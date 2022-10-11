@@ -1,0 +1,34 @@
+{
+  "name": "hodophile",
+  "version": "1.0.0",
+  "description": "Tour package and shopping cart",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Re-MOX/Hodophile.git"
+  },
+  "author": "Salman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Re-MOX/Hodophile/issues"
+  },
+  "homepage": "https://github.com/Re-MOX/Hodophile#readme",
+  "scripts": {
+    "start": "nodemon server.js",
+    "debug": "ndb server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.6.5",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "ndb": "^1.1.5",
+    "nodemon": "^2.0.20"
+  }
+}

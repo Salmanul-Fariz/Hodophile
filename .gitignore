@@ -1,0 +1,12 @@
+# configuration file
+
+config.env
+
+
+#prettier
+
+.prettierrc
+
+#module
+
+node_modules

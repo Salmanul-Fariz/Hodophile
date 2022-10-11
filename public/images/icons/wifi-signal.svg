@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.525" height="15.495" viewBox="0 0 20.525 15.495">
+  <g id="wifi-signal" transform="translate(0 -18.083)">
+    <path id="Path_25997" data-name="Path 25997" d="M46.821,85.278A1.043,1.043,0,1,0,48.3,86.753a2.85,2.85,0,0,1,4.026,0A1.043,1.043,0,0,0,53.8,85.278,4.938,4.938,0,0,0,46.821,85.278Z" transform="translate(-40.046 -56.609)" fill="#1dc5ce"/>
+    <path id="Path_25998" data-name="Path 25998" d="M24.839,55.469a1.043,1.043,0,1,0,1.475,1.475,7.178,7.178,0,0,1,10.14,0,1.043,1.043,0,0,0,1.475-1.475A9.267,9.267,0,0,0,24.839,55.469Z" transform="translate(-21.121 -29.857)" fill="#1dc5ce"/>
+    <path id="Path_25999" data-name="Path 25999" d="M20.219,22.2a14.1,14.1,0,0,0-19.914,0,1.043,1.043,0,0,0,1.475,1.475,11.995,11.995,0,0,1,16.963,0A1.043,1.043,0,1,0,20.219,22.2Z" transform="translate(0 0)" fill="#1dc5ce"/>
+    <circle id="Ellipse_342" data-name="Ellipse 342" cx="1.145" cy="1.145" r="1.145" transform="translate(9.118 31.288)" fill="#1dc5ce"/>
+  </g>
+</svg>

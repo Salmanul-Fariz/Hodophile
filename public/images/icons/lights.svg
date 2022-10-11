@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.308" height="19.308" viewBox="0 0 19.308 19.308">
+  <g id="mode" transform="translate(-1.028 -1)">
+    <path id="Path_25882" data-name="Path 25882" d="M10.682,1a9.654,9.654,0,1,0,9.654,9.654A9.658,9.658,0,0,0,10.682,1Zm0,1.287a8.367,8.367,0,1,1-8.367,8.367A8.371,8.371,0,0,1,10.682,2.287Z" transform="translate(0)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25883" data-name="Path 25883" d="M14.123,10.5a3.658,3.658,0,1,0,3.658,3.658A3.66,3.66,0,0,0,14.123,10.5Zm.019,1.33h-.019a2.328,2.328,0,0,0,0,4.655h.019Z" transform="translate(-3.481 -3.504)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25884" data-name="Path 25884" d="M15.028,4.915V7.243a.665.665,0,1,0,1.33,0V4.915a.665.665,0,0,0-1.33,0Z" transform="translate(-5.011 -1.089)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25885" data-name="Path 25885" d="M21.987,7.613,20.341,9.259a.665.665,0,1,0,.94.94l1.646-1.646a.665.665,0,0,0-.94-.94Z" transform="translate(-6.886 -2.312)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25886" data-name="Path 25886" d="M25.243,15.028H22.915a.665.665,0,0,0,0,1.33h2.328a.665.665,0,0,0,0-1.33Z" transform="translate(-7.752 -5.021)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25887" data-name="Path 25887" d="M22.888,21.987l-1.646-1.646a.665.665,0,0,0-.94.94l1.646,1.646a.665.665,0,0,0,.94-.94Z" transform="translate(-6.872 -6.896)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25888" data-name="Path 25888" d="M16.3,25.243V22.915a.665.665,0,1,0-1.33,0v2.328a.665.665,0,0,0,1.33,0Z" transform="translate(-4.991 -7.761)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25889" data-name="Path 25889" d="M8.514,22.888l1.646-1.646a.665.665,0,0,0-.94-.94L7.574,21.948a.665.665,0,0,0,.94.94Z" transform="translate(-2.288 -6.882)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25890" data-name="Path 25890" d="M4.915,16.3H7.243a.665.665,0,1,0,0-1.33H4.915a.665.665,0,1,0,0,1.33Z" transform="translate(-1.079 -5.001)" fill="#1dc5ce" fill-rule="evenodd"/>
+    <path id="Path_25891" data-name="Path 25891" d="M7.613,8.514,9.259,10.16a.665.665,0,1,0,.94-.94L8.553,7.574a.665.665,0,0,0-.94.94Z" transform="translate(-2.302 -2.298)" fill="#1dc5ce" fill-rule="evenodd"/>
+  </g>
+</svg>

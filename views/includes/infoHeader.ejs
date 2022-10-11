@@ -1,0 +1,29 @@
+<!-- Info bar -->
+<header class="infoBar">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 pt-3 infoLeft">
+                <ul class="d-flex">
+                    <li class="d-flex">
+                        <i class="fa-solid fa-message me-3 infoText-2"></i>
+                        <a class="me-3 infoText-1" href="mailto:INFO@HODOPHILE.COM\\">INFO@HODOPHILE.COM</a>
+                    </li>
+                    <li class="d-flex me-3">
+                        <i class="fa-solid fa-square-phone me-3 infoText-2"></i>
+                        <a class="infoText-1" href="tel:+91 8139036131">+91 8139036131</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6 pt-3">
+                <div class="d-flex justify-content-end">
+                    <% if (user) {%>
+                        <a class="infoText-1 me-3" href="#">My Account</a>
+                        <%} else{%>
+                            <i class="infoText-2 pe-3 fa-solid fa-user"></i>
+                            <a class="infoText-1 me-3" href="/signup">SIGN IN</a>
+                            <%} %>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
