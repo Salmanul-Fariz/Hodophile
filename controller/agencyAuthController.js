@@ -1,4 +1,5 @@
 const agencyModel = require('./../model/agencyModel');
+const mongoosErr = require('./../utils/mongoosErr');
 
 // Login page(Post)
 exports.login = async (req, res) => {
@@ -6,23 +7,42 @@ exports.login = async (req, res) => {
     const agency = await agencyModel
       .findOne({ email: req.body.email })
       .select('+password');
-    if (user) {
-      let password = await user.correctPass(req.body.password, user.password);
+    if (!req.body.email || !req.body.password || !req.body.passwordConfirm) {
+      req.flash('agencyErr', 'Fields required');
+      res.redirect('/agency/login');
+    } else if (agency) {
+      let password = await agency.correctPass(
+        req.body.password,
+        agency.password
+      );
       if (password) {
-        req.session.user = user;
-        res.redirect('/agency');
+        if (req.body.password === req.body.passwordConfirm) {
+          req.session.agency = agency;
+          res.redirect('/agency');
+        } else {
+          req.flash('agencyErr', `Password didn't match`);
+          res.redirect('/agency/login');
+        }
       } else {
-        req.flash('userErr', 'password incorrect');
+        req.flash('agencyErr', 'Password incorrect');
         res.redirect('/agency/login');
       }
     } else {
-      req.flash('userErr', 'invalid ID');
+      req.flash('agencyErr', 'Invalid ID');
       res.redirect('/agency/login');
     }
   } catch (err) {
-    console.log(err);
     let error = mongoosErr(err);
-    req.flash('userErr', error);
+    req.flash('agencyErr', error);
     res.redirect('/login');
   }
+};
+
+// agency signup post (only for test in postman)
+exports.signup = async (req, res) => {
+  const agency = await agencyModel.create(req.body);
+  res.status(200).json({
+    status: 'success',
+    agency,
+  });
 };

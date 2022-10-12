@@ -1,4 +1,3 @@
-
 // session middleware
 exports.sessionAgency = (req, res, next) => {
   if (req.session.agency) {
@@ -8,12 +7,12 @@ exports.sessionAgency = (req, res, next) => {
   }
 };
 
-// Home page
+// Home page(get)
 exports.homePage = (req, res) => {
   res.render('agency/home');
 };
 
 // login pagee (get)
 exports.login = (req, res) => {
-  res.render('agency/login');
+  res.render('agency/login', { agencyErr: req.flash('agencyErr') });
 };

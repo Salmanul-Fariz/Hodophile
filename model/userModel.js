@@ -58,9 +58,11 @@ userSchema.pre('save', async function (next) {
 });
 
 // bycrypt compare password
-
-userSchema.methods.correctPass = async function (candidatePass, password) {
-  return await bcrypt.compare(candidatePass, password);
+userSchema.methods.correctPass = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
 };
 
 // setting model

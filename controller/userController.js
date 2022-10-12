@@ -1,6 +1,6 @@
 const userModel = require('./../model/userModel');
 
-// Home page
+// Home page (get)
 exports.homePage = (req, res) => {
   let user = req.session.user;
   res.render('user/home', { user });
@@ -15,3 +15,7 @@ exports.signup = (req, res) => {
 exports.login = (req, res) => {
   res.render('user/login', { userErr: req.flash('userErr') });
 };
+
+exports.otp = (req, res) => {
+  res.render('user/otp', { otpErr: req.flash('otpErr') });
+}

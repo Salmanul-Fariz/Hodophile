@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
 }
+/* frontend validation error */
+.errBar{
+visibility: hidden;
+}
 
 /*////////////////////*/
 /* HOME PAGE */
