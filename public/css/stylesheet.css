@@ -2,9 +2,37 @@
     margin: 0;
     padding: 0;
 }
+
 /* frontend validation error */
-.errBar{
-visibility: hidden;
+.errBar {
+    visibility: hidden;
+}
+
+/* a tag */
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+/* preloader */
+#preloader {
+    background: black url(../images/gif-logo.gif) no-repeat center;
+    background-size: 8%;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
 }
 
 /*////////////////////*/
@@ -502,4 +530,240 @@ visibility: hidden;
 .signupSec2ErrorMark {
     padding-top: 12px;
     color: #41C356;
+}
+
+/*////////////////////*/
+/* User Profile page*/
+/*////////////////////*/
+
+.profileSec2 {
+    width: 100%;
+    background-color: #41c3569c;
+    padding: 12px 0px;
+}
+
+.profileSec2Bar {
+    background-color: #ecf9ee;
+    border-radius: 40px;
+}
+
+.profileSec2LeftLogo {
+    font-size: 60px;
+}
+
+.profileSec2BarTextHead {
+    font-family: 'Arizonia', cursive;
+    font-size: 42px;
+    font-weight: bold;
+    color: #000000a3;
+}
+
+.profileSec2BarText {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/*////////////////////*/
+/* tours page*/
+/*////////////////////*/
+
+.toursSec2Head {
+    font-family: 'Arizonia', cursive;
+}
+
+.toursSec2 {
+    width: 100%;
+    background-color: #ecf9ee;
+    padding: 20px 0px;
+}
+
+.toursSec3 {
+    width: 100%;
+    background: url(../images/Backgrond/image-6.jpg);
+    background-size: 100% 100%;
+    padding: 100px 0px;
+}
+
+.toursSec3Text1 {
+    font-family: 'Arizonia', cursive;
+    color: white;
+}
+
+.toursSec3Text2 {
+    color: white;
+    font-size: 54px;
+}
+
+.toursSec4 {
+    background-color: #ecf9ee;
+    width: 100%;
+}
+
+.toursSec4Map {
+    width: 100%;
+    height: 400px;
+    background: #000000;
+}
+
+.toursDetailsSec2Image {
+    position: relative;
+    filter: brightness(0.5);
+}
+
+.toursDetailsSec2Text {
+    background: url(./../images/Backgrond/banner-2.jpg);
+    background-size: 1520px 410px;
+    height: 410px;
+    top: 255px;
+    left: 135px;
+}
+
+@media (max-width : 768px) {
+    .toursDetailsSec2Text {
+        background-size: 770px 290px;
+        height: 290px;
+    }
+}
+
+@media (max-width : 992px) {
+    .toursDetailsSec2Text {
+        background-size: 950px 360px;
+        height: 360px;
+    }
+}
+
+@media (max-width : 1200px) {
+    .toursDetailsSec2Text {
+        background-size: 1250px 400px;
+        height: 400px;
+    }
+}
+
+.toursDetailsSec2Text1 {
+    font-size: 27px;
+    color: white;
+}
+
+.toursDetailsSec2Text2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.toursDetailsSec3 {
+    width: 100%;
+    background-color: #ecf9ee;
+    padding: 20px 0px;
+}
+
+.toursDetailsSec3ReviewText {
+    font-size: 18px;
+    font-weight: 500;
+    color: #00000094;
+}
+
+.toursDetailsSec3Review {
+    border: solid;
+    border-left: none;
+    border-right: none;
+    border-color: #747474;
+    border-width: 1px;
+}
+
+.toursDetailsSec3Head {
+    font-family: 'Arizonia', cursive;
+    font-size: 38px;
+    font-weight: 600;
+    color: #746f6f;
+}
+
+.toursDetailsSec3Text {
+    font-size: 20px;
+}
+
+.toursDetailsSec3Icon {
+    font-size: 22px;
+    padding-right: 8px;
+    color: #41c356;
+}
+
+.toursDetailsSec3Paragraph {
+    border-left: solid;
+    padding-left: 30px;
+    border-width: 2px;
+    color: #6c6b6b;
+}
+
+.toursDetailsSec4Head {
+    font-family: 'Arizonia', cursive;
+    font-size: 50px;
+}
+
+.toursDetailsSec5 {
+    width: 100%;
+    background-color: #ecf9ee;
+    padding: 40px 0px;
+}
+
+.toursDetailsSec5Head {
+    font-family: 'Arizonia', cursive;
+    font-size: 45px;
+}
+
+/*////////////////////*/
+/* Admin tours page */
+/*////////////////////*/
+
+.agToursSec1 {
+    width: 100%;
+    background-color: #ecf9ee;
+    padding: 20px 0px;
+}
+
+.agToursSec1LeftButton {
+    border: solid;
+    border-radius: 30px;
+    border-width: 1px;
+    background: #41c356;
+    border-color: #ecf9ee;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0 10px;
+}
+
+.agToursSec1LeftButton:hover {
+    background: transparent;
+    cursor: pointer;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    background-color: #000000;
+}
+
+.agToursSec1LeftButtonIcon {
+    margin: 20px 15px;
+    color: white;
+    font-size: 20px;
+}
+
+@media (max-width : 995px) {
+    .agToursSec1LeftButtonText {
+        display: none;
+    }
+}
+
+.agToursSec1RightBar {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.agToursSec1RightHead {
+    font-family: 'Arizonia', cursive;
+}
+
+.agToursSec1DynamicHead {
+    font-family: 'Arizonia', cursive;
+    font-size: 40px;
 }

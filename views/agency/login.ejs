@@ -19,22 +19,22 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <form id="form" method="post" action="/agency/login" class="signupSec2Form">
                         <h3 class="signupSec2Head">Login</h3>
-                        <div class="signupSec2Error">
-                            <% if (agencyErr.length>0){%>
-                                <div class="signupSec2ErrorBar d-flex justify-content-center">
-                                    <p class="text-center signupSec2ErrorText">
-                                        <%= agencyErr %>
-                                    </p>
-                                    <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                        <% if (agencyErr.length>0){%>
+                            <span id="Err"></span>
+                            <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                <p id="ErrText" class="text-center signupSec2ErrorText">
+                                    <%= agencyErr %>
+                                </p>
+                                <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                            </div>
+                            <%}else{%>
+                                <div id="Err" class="errBar">
+                                    <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                        <p id="ErrText" class="text-center signupSec2ErrorText"></p>
+                                        <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                                    </div>
                                 </div>
                                 <%} %>
-                                    <div id="Err" class="errBar">
-                                        <div class="signupSec2ErrorBar d-flex justify-content-center">
-                                            <p id="ErrText" class="text-center signupSec2ErrorText"></p>
-                                            <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
-                                        </div>
-                                    </div>
-                        </div>
                         <div class="mb-3 mt-2">
                             <label class="form-label signupSec2Text">Email</label>
                             <input id="email" name="email" type="email" class="form-control"

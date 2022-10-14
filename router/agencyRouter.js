@@ -17,4 +17,27 @@ router
 // agency signup post (only for test in postman)
 router.post('/signup', agencyAuthController.signup);
 
+// Tours page
+router
+  .route('/tours')
+  .get(agencyController.sessionAgency, agencyController.tours)
+  .post(agencyController.addPost);
+
+// Tour update page
+router.get(
+  '/tours/update',
+  agencyController.sessionAgency,
+  agencyController.update
+);
+
+// Tour delete page
+router.get(
+  '/tours/delete',
+  agencyController.sessionAgency,
+  agencyController.delete
+);
+
+// Tour add page
+router.get('/tours/add', agencyController.sessionAgency, agencyController.add);
+
 module.exports = router;

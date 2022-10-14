@@ -1,0 +1,73 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <h1 class="signupSec1Text d-flex justify-content-center">Destinations</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="toursSec2">
+            <div class="container">
+                <div class="row pb-5">
+                    <div class="col-12 pt-3 pb-5">
+                        <h1 class="toursSec2Head text-center">See the World</h1>
+                        <p class="text-center">Since 2022, we’ve helped more than 50,000 people of all ages
+                            enjoy the best outdoor experience of their lives.</p>
+                    </div>
+
+                    <!-- cards -->
+                    <div class="col-sm-6 col-lg-4 mt-3">
+                        <div class="card p-3 sec3Card" style="background-color: #d9d9d9;">
+                            <img src="./images/Resources/f-image-2.jpg"
+                                class="card-img-top rounded" alt="...">
+                            <div class="card-body">
+                                <p class="sec3Text1 rounded-2">$210</p>
+                                <p class="sec3Text2">5 Reviews</p>
+                                <h5 class="card-title sec3Text3">Moscow Red City Land</h5>
+                                <p class="card-text sec3Text4 pb-3">Richly varied landscapes, luxurious
+                                    accommodation
+                                    and a wide range of wild experiences await you. </p>
+                                <div class="d-flex mt-3 pb-3">
+                                    <i class="fs-4 fa-solid fa-calendar"></i>
+                                    <p class="ms-2">5 Days</p>
+                                </div>
+                                <a href="/tours/:`${123}`" class="sec3Text5">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-3 -->
+        <section class="toursSec3">
+            <div class="col-12 ">
+                <h2 class=" pt-4 toursSec3Text1 text-center">Are you ready to travel?</h2>
+                <h1 class="pb-4 toursSec3Text2 text-center">Treker is a World Leading Online Tour Booking Platform</h1>
+            </div>
+        </section>
+
+        <!-- section-4 -->
+        <section class="toursSec4 mt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 toursSec4Map">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>

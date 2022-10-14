@@ -1,0 +1,53 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section --->
+        <section class="agToursSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 ">
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/tours" class="d-flex justify-content-center">
+                                <i class="text-primary agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">View
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/tours/add" class="d-flex justify-content-center">
+                                <i class="text-success agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Add</p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/tours/delete" class="d-flex justify-content-center">
+                                <i class="text-danger agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Delete
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/tours/update" class="d-flex justify-content-center">
+                                <i class="agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Update
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- section-2 -->
+                    <div class="agToursSec1RightBar ms-4 col-9">
+                        <h1>update Page</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Itinerary form -->
+        <script src="/js/dynamicItineraryForm.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

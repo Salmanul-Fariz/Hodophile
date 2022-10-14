@@ -6,7 +6,7 @@ const Err = document.getElementById('Err');
 const ErrText = document.getElementById('ErrText');
 
 form.addEventListener('submit', (e) => {
-    console.log('hello');
+  console.log('hello');
   // frontend required validation
   if (email.value === '' || email.value === null) {
     let message = 'Please Enter your email !';
@@ -20,6 +20,20 @@ form.addEventListener('submit', (e) => {
     ErrText.innerText = message;
   } else if (passwordConfirm.value === '' || passwordConfirm.value === null) {
     let message = 'Please Enter your passwordConfirm !';
+    e.preventDefault();
+    Err.style.visibility = 'visible';
+    ErrText.innerText = message;
+  }
+  // password validation
+  else if (password.value.length < 4) {
+    let message = 'Please Enter Strong Password !';
+    e.preventDefault();
+    Err.style.visibility = 'visible';
+    ErrText.innerText = message;
+  }
+  // passwordConfirm validation
+  else if (password.value !== passwordConfirm.value) {
+    let message = `Password didn't match`;
     e.preventDefault();
     Err.style.visibility = 'visible';
     ErrText.innerText = message;

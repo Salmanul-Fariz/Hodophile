@@ -22,22 +22,22 @@
                     <div class="col-sm-10 col-lg-6 ">
                         <form id="form" method="post" action="/otp" class="signupSec2Form">
                             <h3 class="signupSec2Head">Otp</h3>
-                            <div class="signupSec2Error">
-                                <% if (otpErr.length>0){%>
-                                    <div class="signupSec2ErrorBar d-flex justify-content-center">
-                                        <p class="text-center signupSec2ErrorText">
-                                            <%= otpErr %>
-                                        </p>
-                                        <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                            <% if (otpErr.length>0){%>
+                                <span id="Err"></span>
+                                <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                    <p id="ErrText" class="text-center signupSec2ErrorText">
+                                        <%= otpErr %>
+                                    </p>
+                                    <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                                </div>
+                                <%}else{%>
+                                    <div id="Err" class="errBar">
+                                        <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                            <p id="ErrText" class="text-center signupSec2ErrorText"></p>
+                                            <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                                        </div>
                                     </div>
                                     <%} %>
-                                        <div id="Err" class="errBar">
-                                            <div class="signupSec2ErrorBar d-flex justify-content-center">
-                                                <p id="ErrText" class="text-center signupSec2ErrorText"></p>
-                                                <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
-                                            </div>
-                                        </div>
-                            </div>
                             <div class=" mb-3 mt-2">
                                 <label class="form-label signupSec2Text">Otp</label>
                                 <input id="Otp" name="Otp" type="text" class="form-control"

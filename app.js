@@ -3,10 +3,28 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
+const multer = require('multer');
 
 // require router
 const agencyRouter = require('./router/agencyRouter');
 const userRouter = require('./router/userRouter');
+
+// set multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/destination');
+  },
+  filename: function (req, file, cb) {
+    const uniqueName = Date.now() + '.jpg';
+    cb(null, uniqueName);
+  },
+});
+const upload = multer({ storage: storage });
+
+// use multer
+app.use(upload.array('tourImages', 4), function (req, res, next) {
+  next();
+});
 
 // cache
 app.use((req, res, next) => {

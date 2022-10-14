@@ -25,13 +25,15 @@ exports.signup = async (req, res) => {
       //session setting
       userSignup = user;
 
-      // otp generator 
-      req.session.otpGenerator = otpVerification.otpGeneration()
+      // otp generator
+      req.session.otpGenerator = otpVerification.otpGeneration();
 
       // message sending
-      otpVerification.otoSender(req.session.otpGenerator,req.body.contact).then(()=>{
-        res.redirect('/otp');
-      })
+      otpVerification
+        .otoSender(req.session.otpGenerator, req.body.contact)
+        .then(() => {
+          res.redirect('/otp');
+        });
     }
   } catch (err) {
     console.log(err);
