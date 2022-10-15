@@ -41,8 +41,12 @@
                     <!-- section-2 -->
                     <div class="agToursSec1RightBar ms-4 col-9">
                         <h1 class="agToursSec1RightHead text-center mt-3 pb-3">View Tour Package</h1>
+
+                        <!-- search button -->
+                        <input class="agToursSec1SearchButton" type="text" id="myInput" onkeyup="myFunction()"
+                            placeholder="Search for names.." title="Type in a name">
                         <div class="table-responsive">
-                            <table class="table table-striped " style="background-color: #ecf9ee;">
+                            <table id="myTable" class="table table-striped " style="background-color: #ecf9ee;">
                                 <thead>
                                     <tr>
                                         <th scope="col"></th>
@@ -56,22 +60,13 @@
                                 <tbody>
                                     <% for(let i=0; i < tours.length ; i++){%>
                                         <tr scope="row">
-                                            <td>
-                                                <%= i+1 %>
-                                            </td>
-                                            <td>
-                                                <%= tours[i].Name %>
-                                            </td>
-                                            <td>
-                                                <%= tours[i].Place %>
-                                            </td>
-                                            <td>
-                                                <%= tours[i].Duration %>
-                                            </td>
-                                            <td>
-                                                <%= tours[i].Price %>
-                                            </td>
-                                            <td><a href="/agency/tours/<%= tours[i]._id %>" class="btn btn-primary">Details</a></td>
+                                            <td class="pt-3"><%= i+1 %></td>
+                                            <td class="pt-3"><%= tours[i].Name %></td>
+                                            <td class="pt-3"><%= tours[i].Place %></td>
+                                            <td class="pt-3"><%= tours[i].Duration %></td>
+                                            <td class="pt-3"><%= tours[i].Price %></td>
+                                            <td><a href="/agency/tours/<%= tours[i]._id %>"
+                                                    class="btn btn-primary">Details</a></td>
                                         </tr>
                                         <%}%>
                                 </tbody>
@@ -81,6 +76,28 @@
                 </div>
             </div>
         </section>
+
+        <script>
+            function myFunction() {
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("myTable");
+              tr = table.getElementsByTagName("tr");
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }       
+              }
+            }
+            </script>
+            
 
         <!-- footer -->
         <%- include('../includes/agEnd.ejs') %>

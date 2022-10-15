@@ -823,3 +823,13 @@ a:active {
     padding-top: 3px;
     color: #00000087;
 }
+
+.agToursSec1SearchButton{
+    padding: 5px;
+    margin: 15px 0px;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 7px;
+    border-color: black;
+}

@@ -27,7 +27,6 @@ exports.login = (req, res) => {
 // Tours View page
 exports.tours =async (req, res) => {
   const tours = await destinationsModel.find({})
-  console.log(tours);
   res.render('agency/viewTours',{tours});
 };
 
