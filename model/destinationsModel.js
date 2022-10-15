@@ -21,6 +21,18 @@ const destinationSchema = new mongoos.Schema({
     type: String,
     required: [true, 'Please Enter Tour City !'],
   },
+  Description: {
+    type: String,
+    required: [true, 'Please Enter Description !'],
+  },
+  ShortDescription: {
+    type: String,
+    required: [true, 'Please Enter Short Description !'],
+  },
+  Features: {
+    type: Array,
+    required: [true, 'Please Add Features !'],
+  },
   Coordinates: {
     Logitude: {
       type: Number,

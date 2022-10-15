@@ -4,6 +4,10 @@ const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
 const multer = require('multer');
+const dotenv = require('dotenv');
+
+// set config file
+dotenv.config({ path: './config.env' });
 
 // require router
 const agencyRouter = require('./router/agencyRouter');
@@ -39,7 +43,7 @@ app.use(express.urlencoded({ extended: false }));
 // session
 app.use(
   session({
-    secret: 'key',
+    secret: process.env.SESSION_KEY_VALUE,
     saveUninitialized: true,
     resave: false,
     cookie: { maxAge: 60000000000 },

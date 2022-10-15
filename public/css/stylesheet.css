@@ -193,12 +193,12 @@ a:active {
     font-size: 13px;
     color: #00000082;
     font-weight: 500;
-    margin-top: 6px;
+    /* margin-top: 6px; */
 }
 
 .sec3Text3 {
     font-size: 22px;
-    margin-top: 35px;
+    margin-top: 20px;
 }
 
 .sec3Text4 {
@@ -247,14 +247,8 @@ a:active {
     padding: 65px 0px;
 }
 
-.sec5Cards {
-    position: relative;
-}
 
 .sec5Button {
-    position: absolute;
-    top: 15px;
-    left: 100px;
     text-decoration: none;
     font-size: 20px;
     background: #41c356;
@@ -710,6 +704,46 @@ a:active {
     font-size: 45px;
 }
 
+.toursDetailsSec3Price {
+    font-size: 22px;
+    font-weight: 500;
+    color: black;
+    margin: auto 0;
+}
+
+.toursDetailsSec3BookButton {
+    color: white;
+    margin: auto;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.toursDetailsSec3BookBar {
+    border: solid;
+    border-width: 1px;
+    border-color: #41C356;
+    color: #41c356;
+    background-color: #41C356;
+    margin: 15px;
+    padding: 12px;
+    border-radius: 25px;
+}
+
+.toursDetailsSec3BookBar:hover {
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    background-color: black;
+    color: #000000;
+}
+
+.toursDetailsSec3BookIcon {
+    color: white;
+    margin: auto;
+    font-size: 32px;
+}
+
 /*////////////////////*/
 /* Admin tours page */
 /*////////////////////*/
@@ -766,4 +800,26 @@ a:active {
 .agToursSec1DynamicHead {
     font-family: 'Arizonia', cursive;
     font-size: 40px;
+}
+
+.agToursSec2Head {
+    color: #41c356;
+    margin: auto 0;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.agToursSec2Icon {
+    padding-top: 2px;
+    margin: auto 10px;
+    color: #41c356;
+    font-size: 19px;
+}
+
+.agToursSec2Text {
+    margin: auto 0;
+    font-size: 16px;
+    font-weight: 500;
+    padding-top: 3px;
+    color: #00000087;
 }

@@ -40,14 +40,47 @@
 
                     <!-- section-2 -->
                     <div class="agToursSec1RightBar ms-4 col-9">
-                        <h1>View Page</h1>
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">View Tour Package</h1>
+                        <div class="table-responsive">
+                            <table class="table table-striped " style="background-color: #ecf9ee;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Place</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(let i=0; i < tours.length ; i++){%>
+                                        <tr scope="row">
+                                            <td>
+                                                <%= i+1 %>
+                                            </td>
+                                            <td>
+                                                <%= tours[i].Name %>
+                                            </td>
+                                            <td>
+                                                <%= tours[i].Place %>
+                                            </td>
+                                            <td>
+                                                <%= tours[i].Duration %>
+                                            </td>
+                                            <td>
+                                                <%= tours[i].Price %>
+                                            </td>
+                                            <td><a href="/agency/tours/<%= tours[i]._id %>" class="btn btn-primary">Details</a></td>
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Dynamic Itinerary form -->
-        <script src="/js/dynamicItineraryForm.js"></script>
 
         <!-- footer -->
         <%- include('../includes/agEnd.ejs') %>

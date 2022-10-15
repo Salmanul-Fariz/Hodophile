@@ -1,4 +1,3 @@
-const destination = require('./../model/destinationsModel');
 const destinationsModel = require('./../model/destinationsModel');
 const mongoosErr = require('./../utils/mongoosErr');
 
@@ -26,9 +25,17 @@ exports.login = (req, res) => {
 };
 
 // Tours View page
-exports.tours = (req, res) => {
-  res.render('agency/viewTours');
+exports.tours =async (req, res) => {
+  const tours = await destinationsModel.find({})
+  console.log(tours);
+  res.render('agency/viewTours',{tours});
 };
+
+// Tour Page
+exports.tour =async(req,res)=>{
+  const tour = await destinationsModel.findById(req.params.id)
+  res.render('agency/viewTour',{tour})
+}
 
 // Tour delete page
 exports.delete = (req, res) => {
@@ -67,6 +74,15 @@ exports.addPost = async (req, res) => {
       itineraryArray.push(object);
     }
 
+    // Make features to Array
+    const length = req.body.tourFeatures.length
+    let featureArray = []
+    let j = 0
+    while(j < length){
+      j++
+      featureArray.push(req.body.tourFeatures[j-1])
+    }
+
     // setting tour
     const tour = {
       Name: req.body.tourName,
@@ -74,6 +90,9 @@ exports.addPost = async (req, res) => {
       Country: req.body.tourCountry,
       State: req.body.tourState,
       City: req.body.tourCity,
+      Description: req.body.tourDescription,
+      ShortDescription: req.body.tourShortDescription,
+      Features: featureArray,
       Coordinates: {
         Logitude: req.body.tourLongitude,
         Latitude: req.body.tourlatitude,

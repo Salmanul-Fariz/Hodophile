@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-12 toursDetailsSec2Text d-flex">
                         <i class="ms-3 mt-3 toursDetailsSec2Text1 fa-solid fa-location-dot"></i>
-                        <p class="ms-3 mt-3 toursDetailsSec2Text2">Moscow,Russia</p>
+                        <p class="ms-3 mt-3 toursDetailsSec2Text2"><%= tour.Place %>,<%= tour.Country %></p>
                     </div>
                 </div>
             </div>
@@ -32,65 +32,45 @@
         <section class="toursDetailsSec3 pb-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 toursDetailsSec3Review ">
-                        <p class="m-3 toursDetailsSec3ReviewText">5 Reviews</p>
+                    <div class="col-12 d-flex mb-3">
+                        <p class="toursDetailsSec3Price">₹ <%= tour.Price %></p>
+                        <div class="d-flex justify-content-center toursDetailsSec3BookBar">
+                            <i class="toursDetailsSec3BookIcon fa-sharp fa-solid fa-compass"></i>
+                            <p class="ms-2 toursDetailsSec3BookButton">Booking</p>
+                        </div>
                     </div>
                     <div class="col-12 toursDetailsSec3Review ">
-                        <p class="m-3 toursDetailsSec3ReviewText">5 Reviews</p>
+                        <p class="m-3 toursDetailsSec3ReviewText"><%= tour.Review %> Reviews</p>
                     </div>
 
                     <!-- About -->
                     <div class="col-md-8 mt-5">
-                        <h3 class="toursDetailsSec3Head">About Moscow Red City Land</h3>
-                        <p class="toursDetailsSec3Text mt-4">There are many reasons why an executive or VIP would choose
-                            personal security services. Executives could be in charge of large companies that are worth
-                            millions or more, leaving them to be a high-valued target for robbery, assault, and more.
-                            There could be threats made against executives and even bribery and blackmail from a member
-                            of the public or disgruntled employees. When it comes to other VIPs, they do not need
-                            necessarily need to be..<br><br>Leaving them to be a high-valued target for robbery,
-                            assault, and more. There could be threats made against executives and even bribery and
-                            blackmail from a member of the public or disgruntled employees. When it comes to other VIPs
-                        </p>
+                        <h3 class="toursDetailsSec3Head">About <%= tour.Name %></h3>
+                        <p class="toursDetailsSec3Text mt-4"><%= tour.ShortDescription %><br><br><%= tour.Description %></p>
                     </div>
 
                     <!-- Features -->
                     <div class="col-md-8 mt-5">
                         <h3 class="toursDetailsSec3Head pb-4">Features</h3>
+                        <% for( feature of tour.Features){%>
                         <div class="d-flex">
                             <i class="toursDetailsSec3Icon fa-solid fa-angle-right mt-1"></i>
-                            <p class="toursDetailsSec3Text">Free Download Instagram Logo</p>
+                            <p class="toursDetailsSec3Text"><%= feature %></p>
                         </div>
-                        <div class="d-flex">
-                            <i class="toursDetailsSec3Icon fa-solid fa-angle-right mt-1"></i>
-                            <p class="toursDetailsSec3Text">Free Download Instagram Logo</p>
-                        </div>
-                        <div class="d-flex">
-                            <i class="toursDetailsSec3Icon fa-solid fa-angle-right mt-1"></i>
-                            <p class="toursDetailsSec3Text">Free Download Instagram Logo</p>
-                        </div>
+                        <%}%>
                     </div>
 
                     <!-- Itinerary -->
                     <div class="col-md-8 mt-5">
                         <h3 class="toursDetailsSec3Head pb-4">Itinerary</h3>
+                        <% for(day of tour.Itinerary){%>
                         <div class="d-flex">
                             <i class="toursDetailsSec3Icon fa-solid fa-clock mt-1"></i>
-                            <p class="toursDetailsSec3Text ms-2">Day 1</p>
+                            <p class="toursDetailsSec3Text ms-2">Day <%= day.Day %></p>
                         </div>
-                        <p class="toursDetailsSec3Paragraph ms-3 pb-3">Leaving them to be a high-valued target for
-                            robbery,
-                            assault, and more. There could be threats made against executives and even bribery and
-                            blackmail from a member of the public or disgruntled employees. When it comes to other
-                            VIPs</p>
-                        <div class="d-flex">
-                            <i class="toursDetailsSec3Icon fa-solid fa-clock mt-1"></i>
-                            <p class="toursDetailsSec3Text ms-2">Day 1</p>
-                        </div>
-                        <p class="toursDetailsSec3Paragraph ms-3 pb-3">Leaving them to be a high-valued target for
-                            robbery,
-                            assault, and more. There could be threats made against executives and even bribery and
-                            blackmail from a member of the public or disgruntled employees. When it comes to other
-                            VIPs</p>
+                        <h3 class=" ms-2"><%= day.Title %></h3>
+                        <p class="toursDetailsSec3Paragraph ms-3 pb-3"><%= day.Description %></p>
+                            <%}%>
                     </div>
 
                     <!-- Gallery -->
@@ -99,15 +79,15 @@
                         <div id="carouselExampleControls" class="rounded-4 carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="/images/Resources/gallery-1.jpg" class="rounded-4 d-block w-100"
+                                    <img src="/images/destination/<%= tour.Images[1] %>" class="rounded-4 d-block w-100"
                                         alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="/images/Resources/gallery-4.jpg" class="rounded-4 d-block w-100"
+                                    <img src="/images/destination/<%= tour.Images[2] %>" class="rounded-4 d-block w-100"
                                         alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="/images/Resources/gallery-3.jpg" class="rounded-4 d-block w-100"
+                                    <img src="/images/destination/<%= tour.Images[3] %>" class="rounded-4 d-block w-100"
                                         alt="...">
                                 </div>
                             </div>
@@ -133,36 +113,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 toursSec4Map">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- section-5 -->
-        <section class="toursDetailsSec5">
-            <div class="container">
-                <div class="row">
-                    <h3 class="toursDetailsSec5Head text-center pb-4">Explore More Tours</h3>
-
-                    <!-- cards -->
-                    <div class="col-sm-6 col-lg-4 mt-3">
-                        <div class="card p-3 sec3Card" style="background-color: #d9d9d9;">
-                            <img style=" width: 100%; " src="/images/Resources/f-image-2.jpg"
-                                class="card-img-top rounded" alt="...">
-                            <div class="card-body">
-                                <p class="sec3Text1 rounded-2">$210</p>
-                                <p class="sec3Text2">5 Reviews</p>
-                                <h5 class="card-title sec3Text3">Moscow Red City Land</h5>
-                                <p class="card-text sec3Text4 pb-3">Richly varied landscapes, luxurious
-                                    accommodation
-                                    and a wide range of wild experiences await you. </p>
-                                <div class="d-flex mt-3 pb-3">
-                                    <i class="fs-4 fa-solid fa-calendar"></i>
-                                    <p class="ms-2">5 Days</p>
-                                </div>
-                                <a href="#" class="sec3Text5">Details</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

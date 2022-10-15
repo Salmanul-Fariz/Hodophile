@@ -27,9 +27,13 @@ router.post('/logout', userController.logout);
 router.get('/profile', userController.sessionUser, userController.profile);
 
 // Tours page
-router.get('/tours',userController.tours)
+router.get('/tours', userController.tours);
 
 // Tours details page
-router.get('/tours/:id',userController.sessionUser,userController.toursDetails)
+router.get(
+  '/tours/:id',
+  userController.sessionUser,
+  userController.toursDetails
+);
 
 module.exports = router;

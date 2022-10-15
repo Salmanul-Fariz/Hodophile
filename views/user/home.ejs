@@ -18,7 +18,7 @@
                                 education. It’s imperative that you never stop exploring. The world has countless
                                 bounties
                                 to offer up.</p>
-                            <a href="#"><button class="button">MORE</button></a>
+                            <a href="/tours"><button class="button">MORE</button></a>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end rightBar">
                             <img style="width: 570px ; height: 550px;" src="./images/banner-images/banner-image-1.png"
@@ -159,36 +159,13 @@
                             <h3 class="sec4Text1 text-center">We Provide</h3>
                             <h1 class="text-center fw-bold">Top Destinations</h1>
                         </div>
-                        <div class="col-md-6 mt-3 d-flex justify-content-center sec5Cards">
-                            <img class="rounded-4" style="width: 400px; height: 310px;"
-                                src="./images/Resources/gallery-7.jpg" alt="">
-                            <a href="#" class="sec5Button">Details</a>
+                        <% for (tour of tours){%>
+                        <div class="col-md-6 mt-3 ">
+                            <img class="rounded-4 w-100" style="padding-bottom: 30px"
+                                src="./images/destination/<%= tour.Images[0] %>" alt="">
+                            <a href="/tours/<%= tour._id %>" class="sec5Button">Details</a>
                         </div>
-                        <div class="col-md-6 mt-3 d-flex justify-content-center sec5Cards">
-                            <img class="rounded-4" style="width: 400px; height: 310px;"
-                                src="./images/Resources/gallery-8.jpg" alt="">
-                            <a href="#" class="sec5Button">Details</a>
-                        </div>
-                        <div class="col-md-6 mt-3 d-flex justify-content-center sec5Cards">
-                            <img class="rounded-4" style="width: 400px; height: 310px;"
-                                src="./images/Resources/gallery-9.jpg" alt="">
-                            <a href="#" class="sec5Button">Details</a>
-                        </div>
-                        <div class="col-md-6 mt-3 d-flex justify-content-center sec5Cards">
-                            <img class="rounded-4" style="width: 400px; height: 310px;"
-                                src="./images/Resources/gallery-10.jpg" alt="">
-                            <a href="#" class="sec5Button">Details</a>
-                        </div>
-                        <div class="col-md-6 mt-3 d-flex justify-content-center sec5Cards">
-                            <img class="rounded-4" style="width: 400px; height: 310px;"
-                                src="./images/Resources/gallery-11.jpg" alt="">
-                            <a href="#" class="sec5Button">Details</a>
-                        </div>
-                        <div class="col-md-6 mt-3 d-flex justify-content-center sec5Cards">
-                            <img class="rounded-4" style="width: 400px; height: 310px;"
-                                src="./images/Resources/gallery-12.jpg" alt="">
-                            <a href="#" class="sec5Button">Details</a>
-                        </div>
+                        <%}%>
                     </div>
                 </div>
             </section>

@@ -132,6 +132,34 @@
                                         </div>
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Feature</label>
+                                                <input id="tourFeatures" type="text" class="form-control"
+                                                    name="tourFeatures" placeholder="Enter Feature">
+                                            </div>
+                                            <div class="d-flex justify-content-end signupSec2FormBar">
+                                                <p onclick="addFeatures()" class="btn btn-primary"
+                                                    style="width:100px ; margin-top: 30px;">Add</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- add feature  -->
+                                        <div id="formDownFeatures" class="mb-3"></div>
+                                        <div class="d-flex">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Description</label>
+                                                <textarea id="tourDescription" type="number" class="form-control"
+                                                    name="tourDescription" required>
+                                                </textarea>
+                                            </div>
+                                            <div class="mb-3 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Short description</label>
+                                                <textarea id="tourShortDescription" type="number" class="form-control"
+                                                    name="tourShortDescription" required>
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Choose Images</label>
                                                 <input type="file" class="form-control" name="tourImages" required
                                                     multiple>

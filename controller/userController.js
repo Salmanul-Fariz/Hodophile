@@ -1,4 +1,5 @@
 const userModel = require('./../model/userModel');
+const destinationsModel = require('./../model/destinationsModel');
 
 // session middleware
 exports.sessionUser = (req, res, next) => {
@@ -10,9 +11,10 @@ exports.sessionUser = (req, res, next) => {
 };
 
 // Home page
-exports.homePage = (req, res) => {
-  let user = req.session.user;
-  res.render('user/home', { user });
+exports.homePage = async (req, res) => {
+  const user = req.session.user;
+  const tours = await destinationsModel.find({})
+  res.render('user/home', { user,tours });
 };
 
 // SignUp page
@@ -45,10 +47,12 @@ exports.profile = async (req, res) => {
 
 // Tours page
 exports.tours = async (req, res) => {
-  res.render('user/tours');
+  const tours = await destinationsModel.find({})
+  res.render('user/tours',{tours});
 };
 
 // Tours details page
 exports.toursDetails = async (req, res) => {
-  res.render('user/toursDetails');
+  const tour = await destinationsModel.findById(req.params.id)
+  res.render('user/toursDetails',{tour});
 };

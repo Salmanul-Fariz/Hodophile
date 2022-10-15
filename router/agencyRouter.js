@@ -23,6 +23,9 @@ router
   .get(agencyController.sessionAgency, agencyController.tours)
   .post(agencyController.addPost);
 
+// Tour Page
+router.get('/tours/:id', agencyController.tour);
+
 // Tour update page
 router.get(
   '/tours/update',
