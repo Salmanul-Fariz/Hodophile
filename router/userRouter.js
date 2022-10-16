@@ -32,7 +32,7 @@ router.get('/tours', userController.tours);
 // Tours details page
 router.get(
   '/tours/:id',
-  userController.sessionUser,
+
   userController.toursDetails
 );
 

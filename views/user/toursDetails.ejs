@@ -21,10 +21,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12" style="position:relative ;">
-                        <img  class="toursDetailsSec2Image w-100" src="/images/destination/<%= tour.Images[0] %>" alt="">
+                        <img class="toursDetailsSec2Image w-100" src="/images/destination/<%= tour.Images[0] %>" alt="">
                         <div class="toursDetailsSec2Text">
                             <i class="ms-3 mt-3 toursDetailsSec2Text1 fa-solid fa-location-dot"></i>
-                            <p class="ms-3 mt-3 toursDetailsSec2Text2"><%= tour.Place %>,<%= tour.Country %></p>
+                            <p class="ms-3 mt-3 toursDetailsSec2Text2">
+                                <%= tour.Place %>,<%= tour.Country %>
+                            </p>
                         </div>
 
                     </div>
@@ -37,43 +39,57 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 d-flex mb-3">
-                        <p class="toursDetailsSec3Price">₹ <%= tour.Price %></p>
+                        <p class="toursDetailsSec3Price">₹ <%= tour.Price %>
+                        </p>
                         <div class="d-flex justify-content-center toursDetailsSec3BookBar">
                             <i class="toursDetailsSec3BookIcon fa-sharp fa-solid fa-compass"></i>
                             <p class="ms-2 toursDetailsSec3BookButton">Booking</p>
                         </div>
                     </div>
                     <div class="col-12 toursDetailsSec3Review ">
-                        <p class="m-3 toursDetailsSec3ReviewText"><%= tour.Review %> Reviews</p>
+                        <p class="m-3 toursDetailsSec3ReviewText">
+                            <%= tour.Review %> Reviews
+                        </p>
                     </div>
 
                     <!-- About -->
                     <div class="col-md-8 mt-5">
-                        <h3 class="toursDetailsSec3Head">About <%= tour.Name %></h3>
-                        <p class="toursDetailsSec3Text mt-4"><%= tour.ShortDescription %><br><br><%= tour.Description %></p>
+                        <h3 class="toursDetailsSec3Head">About <%= tour.Name %>
+                        </h3>
+                        <p class="toursDetailsSec3Text mt-4">
+                            <%= tour.ShortDescription %><br><br>
+                                <%= tour.Description %>
+                        </p>
                     </div>
 
                     <!-- Features -->
                     <div class="col-md-8 mt-5">
                         <h3 class="toursDetailsSec3Head pb-4">Features</h3>
                         <% for( feature of tour.Features){%>
-                        <div class="d-flex">
-                            <i class="toursDetailsSec3Icon fa-solid fa-angle-right mt-1"></i>
-                            <p class="toursDetailsSec3Text"><%= feature %></p>
-                        </div>
-                        <%}%>
+                            <div class="d-flex">
+                                <i class="toursDetailsSec3Icon fa-solid fa-angle-right mt-1"></i>
+                                <p class="toursDetailsSec3Text">
+                                    <%= feature %>
+                                </p>
+                            </div>
+                            <%}%>
                     </div>
 
                     <!-- Itinerary -->
                     <div class="col-md-8 mt-5">
                         <h3 class="toursDetailsSec3Head pb-4">Itinerary</h3>
                         <% for(day of tour.Itinerary){%>
-                        <div class="d-flex">
-                            <i class="toursDetailsSec3Icon fa-solid fa-clock mt-1"></i>
-                            <p class="toursDetailsSec3Text ms-2">Day <%= day.Day %></p>
-                        </div>
-                        <h3 class=" ms-2"><%= day.Title %></h3>
-                        <p class="toursDetailsSec3Paragraph ms-3 pb-3"><%= day.Description %></p>
+                            <div class="d-flex">
+                                <i class="toursDetailsSec3Icon fa-solid fa-clock mt-1"></i>
+                                <p class="toursDetailsSec3Text ms-2">Day <%= day.Day %>
+                                </p>
+                            </div>
+                            <h3 class=" ms-2">
+                                <%= day.Title %>
+                            </h3>
+                            <p class="toursDetailsSec3Paragraph ms-3 pb-3">
+                                <%= day.Description %>
+                            </p>
                             <%}%>
                     </div>
 
@@ -109,18 +125,22 @@
                     </div>
                 </div>
             </div>
+                    <p id="coordinateDiv" style="display: none;"><%= tour.Coordinates %></p>
         </section>
 
+
         <!-- section-4 -->
-        <section class="toursSec4 pb-5">
-            <h3 class="toursDetailsSec4Head text-center pb-4">Map</h3>
+        <section class="toursSec4">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 toursSec4Map">
+                    <div id="map" class="col-12 toursSec4Map">
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Google Map -->
+        <script src="/js/itemMap.js"></script>
 
         <!-- footer -->
         <%- include('../includes/end.ejs') %>

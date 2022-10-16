@@ -16,7 +16,7 @@ exports.homePage = async (req, res) => {
   try {
     const user = req.session.user;
     const allTours = await destinationsModel.find({});
-    const tours = checkItemDelete(allTours)
+    const tours = checkItemDelete(allTours);
     res.render('user/home', { user, tours });
   } catch (err) {
     console.log(err);
@@ -83,9 +83,18 @@ exports.profile = async (req, res) => {
 exports.tours = async (req, res) => {
   try {
     const allTours = await destinationsModel.find({});
-    const tours = checkItemDelete(allTours)
-    res.render('user/tours', { tours });
+    const tours = checkItemDelete(allTours);
 
+    // To Google Map Setup
+    const coordinates = [];
+    for (let el of tours) {
+      let x = [];
+      x.push(el.Coordinates.Longitude);
+      x.push(el.Coordinates.Latitude);
+      coordinates.push(x);
+    }
+
+    res.render('user/tours', { tours, coordinates });
   } catch (err) {
     console.log(err);
   }
@@ -95,7 +104,16 @@ exports.tours = async (req, res) => {
 exports.toursDetails = async (req, res) => {
   try {
     const tour = await destinationsModel.findById(req.params.id);
-    res.render('user/toursDetails', { tour });
+
+    // To Google Map Setup
+    const coordinates = [];
+    const x = [];
+    x.push(tour.Coordinates.Longitude);
+    x.push(tour.Coordinates.Longitude);
+    coordinates.push(x);
+    console.log(coordinates);
+
+    res.render('user/toursDetails', { tour, coordinates });
   } catch (err) {
     console.log(err);
   }

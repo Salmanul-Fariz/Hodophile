@@ -3,6 +3,25 @@
     padding: 0;
 }
 
+/* map */
+.mapboxgl-popup {
+    width: 180px;
+}
+
+.mapboxgl-popup-content {
+    text-align: center;
+    color: #41C356;
+}
+
+.marker {
+    background-image: url('./../images/location.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 /* frontend validation error */
 .errBar {
     visibility: hidden;
@@ -164,10 +183,8 @@ a:active {
 /* section-3 */
 
 .section-3 {
-    /* background: url(../images/Backgrond/image-1.jpg); */
-    /* background-size: 100% auto; */
-    background-color:#ecf9ee ;
-    padding :20px 0 ;
+    background-color: #ecf9ee;
+    padding: 20px 0;
     width: 100%;
 }
 
@@ -587,16 +604,18 @@ a:active {
 
 .toursSec3Text2 {
     color: white;
-    font-size: 54px;
+    font-size: 50px;
 }
 
 .toursSec4 {
-    background-color: #ecf9ee;
+    padding: 60px;
+    background-color: #c3ddc7;
     width: 100%;
 }
 
 .toursSec4Map {
     width: 100%;
+    height: 350px;
     background: #000000;
 }
 
@@ -808,7 +827,7 @@ a:active {
     color: #00000087;
 }
 
-.agToursSec1SearchButton{
+.agToursSec1SearchButton {
     padding: 5px;
     margin: 15px 0px;
     width: 100%;
