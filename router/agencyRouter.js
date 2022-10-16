@@ -27,7 +27,7 @@ router
 router.get(
   '/tours/update',
   agencyController.sessionAgency,
-  agencyController.update
+  agencyController.updateTours
 );
 
 // Tour delete page
@@ -42,5 +42,11 @@ router.get('/tours/add', agencyController.sessionAgency, agencyController.add);
 
 // Tour Page
 router.get('/tours/:id', agencyController.sessionAgency, agencyController.tour);
+
+// Tour update Page
+router
+  .route('/tours/update/:id')
+  .get(agencyController.sessionAgency, agencyController.updateTour)
+  .post(agencyController.update);
 
 module.exports = router;

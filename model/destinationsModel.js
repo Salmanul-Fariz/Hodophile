@@ -34,7 +34,7 @@ const destinationSchema = new mongoos.Schema({
     required: [true, 'Please Add Features !'],
   },
   Coordinates: {
-    Logitude: {
+    Longitude: {
       type: Number,
       required: [true, 'Please Enter Longitude !'],
     },

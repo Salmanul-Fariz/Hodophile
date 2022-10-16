@@ -40,14 +40,55 @@
 
                     <!-- section-2 -->
                     <div class="agToursSec1RightBar ms-4 col-9">
-                        <h1>update Page</h1>
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Update Tour Package</h1>
+
+                        <!-- search button -->
+                        <input class="agToursSec1SearchButton" type="text" id="myInput" onkeyup="myFunction()"
+                            placeholder="Search for names.." title="Type in a name">
+                        <div class="table-responsive">
+                            <table id="myTable" class="table table-striped " style="background-color: #ecf9ee;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Place</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(let i=0; i < tours.length ; i++){%>
+                                        <tr scope="row">
+                                            <td class="pt-3">
+                                                <%= i+1 %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Name %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Place %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Duration %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Price %>
+                                            </td>
+                                            <td><a href="/agency/tours/update/<%= tours[i]._id %>"
+                                                    class="btn btn-primary">Update</a></td>
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Dynamic Itinerary form -->
-        <script src="/js/dynamicItineraryForm.js"></script>
+        <!-- Search Field -->
+        <script src="/js/agencyTourSearchField.js"></script>
 
         <!-- footer -->
         <%- include('../includes/agEnd.ejs') %>

@@ -60,11 +60,21 @@
                                 <tbody>
                                     <% for(let i=0; i < tours.length ; i++){%>
                                         <tr scope="row">
-                                            <td class="pt-3"><%= i+1 %></td>
-                                            <td class="pt-3"><%= tours[i].Name %></td>
-                                            <td class="pt-3"><%= tours[i].Place %></td>
-                                            <td class="pt-3"><%= tours[i].Duration %></td>
-                                            <td class="pt-3"><%= tours[i].Price %></td>
+                                            <td class="pt-3">
+                                                <%= i+1 %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Name %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Place %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Duration %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= tours[i].Price %>
+                                            </td>
                                             <td><a href="/agency/tours/<%= tours[i]._id %>"
                                                     class="btn btn-primary">Details</a></td>
                                         </tr>
@@ -77,27 +87,8 @@
             </div>
         </section>
 
-        <script>
-            function myFunction() {
-              var input, filter, table, tr, td, i, txtValue;
-              input = document.getElementById("myInput");
-              filter = input.value.toUpperCase();
-              table = document.getElementById("myTable");
-              tr = table.getElementsByTagName("tr");
-              for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                  txtValue = td.textContent || td.innerText;
-                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
-                  }
-                }       
-              }
-            }
-            </script>
-            
+        <!-- Search Field -->
+        <script src="/js/agencyTourSearchField.js"></script>
 
         <!-- footer -->
         <%- include('../includes/agEnd.ejs') %>
