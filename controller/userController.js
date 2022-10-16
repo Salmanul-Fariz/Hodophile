@@ -105,15 +105,7 @@ exports.toursDetails = async (req, res) => {
   try {
     const tour = await destinationsModel.findById(req.params.id);
 
-    // To Google Map Setup
-    const coordinates = [];
-    const x = [];
-    x.push(tour.Coordinates.Longitude);
-    x.push(tour.Coordinates.Longitude);
-    coordinates.push(x);
-    console.log(coordinates);
-
-    res.render('user/toursDetails', { tour, coordinates });
+    res.render('user/toursDetails', { tour });
   } catch (err) {
     console.log(err);
   }
