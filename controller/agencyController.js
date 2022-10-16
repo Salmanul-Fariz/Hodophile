@@ -1,5 +1,7 @@
 const destinationsModel = require('./../model/destinationsModel');
 const mongoosErr = require('./../utils/mongoosErr');
+const checkItemDelete = require('./../utils/checkItemDelete');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -33,7 +35,8 @@ exports.login = (req, res) => {
 // All Tours View page
 exports.tours = async (req, res) => {
   try {
-    const tours = await destinationsModel.find({});
+    const alltours = await destinationsModel.find({});
+    const tours = checkItemDelete(alltours);
     res.render('agency/viewTours', { tours });
   } catch (err) {
     console.log(err);
@@ -50,10 +53,24 @@ exports.tour = async (req, res) => {
   }
 };
 
-// Tour delete page
-exports.delete = (req, res) => {
+// All Tours delete page
+exports.deleteTours = async (req, res) => {
   try {
-    res.render('agency/deleteTours');
+    const alltours = await destinationsModel.find({});
+    const tours = checkItemDelete(alltours);
+    res.render('agency/deleteTours', { tours });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// All Tours delete page
+exports.delete = async (req, res) => {
+  try {
+    await destinationsModel.findOneAndUpdate(req.params.id, {
+      ItemDelete: true,
+    });
+    res.redirect('/agency//tours/delete');
   } catch (err) {
     console.log(err);
   }
@@ -62,7 +79,8 @@ exports.delete = (req, res) => {
 // All Tours update page
 exports.updateTours = async (req, res) => {
   try {
-    const tours = await destinationsModel.find({});
+    const alltours = await destinationsModel.find({});
+    const tours = checkItemDelete(alltours);
     res.render('agency/updateTours', { tours });
   } catch (err) {
     console.log(err);
@@ -119,10 +137,9 @@ exports.update = async (req, res) => {
       for (let i = 0; i < image.Images.length; i++) {
         fs.unlinkSync(`${imagePath}/${image.Images[i]}`);
       }
-      const imagesUpdate = await destinationsModel.findOneAndUpdate(
-        req.params.id,
-        { Images: imagesName }
-      );
+      await destinationsModel.findOneAndUpdate(req.params.id, {
+        Images: imagesName,
+      });
     }
 
     // Update the current Tour

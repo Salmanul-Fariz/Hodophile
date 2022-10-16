@@ -164,8 +164,10 @@ a:active {
 /* section-3 */
 
 .section-3 {
-    background: url(../images/Backgrond/image-1.jpg);
-    background-size: 100% auto;
+    /* background: url(../images/Backgrond/image-1.jpg); */
+    /* background-size: 100% auto; */
+    background-color:#ecf9ee ;
+    padding :20px 0 ;
     width: 100%;
 }
 
@@ -595,7 +597,6 @@ a:active {
 
 .toursSec4Map {
     width: 100%;
-    height: 400px;
     background: #000000;
 }
 
@@ -605,30 +606,14 @@ a:active {
 }
 
 .toursDetailsSec2Text {
-    background-size: 1520px 410px;
-    height: 410px;
-    top: 255px;
-    left: 135px;
+    position: absolute;
+    top: 6px;
+    left: 40px;
 }
 
-@media (max-width : 768px) {
-    .toursDetailsSec2Text {
-        background-size: 770px 290px;
-        height: 290px;
-    }
-}
-
-@media (max-width : 992px) {
-    .toursDetailsSec2Text {
-        background-size: 950px 360px;
-        height: 360px;
-    }
-}
-
-@media (max-width : 1200px) {
-    .toursDetailsSec2Text {
-        background-size: 1250px 400px;
-        height: 400px;
+@media (min-width : 992px) {
+    .toursDetailsSec2Image {
+        height: 500px;
     }
 }
 

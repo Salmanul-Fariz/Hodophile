@@ -20,9 +20,13 @@
         <section class="toursSec2">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 toursDetailsSec2Text d-flex" style="background: url('./../images/destination/<%= tour.Images[0] %>');">
-                        <i class="ms-3 mt-3 toursDetailsSec2Text1 fa-solid fa-location-dot"></i>
-                        <p class="ms-3 mt-3 toursDetailsSec2Text2"><%= tour.Place %>,<%= tour.Country %></p>
+                    <div class="col-12" style="position:relative ;">
+                        <img  class="toursDetailsSec2Image w-100" src="/images/destination/<%= tour.Images[0] %>" alt="">
+                        <div class="toursDetailsSec2Text">
+                            <i class="ms-3 mt-3 toursDetailsSec2Text1 fa-solid fa-location-dot"></i>
+                            <p class="ms-3 mt-3 toursDetailsSec2Text2"><%= tour.Place %>,<%= tour.Country %></p>
+                        </div>
+
                     </div>
                 </div>
             </div>

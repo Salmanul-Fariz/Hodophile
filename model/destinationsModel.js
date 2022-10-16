@@ -72,6 +72,10 @@ const destinationSchema = new mongoos.Schema({
     type: Array,
     required: [true, 'Please Enter itinerary !'],
   },
+  ItemDelete: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const destination = mongoos.model('Destination', destinationSchema);

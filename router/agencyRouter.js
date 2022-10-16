@@ -34,19 +34,26 @@ router.get(
 router.get(
   '/tours/delete',
   agencyController.sessionAgency,
-  agencyController.delete
+  agencyController.deleteTours
 );
 
 // Tour add page
 router.get('/tours/add', agencyController.sessionAgency, agencyController.add);
 
-// Tour Page
+// Tour Page(id)
 router.get('/tours/:id', agencyController.sessionAgency, agencyController.tour);
 
-// Tour update Page
+// Tour update Page(id)
 router
   .route('/tours/update/:id')
   .get(agencyController.sessionAgency, agencyController.updateTour)
   .post(agencyController.update);
+
+// Tour delete Page(id)
+router.get(
+  '/tours/delete/:id',
+  agencyController.sessionAgency,
+  agencyController.delete
+);
 
 module.exports = router;

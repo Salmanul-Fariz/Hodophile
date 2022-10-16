@@ -111,41 +111,52 @@
                             <h3 class="sec4Text1 text-center">We Are Awsome</h3>
                             <h1 class="text-center fw-bold">Why Choose Hodophile</h1>
                         </div>
-                        <div class="col-sm-3">
-                            <div>
-                                <img src="./images/Resources/icon-1.png" alt="">
-                                <h3>Diverse Destinations</h3>
-                                <p>Richly varied landscapes, luxury accommodation Travel.</p>
+                        <div class="d-flex justify-content-center">
+                            <div class="col-md-6">
+                                <div>
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mt-5" src="./images/Resources/icon-1.png" alt="">
+                                    </div>
+                                    <h3 class="text-center mt-4">Diverse Destinations</h3>
+                                    <p class="text-center mt-4">Richly varied landscapes, luxury accommodation Travel.</p>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mt-5" src="./images/Resources/icon-2.png" alt="">
+                                    </div>
+                                    <h3 class="text-center mt-4">Diverse Destinations</h3>
+                                    <p class="text-center mt-4">Richly varied landscapes, luxury accommodation Travel.</p>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mt-5" src="./images/Resources/icon-3.png" alt="">
+                                    </div>
+                                    <h3 class="text-center mt-4">Diverse Destinations</h3>
+                                    <p class="text-center mt-4">Richly varied landscapes, luxury accommodation Travel.</p>
+                                </div>
                             </div>
-                            <div>
-                                <img class="mt-4" src="./images/Resources/icon-2.png" alt="">
-                                <h3>Value for Money</h3>
-                                <p>Richly varied landscapes, luxury accommodation Travel.</p>
-                            </div>
-                            <div>
-                                <img class="mt-4" src="./images/Resources/icon-3.png" alt="">
-                                <h3>Beautiful Places</h3>
-                                <p>Richly varied landscapes, luxury accommodation Travel.</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 d-flex justify-content-center">
-                            <img src="./images/Resources/why-image-1.png" alt="">
-                        </div>
-                        <div class="col-sm-3">
-                            <div>
-                                <img src="./images/Resources/icon-4.png" alt="">
-                                <h3>Fast Booking</h3>
-                                <p>Richly varied landscapes, luxury accommodation Travel.</p>
-                            </div>
-                            <div>
-                                <img class="mt-4" src="./images/Resources/icon-5.png" alt="">
-                                <h3>Support Team</h3>
-                                <p>Richly varied landscapes, luxury accommodation Travel.</p>
-                            </div>
-                            <div>
-                                <img class="mt-4" src="./images/Resources/icon-6.png" alt="">
-                                <h3>Passionate Travel</h3>
-                                <p>Richly varied landscapes, luxury accommodation Travel.</p>
+                            <div class="col-md-6">
+                                <div>
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mt-5" src="./images/Resources/icon-4.png" alt="">
+                                    </div>
+                                    <h3 class="text-center mt-4">Diverse Destinations</h3>
+                                    <p class="text-center mt-4">Richly varied landscapes, luxury accommodation Travel.</p>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mt-5" src="./images/Resources/icon-5.png" alt="">
+                                    </div>
+                                    <h3 class="text-center mt-4">Diverse Destinations</h3>
+                                    <p class="text-center mt-4">Richly varied landscapes, luxury accommodation Travel.</p>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mt-5" src="./images/Resources/icon-6.png" alt="">
+                                    </div>
+                                    <h3 class="text-center mt-4">Diverse Destinations</h3>
+                                    <p class="text-center mt-4">Richly varied landscapes, luxury accommodation Travel.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,12 +171,12 @@
                             <h1 class="text-center fw-bold">Top Destinations</h1>
                         </div>
                         <% for (tour of tours){%>
-                        <div class="col-md-6 mt-3 ">
-                            <img class="rounded-4 w-100" style="padding-bottom: 30px"
-                                src="./images/destination/<%= tour.Images[0] %>" alt="">
-                            <a href="/tours/<%= tour._id %>" class="sec5Button">Details</a>
-                        </div>
-                        <%}%>
+                            <div class="col-md-6 mt-3 ">
+                                <img class="rounded-4 w-100" style="padding-bottom: 30px"
+                                    src="./images/destination/<%= tour.Images[0] %>" alt="">
+                                <a href="/tours/<%= tour._id %>" class="sec5Button">Details</a>
+                            </div>
+                            <%}%>
                     </div>
                 </div>
             </section>

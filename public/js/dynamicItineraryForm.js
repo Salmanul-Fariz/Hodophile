@@ -88,12 +88,6 @@ function itineraryForm() {
     Err.style.visibility = 'visible';
     ErrText.innerText = message;
   }
-  // validate Difficulty required
-  else if (tourDifficulty.value === '' || tourDifficulty.value === null) {
-    let message = 'Please Enter Difficulty !';
-    Err.style.visibility = 'visible';
-    ErrText.innerText = message;
-  }
   // validate Price required
   else if (tourPrice.value === '' || tourPrice.value === null) {
     let message = 'Please Enter Price !';

@@ -1,5 +1,6 @@
 const userModel = require('./../model/userModel');
 const destinationsModel = require('./../model/destinationsModel');
+const checkItemDelete = require('./../utils/checkItemDelete');
 
 // session middleware
 exports.sessionUser = (req, res, next) => {
@@ -14,7 +15,8 @@ exports.sessionUser = (req, res, next) => {
 exports.homePage = async (req, res) => {
   try {
     const user = req.session.user;
-    const tours = await destinationsModel.find({});
+    const allTours = await destinationsModel.find({});
+    const tours = checkItemDelete(allTours)
     res.render('user/home', { user, tours });
   } catch (err) {
     console.log(err);
@@ -25,7 +27,7 @@ exports.homePage = async (req, res) => {
 exports.signup = (req, res) => {
   try {
     if (req.session.user) {
-      res.redirect('/')
+      res.redirect('/');
     } else {
       res.render('user/signup', { userErr: req.flash('userErr') });
     }
@@ -38,7 +40,7 @@ exports.signup = (req, res) => {
 exports.login = (req, res) => {
   try {
     if (req.session.user) {
-      res.redirect('/')
+      res.redirect('/');
     } else {
       res.render('user/login', { userErr: req.flash('userErr') });
     }
@@ -80,8 +82,10 @@ exports.profile = async (req, res) => {
 // Tours page
 exports.tours = async (req, res) => {
   try {
-    const tours = await destinationsModel.find({});
+    const allTours = await destinationsModel.find({});
+    const tours = checkItemDelete(allTours)
     res.render('user/tours', { tours });
+
   } catch (err) {
     console.log(err);
   }
