@@ -50,7 +50,7 @@ router
   .post(agencyController.update);
 
 // Tour delete Page(id)
-router.get(
+router.post(
   '/tours/delete/:id',
   agencyController.sessionAgency,
   agencyController.delete

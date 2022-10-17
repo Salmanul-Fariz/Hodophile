@@ -75,7 +75,7 @@
                                             <td class="pt-3">
                                                 <%= tours[i].Price %>
                                             </td>
-                                            <td><a href="/agency/tours/delete/<%= tours[i]._id %>"
+                                            <td><a onclick="agencyDeleteTour('<%= tours[i]._id %>')"
                                                     class="btn btn-danger">Delete</a></td>
                                         </tr>
                                         <%}%>
@@ -89,6 +89,10 @@
 
         <!-- Search Field -->
         <script src="/js/agencyTourSearchField.js"></script>
+
+        <!-- Swal Alert -->
+        <script src="/js/swalAlert.js"></script>
+
 
         <!-- footer -->
         <%- include('../includes/agEnd.ejs') %>

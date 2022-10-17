@@ -70,7 +70,7 @@ exports.delete = async (req, res) => {
     await destinationsModel.findOneAndUpdate(req.params.id, {
       ItemDelete: true,
     });
-    res.redirect('/agency//tours/delete');
+    res.redirect('/agency/tours/delete');
   } catch (err) {
     console.log(err);
   }

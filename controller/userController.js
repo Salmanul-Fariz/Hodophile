@@ -62,6 +62,7 @@ exports.otp = (req, res) => {
 exports.logout = (req, res) => {
   try {
     req.session.user = null;
+    // res.json({status:true})
     res.redirect('/');
   } catch (err) {
     console.log(err);
