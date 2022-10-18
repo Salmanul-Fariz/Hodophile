@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 // require controller
-const userController = require('./../controller/userController');
-const userAuthController = require('./../controller/userAuthController');
-const userToursController = require('./../controller/userToursController');
-const userTrekkingsController = require('./../controller/userTrekkingsController');
+const userController = require('./../controller/user/userController');
+const userAuthController = require('./../controller/user/userAuthController');
+const userToursController = require('./../controller/user/userToursController');
+const userTrekkingsController = require('./../controller/user/userTrekkingsController');
 
 //  home page
 router.route('/').get(userController.homePage);
@@ -26,7 +26,12 @@ router.route('/login').get(userController.login).post(userAuthController.login);
 router.post('/logout', userController.logout);
 
 // profile page
-router.get('/profile', userController.sessionUser, userController.profile);
+router.get(
+  '/profile',
+  userController.sessionUser,
+  userController.checkBlocked,
+  userController.profile
+);
 
 //////////////////////////////////
 ///////////   Tours   ////////////
@@ -39,6 +44,7 @@ router.get('/tours', userToursController.tours);
 router.get(
   '/tours/:id',
   userController.sessionUser,
+  userController.checkBlocked,
   userToursController.details
 );
 
@@ -53,6 +59,7 @@ router.get('/trekkings', userTrekkingsController.trekkings);
 router.get(
   '/trekkings/:id',
   userController.sessionUser,
+  userController.checkBlocked,
   userTrekkingsController.details
 );
 

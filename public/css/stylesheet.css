@@ -828,11 +828,17 @@ a:active {
 }
 
 .agToursSec1SearchButton {
-    padding: 5px;
+    padding: 14px;
     margin: 15px 0px;
     width: 100%;
     border: solid;
     border-width: 1px;
     border-radius: 7px;
     border-color: black;
+}
+
+.agUsersec1{
+    background: #ecf9ee;
+    border-radius: 20px;
+    padding: 20px;
 }

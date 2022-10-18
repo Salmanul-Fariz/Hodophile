@@ -1,0 +1,74 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section --->
+        <section class="agToursSec1">
+            <div class="container">
+                <div class="row">
+
+                    <!-- section-1 -->
+                    <div class="agUsersec1 ms-4 col-12">
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">View Tour Package</h1>
+
+                        <!-- search button -->
+                        <input class="agToursSec1SearchButton" type="text" id="myInput" onkeyup="myFunction()"
+                            placeholder="Search for names.." title="Type in a name">
+                        <div class="table-responsive">
+                            <table id="myTable" class="table table-striped " style="background-color: #ecf9ee;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Contact</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(let i=0; i < users.length ; i++){%>
+                                        <tr scope="row">
+                                            <td class="pt-3">
+                                                <%= i+1 %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= users[i].firstName %>
+                                                    <%= users[i].lastName %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= users[i].email %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= users[i].contact %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= users[i].age %>
+                                            </td>
+                                            <% if (users[i].blocked) {%>
+                                                <td><a onclick="agencyUserUnblock('<%= users[i]._id %>')"
+                                                        class="btn btn-success">Unblock</a></td>
+                                                <%}else{%>
+                                                    <td><a onclick="agencyUserBlock('<%= users[i]._id %>')"
+                                                            class="btn btn-danger">Block</a></td>
+                                                    <%}%>
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Field -->
+        <script src="/js/agencySearchField.js"></script>
+
+        <!-- Swal Alert -->
+        <script src="/js/swalAlert.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

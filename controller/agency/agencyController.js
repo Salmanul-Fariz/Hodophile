@@ -1,6 +1,5 @@
-const destinationsModel = require('./../model/destinationsModel');
-const mongoosErr = require('./../utils/mongoosErr');
-const checkItemDelete = require('./../utils/checkItemDelete');
+const destinationsModel = require('./../../model/destinationsModel');
+const checkItemDelete = require('./../../utils/checkItemDelete');
 
 // session middleware
 exports.sessionAgency = (req, res, next) => {

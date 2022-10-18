@@ -1,5 +1,5 @@
-const trekkingModel = require('./../model/trekkingModel');
-const checkItemDelete = require('./../utils/checkItemDelete');
+const trekkingModel = require('./../../model/trekkingModel');
+const checkItemDelete = require('./../../utils/checkItemDelete');
 
 // Trekkings page
 exports.trekkings = async (req, res) => {

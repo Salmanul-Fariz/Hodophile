@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 
 // require controller
-const agencyController = require('./../controller/agencyController');
-const agencyAuthController = require('./../controller/agencyAuthController');
-const agencyToursController = require('./../controller/agencyToursController');
-const agencyTrekkingController = require('./../controller/agencyTrekkingController');
+const agencyController = require('./../controller/agency/agencyController');
+const agencyAuthController = require('./../controller/agency/agencyAuthController');
+const agencyToursController = require('./../controller/agency/agencyToursController');
+const agencyTrekkingController = require('./../controller/agency/agencyTrekkingController');
+const agencyUserController = require('./../controller/agency/agencyUserController');
 
 // require Multer
 const Multer = require('./../utils/multer');
@@ -128,5 +128,30 @@ router
 
 // Trekking delete Page(id)
 router.post('/trekkings/delete/:id', agencyTrekkingController.delete);
+
+//////////////////////////////////
+////////////   User   ////////////
+//////////////////////////////////
+
+// All users
+router.get(
+  '/users',
+  agencyController.sessionAgency,
+  agencyUserController.userdetails
+);
+
+// To block user
+router.post(
+  '/users/block/:id',
+  agencyController.sessionAgency,
+  agencyUserController.userBlock
+);
+
+// To unblock user
+router.post(
+  '/users/unblock/:id',
+  agencyController.sessionAgency,
+  agencyUserController.userUnblock
+);
 
 module.exports = router;

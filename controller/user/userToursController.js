@@ -1,5 +1,5 @@
-const destinationsModel = require('./../model/destinationsModel');
-const checkItemDelete = require('./../utils/checkItemDelete');
+const destinationsModel = require('./../../model/destinationsModel');
+const checkItemDelete = require('./../../utils/checkItemDelete');
 
 // Tours page
 exports.tours = async (req, res) => {

@@ -1,6 +1,6 @@
-const trekkingModel = require('./../model/trekkingModel');
-const mongoosErr = require('./../utils/mongoosErr');
-const checkItemDelete = require('./../utils/checkItemDelete');
+const trekkingModel = require('./../../model/trekkingModel');
+const mongoosErr = require('./../../utils/mongoosErr');
+const checkItemDelete = require('./../../utils/checkItemDelete');
 
 const fs = require('fs');
 const path = require('path');
@@ -130,7 +130,6 @@ exports.updateTrekking = async (req, res) => {
 // Trekkings update Page(post)
 exports.update = async (req, res) => {
   try {
-    res.redirect('/agency/trekkings/update');
     // Make Itinerary to Array
     let day = req.body.trekkingDuration;
     let itineraryArray = [];
@@ -157,6 +156,7 @@ exports.update = async (req, res) => {
       const imagePath = path.join(
         __dirname,
         '../',
+        '../',
         'public/',
         'images/',
         'trekking/'
@@ -164,13 +164,13 @@ exports.update = async (req, res) => {
       for (let i = 0; i < image.Images.length; i++) {
         fs.unlinkSync(`${imagePath}/${image.Images[i]}`);
       }
-      await trekkingModel.findOneAndUpdate(req.params.id, {
+      await trekkingModel.updateOne({_id:req.params.id}, {
         Images: imagesName,
       });
     }
 
     // Update the current Trekking
-    await trekkingModel.findOneAndUpdate(req.params.id, {
+    await trekkingModel.updateOne({_id:req.params.id}, {
       Name: req.body.trekkingName,
       Place: req.body.trekkingPlace,
       Country: req.body.trekkingCountry,
@@ -190,6 +190,8 @@ exports.update = async (req, res) => {
       Discount: req.body.trekkingDiscount,
       Itinerary: itineraryArray,
     });
+
+    res.redirect('/agency/trekkings/update');
   } catch (err) {
     console.log(err);
     let error = mongoosErr(err);
@@ -212,7 +214,7 @@ exports.deleteTours = async (req, res) => {
 // Trekkings delete page(post)
 exports.delete = async (req, res) => {
   try {
-    await trekkingModel.findOneAndUpdate(req.params.id, {
+    await trekkingModel.updateOne({_id:req.params.id}, {
       ItemDelete: true,
     });
     res.redirect('/agency/trekkings/delete');

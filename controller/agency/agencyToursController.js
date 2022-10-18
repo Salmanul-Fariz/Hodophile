@@ -1,6 +1,6 @@
-const destinationsModel = require('./../model/destinationsModel');
-const mongoosErr = require('./../utils/mongoosErr');
-const checkItemDelete = require('./../utils/checkItemDelete');
+const destinationsModel = require('./../../model/destinationsModel');
+const mongoosErr = require('./../../utils/mongoosErr');
+const checkItemDelete = require('./../../utils/checkItemDelete');
 
 const fs = require('fs');
 const path = require('path');
@@ -40,7 +40,7 @@ exports.deleteTours = async (req, res) => {
 // Tours delete page(post)
 exports.delete = async (req, res) => {
   try {
-    await destinationsModel.findOneAndUpdate(req.params.id, {
+    await destinationsModel.updateOne({_id:req.params.id}, {
       ItemDelete: true,
     });
     res.redirect('/agency/tours/delete');
@@ -76,7 +76,6 @@ exports.updateTour = async (req, res) => {
 // Tour update Page(post)
 exports.update = async (req, res) => {
   try {
-    res.redirect('/agency/tours/update');
     // Make Itinerary to Array
     let day = req.body.tourDuration;
     let itineraryArray = [];
@@ -103,6 +102,7 @@ exports.update = async (req, res) => {
       const imagePath = path.join(
         __dirname,
         '../',
+        '../',
         'public/',
         'images/',
         'destination/'
@@ -110,13 +110,13 @@ exports.update = async (req, res) => {
       for (let i = 0; i < image.Images.length; i++) {
         fs.unlinkSync(`${imagePath}/${image.Images[i]}`);
       }
-      await destinationsModel.findOneAndUpdate(req.params.id, {
+      await destinationsModel.updateOne({_id:req.params.id}, {
         Images: imagesName,
       });
     }
 
     // Update the current Tour
-    await destinationsModel.findOneAndUpdate(req.params.id, {
+    await destinationsModel.updateOne({_id:req.params.id}, {
       Name: req.body.tourName,
       Place: req.body.tourPlace,
       Country: req.body.tourCountry,
@@ -136,6 +136,9 @@ exports.update = async (req, res) => {
       Discount: req.body.tourDiscount,
       Itinerary: itineraryArray,
     });
+
+    res.redirect('/agency/tours/update');
+
   } catch (err) {
     console.log(err);
     let error = mongoosErr(err);

@@ -1,5 +1,5 @@
-const agencyModel = require('./../model/agencyModel');
-const mongoosErr = require('./../utils/mongoosErr');
+const agencyModel = require('./../../model/agencyModel');
+const mongoosErr = require('./../../utils/mongoosErr');
 
 // Login page(Post)
 exports.login = async (req, res) => {

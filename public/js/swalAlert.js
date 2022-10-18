@@ -73,3 +73,52 @@ function agencyDeleteTrekking(id) {
   });
 }
 
+// Agency user block
+function agencyUserBlock(id) {
+  Swal.fire({
+    title: 'Are you sure?',
+    icon: 'warning',
+    iconColor: 'White',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Block',
+    background: '#41c356',
+    color: 'White',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Creating Submit Form
+      const form = document.createElement('form');
+      // Form Attributes
+      form.method = 'post';
+      form.action = `/agency/users/block/${id}`;
+      document.body.appendChild(form);
+      form.submit();
+    }
+  });
+}
+
+// Agency user unblock
+function agencyUserUnblock(id) {
+  Swal.fire({
+    title: 'Are you sure?',
+    icon: 'warning',
+    iconColor: 'White',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Unblock',
+    background: '#41c356',
+    color: 'White',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Creating Submit Form
+      const form = document.createElement('form');
+      // Form Attributes
+      form.method = 'post';
+      form.action = `/agency/users/unblock/${id}`;
+      document.body.appendChild(form);
+      form.submit();
+    }
+  });
+}

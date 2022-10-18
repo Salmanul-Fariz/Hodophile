@@ -1,6 +1,6 @@
-const userModel = require('./../model/userModel');
-const mongoosErr = require('./../utils/mongoosErr');
-const otpVerification = require('./../utils/otpVerification');
+const userModel = require('./../../model/userModel');
+const mongoosErr = require('./../../utils/mongoosErr');
+const otpVerification = require('./../../utils/otpVerification');
 
 let userSignup = null;
 
@@ -69,6 +69,9 @@ exports.login = async (req, res) => {
       .select('+password');
     if (!req.body.password || !req.body.email || !req.body.passwordConfirm) {
       req.flash('userErr', 'Fields required');
+      res.redirect('/login');
+    } else if (user.blocked === true) {
+      req.flash('userErr', 'Id is Blocked');
       res.redirect('/login');
     } else if (user) {
       let password = await user.correctPass(req.body.password, user.password);
