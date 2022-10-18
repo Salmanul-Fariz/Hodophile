@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="col-12">
-                            <h1 class="signupSec1Text d-flex justify-content-center">Destinations</h1>
+                            <h1 class="signupSec1Text d-flex justify-content-center">Trekkings</h1>
                         </div>
                     </div>
                 </div>
@@ -28,30 +28,30 @@
                     </div>
 
                     <!-- cards -->
-                    <% for(tour of tours){%>
+                    <% for(trekking of trekkings){%>
                         <div class="col-sm-6 col-lg-4 mt-3">
                             <div class="card p-3 sec3Card" style="background-color: #ecf9ee;">
-                                <img src="./images/destination/<%= tour.Images[0] %>" class="card-img-top rounded"
+                                <img src="./images/trekking/<%= trekking.Images[0] %>" class="card-img-top rounded"
                                     alt="...">
                                 <div class="card-body">
-                                    <p class="sec3Text1 rounded-2">₹ <%= tour.Price %>
+                                    <p class="sec3Text1 rounded-2">₹ <%= trekking.Price %>
                                     </p>
                                     <p class="sec3Text2">
-                                        <%= tour.Review %> Reviews
+                                        <%= trekking.Review %> Reviews
                                     </p>
                                     <h5 class="card-title sec3Text3">
-                                        <%= tour.Name %>
+                                        <%= trekking.Name %>
                                     </h5>
                                     <p class="card-text sec3Text4 pb-3">
-                                        <%= tour.ShortDescription %>
+                                        <%= trekking.ShortDescription %>
                                     </p>
                                     <div class="d-flex mt-3 pb-3">
                                         <i class="fs-4 fa-solid fa-calendar"></i>
                                         <p class="ms-2">
-                                            <%= tour.Duration %> Days
+                                            <%= trekking.Duration %> Days
                                         </p>
                                     </div>
-                                    <a href="/tours/<%= tour._id %>" class="sec3Text5">Details</a>
+                                    <a href="/trekkings/<%= trekking._id %>" class="sec3Text5">Details</a>
                                 </div>
                             </div>
                         </div>

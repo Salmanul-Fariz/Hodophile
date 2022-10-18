@@ -4,6 +4,8 @@ const router = express.Router();
 // require controller
 const userController = require('./../controller/userController');
 const userAuthController = require('./../controller/userAuthController');
+const userToursController = require('./../controller/userToursController');
+const userTrekkingsController = require('./../controller/userTrekkingsController');
 
 //  home page
 router.route('/').get(userController.homePage);
@@ -26,14 +28,32 @@ router.post('/logout', userController.logout);
 // profile page
 router.get('/profile', userController.sessionUser, userController.profile);
 
+//////////////////////////////////
+///////////   Tours   ////////////
+//////////////////////////////////
+
 // Tours page
-router.get('/tours', userController.tours);
+router.get('/tours', userToursController.tours);
 
 // Tours details page
 router.get(
   '/tours/:id',
   userController.sessionUser,
-  userController.toursDetails
+  userToursController.details
+);
+
+//////////////////////////////////
+//////////   Trekkings   /////////
+//////////////////////////////////
+
+// Trekkings page
+router.get('/trekkings', userTrekkingsController.trekkings);
+
+// Trekkings details page
+router.get(
+  '/trekkings/:id',
+  userController.sessionUser,
+  userTrekkingsController.details
 );
 
 module.exports = router;

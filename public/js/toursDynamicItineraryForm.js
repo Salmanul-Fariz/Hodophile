@@ -25,9 +25,6 @@ const formButtonText = document.getElementById('formButtonText');
 const formSubmit = document.getElementById('formSubmit');
 const formsubmitButton = document.getElementById('formsubmitButton');
 
-// Create a break line element
-const br = document.createElement('br');
-
 // Adding features form
 const formDownFeatures = document.getElementById('formDownFeatures');
 

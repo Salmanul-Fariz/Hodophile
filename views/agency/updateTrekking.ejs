@@ -10,27 +10,27 @@
                 <div class="row">
                     <div class="col-2 ">
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings" class="d-flex justify-content-center">
                                 <i class="text-primary agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">View
                                 </p>
                             </a>
                         </div>
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours/add" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings/add" class="d-flex justify-content-center">
                                 <i class="text-success agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Add</p>
                             </a>
                         </div>
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours/delete" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings/delete" class="d-flex justify-content-center">
                                 <i class="text-danger agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Delete
                                 </p>
                             </a>
                         </div>
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours/update" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings/update" class="d-flex justify-content-center">
                                 <i class="agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Update
                                 </p>
@@ -40,8 +40,8 @@
 
                     <!-- section-2 -->
                     <div class="agToursSec1RightBar ms-4 col-9">
-                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Update Tour Package</h1>
-                        <form id="form" method="post" action="/agency/tours/update/<%= tour._id %>"
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Update Trekking</h1>
+                        <form id="form" method="post" action="/agency/trekkings/update/<%= trekking._id %>"
                             enctype="multipart/form-data" class="p-4">
 
                             <!-- errBar -->
@@ -64,63 +64,63 @@
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Name</label>
-                                                <input id="tourName" type="text" class="form-control" name="tourName"
-                                                    placeholder="Enter Tour Name" value="<%= tour.Name %>" required>
+                                                <input id="trekkingName" type="text" class="form-control" name="trekkingName"
+                                                    placeholder="Enter Trekking Name" value="<%= trekking.Name %>" required>
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Place</label>
-                                                <input id="tourPlace" type="text" class="form-control" name="tourPlace"
-                                                    placeholder=" Enter Tour place" value="<%= tour.Place %>" required>
+                                                <input id="trekkingPlace" type="text" class="form-control" name="trekkingPlace"
+                                                    placeholder=" Enter Trekking place" value="<%= trekking.Place %>" required>
                                             </div>
                                         </div>
                                         <div class=" d-flex mt-2">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Country</label>
-                                                <input id="tourCountry" type="text" class="form-control"
-                                                    name="tourCountry" placeholder="Enter Country Name "
-                                                    value="<%= tour.Country %>" required>
+                                                <input id="trekkingCountry" type="text" class="form-control"
+                                                    name="trekkingCountry" placeholder="Enter Country Name "
+                                                    value="<%= trekking.Country %>" required>
                                             </div>
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">State</label>
-                                                <input id="tourState" type="text" class="form-control" name="tourState"
-                                                    placeholder="Enter State Name" value="<%= tour.State %>" required>
+                                                <input id="trekkingState" type="text" class="form-control" name="trekkingState"
+                                                    placeholder="Enter State Name" value="<%= trekking.State %>" required>
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">City</label>
-                                                <input id="tourCity" type="text" class="form-control" name="tourCity"
-                                                    placeholder="Enter City Name" value="<%= tour.City %>" required>
+                                                <input id="trekkingCity" type="text" class="form-control" name="trekkingCity"
+                                                    placeholder="Enter City Name" value="<%= trekking.City %>" required>
                                             </div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Longitude</label>
-                                                <input id="tourLogitude" type="text" class="form-control"
-                                                    name="tourLongitude" placeholder="Enter Longitude"
-                                                    value="<%= tour.Coordinates.Longitude %>" required>
+                                                <input id="trekkingLongitude" type="text" class="form-control"
+                                                    name="trekkingLongitude" placeholder="Enter Longitude"
+                                                    value="<%= trekking.Coordinates.Longitude %>" required>
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Latitude</label>
-                                                <input id="tourlatitude" type="text" class="form-control"
-                                                    name="tourlatitude" placeholder=" Enter Latitude"
-                                                    value="<%= tour.Coordinates.Latitude %>" required>
+                                                <input id="trekkinglatitude" type="text" class="form-control"
+                                                    name="trekkinglatitude" placeholder=" Enter Latitude"
+                                                    value="<%= trekking.Coordinates.Latitude %>" required>
                                             </div>
                                         </div>
                                         <div class=" d-flex mt-2">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Duration</label>
-                                                <input id="tourDuration" type="number" class="form-control"
-                                                    name="tourDuration" placeholder="Enter Duration"
-                                                    value="<%= tour.Duration %>" required>
+                                                <input id="trekkingDuration" type="number" class="form-control"
+                                                    name="trekkingDuration" placeholder="Enter Duration"
+                                                    value="<%= trekking.Duration %>" required>
                                             </div>
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Review</label>
-                                                <input id="tourReview" type="number" class="form-control"
-                                                    name="tourReview" placeholder="Enter Review Rate"
-                                                    value="<%= tour.Review %>" required>
+                                                <input id="trekkingReview" type="number" class="form-control"
+                                                    name="trekkingReview" placeholder="Enter Review Rate"
+                                                    value="<%= trekking.Review %>" required>
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Difficulty</label>
-                                                <select class="form-control" id="tourDifficulty" name="tourDifficulty">
+                                                <select class="form-control" id="trekkingDifficulty" name="trekkingDifficulty">
                                                     <option>Easy</option>
                                                     <option>Medium</option>
                                                     <option>Hard</option>
@@ -130,23 +130,23 @@
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Price</label>
-                                                <input id="tourPrice" type="number" class="form-control"
-                                                    name="tourPrice" placeholder="Enter Price" value="<%= tour.Price %>"
+                                                <input id="trekkingPrice" type="number" class="form-control"
+                                                    name="trekkingPrice" placeholder="Enter Price" value="<%= trekking.Price %>"
                                                     required>
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Discount</label>
-                                                <input id="tourDiscount" type="number" class="form-control"
-                                                    name="tourDiscount" placeholder="Enter Discount Rate"
-                                                    value="<%= tour.Discount %>" required>
+                                                <input id="trekkingDiscount" type="number" class="form-control"
+                                                    name="trekkingDiscount" placeholder="Enter Discount Rate"
+                                                    value="<%= trekking.Discount %>" required>
                                             </div>
                                         </div>
-                                        <% for (feature of tour.Features){%>
+                                        <% for (feature of trekking.Features){%>
                                             <div class="d-flex">
                                                 <div class="mb-3 pe-2 signupSec2FormBar">
                                                     <label class="form-label signupSec2Text">Feature</label>
-                                                    <input id="tourFeatures" type="text" class="form-control"
-                                                        name="tourFeatures" value="<%= feature %>"
+                                                    <input id="trekkingFeatures" type="text" class="form-control"
+                                                        name="trekkingFeatures" value="<%= feature %>"
                                                         placeholder="Enter Feature" required>
                                                 </div>
                                             </div>
@@ -162,22 +162,22 @@
                                                 <div class="d-flex">
                                                     <div class="mb-3 pe-2 signupSec2FormBar">
                                                         <label class="form-label signupSec2Text">Description</label>
-                                                        <textarea id="tourDescription" type="number"
-                                                            class="form-control" name="tourDescription"
-                                                            required><%= tour.Description %></textarea>
+                                                        <textarea id="trekkingDescription" type="number"
+                                                            class="form-control" name="trekkingDescription"
+                                                            required><%= trekking.Description %></textarea>
                                                     </div>
                                                     <div class="mb-3 signupSec2FormBar">
                                                         <label class="form-label signupSec2Text">Short
                                                             description</label>
-                                                        <textarea id="tourShortDescription" type="number"
-                                                            class="form-control" name="tourShortDescription"
-                                                            required><%= tour.ShortDescription %></textarea>
+                                                        <textarea id="trekkingShortDescription" type="number"
+                                                            class="form-control" name="trekkingShortDescription"
+                                                            required><%= trekking.ShortDescription %></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="mb-3 pe-2 signupSec2FormBar">
                                                         <label class="form-label signupSec2Text">Choose Images</label>
-                                                        <input type="file" class="form-control" name="tourImages"
+                                                        <input type="file" class="form-control" name="trekkingImages"
                                                             multiple>
                                                     </div>
                                                 </div>
@@ -203,7 +203,7 @@
         </section>
 
         <!-- Dynamic Itinerary form -->
-        <script src="/js/toursDynamicItineraryForm.js"></script>
+        <script src="/js/trekkingsDynamicItineraryForm.js"></script>
 
 
         <!-- footer -->

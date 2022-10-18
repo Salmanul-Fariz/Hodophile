@@ -10,27 +10,27 @@
                 <div class="row">
                     <div class="col-2 ">
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings" class="d-flex justify-content-center">
                                 <i class="text-primary agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">View
                                 </p>
                             </a>
                         </div>
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours/add" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings/add" class="d-flex justify-content-center">
                                 <i class="text-success agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Add</p>
                             </a>
                         </div>
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours/delete" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings/delete" class="d-flex justify-content-center">
                                 <i class="text-danger agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Delete
                                 </p>
                             </a>
                         </div>
                         <div class=" mb-3 agToursSec1LeftButton">
-                            <a href="/agency/tours/update" class="d-flex justify-content-center">
+                            <a href="/agency/trekkings/update" class="d-flex justify-content-center">
                                 <i class="agToursSec1LeftButtonIcon fa-solid fa-user"></i>
                                 <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Update
                                 </p>
@@ -40,15 +40,16 @@
 
                     <!-- section-2 -->
                     <div class="agToursSec1RightBar ms-4 col-9">
-                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Add Tour Package</h1>
-                        <form id="form" method="post" action="/agency/tours" enctype="multipart/form-data" class="p-4">
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Add Trekkings</h1>
+                        <form id="form" method="post" action="/agency/trekkings" enctype="multipart/form-data"
+                            class="p-4">
 
                             <!-- errBar -->
-                            <% if (tourErr.length>0){%>
+                            <% if (trekkingErr.length>0){%>
                                 <span id="Err"></span>
                                 <div class="signupSec2ErrorBar d-flex justify-content-center">
                                     <p id="ErrText" class="text-center signupSec2ErrorText">
-                                        <%= tourErr %>
+                                        <%= trekkingErr %>
                                     </p>
                                     <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
                                 </div>
@@ -63,58 +64,59 @@
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Name</label>
-                                                <input id="tourName" type="text" class="form-control" name="tourName"
-                                                    placeholder="Enter Tour Name">
+                                                <input id="trekkingName" type="text" class="form-control"
+                                                    name="trekkingName" placeholder="Enter Trekking Name">
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Place</label>
-                                                <input id="tourPlace" type="text" class="form-control" name="tourPlace"
-                                                    placeholder=" Enter Tour place">
+                                                <input id="trekkingPlace" type="text" class="form-control"
+                                                    name="trekkingPlace" placeholder="Enter Trekking place">
                                             </div>
                                         </div>
                                         <div class=" d-flex mt-2">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Country</label>
-                                                <input id="tourCountry" type="text" class="form-control"
-                                                    name="tourCountry" placeholder="Enter Country Name ">
+                                                <input id="trekkingCountry" type="text" class="form-control"
+                                                    name="trekkingCountry" placeholder="Enter Country Name ">
                                             </div>
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">State</label>
-                                                <input id="tourState" type="text" class="form-control" name="tourState"
-                                                    placeholder="Enter State Name">
+                                                <input id="trekkingState" type="text" class="form-control"
+                                                    name="trekkingState" placeholder="Enter State Name">
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">City</label>
-                                                <input id="tourCity" type="text" class="form-control" name="tourCity"
-                                                    placeholder="Enter City Name">
+                                                <input id="trekkingCity" type="text" class="form-control"
+                                                    name="trekkingCity" placeholder="Enter City Name">
                                             </div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Longitude</label>
-                                                <input id="tourLogitude" type="text" class="form-control"
-                                                    name="tourLongitude" placeholder="Enter Longitude">
+                                                <input id="trekkingLongitude" type="text" class="form-control"
+                                                    name="trekkingLongitude" placeholder="Enter Longitude">
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Latitude</label>
-                                                <input id="tourlatitude" type="text" class="form-control"
-                                                    name="tourlatitude" placeholder=" Enter Latitude">
+                                                <input id="trekkinglatitude" type="text" class="form-control"
+                                                    name="trekkinglatitude" placeholder=" Enter Latitude">
                                             </div>
                                         </div>
                                         <div class=" d-flex mt-2">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Duration</label>
-                                                <input id="tourDuration" type="number" class="form-control"
-                                                    name="tourDuration" placeholder="Enter Duration">
+                                                <input id="trekkingDuration" type="number" class="form-control"
+                                                    name="trekkingDuration" placeholder="Enter Duration">
                                             </div>
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Review</label>
-                                                <input id="tourReview" type="number" class="form-control"
-                                                    name="tourReview" placeholder="Enter Review Rate">
+                                                <input id="trekkingReview" type="number" class="form-control"
+                                                    name="trekkingReview" placeholder="Enter Review Rate">
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Difficulty</label>
-                                                <select class="form-control" id="tourDifficulty" name="tourDifficulty">
+                                                <select class="form-control" id="trekkingDifficulty"
+                                                    name="trekkingDifficulty">
                                                     <option>Easy</option>
                                                     <option>Medium</option>
                                                     <option>Hard</option>
@@ -124,20 +126,20 @@
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Price</label>
-                                                <input id="tourPrice" type="number" class="form-control"
-                                                    name="tourPrice" placeholder="Enter Price">
+                                                <input id="trekkingPrice" type="number" class="form-control"
+                                                    name="trekkingPrice" placeholder="Enter Price">
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Discount</label>
-                                                <input id="tourDiscount" type="number" class="form-control"
-                                                    name="tourDiscount" placeholder="Enter Discount Rate">
+                                                <input id="trekkingDiscount" type="number" class="form-control"
+                                                    name="trekkingDiscount" placeholder="Enter Discount Rate">
                                             </div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Feature</label>
-                                                <input id="tourFeatures" type="text" class="form-control"
-                                                    name="tourFeatures" placeholder="Enter Feature">
+                                                <input id="trekkingFeatures" type="text" class="form-control"
+                                                    name="trekkingFeatures" placeholder="Enter Feature">
                                             </div>
                                             <div class="d-flex justify-content-end signupSec2FormBar">
                                                 <p onclick="addFeatures()" class="btn btn-primary"
@@ -150,19 +152,20 @@
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Description</label>
-                                                <textarea id="tourDescription" type="number" class="form-control"
-                                                    name="tourDescription" required></textarea>
+                                                <textarea id="trekkingDescription" type="number" class="form-control"
+                                                    name="trekkingDescription" required></textarea>
                                             </div>
                                             <div class="mb-3 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Short description</label>
-                                                <textarea id="tourShortDescription" type="number" class="form-control"
-                                                    name="tourShortDescription" required></textarea>
+                                                <textarea id="trekkingShortDescription" type="number"
+                                                    class="form-control" name="trekkingShortDescription"
+                                                    required></textarea>
                                             </div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="mb-3 pe-2 signupSec2FormBar">
                                                 <label class="form-label signupSec2Text">Choose Images</label>
-                                                <input type="file" class="form-control" name="tourImages" required
+                                                <input type="file" class="form-control" name="trekkingImages" required
                                                     multiple>
                                             </div>
                                         </div>
@@ -188,7 +191,7 @@
         </section>
 
         <!-- Dynamic Itinerary form -->
-        <script src="/js/toursDynamicItineraryForm.js"></script>
+        <script src="/js/trekkingsDynamicItineraryForm.js"></script>
 
         <!-- footer -->
         <%- include('../includes/agEnd.ejs') %>
