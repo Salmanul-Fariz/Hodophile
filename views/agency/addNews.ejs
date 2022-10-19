@@ -1,0 +1,68 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Add News</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="agNewsSec2">
+            <form id="form" method="post" action="/agency/news/add" class="signupSec2Form" enctype="multipart/form-data">
+                <% if (newsErr.length>0){%>
+                    <span id="Err"></span>
+                    <div class="signupSec2ErrorBar d-flex justify-content-center">
+                        <p id="ErrText" class="text-center signupSec2ErrorText">
+                            <%= newsErr %>
+                        </p>
+                        <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                    </div>
+                    <%}else{%>
+                        <div id="Err" class="errBar">
+                            <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                <p id="ErrText" class="text-center signupSec2ErrorText"></p>
+                                <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                            </div>
+                        </div>
+                        <%} %>
+                            <div class="mb-3 mt-2">
+                                <label class="form-label signupSec2Text">Title</label>
+                                <input id="title" name="title" type="text" class="w-50 form-control"
+                                    placeholder=" Enter Title of News">
+                            </div>
+                            <div class="mb-3 mt-2">
+                                <label class="form-label signupSec2Text">Place</label>
+                                <input id="place" name="place" type="text" class="w-50 form-control"
+                                    placeholder="Enter Place">
+                            </div>
+                            <div class=" mb-3 mt-2">
+                                <label class="form-label signupSec2Text">Short Description</label>
+                                <input id="shortDescription" name="shortDescription" type="text" class="form-control"
+                                    placeholder="Enter Short Description">
+                            </div>
+                            <div class="d-flex">
+                                <div class="mb-3 pe-2 signupSec2FormBar">
+                                    <label class="form-label signupSec2Text">Choose Images</label>
+                                    <input type="file" class="form-control" name="newsImage" required>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center p-4">
+                                <button type="submit" class="signupSec2FormButton">Submit</button>
+                            </div>
+            </form>
+        </section>
+
+        <!-- frontEnd validation -->
+        <script src="/js/agencyNewsForm.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

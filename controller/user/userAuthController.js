@@ -2,8 +2,6 @@ const userModel = require('./../../model/userModel');
 const mongoosErr = require('./../../utils/mongoosErr');
 const otpVerification = require('./../../utils/otpVerification');
 
-let userSignup = null;
-
 // SignUp page(Post)
 exports.signup = async (req, res) => {
   try {
@@ -23,17 +21,19 @@ exports.signup = async (req, res) => {
       };
 
       //session setting
-      userSignup = user;
+      req.session.userOtp = user;
 
       // otp generator
       req.session.otpGenerator = otpVerification.otpGeneration();
+      console.log(req.session.otpGenerator);
 
       // message sending
-      otpVerification
-        .otoSender(req.session.otpGenerator, req.body.contact)
-        .then(() => {
-          res.redirect('/otp');
-        });
+      // otpVerification
+      //   .otpSender(req.session.otpGenerator, userSignup.contact)
+      //   .then(() => {
+      //     res.redirect('/otp');
+      //   });
+      res.redirect('/otp');
     }
   } catch (err) {
     console.log(err);
@@ -43,12 +43,23 @@ exports.signup = async (req, res) => {
   }
 };
 
+// Resent OTP
+exports.resend = (req, res) => {
+  // message sending
+  otpVerification
+    .otpSender(req.session.otpGenerator, req.session.userOtp.contact)
+    .then(() => {
+      res.redirect('/otp');
+    });
+};
+
 // OTP page(Post)
 exports.otp = async (req, res) => {
   try {
     if (req.session.otpGenerator === req.body.Otp) {
-      const user = await userModel.create(userSignup);
+      const user = await userModel.create(req.session.userOtp);
       req.session.user = user;
+      req.session.userOtp = null;
       req.session.otpGenerator = null;
       userSignup = null;
       res.redirect('/');
@@ -67,7 +78,7 @@ exports.login = async (req, res) => {
     const user = await userModel
       .findOne({ email: req.body.email })
       .select('+password');
-    if (!req.body.password || !req.body.email || !req.body.passwordConfirm) {
+    if (!req.body.password || !req.body.email) {
       req.flash('userErr', 'Fields required');
       res.redirect('/login');
     } else if (user.blocked === true) {
@@ -76,13 +87,8 @@ exports.login = async (req, res) => {
     } else if (user) {
       let password = await user.correctPass(req.body.password, user.password);
       if (password) {
-        if (req.body.password === req.body.passwordConfirm) {
-          req.session.user = user;
-          res.redirect('/');
-        } else {
-          req.flash('userErr', `Password didn't match`);
-          res.redirect('/login');
-        }
+        req.session.user = user;
+        res.redirect('/');
       } else {
         req.flash('userErr', 'Password incorrect');
         res.redirect('/login');

@@ -48,6 +48,10 @@ const userSchema = new mongoos.Schema({
       message: 'Password are not Same !',
     },
   },
+  NewsLike:{
+    type:Array,
+    default:null
+  },
 });
 
 // bycrypt password

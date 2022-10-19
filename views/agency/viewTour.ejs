@@ -41,84 +41,70 @@
                     <!-- section-2 -->
                     <div class="agToursSec1RightBar ms-4 col-9">
                         <h1 class="agToursSec1RightHead text-center mt-3 pb-3">View Tour Details</h1>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Name</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">
-                                    <%= tour.Name %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Place</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">
-                                    <%= tour.Place %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Country</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">
-                                    <%= tour.Country %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">State</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">
-                                    <%= tour.State %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Duration</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">
-                                    <%= tour.Duration %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Review</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">
-                                    <%= tour.Review %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Price</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">₹ <%= tour.Price %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Discount</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4  ps-5 agToursSec2Text ">₹ <%= tour.Discount %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Difficulty</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="mb-4 mt-4 col-12  ps-5 agToursSec2Text ">
-                                    <%= tour.Difficulty %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">Description</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="mb-4 mt-4 col-12  ps-5 agToursSec2Text ">
-                                    <%= tour.Description %>
-                                </p>
-                                <div class="col-12 d-flex">
-                                    <p class="agToursSec2Head">ShortDescription</p>
-                                    <i class="agToursSec2Icon fa-solid fa-angle-right"></i>
-                                </div>
-                                <p class="col-12 mb-4 mt-4 ps-5 agToursSec2Text ">
-                                    <%= tour.ShortDescription %>
-                                </p>
 
+                        <!-- About -->
+                        <div class="col-12 p-5 mt-5">
+                            <h3 class="toursDetailsSec3Head">About <%= tour.Name %>
+                            </h3>
+                            <p class="toursDetailsSec3Text mt-4">
+                                <%= tour.ShortDescription %><br><br>
+                                    <%= tour.Description %>
+                            </p>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="col-12 p-5 mt-5">
+                            <h3 class="toursDetailsSec3Head pb-4">Features</h3>
+                            <% for( feature of tour.Features){%>
+                                <div class="d-flex">
+                                    <i class="toursDetailsSec3Icon fa-solid fa-angle-right mt-1"></i>
+                                    <p class="toursDetailsSec3Text">
+                                        <%= feature %>
+                                    </p>
+                                </div>
+                                <%}%>
+                        </div>
+
+                        <!-- Itinerary -->
+                        <div class="col-md-8 p-5 mt-5">
+                            <h3 class="toursDetailsSec3Head pb-4">Itinerary</h3>
+                            <% for(day of tour.Itinerary){%>
+                                <div class="d-flex">
+                                    <i class="toursDetailsSec3Icon fa-solid fa-clock mt-1"></i>
+                                    <p class="toursDetailsSec3Text ms-2">Day <%= day.Day %>
+                                    </p>
+                                </div>
+                                <h3 class=" ms-2">
+                                    <%= day.Title %>
+                                </h3>
+                                <p class="toursDetailsSec3Paragraph ms-3 pb-3">
+                                    <%= day.Description %>
+                                </p>
+                                <%}%>
+                        </div>
+
+                        <!-- Gallery -->
+                        <div class="col-12 p-5 mt-5">
+                            <h3 class="toursDetailsSec3Head pb-4">Gallery</h3>
+                            <div id="carouselExampleControls" class="rounded-4 carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <% for (i=0 ; i < tour.Images.length ; i++ ){%>
+                                        <div class="carousel-item active">
+                                            <img src="/images/destination/<%= tour.Images[i] %>"
+                                                class="rounded-4 d-block w-100" alt="...">
+                                        </div>
+                                        <%} %>
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -1,24 +1,13 @@
 const app = require('./app');
-const dotenv = require('dotenv');
-const mongoos = require('mongoose');
+const mongoos = require('./config/Connection');
 
-// set config file
-dotenv.config({ path: './config.env' });
-
-// taking datbase link from config
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
-
-// connect mongoos
+// Connect Mongoos
 mongoos
-  .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
   .then(() => {
     console.log('DataBase connected !');
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
 // connect port

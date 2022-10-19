@@ -5,18 +5,21 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const dotenv = require('dotenv');
 
+// Require MiddleWare
+const middleware = require('./middleware/middleware');
+
 // set config file
 dotenv.config({ path: './config.env' });
 
 // require router
-const agencyRouter = require('./router/agencyRouter');
 const userRouter = require('./router/userRouter');
+const agencyRouter = require('./router/agencyRouter');
+const agnecyToursRouter = require('./router/agnecyToursRouter');
+const agencyTrekkingRouter = require('./router/agencyTrekkingRouter');
+
 
 // cache
-app.use((req, res, next) => {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  next();
-});
+app.use(middleware.cache);
 
 // Body parser, reading data from body into req.body
 app.use(express.json());
@@ -36,8 +39,10 @@ app.use(
 app.use(flash());
 
 // router
-app.use('/agency', agencyRouter);
 app.use('/', userRouter);
+app.use('/agency', agencyRouter);
+app.use('/agency/tours', agnecyToursRouter);
+app.use('/agency/trekkings', agencyTrekkingRouter);
 
 // view engine setup
 app.set('view engine', 'ejs');

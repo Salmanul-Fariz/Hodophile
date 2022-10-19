@@ -98,18 +98,12 @@
                         <h3 class="toursDetailsSec3Head pb-4">Gallery</h3>
                         <div id="carouselExampleControls" class="rounded-4 carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="/images/destination/<%= tour.Images[1] %>" class="rounded-4 d-block w-100"
-                                        alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="/images/destination/<%= tour.Images[2] %>" class="rounded-4 d-block w-100"
-                                        alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="/images/destination/<%= tour.Images[3] %>" class="rounded-4 d-block w-100"
-                                        alt="...">
-                                </div>
+                                <% for (i=0 ; i < tour.Images.length ; i++ ){%>
+                                    <div class="carousel-item active">
+                                        <img src="/images/destination/<%= tour.Images[i] %>"
+                                            class="rounded-4 d-block w-100" alt="...">
+                                    </div>
+                                    <%} %>
                             </div>
                             <button class="carousel-control-prev" type="button"
                                 data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -125,7 +119,9 @@
                     </div>
                 </div>
             </div>
-                    <p id="coordinateDiv" style="display: none;"><%= tour.Coordinates %></p>
+            <p id="coordinateDiv" style="display: none;">
+                <%= tour.Coordinates %>
+            </p>
         </section>
 
 

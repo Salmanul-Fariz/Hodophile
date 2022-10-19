@@ -65,7 +65,11 @@ exports.login = (req, res) => {
 // OTP page
 exports.otp = (req, res) => {
   try {
-    res.render('user/otp', { otpErr: req.flash('otpErr') });
+    if(req.session.user){
+      res.redirect('/');
+    }else{
+      res.render('user/otp', { otpErr: req.flash('otpErr') });
+    }
   } catch (err) {
     console.log(err);
   }

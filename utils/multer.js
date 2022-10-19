@@ -27,3 +27,17 @@ exports.tourMulter = () => {
   });
   return multer({ storage: storage });
 };
+
+// set multer(News)
+exports.newsMulter = () => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/news');
+    },
+    filename: function (req, file, cb) {
+      const uniqueName = Date.now() + '.jpg';
+      cb(null, uniqueName);
+    },
+  });
+  return multer({ storage: storage });
+};

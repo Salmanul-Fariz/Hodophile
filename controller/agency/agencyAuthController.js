@@ -7,7 +7,7 @@ exports.login = async (req, res) => {
     const agency = await agencyModel
       .findOne({ email: req.body.email })
       .select('+password');
-    if (!req.body.email || !req.body.password || !req.body.passwordConfirm) {
+    if (!req.body.email || !req.body.password) {
       req.flash('agencyErr', 'Fields required');
       res.redirect('/agency/login');
     } else if (agency) {
@@ -16,13 +16,8 @@ exports.login = async (req, res) => {
         agency.password
       );
       if (password) {
-        if (req.body.password === req.body.passwordConfirm) {
-          req.session.agency = agency;
-          res.redirect('/agency');
-        } else {
-          req.flash('agencyErr', `Password didn't match`);
-          res.redirect('/agency/login');
-        }
+        req.session.agency = agency;
+        res.redirect('/agency');
       } else {
         req.flash('agencyErr', 'Password incorrect');
         res.redirect('/agency/login');

@@ -6,6 +6,7 @@ const userController = require('./../controller/user/userController');
 const userAuthController = require('./../controller/user/userAuthController');
 const userToursController = require('./../controller/user/userToursController');
 const userTrekkingsController = require('./../controller/user/userTrekkingsController');
+const userNewsController = require('./../controller/user/userNewsController');
 
 //  home page
 router.route('/').get(userController.homePage);
@@ -16,8 +17,11 @@ router
   .get(userController.signup)
   .post(userAuthController.signup);
 
-// otp
+// OTP
 router.route('/otp').get(userController.otp).post(userAuthController.otp);
+
+// OTP Resent
+router.get('/otp/resend', userAuthController.resend);
 
 // login page
 router.route('/login').get(userController.login).post(userAuthController.login);
@@ -61,6 +65,34 @@ router.get(
   userController.sessionUser,
   userController.checkBlocked,
   userTrekkingsController.details
+);
+
+//////////////////////////////////
+////////////   News   ////////////
+//////////////////////////////////
+
+// News Page
+router.get(
+  '/news',
+  userController.sessionUser,
+  userController.checkBlocked,
+  userNewsController.news
+);
+
+// News Increment
+router.post(
+  '/news/increment/:userId/:newsId',
+  userController.sessionUser,
+  userController.checkBlocked,
+  userNewsController.increment
+);
+
+// News Decrement
+router.post(
+  '/news/decrement/:userId/:newsId',
+  userController.sessionUser,
+  userController.checkBlocked,
+  userNewsController.decrement
 );
 
 module.exports = router;

@@ -1,58 +1,59 @@
 <!-- navigationbar -->
 <%- include('../includes/navigation.ejs') %>
 
-    <!-- header -->
-    <%- include('../includes/head.ejs') %>
-
-        <!-- section-1 -->
-        <section class="signupSec1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h1 class="signupSec1Text d-flex justify-content-center">Otp</h1>
-                    </div>
+    <!-- section-1 -->
+    <section class="signupSec1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="signupSec1Text d-flex justify-content-center">Otp</h1>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- section-2 -->
-        <section class="loginSec2">
-            <div class="container">
-                <div class="row d-flex justify-content-center pt-5 pb-5">
-                    <div class="col-sm-10 col-lg-6 ">
-                        <form id="form" method="post" action="/otp" class="signupSec2Form">
-                            <h3 class="signupSec2Head">Otp</h3>
-                            <% if (otpErr.length>0){%>
-                                <span id="Err"></span>
-                                <div class="signupSec2ErrorBar d-flex justify-content-center">
-                                    <p id="ErrText" class="text-center signupSec2ErrorText">
-                                        <%= otpErr %>
-                                    </p>
-                                    <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
-                                </div>
-                                <%}else{%>
-                                    <div id="Err" class="errBar">
-                                        <div class="signupSec2ErrorBar d-flex justify-content-center">
-                                            <p id="ErrText" class="text-center signupSec2ErrorText"></p>
-                                            <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
-                                        </div>
+    <!-- section-2 -->
+    <section class="loginSec2">
+        <div class="container">
+            <div class="row d-flex justify-content-center pt-5 pb-5">
+                <div class="col-sm-10 col-lg-6 ">
+                    <form id="form" method="post" action="/otp" class="signupSec2Form">
+                        <h3 class="signupSec2Head">Otp</h3>
+                        <% if (otpErr.length>0){%>
+                            <span id="Err"></span>
+                            <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                <p id="ErrText" class="text-center signupSec2ErrorText">
+                                    <%= otpErr %>
+                                </p>
+                                <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                            </div>
+                            <%}else{%>
+                                <div id="Err" class="errBar">
+                                    <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                        <p id="ErrText" class="text-center signupSec2ErrorText"></p>
+                                        <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
                                     </div>
-                                    <%} %>
-                            <div class=" mb-3 mt-2">
-                                <label class="form-label signupSec2Text">Otp</label>
-                                <input id="Otp" name="Otp" type="text" class="form-control"
-                                    placeholder="Enter your Otp">
-                            </div>
-                            <div class="d-flex justify-content-center p-4">
-                                <button type="submit" class="signupSec2FormButton">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+                                </div>
+                                <%} %>
+
+                                    <div class=" mb-3 mt-2">
+                                        <label class="form-label signupSec2Text">Otp</label>
+                                        <input id="Otp" name="Otp" type="text" class="form-control"
+                                            placeholder="Enter your Otp">
+                                    </div>
+                                    <div class=" mb-3 mt-3">
+                                        <a href="/otp/resend" >Resent OTP</a>
+                                    </div>
+                                    <div class="d-flex justify-content-center p-4">
+                                        <button type="submit" class="signupSec2FormButton">Submit</button>
+                                    </div>
+                    </form>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- frontEnd validation -->
-        <script src="/js/userOtpValidation.js"></script>
-        <!-- footer -->
-        <%- include('../includes/end.ejs') %>
+    <!-- frontEnd validation -->
+    <script src="/js/userOtpValidation.js"></script>
+    <!-- footer -->
+    <%- include('../includes/end.ejs') %>

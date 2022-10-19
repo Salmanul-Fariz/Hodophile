@@ -15,11 +15,13 @@ exports.otpGeneration = () => {
   return otpGenerator.generate(6, {
     upperCaseAlphabets: false,
     specialChars: false,
+    digits:true,
+    lowerCaseAlphabets:false
   });
 };
 
 // Otp Sending
-exports.otoSender = (otp, contact) => {
+exports.otpSender = (otp, contact) => {
   return new Promise((resolve, reject) => {
     client.messages
       .create({

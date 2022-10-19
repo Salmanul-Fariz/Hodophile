@@ -1,0 +1,76 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">News</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="signupSec1 pt-5">
+            <div class="container">
+                <div class="row">
+                    <% for(key of news){%>
+                        <div class="col-md-6 mt-4">
+                            <img src="./images/news/<%= key.Image %>" class="card-img-top rounded" alt="...">
+                        </div>
+                        <div class="col-md-6 mt-5">
+                            <h4 class="newsTitle">
+                                <%= key.Title %>
+                            </h4>
+                            <h6 class="newsDate">
+                                <%= key.Place %>
+                            </h6>
+                            <small class="newsDescription">
+                                <%= key.ShortDescription %>
+                            </small>
+                            <div class="d-flex p-3">
+                                <% if ( NewsLike.length===0 ){%>
+                                    <button id="news<%= key._id %>" class="newsLikeIcon"
+                                        onclick="Like('<%= userId %>','<%= key._id %>')">Like</button>
+                                    <%} %>
+                                        <% for ( i=0 ; i < NewsLike.length ; i++ ) {%>
+                                            <% if(NewsLike[i]==key._id){%>
+                                                <button id="news<%= key._id %>" style="background-color: red;"
+                                                    class="newsLikeIcon"
+                                                    onclick="Like('<%= userId %>','<%= key._id %>')">Unlike</button>
+                                                <% break %>
+                                                    <%}else if (NewsLike.length-1===i){%>
+                                                        <button id="news<%= key._id %>" class="newsLikeIcon"
+                                                            onclick="Like('<%= userId %>','<%= key._id %>')">Like</button>
+                                                        <%} %>
+                                                            <%} %>
+                                                                <% if(key.Like> 0){%>
+                                                                    <p id="likeCount<%= key._id %>"
+                                                                        class="newsLikeCount">
+                                                                        <%= key.Like %>
+                                                                    </p>
+                                                                    <%}else{%>
+                                                                        <p style="visibility:hidden ;"
+                                                                            id="likeCount<%= key._id %>"
+                                                                            class="newsLikeCount">
+                                                                            <%= key.Like %>
+                                                                        </p>
+                                                                        <%} %>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- News Like -->
+        <script src="/js/newsLike.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>
