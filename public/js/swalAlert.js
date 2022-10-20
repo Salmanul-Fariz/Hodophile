@@ -132,7 +132,7 @@ function agencyDeleteNews(id) {
     showCancelButton: true,
     confirmButtonColor: '#d33',
     cancelButtonColor: '#3085d6',
-    confirmButtonText: 'Unblock',
+    confirmButtonText: 'Delete',
     background: '#41c356',
     color: 'White',
   }).then((result) => {

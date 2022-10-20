@@ -10,40 +10,54 @@
                 <div class="row">
 
                     <!-- section-1 -->
-                    <div class="agUsersec1 ms-4 col-12">
-                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">View News</h1>
-                        <div class="col-3 pt-4 pb-3 d-flex justify-content-end">
-                            <a href="/agency/news/add" class="btn btn-success w-100">Add News</a>
-                        </div>
+                    <div class="col-12">
+                        <div class="agUsersec1 ms-4 col-12">
+                            <h1 class="agToursSec1RightHead text-center mt-3 pb-3">View News</h1>
+                            <div class="col-3 pt-4 pb-3 d-flex justify-content-end">
+                                <a href="/agency/news/add" class="btn btn-success w-100">Add News</a>
+                            </div>
 
-                        <!-- search button -->
-                        <input class="agToursSec1SearchButton" type="text" id="myInput" onkeyup="myFunction()"
-                            placeholder="Search for names.." title="Type in a name">
-                        <div class="table-responsive">
-                            <table id="myTable" class="table table-striped " style="background-color: #ecf9ee;">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">title</th>
-                                        <th scope="col">Short Description</th>
-                                        <th scope="col">Place</th>
-                                        <th scope="col">Like</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% for(let i=0; i < news.length ; i++){%>
-                                        <tr scope="row">
-                                            <td class="pt-3"><%= i+1 %></td>
-                                            <td class="pt-3"><%= news[i].Title %></td>
-                                            <td class="pt-3"><%= news[i].Place %></td>
-                                            <td class="pt-3"><%= news[i].ShortDescription %></td>
-                                            <td class="pt-3"><%= news[i].Like %></td>
-                                            <td><a  onclick="agencyDeleteNews('<%= news[i]._id %>')" class="btn btn-danger">Delete</a></td>
+                            <!-- search button -->
+                            <input class="agToursSec1SearchButton" type="text" id="myInput" onkeyup="myFunction()"
+                                placeholder="Search for names.." title="Type in a name">
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-striped " style="background-color: #ecf9ee;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Title</th>
+                                            <th class="newsDeleteButton" scope="col">Place</th>
+                                            <th scope="col">Short Description</th>
+                                            <th scope="col">Like</th>
+                                            <th class="newsDeleteButton" scope="col"></th>
                                         </tr>
-                                        <%}%>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let i=0; i < news.length ; i++){%>
+                                            <tr scope="row">
+                                                <td class="pt-3">
+                                                    <%= i+1 %>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <%= news[i].Title %>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <%= news[i].Place %>
+                                                </td>
+                                                <td class="newsDeleteButton pt-3">
+                                                    <%= news[i].ShortDescription %>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <%= news[i].Like %>
+                                                </td>
+                                                <td ><a
+                                                        onclick="agencyDeleteNews('<%= news[i]._id %>')"
+                                                        class="btn btn-danger">Delete</a></td>
+                                            </tr>
+                                            <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -898,3 +898,9 @@ a:active {
     padding: 30px;
 }
 
+@media (max-width : 850px) {
+    .newsDeleteButton {
+        display: none;
+    }
+}
+
