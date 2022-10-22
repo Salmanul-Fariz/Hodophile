@@ -7,3 +7,6 @@ config.env
 
 #module
 node_modules
+
+#Remove Image Folder
+public/images
