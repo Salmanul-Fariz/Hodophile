@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // require controller
-const agencyController = require('./../controller/agency/agencyController');
-const agencyToursController = require('./../controller/agency/agencyToursController');
+const agencyController = require('./../../controller/agency/agencyController');
+const agencyToursController = require('./../../controller/agency/agencyToursController');
 
 // require Multer
-const Multer = require('./../utils/multer');
+const Multer = require('./../../utils/multer');
 const tourMulter = Multer.tourMulter();
 
 // Tours page
@@ -34,18 +34,10 @@ router.get(
 );
 
 // Tour add page
-router.get(
-  '/add',
-  agencyController.sessionAgency,
-  agencyToursController.add
-);
+router.get('/add', agencyController.sessionAgency, agencyToursController.add);
 
 // Tour Page(id)
-router.get(
-  '/:id',
-  agencyController.sessionAgency,
-  agencyToursController.tour
-);
+router.get('/:id', agencyController.sessionAgency, agencyToursController.tour);
 
 // Tour update Page(id)
 router

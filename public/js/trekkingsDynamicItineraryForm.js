@@ -184,7 +184,7 @@ function addFeatures() {
   input.setAttribute('placeholder', 'Enter Feature');
   input.setAttribute('required', '');
 
-  // Create description form
+  // Create feature form
   const appendDiv = formDownFeatures.appendChild(div);
   appendDiv.appendChild(label);
   appendDiv.appendChild(input);

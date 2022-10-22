@@ -55,52 +55,22 @@
                             <h3 class="sec4Text1 text-center">Modern & Beautiful</h3>
                             <h1 class="text-center fw-bold">Our Most Poppular<br>Trekking</h1>
                         </div>
+                    <% for( i = 0 ; i < trekkings.length ; i++ ) {%>
                         <!-- cards -->
                         <div class="col-md-4 sec3Cards">
                             <div class="card p-3 sec3Card" style="background-color: #ECF9EE;">
-                                <img style=" width: 100%; " src="./images/Resources/f-image-2.jpg"
+                                <img style=" width: 100%; " src="./images/trekking/<%= trekkings[i].Images[0] %>"
                                     class="card-img-top rounded" alt="...">
                                 <div class="card-body">
-                                    <p class="sec3Text1 rounded-2">$210</p>
-                                    <p class="sec3Text2">5 Reviews</p>
-                                    <h5 class="card-title sec3Text3">Moscow Red City Land</h5>
-                                    <p class="card-text sec3Text4 pb-3">Richly varied landscapes, luxurious
-                                        accommodation
-                                        and a wide range of wild experiences await you. </p>
+                                    <p class="sec3Text1 rounded-2">₹ <%= trekkings[i].Price %></p>
+                                    <p class="sec3Text2"><%= trekkings[i].Review %> Reviews</p>
+                                    <h5 class="card-title sec3Text3"><%= trekkings[i].Name %></h5>
+                                    <p class="card-text sec3Text4 pb-3"><%= trekkings[i].ShortDescription %></p>
                                     <a href="#" class="sec3Text5">Details</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 sec3Cards">
-                            <div class="card p-3 sec3Card" style="background-color: #ECF9EE;">
-                                <img style=" width: 100%;" src="./images/Resources/f-image-1.jpg"
-                                    class="card-img-top rounded" alt="...">
-                                <div class="card-body">
-                                    <p class="sec3Text1 rounded-2">$210</p>
-                                    <p class="sec3Text2">5 Reviews</p>
-                                    <h5 class="card-title sec3Text3">Moscow Red City Land</h5>
-                                    <p class="card-text sec3Text4 pb-3">Richly varied landscapes, luxurious
-                                        accommodation
-                                        and a wide range of wild experiences await you. </p>
-                                    <a href="#" class="sec3Text5">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 sec3Cards">
-                            <div class="card p-3 sec3Card" style="background-color: #ECF9EE;">
-                                <img style=" width: 100%;" src="./images/Resources/f-image-3.jpg"
-                                    class="card-img-top rounded" alt="...">
-                                <div class="card-body">
-                                    <p class="sec3Text1 rounded-2">$210</p>
-                                    <p class="sec3Text2">5 Reviews</p>
-                                    <h5 class="card-title sec3Text3">Moscow Red City Land</h5>
-                                    <p class="card-text sec3Text4 pb-3">Richly varied landscapes, luxurious
-                                        accommodation
-                                        and a wide range of wild experiences await you. </p>
-                                    <a href="#" class="sec3Text5">Details</a>
-                                </div>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                 </div>
             </section>

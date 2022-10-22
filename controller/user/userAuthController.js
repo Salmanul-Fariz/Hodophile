@@ -61,7 +61,6 @@ exports.otp = async (req, res) => {
       req.session.user = user;
       req.session.userOtp = null;
       req.session.otpGenerator = null;
-      userSignup = null;
       res.redirect('/');
     } else {
       req.flash('otpErr', 'Please Enter correctly !');

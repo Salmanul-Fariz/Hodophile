@@ -1,0 +1,43 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Add Category</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="agNewsSec2">
+            <form id="form" method="post" action="/agency/shoppings/category/add" class=" signupSec2Form" >
+                <% if (categoryErr.length>0){%>
+                    <span id="Err"></span>
+                    <div class="d-flex justify-content-center">
+                        <div class="w-50 signupSec2ErrorBar d-flex justify-content-center">
+                            <p id="ErrText" class="text-center signupSec2ErrorText">
+                                <%= categoryErr %>
+                            </p>
+                            <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                        </div>
+                    </div>
+                    <%}%>
+                        <div class="mb-3 mt-2 d-flex justify-content-center">
+                            <input id="shoppingCategory" name="shoppingCategory" type="text" class="w-50 form-control"
+                                placeholder=" Enter Category">
+                        </div>
+                        <div class="d-flex justify-content-center p-4">
+                            <button type="submit" class="signupSec2FormButton">Submit</button>
+                        </div>
+            </form>
+        </section>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

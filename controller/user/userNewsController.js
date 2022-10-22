@@ -18,28 +18,36 @@ exports.news = async (req, res) => {
 
 // News Increment
 exports.increment = async (req, res) => {
-  await userModel.updateOne(
-    { _id: req.params.userId },
-    { $push: { NewsLike: req.params.newsId } }
-  );
-  await newsModel.updateOne(
-    { _id: req.params.newsId },
-    {
-      $inc: { Like: 1 },
-    }
-  );
+  try {
+    await userModel.updateOne(
+      { _id: req.params.userId },
+      { $push: { NewsLike: req.params.newsId } }
+    );
+    await newsModel.updateOne(
+      { _id: req.params.newsId },
+      {
+        $inc: { Like: 1 },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // News Decrement
-exports.decrement =async (req, res) => {
-  await userModel.updateOne(
-    { _id: req.params.userId },
-    { $pull: { NewsLike: req.params.newsId } }
-  );
-  await newsModel.updateOne(
-    { _id: req.params.newsId },
-    {
-      $inc: { Like: -1 },
-    }
-  );
+exports.decrement = async (req, res) => {
+  try {
+    await userModel.updateOne(
+      { _id: req.params.userId },
+      { $pull: { NewsLike: req.params.newsId } }
+    );
+    await newsModel.updateOne(
+      { _id: req.params.newsId },
+      {
+        $inc: { Like: -1 },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
 };

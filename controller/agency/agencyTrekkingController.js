@@ -59,15 +59,6 @@ exports.addPost = async (req, res) => {
       itineraryArray.push(object);
     }
 
-    // Make features to Array
-    const length = req.body.trekkingFeatures.length;
-    let featureArray = [];
-    let j = 0;
-    while (j < length) {
-      j++;
-      featureArray.push(req.body.trekkingFeatures[j - 1]);
-    }
-
     // setting trekking
     const trekking = {
       Name: req.body.trekkingName,
@@ -77,7 +68,7 @@ exports.addPost = async (req, res) => {
       City: req.body.trekkingCity,
       Description: req.body.trekkingDescription,
       ShortDescription: req.body.trekkingShortDescription,
-      Features: featureArray,
+      Features: req.body.trekkingFeatures,
       Coordinates: {
         Longitude: req.body.trekkingLongitude,
         Latitude: req.body.trekkinglatitude,

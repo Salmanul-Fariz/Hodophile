@@ -1,5 +1,6 @@
 const userModel = require('./../../model/userModel');
 const destinationsModel = require('./../../model/destinationsModel');
+const trekkingModel = require('./../../model/trekkingModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
 const session = require('express-session');
 
@@ -30,7 +31,10 @@ exports.homePage = async (req, res) => {
     const user = req.session.user;
     const allTours = await destinationsModel.find({});
     const tours = checkItemDelete(allTours);
-    res.render('user/home', { user, tours });
+    const allTrekkings = await trekkingModel.find({});
+    const trekkings = checkItemDelete(allTrekkings);
+    res.render('user/home', { user, tours, trekkings });
+    
   } catch (err) {
     console.log(err);
   }
@@ -65,9 +69,9 @@ exports.login = (req, res) => {
 // OTP page
 exports.otp = (req, res) => {
   try {
-    if(req.session.user){
+    if (req.session.user) {
       res.redirect('/');
-    }else{
+    } else {
       res.render('user/otp', { otpErr: req.flash('otpErr') });
     }
   } catch (err) {

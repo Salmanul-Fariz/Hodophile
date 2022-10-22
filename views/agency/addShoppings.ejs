@@ -1,0 +1,188 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section --->
+        <section class="agToursSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 ">
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings" class="d-flex justify-content-center">
+                                <i class="text-primary agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">View
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/add" class="d-flex justify-content-center">
+                                <i class="text-success agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Add</p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/delete" class="d-flex justify-content-center">
+                                <i class="text-danger agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Delete
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/update" class="d-flex justify-content-center">
+                                <i class="agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Update
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/category" class="d-flex justify-content-center">
+                                <i class="text-dark agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Category
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- section-2 -->
+                    <div class="agToursSec1RightBar ms-4 col-9">
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Add Shoppings Product</h1>
+                        <form id="form" method="post" action="/agency/shoppings/add" enctype="multipart/form-data" class="p-4">
+
+                            <!-- errBar -->
+                            <% if (shoppingErr.length>0){%>
+                                <span id="Err"></span>
+                                <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                    <p id="ErrText" class="text-center signupSec2ErrorText">
+                                        <%= shoppingErr %>
+                                    </p>
+                                    <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                                </div>
+                                <%}else{%>
+                                    <div id="Err" class="errBar">
+                                        <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                            <p id="ErrText" class="text-center signupSec2ErrorText"></p>
+                                            <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                                        </div>
+                                    </div>
+                                    <%} %>
+                                        <div class="d-flex">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Name</label>
+                                                <input id="shoppingName" type="text" class="form-control"
+                                                    name="shoppingName" placeholder="Enter Product Name">
+                                            </div>
+                                            <div class="mb-3 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Short Name</label>
+                                                <input id="shoppingShortName" type="text" class="form-control"
+                                                    name="shoppingShortName" placeholder=" Enter Short Name">
+                                            </div>
+                                        </div>
+                                        <div class=" d-flex mt-2">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Category</label>
+                                                <select class="form-control" id="shoppingCategory"
+                                                    name="shoppingCategory" placeholder="dsflkj">
+                                                    <option style="color:#6e6e6e ;">Select Category</option>
+                                                    <% for(let i=0; i < categories.length ; i++){%>
+                                                        <option>
+                                                            <%= categories[i].Name %>
+                                                        </option>
+                                                        <%}%>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Review</label>
+                                                <input id="shoppingReview" type="number" class="form-control"
+                                                    name="shoppingReview" placeholder="Enter Review">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Price</label>
+                                                <input id="ShoppingPrice" type="number" class="form-control"
+                                                    name="ShoppingPrice" placeholder="Enter Price">
+                                            </div>
+                                            <div class="mb-3 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Discount</label>
+                                                <input id="shoppingDiscount" type="number" class="form-control"
+                                                    name="shoppingDiscount" placeholder=" Enter Discount">
+                                            </div>
+                                        </div>
+                                        <h3 id="formHeading" class="agToursSec1DynamicHead mb-2 text-center mt-3">
+                                            Highlights</h3>
+                                        <div class="mb-3 pe-2 signupSec2FormBar">
+                                            <label class="form-label signupSec2Text">Highlights</label>
+                                            <input id="shoppingHighlights" type="text" class="form-control"
+                                                name="shoppingHighlights" placeholder="Enter Highlights" required>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Highlights</label>
+                                                <input id="shoppingHighlights" type="text" class="form-control"
+                                                    name="shoppingHighlights" placeholder="Enter Highlights" required>
+                                            </div>
+                                            <div class="d-flex justify-content-end signupSec2FormBar">
+                                                <p onclick="addHighlights()" class="btn btn-primary"
+                                                    style="width:100px ; margin-top: 30px;">Add</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- add Highlight  -->
+                                        <div id="formDownHighlight" class="mb-3"></div>
+
+                                        <h3 id="formHeading" class="agToursSec1DynamicHead mb-2 text-center mt-3">
+                                            Specifications
+                                        </h3>
+
+                                        <div class="mb-3 pe-2 signupSec2FormBar">
+                                            <label class="form-label signupSec2Text">Specifications</label>
+                                            <input id="shoppingSpecifications" type="text" class="form-control"
+                                                name="shoppingSpecifications" placeholder="Enter Specifications"
+                                                required>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Specifications</label>
+                                                <input id="shoppingSpecifications" type="text" class="form-control"
+                                                    name="shoppingSpecifications" placeholder="Enter Specifications"
+                                                    required>
+                                            </div>
+                                            <div class="d-flex justify-content-end signupSec2FormBar">
+                                                <p onclick="addSpecifications()" class="btn btn-primary"
+                                                    style="width:100px ; margin-top: 30px;">Add</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- add Specifications  -->
+                                        <div id="formDownSpecifications" class="mb-3"></div>
+                                        <div class="d-flex">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Choose Images</label>
+                                                <input type="file" class="form-control" name="shoppingImages" required
+                                                    multiple>
+                                            </div>
+                                        </div>
+
+                                        <div id="formDown" class="mb-3 d-flex"></div>
+                                        <div id="formSubmit" style="visibility:hidden;"
+                                            class="d-flex justify-content-center p-4">
+                                            <button id="formsubmitButton" type="submit"
+                                                class="signupSec2FormButton"></button>
+                                        </div>
+                        </form>
+                        <div id="formButton" class="d-flex justify-content-center p-4">
+                            <button id="formButtonText" onclick="formValidation()"
+                                class="signupSec2FormButton">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic form and Validation -->
+        <script src="/js/shoppingsDynamicForm.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

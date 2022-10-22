@@ -1,0 +1,100 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Details</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row w-100 mt-5">
+                    <div class="col-sm-10 col-lg-6">
+                        <div class="card border-0 sec3Card" style="background-color: white;">
+                            <img style=" width: 94%; height: 600px;" src="/images/shopping/<%= product.Images[0] %>"
+                                class="p-4 card-img-top rounded" alt="...">
+                            <div class="card-body mt-1 mb-2">
+                                <div class="d-flex">
+                                    <div class="d-flex shoppingButtonBar m-auto">
+                                        <i class="ShoppingButton fa-solid fa-bolt"></i>
+                                        <a href="#" class="ShoppingButton">BUY NOW</a>
+                                    </div>
+                                    <div style="background-color:#0d6efd ;" class="d-flex shoppingButtonBar m-auto">
+                                        <i class="ShoppingButton fa-brands fa-opencart"></i>
+                                        <a href="#" class="ShoppingButton">ADD CART</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 p-4">
+                        <h2 class="shoppingText1">
+                            <%= product.Name %>
+                        </h2>
+                        <p class="shoppingText2">
+                            <%= product.Review %> Review
+                        </p>
+                        <p class="shoppingText3">₹ <%= product.Price %>
+                        </p>
+                        <% for( Hightlight of product.Highlights){%>
+                            <div class="d-flex col-12">
+                                <i style="color: #9d9d9d;" class="shoppingsHighlightsIcons fa-solid fa-angle-right"></i>
+                                <p style="color: #9d9d9d;" class="shoppingsHighlights">
+                                    <%= Hightlight %>
+                                </p>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+                <div class="row w-100 mt-5">
+                    <div class="col-12">
+                        <h3 class="toursDetailsSec3Head pb-4">Description</h3>
+                        <p style="word-break: break-word;" class="toursDetailsSec3Paragraph ms-3 pb-3">
+                            <%= product.ShortDescription %>
+                        </p>
+                        <h3 class="toursDetailsSec3Head mt-3 pb-4">Specifications</h3>
+                        <ul style="line-height:40px ;">
+                            <% for( Specification of product.Specifications){%>
+                                <li>
+                                    <%= Specification %>
+                                </li>
+                                <% } %>
+                        </ul>
+                    </div>
+                    <div class="col-md-12 pb-5 mt-4">
+                        <h3 class="toursDetailsSec3Head pb-4">Images</h3>
+                            <div class="d-flex justify-content-center">
+                                <div id="lightBox" class="col-6  col-sm-3 p-0">
+                                        <i onclick="closeZoom()" class="zoomCloseIcon fa-solid fa-circle-xmark"></i>
+                                    <img style="width: 100%;height: 430px;" id="zoomImage" alt="">
+                                </div>
+                            </div>
+                        <div class="row">
+                            <% for(i=0 ; i < product.Images.length ; i++){%>
+                                <div class="col-6 col-sm-4  col-md-3 mt-3 ">
+                                    <img style="width: 190px;height: 260px;" onclick="zoomImagefunction('<%= product.Images[i] %>')" class="shoppingDetailsImage col-3 col-md-2 pe-3"
+                                    src="/images/shopping/<%= product.Images[i] %>" alt="">
+                                </div>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- zoom Image -->
+        <script src="/js/shoppingDetailsImages.js"></script>
+
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>

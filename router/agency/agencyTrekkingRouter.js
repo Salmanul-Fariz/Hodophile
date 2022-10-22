@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // require controller
-const agencyController = require('./../controller/agency/agencyController');
-const agencyTrekkingController = require('./../controller/agency/agencyTrekkingController');
+const agencyController = require('./../../controller/agency/agencyController');
+const agencyTrekkingController = require('./../../controller/agency/agencyTrekkingController');
 
 // require Multer
-const Multer = require('./../utils/multer');
+const Multer = require('./../../utils/multer');
 const trekkingMulter = Multer.trekkingMulter();
 
 // Trekking page

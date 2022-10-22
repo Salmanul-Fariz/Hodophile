@@ -41,3 +41,17 @@ exports.newsMulter = () => {
   });
   return multer({ storage: storage });
 };
+
+// set multer(Shoppings)
+exports.shoppingMulter = () => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/shopping');
+    },
+    filename: function (req, file, cb) {
+      const uniqueName = Date.now() + '.jpg';
+      cb(null, uniqueName);
+    },
+  });
+  return multer({ storage: storage });
+};

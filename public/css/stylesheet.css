@@ -4,11 +4,52 @@
 }
 
 /* section Container */
-.SectionContainer{
+.SectionContainer {
     max-width: 1349px;
     margin: auto;
 }
 
+/* sidebar */
+.sideBar {
+    visibility: hidden;
+    width: 240px;
+    height: 100%;
+    background-color: #41c356;
+    position: absolute;
+    z-index: 100;
+}
+
+.sideBarCloseIcon {
+    font-size: 32px;
+    color: #a8eb9c;
+}
+
+.sideBarCloseIcon:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.sideBarDropDown {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: start;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.sideBarDropDownTextBar {
+    background: transparent;
+    border: 0px;
+    width: 100%;
+}
+
+.sideBarToggleBar {
+    visibility: visible;
+    font-size: 32px;
+    position: absolute;
+}
 
 /* map */
 .mapboxgl-popup {
@@ -114,11 +155,12 @@ a:active {
     position: absolute;
     top: 4;
     font-size: 14px;
-    color: black;
-    right: -3px;
+    color: white;
+    right: -10px;
     font-weight: 700;
-    background-color: white;
+    background-color: black;
     border-radius: 20px;
+    padding: 0 4px;
 }
 
 .headerCart {
@@ -240,7 +282,8 @@ a:active {
     padding: 6px 20px;
     color: white;
     border-radius: 6px;
-    border: none;
+    border: solid;
+    border-width: 1px;
 }
 
 .sec3Text5:hover {
@@ -550,6 +593,10 @@ a:active {
 .signupSec2ErrorMark {
     padding-top: 12px;
     color: #41C356;
+}
+
+.signupSec2ErrorMark:hover {
+    cursor: pointer;
 }
 
 /*////////////////////*/
@@ -878,7 +925,7 @@ a:active {
     font-size: 16px;
 }
 
-.newsLikeIcon:hover{
+.newsLikeIcon:hover {
     cursor: pointer;
 }
 
@@ -904,3 +951,91 @@ a:active {
     }
 }
 
+/*////////////////////*/
+/* Shopping page*/
+/*////////////////////*/
+
+.shopSec2Price {
+    font-size: 15px;
+    font-weight: 500;
+    background: #0d6efd;
+    position: absolute;
+    top: 0;
+    color: white;
+    border: 0;
+    padding: 6px;
+}
+
+.ShoppingButton {
+    margin: auto;
+    padding: 0px 6px;
+    color: white;
+    font-size: 20px;
+}
+
+.ShoppingButton:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.shoppingButtonBar {
+    background-color: #41c356;
+    color: white;
+    padding: 15px 18px;
+}
+
+.shoppingButtonBar:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.shoppingText1 {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.shoppingText2 {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #858585;
+}
+
+.shoppingText3 {
+    margin-top: 20px;
+    font-size: 32px;
+}
+
+.shoppingsHighlightsIcons {
+    font-size: 24px;
+    padding-right: 6px;
+}
+
+.shoppingDetailsImage:hover {
+    cursor: pointer;
+}
+
+#lightBox {
+    height: auto;
+    position: fixed;
+    z-index: 99;
+    top: 60px;
+    align-items: center;
+    visibility: hidden;
+}
+
+#lightBox show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.zoomCloseIcon {
+    display: block;
+    color: black;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.zoomCloseIcon:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,108 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section --->
+        <section class="agToursSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 ">
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings" class="d-flex justify-content-center">
+                                <i class="text-primary agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">View
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/add" class="d-flex justify-content-center">
+                                <i class="text-success agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Add</p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/delete" class="d-flex justify-content-center">
+                                <i class="text-danger agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Delete
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/update" class="d-flex justify-content-center">
+                                <i class="agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Update
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/shoppings/category" class="d-flex justify-content-center">
+                                <i class="text-dark agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Category
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- section-2 -->
+                    <div class="agToursSec1RightBar ms-4 col-9">
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Details</h1>
+
+                        <!-- section-2 -->
+                        <div class="container">
+                            <div class="row w-100 mt-5">
+                                <div class="col-sm-12 col-lg-6 p-4">
+                                    <h2 class="shoppingText1">
+                                        <%= product.Name %>
+                                    </h2>
+                                    <p class="shoppingText2">
+                                        <%= product.Review %> Review
+                                    </p>
+                                    <p class="shoppingText3">$ <%= product.Price %>
+                                    </p>
+                                    <% for (i=0 ; i < product.Highlights.length ; i++){%>
+                                        <div class="d-flex col-12">
+                                            <i style="color: #9d9d9d;"
+                                                class="shoppingsHighlightsIcons fa-solid fa-angle-right"></i>
+                                            <p style="color: #9d9d9d;" class="shoppingsHighlights">
+                                                <%= product.Highlights[i] %>
+                                            </p>
+                                        </div>
+                                        <%}%>
+                                </div>
+                            </div>
+                            <div class="row w-100 mt-5">
+                                <div class="col-12">
+                                    <h3 class="toursDetailsSec3Head pb-4">Description</h3>
+                                    <p class="toursDetailsSec3Paragraph ms-3 pb-3">
+                                        <%= product.ShortDescription %>
+                                    </p>
+                                    <h3 class="toursDetailsSec3Head pb-2 mt-4">Specifications</h3>
+                                    <ul style="line-height:40px ;">
+                                        <% for (i=0 ; i < product.Specifications.length ; i++){%>
+                                            <li>
+                                                <%= product.Specifications[i] %>
+                                            </li>
+                                            <%}%>
+                                    </ul>
+                                </div>
+                                <div class="col-md-12 pb-5 mt-4">
+                                    <h3 class="toursDetailsSec3Head pb-4">Images</h3>
+                                    <div class="d-flex">
+                                        <% for (i=0 ; i < product.Images.length ; i++){%>
+                                            <img class="col-3 col-md-2 pe-3"
+                                                src="/images/shopping/<%= product.Images[i] %>" alt="">
+                                            <%}%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

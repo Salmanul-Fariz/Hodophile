@@ -178,15 +178,6 @@ exports.addPost = async (req, res) => {
       itineraryArray.push(object);
     }
 
-    // Make features to Array
-    const length = req.body.tourFeatures.length;
-    let featureArray = [];
-    let j = 0;
-    while (j < length) {
-      j++;
-      featureArray.push(req.body.tourFeatures[j - 1]);
-    }
-
     // setting tour
     const tour = {
       Name: req.body.tourName,
@@ -196,7 +187,7 @@ exports.addPost = async (req, res) => {
       City: req.body.tourCity,
       Description: req.body.tourDescription,
       ShortDescription: req.body.tourShortDescription,
-      Features: featureArray,
+      Features: req.body.tourFeatures,
       Coordinates: {
         Longitude: req.body.tourLongitude,
         Latitude: req.body.tourlatitude,

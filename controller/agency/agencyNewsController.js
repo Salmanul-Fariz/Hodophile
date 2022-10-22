@@ -1,4 +1,5 @@
 const newsModel = require('./../../model/newsModel');
+const mongoosErr = require('./../../utils/mongoosErr');
 
 const fs = require('fs');
 const path = require('path');
@@ -31,9 +32,11 @@ exports.newsAdd = async (req, res) => {
       ShortDescription: req.body.shortDescription,
       Image: req.file.filename,
     });
-    const user = await res.redirect('/agency/news');
+    res.redirect('/agency/news');
   } catch (err) {
-    console.log(err);
+    let error = mongoosErr(err);
+    req.flash('newsErr', error);
+    res.redirect('/agency/news/add');
   }
 };
 
