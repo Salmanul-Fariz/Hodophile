@@ -70,6 +70,6 @@ userSchema.methods.correctPass = async function (
 };
 
 // setting model
-const User = mongoos.model('User', userSchema);
+const UserModel = mongoos.model('User', userSchema);
 
-module.exports = User;
+module.exports = UserModel;

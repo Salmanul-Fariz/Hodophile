@@ -2,14 +2,15 @@ const userModel = require('./../../model/userModel');
 const destinationsModel = require('./../../model/destinationsModel');
 const trekkingModel = require('./../../model/trekkingModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
-const session = require('express-session');
+const cartItemCount = require('./../../utils/cartItemCount');
+const wishlistItemCount = require('./../../utils/wishlistItemCount');
 
 // session middleware
 exports.sessionUser = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    res.redirect('/signup');
+    res.redirect('/login');
   }
 };
 
@@ -33,8 +34,16 @@ exports.homePage = async (req, res) => {
     const tours = checkItemDelete(allTours);
     const allTrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(allTrekkings);
-    res.render('user/home', { user, tours, trekkings });
-    
+    const cartCount = await cartItemCount(req.session.user);
+    const wishlistCount = await wishlistItemCount(req.session.user);
+
+    res.render('user/home', {
+      user,
+      tours,
+      trekkings,
+      cartCount,
+      wishlistCount,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -95,7 +104,10 @@ exports.profile = async (req, res) => {
   try {
     const userEmail = req.session.user.email;
     const user = await userModel.findOne({ email: userEmail });
-    res.render('user/profile', { user });
+    const cartCount = await cartItemCount(req.session.user);
+    const wishlistCount = await wishlistItemCount(req.session.user);
+
+    res.render('user/profile', { user, cartCount, wishlistCount });
   } catch (err) {
     console.log(err);
   }

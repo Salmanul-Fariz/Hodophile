@@ -17,6 +17,8 @@ const userShoppingRouter = require('./router/user/userShoppingsRouter');
 const userTourRouter = require('./router/user/userTourRouter');
 const userTrekkingsRouter = require('./router/user/userTrekkingsRouter');
 const userNewsRouter = require('./router/user/userNewsRouter');
+const userCartRouter = require('./router/user/userCartRouter');
+const userWishlistRouter = require('./router/user/userWishlistRouter');
 
 // require User router
 const agencyRouter = require('./router/agency/agencyRouter');
@@ -49,6 +51,8 @@ app.use(flash());
 
 // User Router
 app.use('/', userRouter);
+app.use('/shoppings/wishlists', userWishlistRouter);
+app.use('/shoppings/carts', userCartRouter);
 app.use('/shoppings', userShoppingRouter);
 app.use('/tours', userTourRouter);
 app.use('/trekkings', userTrekkingsRouter);

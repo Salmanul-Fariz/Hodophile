@@ -8,33 +8,21 @@
         <section class="signupSec1">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="collapse" id="navbarToggleExternalContent">
-                            <div class="bg-dark p-4">
-                                <form class="d-flex pt-3 pb-3">
-                                    <input class="form-control me-2" type="search" placeholder="Search"
-                                        aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
-                                </form>
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                    <% for(category of categories){%>
-                                        <label class="btn btn-outline-success" for="btnradio1">
-                                            <%= category.Name %>
-                                        </label>
-                                        <% } %>
-                                </div>
-                            </div>
-                        </div>
-                        <nav class="navbar">
-                            <div class="container-fluid">
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarToggleExternalContent"
-                                    aria-controls="navbarToggleExternalContent" aria-expanded="false"
-                                    aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                            </div>
-                        </nav>
+                    <div class="d-flex col-6">
+                        <ul class="mt-2">
+                            <li class="btn btn-outline-success mt-2 active">All</li>
+                            <% for(category of categories){%>
+                                <li class="btn btn-outline-success mt-2">
+                                    <%= category.Name %>
+                                </li>
+                                <% } %>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <form class="d-flex pt-3 pb-3">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -56,19 +44,47 @@
             <div class="container">
                 <div class="row w-100">
                     <% for(product of products){%>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4">
+                        <div class="col-8 col-sm-6 col-md-5 col-lg-3 me-2 mt-4">
                             <div class="card border-0 sec3Card" style="background-color:transparent;">
-                                <img style="height:350px ; width: 100%; " src="./images/shopping/<%= product.Images[0] %>"
+                                <img class="ShoppingmainImages" src="./images/shopping/<%= product.Images[0] %>"
                                     class="card-img-top rounded" alt="...">
                                 <div class="card-body">
-                                    <div class="d-flex">
-                                        <a href="/shoppings/<%= product._id %>" class="sec3Text5">Details</a>
-                                    </div>
-                                    <h5 class="mt-3 card-title sec3Text3">
-                                        <%= product.ShortName %>
-                                    </h5>
-                                    <p class="mt-3 shopSec2Price rounded-2">₹ <%= product.Price %>
-                                    </p>
+                                    <% if( wishlist==null ){%>
+                                        <i id="<%= product._id %>Wishlist"
+                                            onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
+                                            class="sec6LoveLike fa-solid fa-heart"></i>
+                                        <%}else{%>
+                                            <% for( i=0 ; i < wishlist.Products.length ; i++ ){%>
+                                                <% if( wishlist.Products[i].productId == product.id ){%>
+                                                    <i id="<%= product._id %>Wishlist"
+                                                        onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
+                                                        class="sec6LoveUnlike fa-solid fa-heart"></i>
+                                                    <% break %>
+                                                        <%}else{%>
+                                                            <i id="<%= product._id %>Wishlist"
+                                                                onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
+                                                                class="sec6LoveLike fa-solid fa-heart"></i>
+                                                            <%} %>
+                                                                <%} %>
+                                                                    <%} %>
+                                                                        <div class="d-flex">
+                                                                            <a href="/shoppings/<%= product._id %>"
+                                                                                class="sec3Text5">Details</a>
+                                                                            <a onclick="addToCart('<%= product._id %>','<%= userId %>')"
+                                                                                class="ms-5 sec3Text5"><i
+                                                                                    class="fa-brands fa-opencart"></i></a>
+                                                                        </div>
+                                                                        <h5 class="mt-3 card-title sec3Text3">
+                                                                            <%= product.ShortName %>
+                                                                        </h5>
+                                                                        <% if( product.Discount> 0 ){%>
+                                                                            <p class="shoppingDiscountText mt-3 ">
+                                                                                <%= product.Discount %> % OFF
+                                                                            </p>
+                                                                            <%} %>
+                                                                                <p class="mt-3 shopSec2Price rounded-2">
+                                                                                    ₹ <%= product.Price %>
+                                                                                </p>
                                 </div>
                             </div>
                         </div>
@@ -76,6 +92,13 @@
                 </div>
             </div>
         </section>
+
+        <!-- Add To Cart -->
+        <script src="/js/addToCart.js"></script>
+
+        <!-- Add To Wishlist -->
+        <script src="/js/addToWishlist.js"></script>
+
 
         <!-- footer -->
         <%- include('../includes/end.ejs') %>

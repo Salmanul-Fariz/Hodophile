@@ -47,6 +47,6 @@ const shoppingSchema = new mongoos.Schema({
   },
 });
 
-const Shopping = mongoos.model('shopping', shoppingSchema);
+const ShoppingModel = mongoos.model('shopping', shoppingSchema);
 
-module.exports = Shopping;
+module.exports = ShoppingModel;

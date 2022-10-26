@@ -10,6 +10,8 @@ function userLogout() {
     confirmButtonText: 'Logout',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form
@@ -35,6 +37,8 @@ function agencyDeleteTour(id) {
     confirmButtonText: 'Delete',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form
@@ -60,6 +64,8 @@ function agencyDeleteTrekking(id) {
     confirmButtonText: 'Delete',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form
@@ -85,6 +91,8 @@ function agencyUserBlock(id) {
     confirmButtonText: 'Block',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form
@@ -110,6 +118,8 @@ function agencyUserUnblock(id) {
     confirmButtonText: 'Unblock',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form
@@ -135,6 +145,8 @@ function agencyDeleteNews(id) {
     confirmButtonText: 'Delete',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form
@@ -149,7 +161,7 @@ function agencyDeleteNews(id) {
 }
 
 // Delete Products
-function agencyDeleteShopping(id){
+function agencyDeleteShopping(id) {
   Swal.fire({
     title: 'Are you sure?',
     icon: 'warning',
@@ -160,6 +172,8 @@ function agencyDeleteShopping(id){
     confirmButtonText: 'Delete',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form
@@ -174,7 +188,7 @@ function agencyDeleteShopping(id){
 }
 
 // Delete Category
-function agencyDeleteCategory(id){
+function agencyDeleteCategory(id) {
   Swal.fire({
     title: 'Are you sure?',
     icon: 'warning',
@@ -185,6 +199,8 @@ function agencyDeleteCategory(id){
     confirmButtonText: 'Delete',
     background: '#41c356',
     color: 'White',
+    width: '410px',
+    height: '290px',
   }).then((result) => {
     if (result.isConfirmed) {
       // Creating Submit Form

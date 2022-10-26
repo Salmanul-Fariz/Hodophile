@@ -1,0 +1,79 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <h1 class="signupSec1Text d-flex justify-content-center">Wishlists Page</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="toursSec2">
+            <div class="container">
+                <% if(userWishlist){%>
+                    <div id="emptyBar"></div>
+                    <div id="emptyTable" class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="myTable" class="table " style="background-color: #ecf9ee;">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-3" scope="col">Image</th>
+                                            <th class="p-3" scope="col"></th>
+                                            <th class="p-3" scope="col"></th>
+                                            <th class="p-3" scope="col"></th>
+                                            <th class="p-3" scope="col"></th>
+                                            <th class="p-3" scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let i=0; i < wishlistProducts.length; i++){%>
+                                            <tr id="<%= wishlistProducts[i].id %>Product" scope="row">
+                                                <td class="pt-3"><img style="width: 80px;"
+                                                        src="/images/shopping/<%= wishlistProducts[i].Images[i] %>"
+                                                        alt="">
+                                                </td>
+                                                <td class="p-3 wishlistText" style="color:#626262 ;">
+                                                    <%= wishlistProducts[i].ShortName %><br>
+                                                        <%= wishlistProducts[i].Price %>
+                                                <td class="p-3"></td>
+                                                <td class="p-3"></td>
+                                                <td class="p-3"></td>
+                                                <td onclick="addToCartProduct('<%= userId %>','<%= wishlistProducts[i].id %>')"
+                                                    class="p-3 cartTableClose"><a class="btn btn-primary">Add To
+                                                        Cart</a></td>
+                                                <td class="p-3 cartTableClose">
+                                                    <i onclick="deleteWishlsitProduct('<%= userId %>','<%= wishlistProducts[i].id %>')"
+                                                        class="cartTableCloseButton fa-solid fa-xmark"></i>
+                                                </td>
+                                            </tr>
+                                            <span id="emptyProductLength" style="display: none;">
+                                                <%= wishlistProducts.length %>
+                                            </span>
+                                            <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <%}else{%>
+                        <h3 style="padding:150px 0 ;" class="text-center">Wishlist Empty</h3>
+                        <%}%>
+            </div>
+        </section>
+
+        <!-- Add To Wishlist -->
+        <script src="/js/addToWishlist.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>

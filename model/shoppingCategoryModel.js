@@ -7,9 +7,9 @@ const shoppingsCategorySchema = new mongoos.Schema({
   },
 });
 
-const shoppingsCategory = mongoos.model(
+const shoppingsCategoryModel = mongoos.model(
   'ShoppingCategory',
   shoppingsCategorySchema
 );
 
-module.exports = shoppingsCategory;
+module.exports = shoppingsCategoryModel;

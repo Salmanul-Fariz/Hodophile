@@ -78,6 +78,6 @@ const trekkingSchema = new mongoos.Schema({
   },
 });
 
-const trekking = mongoos.model('trekking', trekkingSchema);
+const trekkingModel = mongoos.model('trekking', trekkingSchema);
 
-module.exports = trekking;
+module.exports = trekkingModel;

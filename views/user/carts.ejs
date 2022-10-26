@@ -1,0 +1,150 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <h1 class="signupSec1Text d-flex justify-content-center">Cart Page</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="toursSec2">
+            <div class="container">
+                <% if(userCart){%>
+                    <div id="emptyBar"></div>
+                    <div id="emptyTable" class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="myTable" class="table " style="background-color: #ecf9ee;">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-3" scope="col">IMAGES</th>
+                                            <th class="p-3" scope="col">NAMES</th>
+                                            <th class="p-3" scope="col">PRICE</th>
+                                            <th class="p-3" scope="col"></th>
+                                            <th class="p-3" scope="col">TOTAL</th>
+                                            <th class="p-3" scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let i=0; i < cartProducts.length; i++){%>
+                                            <tr id="<%= cartProducts[i].id %>Product" scope="row">
+                                                <td class="pt-3"><img style="width: 80px;"
+                                                        src="/images/shopping/<%= cartProducts[i].Images[i] %>" alt="">
+                                                </td>
+                                                <td class="p-3 ">
+                                                    <p class="cartTableText">
+                                                        <%= cartProducts[i].ShortName %>
+                                                    </p>
+                                                </td>
+                                                <td class="p-3 ">
+                                                    <p class="cartTableText">
+                                                        <%= cartProducts[i].Price %>
+                                                    </p>
+                                                </td>
+                                                <td class="p-3">
+                                                    <div class="d-flex cartTableButtonBar">
+                                                        <i onclick="decreaseQuantity('<%= userId %>','<%= cartProducts[i].id %>')"
+                                                            class="cartTableIncButtons fa-solid fa-minus"></i>
+                                                        <% for (p of cart.Products) { %>
+                                                            <% if(p.productId===cartProducts[i].id) { %>
+                                                                <input id="<%= cartProducts[i].id %>Input"
+                                                                    value="<%= p.Count %>" readonly
+                                                                    class=" ms-2 cartTableIncInput" type="Number">
+                                                                <% } %>
+                                                                    <% } %>
+                                                                        <i onclick="increaseQuantity('<%= userId %>','<%= cartProducts[i].id %>')"
+                                                                            class="cartTableIncButtons fa-solid fa-plus"></i>
+                                                    </div>
+                                                </td>
+                                                <% for (p of cart.Products) { %>
+                                                    <% if(p.productId===cartProducts[i].id) { %>
+                                                        <span id="<%= cartProducts[i].id %>productPrice"
+                                                            class="productPrice" style="visibility:hidden ;">
+                                                            <%= cartProducts[i].Price %>
+                                                        </span>
+                                                        <span class="productCount" style="visibility:hidden ">
+                                                            <%= p.Count %>
+                                                        </span>
+                                                        <td class=" p-3 ">
+                                                            <p id="<%= cartProducts[i].id %>productTotal"
+                                                                class="productTotal cartTableText">
+                                                            </p>
+                                                        </td>
+                                                        <% } %>
+                                                            <% } %>
+                                                                <td class="p-3 cartTableText"></td>
+                                                                <td class="p-3 cartTableClose">
+                                                                    <i onclick="deleteCartProduct('<%= userId %>','<%= cartProducts[i].id %>')"
+                                                                        class="cartTableCloseButton fa-solid fa-xmark"></i>
+                                                                </td>
+                                            </tr>
+                                            <span id="<%= cartProducts[i].id %>productDiscount" class="productDiscount"
+                                                style="visibility:hidden ;">
+                                                <%= cartProducts[i].Discount %>
+                                            </span>
+                                            <%}%>
+                                                <span id="emptyProductLength" style="display: none;">
+                                                    <%= cartProducts.length %>
+                                                </span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="emptyTotal" class="row mt-5 d-flex justify-content-end">
+                        <div class="col-10 col-md-8 col-lg-7 col-xl-5">
+                            <div class="cartPaymentBar mb-5">
+                                <div class="d-flex">
+                                    <div class="col-9">
+                                        <p class="cartPaymentText">Sub total</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p id="totalPriceCart" class="text-center cartPaymentPrice"></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-9">
+                                        <p class="cartPaymentText">Discouts</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p id="totalPriceDiscount" class="text-center cartPaymentDiscount"></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex cartPaymentTotalBar">
+                                    <div class="col-9">
+                                        <p class="cartPaymentText">Total</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p id="totalCartPrice" class="text-center cartPaymentPrice"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="emptyCheckout" class="row d-flex justify-content-end">
+                        <div class="col-5 col-md-3 col-xl-2 ">
+                            <a class="signupSec2FormButton" style="padding: 14px 25px;" href="">Check Out</a>
+                        </div>
+                    </div>
+                    <%}else{%>
+                        <h3 style="padding:150px 0 ;" class="text-center">Cart Empty</h3>
+                        <%}%>
+            </div>
+        </section>
+
+        <!-- Add To Cart -->
+        <script src="/js/addToCart.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>

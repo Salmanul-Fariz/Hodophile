@@ -1,15 +1,22 @@
 const newsModel = require('./../../model/newsModel');
 const userModel = require('./../../model/userModel');
+const cartItemCount = require('./../../utils/cartItemCount');
+const wishlistItemCount = require('./../../utils/wishlistItemCount');
 
 // News Page
 exports.news = async (req, res) => {
   try {
     const news = await newsModel.find({});
     const user = await userModel.findOne({ _id: req.session.user._id });
+    const cartCount = await cartItemCount(req.session.user);
+    const wishlistCount = await wishlistItemCount(req.session.user);
+
     res.render('user/news', {
       news,
       NewsLike: user.NewsLike,
       userId: user._id,
+      cartCount,
+      wishlistCount,
     });
   } catch (err) {
     console.log(err);
@@ -29,6 +36,9 @@ exports.increment = async (req, res) => {
         $inc: { Like: 1 },
       }
     );
+    res.json({
+      status: true,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -47,6 +57,9 @@ exports.decrement = async (req, res) => {
         $inc: { Like: -1 },
       }
     );
+    res.json({
+      status: true,
+    });
   } catch (err) {
     console.log(err);
   }

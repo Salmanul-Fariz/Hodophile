@@ -21,20 +21,31 @@
                 <div class="row w-100 mt-5">
                     <div class="col-sm-10 col-lg-6">
                         <div class="card border-0 sec3Card" style="background-color: white;">
-                            <img style=" width: 94%; height: 600px;" src="/images/shopping/<%= product.Images[0] %>"
-                                class="p-4 card-img-top rounded" alt="...">
-                            <div class="card-body mt-1 mb-2">
-                                <div class="d-flex">
-                                    <div class="d-flex shoppingButtonBar m-auto">
-                                        <i class="ShoppingButton fa-solid fa-bolt"></i>
-                                        <a href="#" class="ShoppingButton">BUY NOW</a>
-                                    </div>
-                                    <div style="background-color:#0d6efd ;" class="d-flex shoppingButtonBar m-auto">
-                                        <i class="ShoppingButton fa-brands fa-opencart"></i>
-                                        <a href="#" class="ShoppingButton">ADD CART</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <% if( wishlist == null ){%>
+                                <i id="<%= product._id %>Wishlist" onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
+                                    class="sec6LoveLike fa-solid fa-heart"></i>
+                                <%}else{%>
+                                    <i id="<%= product._id %>Wishlist" onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
+                                        class="sec6LoveUnlike fa-solid fa-heart"></i>
+                                    <%} %>
+                                        <img style=" width: 94%; height: 600px;"
+                                            src="/images/shopping/<%= product.Images[0] %>"
+                                            class="p-4 card-img-top rounded" alt="...">
+                                        <div class="card-body mt-1 mb-2">
+                                            <div class="d-flex">
+                                                <div class="d-flex shoppingButtonBar m-auto">
+                                                    <i class="ShoppingButton fa-solid fa-bolt"></i>
+                                                    <a href="#" class="ShoppingButton">BUY NOW</a>
+                                                </div>
+                                                <div style="background-color:#0d6efd ;"
+                                                    class="d-flex shoppingButtonBar m-auto">
+                                                    <i class="ShoppingButton fa-brands fa-opencart"></i>
+                                                    <a style="text-decoration: none;"
+                                                        onclick="addToCart('<%= product._id %>','<%= userId %>')"
+                                                        class="ShoppingButton">ADD CART</a>
+                                                </div>
+                                            </div>
+                                        </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-6 p-4">
@@ -46,14 +57,20 @@
                         </p>
                         <p class="shoppingText3">₹ <%= product.Price %>
                         </p>
-                        <% for( Hightlight of product.Highlights){%>
-                            <div class="d-flex col-12">
-                                <i style="color: #9d9d9d;" class="shoppingsHighlightsIcons fa-solid fa-angle-right"></i>
-                                <p style="color: #9d9d9d;" class="shoppingsHighlights">
-                                    <%= Hightlight %>
-                                </p>
-                            </div>
-                            <% } %>
+                        <% if( product.Discount> 0 ){%>
+                            <p class="shoppingDiscountText mt-3 ">
+                                <%= product.Discount %> % OFF
+                            </p>
+                            <%} %>
+                                <% for( Hightlight of product.Highlights){%>
+                                    <div class="d-flex col-12">
+                                        <i style="color: #9d9d9d;"
+                                            class="shoppingsHighlightsIcons fa-solid fa-angle-right"></i>
+                                        <p style="color: #9d9d9d;" class="shoppingsHighlights">
+                                            <%= Hightlight %>
+                                        </p>
+                                    </div>
+                                    <% } %>
                     </div>
                 </div>
                 <div class="row w-100 mt-5">
@@ -73,17 +90,19 @@
                     </div>
                     <div class="col-md-12 pb-5 mt-4">
                         <h3 class="toursDetailsSec3Head pb-4">Images</h3>
-                            <div class="d-flex justify-content-center">
-                                <div id="lightBox" class="col-6  col-sm-3 p-0">
-                                        <i onclick="closeZoom()" class="zoomCloseIcon fa-solid fa-circle-xmark"></i>
-                                    <img style="width: 100%;height: 430px;" id="zoomImage" alt="">
-                                </div>
+                        <div class="d-flex justify-content-center">
+                            <div id="lightBox" class="col-6  col-sm-3 p-0">
+                                <i onclick="closeZoom()" class="zoomCloseIcon fa-solid fa-circle-xmark"></i>
+                                <img style="width: 100%;height: 430px;" id="zoomImage" alt="">
                             </div>
+                        </div>
                         <div class="row">
                             <% for(i=0 ; i < product.Images.length ; i++){%>
                                 <div class="col-6 col-sm-4  col-md-3 mt-3 ">
-                                    <img style="width: 190px;height: 260px;" onclick="zoomImagefunction('<%= product.Images[i] %>')" class="shoppingDetailsImage col-3 col-md-2 pe-3"
-                                    src="/images/shopping/<%= product.Images[i] %>" alt="">
+                                    <img style="width: 190px;height: 260px;"
+                                        onclick="zoomImagefunction('<%= product.Images[i] %>')"
+                                        class="shoppingDetailsImage col-3 col-md-2 pe-3"
+                                        src="/images/shopping/<%= product.Images[i] %>" alt="">
                                 </div>
                                 <% } %>
                         </div>
@@ -94,6 +113,12 @@
 
         <!-- zoom Image -->
         <script src="/js/shoppingDetailsImages.js"></script>
+
+        <!-- Add To Cart -->
+        <script src="/js/addToCart.js"></script>
+
+        <!-- Add To Wishlist -->
+        <script src="/js/addToWishlist.js"></script>
 
 
         <!-- footer -->

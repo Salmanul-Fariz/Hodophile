@@ -78,6 +78,6 @@ const destinationSchema = new mongoos.Schema({
   },
 });
 
-const destination = mongoos.model('Destination', destinationSchema);
+const destinationModel = mongoos.model('Destination', destinationSchema);
 
-module.exports = destination;
+module.exports = destinationModel;

@@ -1,14 +1,30 @@
 const shoppingsModel = require('./../../model/shoppingsModel');
 const shoppingCategoryModel = require('./../../model/shoppingCategoryModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
-const { find } = require('../../model/destinationsModel');
+const cartItemCount = require('./../../utils/cartItemCount');
+const wishlistItemCount = require('./../../utils/wishlistItemCount');
+const wishlistModel = require('./../../model/wishlistModel');
 
 // Shopping Page
 exports.shoppingPage = async (req, res) => {
   try {
     const categories = await shoppingCategoryModel.find({});
-    const products = await shoppingsModel.find({});
-    res.render('user/shoppings', { categories, products });
+    const allproducts = await shoppingsModel.find({});
+    const products = await checkItemDelete(allproducts);
+    const cartCount = await cartItemCount(req.session.user);
+    const wishlistCount = await wishlistItemCount(req.session.user);
+    const wishlist = await wishlistModel.findOne({
+      UserId: req.session.user._id,
+    });
+
+    res.render('user/shoppings', {
+      categories,
+      products,
+      userId: req.session.user._id,
+      cartCount,
+      wishlist,
+      wishlistCount,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -18,7 +34,20 @@ exports.shoppingPage = async (req, res) => {
 exports.shoppingDetailsPage = async (req, res) => {
   try {
     const product = await shoppingsModel.findById(req.params.id);
-    res.render('user/shoppingsDetails', { product });
+    const cartCount = await cartItemCount(req.session.user);
+    const wishlistCount = await wishlistItemCount(req.session.user);
+    const wishlist = await wishlistModel.findOne({
+      UserId: req.session.user._id,
+      'Products.productId': req.params.id,
+    });
+
+    res.render('user/shoppingsDetails', {
+      product,
+      userId: req.session.user._id,
+      cartCount,
+      wishlist,
+      wishlistCount,
+    });
   } catch (err) {
     console.log(err);
   }

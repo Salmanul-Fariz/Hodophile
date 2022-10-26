@@ -1,10 +1,9 @@
-module.exports = (allTours) => {
+module.exports = (items) => {
   const tours = [];
-  allTours.forEach((el) => {
+  items.forEach((el) => {
     if (el.ItemDelete === false) {
       tours.push(el);
     }
   });
-
   return tours;
 };

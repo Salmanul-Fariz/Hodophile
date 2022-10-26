@@ -39,6 +39,6 @@ agencySchema.methods.correctPass = async function (
 };
 
 // setting model
-const Agency = mongoos.model('agency', agencySchema);
+const AgencyModel = mongoos.model('agency', agencySchema);
 
-module.exports = Agency;
+module.exports = AgencyModel;

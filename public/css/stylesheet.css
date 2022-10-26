@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+/* Remove arrow */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 /* section Container */
 .SectionContainer {
     max-width: 1349px;
@@ -344,17 +351,36 @@ a:active {
     padding: 65px 0px;
 }
 
-.sec6Love {
+.sec6LoveLike {
     font-size: 25px;
-    color: #ff00007a;
+    color: #ffb8b8;
     position: absolute;
-    top: 18px;
-    right: 20px;
+    top: 14px;
+    right: 14px;
+    background: white;
+    padding: 6px;
+    border-radius: 18px;
 }
 
-.sec6Love:hover {
+.sec6LoveLike:hover {
     color: red;
 }
+
+.sec6LoveUnlike {
+    font-size: 25px;
+    color: red;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: white;
+    padding: 6px;
+    border-radius: 18px;
+}
+
+.sec6LoveUnlike:hover {
+    color: #ffb8b8;
+}
+
 
 .sec6Text1 {
     font-size: 20px;
@@ -1038,4 +1064,127 @@ a:active {
 
 .zoomCloseIcon:hover {
     cursor: pointer;
+}
+
+.ShoppingmainImages {
+    height: 330px;
+    width: 100%;
+}
+
+@media (max-width : 1200px) {
+    .ShoppingmainImages {
+        height: 330px;
+        width: 100%;
+    }
+}
+
+.shoppingDiscountText {
+    font-size: 21px;
+    font-weight: 700;
+    color: #e57878;
+}
+
+.shoppingCategoryHead{
+    color: black;
+    font-size: 45px;
+    padding: 12px 0px;
+    font-family: 'Arizonia';
+}
+
+/*////////////////////*/
+/* Cart page*/
+/*////////////////////*/
+
+.cartTableText {
+    font-size: 22px;
+    font-weight: 500;
+    padding: 32px 0;
+    margin: 0px;
+}
+
+.cartTableIncButtons {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+}
+
+.cartTableIncButtons:hover {
+    cursor: pointer;
+    background-color: #41c356;
+}
+
+.cartTableIncInput {
+    padding: 18px 0;
+    text-align: center;
+    font-weight: 500;
+    margin-right: 10px;
+    border-radius: 9px;
+    border: none;
+    width: 55px;
+    height: 58px;
+}
+
+.cartTableButtonBar {
+    padding: 28px 0px;
+}
+
+.cartTableCloseButton {
+    font-size: 32px;
+    color: #ff5454;
+}
+
+.cartTableCloseButton:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.cartTableClose {
+    line-height: 116px;
+}
+
+.cartTableClose:hover {
+    cursor: pointer;
+}
+
+.cartPaymentBar {
+    background-color: white;
+    border-radius: 26px;
+    width: 100%;
+    padding: 35px;
+}
+
+.cartPaymentText {
+    font-size: 24px;
+    color: #7a7979;
+    font-weight: 600;
+}
+
+.cartPaymentPrice {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.cartPaymentTotalBar {
+    margin-top: 68px;
+    border-top: solid;
+    border-width: 2px;
+    padding-top: 15px;
+    border-bottom: double;
+}
+
+.cartPaymentDiscount {
+    font-size: 24px;
+    font-weight: 400;
+    color: #9d9d9d;
+}
+
+/*////////////////////*/
+/* wishlist page*/
+/*////////////////////*/
+
+
+.wishlistText {
+    line-height: 36px;
+    font-size: 18px;
+    font-weight: 600;
 }

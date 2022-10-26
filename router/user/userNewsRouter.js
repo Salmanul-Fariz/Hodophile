@@ -14,7 +14,7 @@ router.get(
 );
 
 // News Increment
-router.post(
+router.get(
   '/increment/:userId/:newsId',
   userController.sessionUser,
   userController.checkBlocked,
@@ -22,7 +22,7 @@ router.post(
 );
 
 // News Decrement
-router.post(
+router.get(
   '/decrement/:userId/:newsId',
   userController.sessionUser,
   userController.checkBlocked,
