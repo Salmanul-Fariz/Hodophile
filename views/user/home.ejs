@@ -9,7 +9,6 @@
 
             <!-- section-1 -->
             <section class="section-1">
-                <button onclick="display()">helo</button>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 leftBar">
@@ -22,7 +21,7 @@
                             <a href="/tours"><button class="button">MORE</button></a>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end rightBar">
-                            <img style="width: 570px ; height: 550px;" src="./images/banner-images/banner-image-1.png"
+                            <img style="width: 490px ; height: 550px;" src="./images/banner-images/about-image-2.png"
                                 alt="">
                         </div>
                     </div>
@@ -55,22 +54,29 @@
                             <h3 class="sec4Text1 text-center">Modern & Beautiful</h3>
                             <h1 class="text-center fw-bold">Our Most Poppular<br>Trekking</h1>
                         </div>
-                    <% for( i = 0 ; i < trekkings.length ; i++ ) {%>
-                        <!-- cards -->
-                        <div class="col-md-4 sec3Cards">
-                            <div class="card p-3 sec3Card" style="background-color: #ECF9EE;">
-                                <img style=" width: 100%; " src="./images/trekking/<%= trekkings[i].Images[0] %>"
-                                    class="card-img-top rounded" alt="...">
-                                <div class="card-body">
-                                    <p class="sec3Text1 rounded-2">₹ <%= trekkings[i].Price %></p>
-                                    <p class="sec3Text2"><%= trekkings[i].Review %> Reviews</p>
-                                    <h5 class="card-title sec3Text3"><%= trekkings[i].Name %></h5>
-                                    <p class="card-text sec3Text4 pb-3"><%= trekkings[i].ShortDescription %></p>
-                                    <a href="#" class="sec3Text5">Details</a>
+                        <% for( i=0 ; i < trekkings.length ; i++ ) {%>
+                            <!-- cards -->
+                            <div class="col-md-4 sec3Cards">
+                                <div class="card p-3 border-0 sec3Card " style="background-color: #ECF9EE;">
+                                    <img style=" width: 100%; " src="./images/trekking/<%= trekkings[i].Images[0] %>"
+                                        class="card-img-top rounded" alt="...">
+                                    <div class="card-body p-0">
+                                        <p class="sec3Text1 rounded-2">₹ <%= trekkings[i].Price %>
+                                        </p>
+                                        <p class="sec3Text2 mt-2">
+                                            <%= trekkings[i].Review %> Reviews
+                                        </p>
+                                        <a href="/trekkings/<%= trekkings[i]._id %>" class="sec3Text5">Details</a>
+                                        <h5 class="card-title sec3Text3">
+                                            <%= trekkings[i].Name %>
+                                        </h5>
+                                        <p class="card-text sec3Text4 pb-3">
+                                            <%= trekkings[i].ShortDescription %>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <% } %>
+                            <% } %>
                     </div>
                 </div>
             </section>
@@ -165,117 +171,24 @@
                             <h3 class="sec4Text1 text-center">Shop Now</h3>
                             <h1 class="text-center fw-bold">Featured Products</h1>
                         </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
+                        <% for( i=0 ; i < shoppings.length ; i++ ) {%>
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                                <div class="card p-2 sec6Card mt-3">
+                                    <img style="width: 100%; height: 265px;" src="./images/shopping/<%= shoppings[i].Images[0] %>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
+                                        <p class="sec6Text2">$225</p>
+                                        <a href="/shoppings/<%= shoppings._id %>" class="sec6Button">Details</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
+                            <% } %>
+                                <div class="col-12 d-flex justify-content-center">
+                                    <a href="#" class="sec6More">More</a>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card p-2 sec6Card mt-3">
-                                <img src="./images/shopping/prod-1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <i class="sec6Love fa-solid fa-heart"></i>
-                                    <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                    <p class="sec6Text2">$225</p>
-                                    <a href="#" class="sec6Button">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 d-flex justify-content-center">
-                            <a href="#" class="sec6More">More</a>
-                        </div>
                     </div>
                 </div>
             </section>
-            <script>
-                function display() {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        icon: 'warning',
-                        iconColor:'White',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Logout',
-                        background: '#41c356',
-                        color:'White',
-                        width:'410px',
-                        height:'290px'
-                    })
-                }
-            </script>
 
             <!-- footer -->
             <%- include('../includes/end.ejs') %>

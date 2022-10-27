@@ -4,6 +4,7 @@ const trekkingModel = require('./../../model/trekkingModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
+const shoppingsModel = require('./../../model/shoppingsModel');
 
 // session middleware
 exports.sessionUser = (req, res, next) => {
@@ -34,6 +35,8 @@ exports.homePage = async (req, res) => {
     const tours = checkItemDelete(allTours);
     const allTrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(allTrekkings);
+    const allShoppings = await shoppingsModel.find({});
+    const shoppings = checkItemDelete(allShoppings);
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
 
@@ -41,6 +44,7 @@ exports.homePage = async (req, res) => {
       user,
       tours,
       trekkings,
+      shoppings,
       cartCount,
       wishlistCount,
     });
@@ -92,7 +96,6 @@ exports.otp = (req, res) => {
 exports.logout = (req, res) => {
   try {
     req.session.user = null;
-    // res.json({status:true})
     res.redirect('/');
   } catch (err) {
     console.log(err);

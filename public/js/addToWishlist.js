@@ -14,8 +14,9 @@ function addToWishlist(productId, userId) {
         const wishlistCount = document.getElementById('wishlistCount');
         wishlistCount.innerHTML = wishlistCount.innerHTML * 1 + 1;
       } else if (res.status == false) {
-        // To decrease Count
         wishlist.setAttribute('class', 'sec6LoveLike fa-solid fa-heart');
+
+        // To decrease Count
         const wishlistCount = document.getElementById('wishlistCount');
         wishlistCount.innerHTML = wishlistCount.innerHTML * 1 - 1;
       }
@@ -68,6 +69,9 @@ function addToCartProduct(userId, productId) {
             const cartCount = document.getElementById('cartCount');
             cartCount.innerHTML = cartCount.innerHTML * 1 + 1;
           }
+          // To decrease Count
+          const wishlistCount = document.getElementById('wishlistCount');
+          wishlistCount.innerHTML = wishlistCount.innerHTML * 1 - 1;
         },
       });
     }
@@ -113,6 +117,9 @@ function deleteWishlsitProduct(userId, productId) {
               );
               cartProducts.remove();
             }
+            // To decrease Count
+            const wishlistCount = document.getElementById('wishlistCount');
+            wishlistCount.innerHTML = wishlistCount.innerHTML * 1 - 1;
           }
         },
       });

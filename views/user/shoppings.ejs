@@ -9,10 +9,12 @@
             <div class="container">
                 <div class="row">
                     <div class="d-flex col-6">
+                        <span id="Category" style="visibility:hidden ;"><%= Category %></span>
                         <ul class="mt-2">
-                            <li class="btn btn-outline-success mt-2 active">All</li>
+                            <li id="All" onclick="filterProducts('All')" class="btn btn-outline-success mt-2">All</li>
                             <% for(category of categories){%>
-                                <li class="btn btn-outline-success mt-2">
+                                <li id="<%= category.Name %>" onclick="filterProducts('<%= category.Name %>')"
+                                    class="btn btn-outline-success mt-2">
                                     <%= category.Name %>
                                 </li>
                                 <% } %>
@@ -55,7 +57,8 @@
                                             class="sec6LoveLike fa-solid fa-heart"></i>
                                         <%}else{%>
                                             <% for( i=0 ; i < wishlist.Products.length ; i++ ){%>
-                                                <% if( wishlist.Products[i].productId == product.id ){%>
+                                                <% console.log() %>
+                                                <% if( wishlist.Products[i].productId==product._id ){%>
                                                     <i id="<%= product._id %>Wishlist"
                                                         onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
                                                         class="sec6LoveUnlike fa-solid fa-heart"></i>
@@ -98,6 +101,9 @@
 
         <!-- Add To Wishlist -->
         <script src="/js/addToWishlist.js"></script>
+
+        <!-- filterProducts -->
+        <script src="/js/filterShoppings.js"></script>
 
 
         <!-- footer -->

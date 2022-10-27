@@ -13,6 +13,14 @@ router.get(
   userShoppingController.shoppingPage
 );
 
+// filter Shopping Produc
+router.get(
+  '/:filter',
+  userController.sessionUser,
+  userController.checkBlocked,
+  userShoppingController.filterProducts
+);
+
 // Shopping Product Details
 router.get(
   '/:id',

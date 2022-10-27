@@ -10,7 +10,16 @@ exports.shoppingPage = async (req, res) => {
   try {
     const categories = await shoppingCategoryModel.find({});
     const allproducts = await shoppingsModel.find({});
-    const products = await checkItemDelete(allproducts);
+    let products;
+    let Category;
+    if (req.session.filter) {
+      products = await checkItemDelete(req.session.filter);
+      Category = req.session.filterCategory;
+    } else {
+      products = await checkItemDelete(allproducts);
+      Category = 'All';
+    }
+    req.session.filter = null;
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
     const wishlist = await wishlistModel.findOne({
@@ -20,6 +29,7 @@ exports.shoppingPage = async (req, res) => {
     res.render('user/shoppings', {
       categories,
       products,
+      Category,
       userId: req.session.user._id,
       cartCount,
       wishlist,
@@ -51,4 +61,19 @@ exports.shoppingDetailsPage = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+// Filtering the shoppping
+exports.filterProducts = async (req, res) => {
+  req.session.filterCategory = req.params.filter;
+  if (req.params.filter == 'All') {
+    req.params.filter === null;
+  } else {
+    req.session.filter = await shoppingsModel.find({
+      Category: req.params.filter,
+    });
+  }
+  res.json({
+    status: true,
+  });
 };
