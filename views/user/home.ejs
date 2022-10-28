@@ -57,24 +57,26 @@
                         <% for( i=0 ; i < trekkings.length ; i++ ) {%>
                             <!-- cards -->
                             <div class="col-md-4 sec3Cards">
-                                <div class="card p-3 border-0 sec3Card " style="background-color: #ECF9EE;">
-                                    <img style=" width: 100%; " src="./images/trekking/<%= trekkings[i].Images[0] %>"
-                                        class="card-img-top rounded" alt="...">
-                                    <div class="card-body p-0">
-                                        <p class="sec3Text1 rounded-2">₹ <%= trekkings[i].Price %>
-                                        </p>
-                                        <p class="sec3Text2 mt-2">
-                                            <%= trekkings[i].Review %> Reviews
-                                        </p>
-                                        <a href="/trekkings/<%= trekkings[i]._id %>" class="sec3Text5">Details</a>
-                                        <h5 class="card-title sec3Text3">
-                                            <%= trekkings[i].Name %>
-                                        </h5>
-                                        <p class="card-text sec3Text4 pb-3">
-                                            <%= trekkings[i].ShortDescription %>
-                                        </p>
+                                <a href="/trekkings/<%= trekkings[i]._id %>">
+                                    <div class="card p-3 sec3Card " style="background-color: #ECF9EE;">
+                                        <img style=" width: 100%; "
+                                            src="./images/trekking/<%= trekkings[i].Images[0] %>"
+                                            class="card-img-top rounded" alt="...">
+                                        <div class="card-body p-0">
+                                            <p class="sec3Text1 rounded-2">₹ <%= trekkings[i].Price %>
+                                            </p>
+                                            <p class="sec3Text2 mt-2">
+                                                <%= trekkings[i].Review %> Reviews
+                                            </p>
+                                            <h5 class="card-title sec3Text3">
+                                                <%= trekkings[i].Name %>
+                                            </h5>
+                                            <p class="card-text sec3Text4 pb-3">
+                                                <%= trekkings[i].ShortDescription %>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <% } %>
                     </div>
@@ -155,9 +157,10 @@
                         </div>
                         <% for (tour of tours){%>
                             <div class="col-md-6 mt-3 ">
-                                <img class="rounded-4 w-100" style="padding-bottom: 30px"
-                                    src="./images/destination/<%= tour.Images[0] %>" alt="">
-                                <a href="/tours/<%= tour._id %>" class="sec5Button">Details</a>
+                                <a href="/tours/<%= tour._id %>">
+                                    <img class="rounded-4 w-100" src="./images/destination/<%= tour.Images[0] %>"
+                                        alt="">
+                                </a>
                             </div>
                             <%}%>
                     </div>
@@ -173,18 +176,21 @@
                         </div>
                         <% for( i=0 ; i < shoppings.length ; i++ ) {%>
                             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card p-2 sec6Card mt-3">
-                                    <img style="width: 100%; height: 265px;" src="./images/shopping/<%= shoppings[i].Images[0] %>" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="sec6Text1 card-title">Smart Air Bag Travel</h5>
-                                        <p class="sec6Text2">$225</p>
-                                        <a href="/shoppings/<%= shoppings._id %>" class="sec6Button">Details</a>
+                                <a href="/shoppings/<%= shoppings[i].id %>">
+                                    <div class="bg-transparent border-1 card p-3 sec6Card mt-3">
+                                        <img style="width: 100%; height: 265px;"
+                                            src="./images/shopping/<%= shoppings[i].Images[0] %>" class="card-img-top"
+                                            alt="...">
+                                        <div class="card-body p-0 mt-3">
+                                            <h5 class="text-dark card-title">Smart Air Bag Travel</h5>
+                                            <p style="color: #1dc5ce;font-size: 18px;font-weight: 500;">$225</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <% } %>
                                 <div class="col-12 d-flex justify-content-center">
-                                    <a href="#" class="sec6More">More</a>
+                                    <a href="/shoppings" class="sec6More">More</a>
                                 </div>
                     </div>
                 </div>

@@ -43,6 +43,7 @@ exports.shoppingPage = async (req, res) => {
 // Shopping Product Details
 exports.shoppingDetailsPage = async (req, res) => {
   try {
+    console.log('started');
     const product = await shoppingsModel.findById(req.params.id);
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -65,15 +66,19 @@ exports.shoppingDetailsPage = async (req, res) => {
 
 // Filtering the shoppping
 exports.filterProducts = async (req, res) => {
-  req.session.filterCategory = req.params.filter;
-  if (req.params.filter == 'All') {
-    req.params.filter === null;
-  } else {
-    req.session.filter = await shoppingsModel.find({
-      Category: req.params.filter,
+  try {
+    req.session.filterCategory = req.params.filter;
+    if (req.params.filter == 'All') {
+      req.params.filter === null;
+    } else {
+      req.session.filter = await shoppingsModel.find({
+        Category: req.params.filter,
+      });
+    }
+    res.json({
+      status: true,
     });
+  } catch (err) {
+    console.log(err);
   }
-  res.json({
-    status: true,
-  });
 };

@@ -107,6 +107,7 @@ a:active {
     width: 100%;
     position: fixed;
     z-index: 100;
+    transition: opacity 0.3s linear;
 }
 
 /*////////////////////*/
@@ -273,6 +274,7 @@ a:active {
 }
 
 .sec3Text3 {
+    color: #000000;
     font-size: 22px;
     margin-top: 20px;
 }
@@ -432,7 +434,8 @@ a:active {
     padding: 6px 27px;
     color: white;
     border-radius: 16px;
-    border: none;
+    border: solid;
+    border-width: 1px;
     margin-top: 80px;
 }
 
@@ -988,6 +991,7 @@ a:active {
     background: #0d6efd;
     position: absolute;
     top: 0;
+    left: 18px;
     color: white;
     border: 0;
     padding: 6px;
@@ -1090,6 +1094,13 @@ a:active {
     font-size: 45px;
     padding: 12px 0px;
     font-family: 'Arizonia';
+}
+
+@media (max-width : 576px) {
+    .centerSec2 {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 /*////////////////////*/

@@ -143,6 +143,8 @@ function decreaseQuantity(userId, productId) {
         }
       },
     });
+  }else{
+    deleteCartProduct(userId,productId)
   }
 }
 
@@ -223,18 +225,6 @@ function deleteCartProduct(userId, productId) {
 
 // Add to cart in (Shoppings)
 function addToCart(productId, userId) {
-  Swal.fire({
-    position: 'top-end',
-    icon: 'success',
-    title: 'Add To Cart',
-    showConfirmButton: false,
-    timer: 1000,
-    fontSize: '30px',
-    width: '300px',
-    background: '#41c356',
-    color: 'white',
-    iconColor: 'white',
-  });
   $.ajax({
     url: ` /shoppings/carts/${userId}/${productId}`,
     type: 'post',
@@ -242,6 +232,18 @@ function addToCart(productId, userId) {
     success: (res) => {
       console.log(res.status);
       if (res.status) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Add To Cart',
+          showConfirmButton: false,
+          timer: 1000,
+          fontSize: '30px',
+          width: '300px',
+          background: '#41c356',
+          color: 'white',
+          iconColor: 'white',
+        });
         const cartCount = document.getElementById('cartCount');
         cartCount.innerHTML = cartCount.innerHTML * 1 + 1;
       }

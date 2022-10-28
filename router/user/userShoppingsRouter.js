@@ -15,7 +15,7 @@ router.get(
 
 // filter Shopping Produc
 router.get(
-  '/:filter',
+  '/filter/:filter',
   userController.sessionUser,
   userController.checkBlocked,
   userShoppingController.filterProducts

@@ -7,16 +7,14 @@
         <!-- checked box -->
         <section class="signupSec1">
             <div class="container">
-                <div class="row">
+                <div class="row d-flex justify-content-center">
+                    <span id="Category" style="visibility:hidden ;"><%= Category %></span>
                     <div class="d-flex col-6">
-                        <span id="Category" style="visibility:hidden ;"><%= Category %></span>
-                        <ul class="mt-2">
+                        <ul class="mt-2 p-0">
                             <li id="All" onclick="filterProducts('All')" class="btn btn-outline-success mt-2">All</li>
                             <% for(category of categories){%>
                                 <li id="<%= category.Name %>" onclick="filterProducts('<%= category.Name %>')"
-                                    class="btn btn-outline-success mt-2">
-                                    <%= category.Name %>
-                                </li>
+                                    class="btn btn-outline-success mt-2"><%= category.Name %></li>
                                 <% } %>
                         </ul>
                     </div>
@@ -44,20 +42,21 @@
         <!-- section-2 -->
         <section class="signupSec1">
             <div class="container">
-                <div class="row w-100">
+                <div class="row centerSec2">
                     <% for(product of products){%>
                         <div class="col-8 col-sm-6 col-md-5 col-lg-3 me-2 mt-4">
                             <div class="card border-0 sec3Card" style="background-color:transparent;">
-                                <img class="ShoppingmainImages" src="./images/shopping/<%= product.Images[0] %>"
-                                    class="card-img-top rounded" alt="...">
-                                <div class="card-body">
+                                <a href="/shoppings/<%= product._id %>">
+                                    <img class="ShoppingmainImages" src="./images/shopping/<%= product.Images[0] %>"
+                                        class="card-img-top rounded" alt="...">
+                                </a>
+                                <div class="card-body p-0 ">
                                     <% if( wishlist==null ){%>
                                         <i id="<%= product._id %>Wishlist"
                                             onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
                                             class="sec6LoveLike fa-solid fa-heart"></i>
                                         <%}else{%>
                                             <% for( i=0 ; i < wishlist.Products.length ; i++ ){%>
-                                                <% console.log() %>
                                                 <% if( wishlist.Products[i].productId==product._id ){%>
                                                     <i id="<%= product._id %>Wishlist"
                                                         onclick="addToWishlist('<%= product._id %>','<%= userId %>')"
@@ -70,11 +69,9 @@
                                                             <%} %>
                                                                 <%} %>
                                                                     <%} %>
-                                                                        <div class="d-flex">
-                                                                            <a href="/shoppings/<%= product._id %>"
-                                                                                class="sec3Text5">Details</a>
+                                                                        <div class="d-flex mt-3">
                                                                             <a onclick="addToCart('<%= product._id %>','<%= userId %>')"
-                                                                                class="ms-5 sec3Text5"><i
+                                                                                class=" sec3Text5"><i
                                                                                     class="fa-brands fa-opencart"></i></a>
                                                                         </div>
                                                                         <h5 class="mt-3 card-title sec3Text3">
