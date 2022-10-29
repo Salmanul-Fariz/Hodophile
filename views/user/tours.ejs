@@ -46,12 +46,17 @@
                                         <p class="card-text sec3Text4 pb-3">
                                             <%= tour.ShortDescription %>
                                         </p>
-                                        <div class="d-flex mt-3 pb-3">
+                                        <div class="d-flex mt-3 pb-2">
                                             <i style="color: black;" class="fs-4 fa-solid fa-calendar"></i>
                                             <p style="color: black;" class="ms-2">
                                                 <%= tour.Duration %> Days
                                             </p>
                                         </div>
+                                        <% if( tour.Discount> 0 ){%>
+                                            <p class="shoppingDiscountText mt-3 ">
+                                                <%= tour.Discount %> % OFF
+                                            </p>
+                                            <%} %>
                                     </div>
                                 </div>
                             </a>

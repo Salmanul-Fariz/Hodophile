@@ -52,7 +52,11 @@
                                                 <%= trekking.Duration %> Days
                                             </p>
                                         </div>
-
+                                        <% if( trekking.Discount> 0 ){%>
+                                            <p class="shoppingDiscountText mt-3 ">
+                                                <%= trekking.Discount %> % OFF
+                                            </p>
+                                            <%} %>
                                     </div>
                                 </div>
                             </a>

@@ -232,17 +232,24 @@ function addToCart(productId, userId) {
     success: (res) => {
       console.log(res.status);
       if (res.status) {
-        Swal.fire({
+        const Toast = Swal.mixin({
+          toast: true,
           position: 'top-end',
+          showConfirmButton: false,
+          timer:2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+      
+        Toast.fire({
           icon: 'success',
           title: 'Add To Cart',
-          showConfirmButton: false,
-          timer: 1000,
-          fontSize: '30px',
-          width: '300px',
           background: '#41c356',
-          color: 'white',
-          iconColor: 'white',
+          color: 'White',
+          iconColor: 'White',
         });
         const cartCount = document.getElementById('cartCount');
         cartCount.innerHTML = cartCount.innerHTML * 1 + 1;

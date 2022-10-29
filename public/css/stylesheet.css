@@ -803,6 +803,8 @@ a:active {
     margin: auto;
     font-size: 18px;
     font-weight: 600;
+    background: transparent;
+    border: none;
 }
 
 .toursDetailsSec3BookBar {
@@ -1089,7 +1091,7 @@ a:active {
     color: #e57878;
 }
 
-.shoppingCategoryHead{
+.shoppingCategoryHead {
     color: black;
     font-size: 45px;
     padding: 12px 0px;
@@ -1199,4 +1201,23 @@ a:active {
     line-height: 36px;
     font-size: 18px;
     font-weight: 600;
+}
+
+/*////////////////////*/
+/* Booking Page  */
+/*////////////////////*/
+
+.bookingText {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.bookingStatusButton {
+    background: none;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 28px;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
 }

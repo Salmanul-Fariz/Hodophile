@@ -1,0 +1,108 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section --->
+        <section class="agToursSec1">
+            <div class="container">
+                <div class="row">
+                    <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Booking Details</h1>
+                    <div class="d-flex col-12 col-md-6 mt-5">
+                        <div class="col-6">
+                            <P class="bookingText">Bookking ID</P>
+                            <P class="bookingText">Package ID</P>
+                            <P class="bookingText">User ID</P>
+                            <P class="bookingText">Category</P>
+                            <P class="bookingText">Booking Status</P>
+                            <P class="bookingText">Payment Status</P>
+                            <P class="bookingText">Contact</P>
+                            <P class="bookingText">Email</P>
+                            <P class="bookingText">No.Travelers</P>
+                            <P class="bookingText">Booking Date</P>
+                            <P class="bookingText">Total Price</P>
+                        </div>
+                        <div class="col-6">
+                            <P class="bookingText">
+                                <%= booking._id %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.PackageId %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.User.UserId %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.Category %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.Status %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.Payment %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.User.Contact %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.User.Email %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.Travelers %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.DateBooking %>
+                            </P>
+                            <P class="bookingText">
+                                <%= booking.TotalPrice %>
+                            </P>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-6 d-flex justify-content-end mt-5">
+                        <% if(booking.Status=='Pending' ){%>
+                            <div class="dropdown">
+                                <button style="background-color:#0d6efd;" class="bookingStatusButton dropdown-toggle"
+                                    type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pending
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li>
+                                        <form
+                                            action="/agency/bookings/approved/<%= booking._id %>/<%= booking.Category %>/<%= booking.User.Email %>/<%= booking.User.Contact %>"
+                                            method="post">
+                                            <button class="dropdown-item" type="submit">Approved</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form
+                                            action="/agency/bookings/cancelled/<%= booking._id %>/<%= booking.Category %>/<%= booking.User.Email %>/<%= booking.User.Contact %> "
+                                            method="post">
+                                            <button class="dropdown-item" type="submit">Cancelled</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <%}else if(booking.Status=='Approved' ){%>
+                                <div class="dropdown">
+                                    <button style="background-color:#41c356;" class="bookingStatusButton" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Approved
+                                    </button>
+                                </div>
+                                <%}else if (booking.Status=='Cancelled' ){%>
+                                    <div class="dropdown">
+                                        <button style="background-color:red;" class="bookingStatusButton" type="button"
+                                            id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Cancelled
+                                        </button>
+                                    </div>
+                                    <%} %>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

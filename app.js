@@ -20,14 +20,14 @@ const userNewsRouter = require('./router/user/userNewsRouter');
 const userCartRouter = require('./router/user/userCartRouter');
 const userWishlistRouter = require('./router/user/userWishlistRouter');
 
-// require User router
+// require agency router
 const agencyRouter = require('./router/agency/agencyRouter');
 const agnecyToursRouter = require('./router/agency/agnecyToursRouter');
 const agencyTrekkingRouter = require('./router/agency/agencyTrekkingRouter');
 const agencyShoppingsRouter = require('./router/agency/agencyShoppingsRouter');
 const agencyNewsRouter = require('./router/agency/agencyNewsRouter');
 const agencyUserRouter = require('./router/agency/agencyUserRouter');
-
+const agencyBookingsRouter = require('./router/agency/agencyBookingsRouter');
 
 // cache
 app.use(middleware.cache);
@@ -65,7 +65,7 @@ app.use('/agency/trekkings', agencyTrekkingRouter);
 app.use('/agency/shoppings', agencyShoppingsRouter);
 app.use('/agency/news', agencyNewsRouter);
 app.use('/agency/users', agencyUserRouter);
-
+app.use('/agency/bookings', agencyBookingsRouter);
 
 // view engine setup
 app.set('view engine', 'ejs');
