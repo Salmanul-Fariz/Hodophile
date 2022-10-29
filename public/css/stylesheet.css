@@ -949,7 +949,7 @@ a:active {
 }
 
 .newsLikeIcon {
-    padding: 2px 18px;
+    padding: 0px 12px;
     border: none;
     border-radius: 7px;
     background-color: #41c356;
@@ -962,8 +962,8 @@ a:active {
 }
 
 .newsLikeCount {
-    margin: 1px 14px;
-    font-size: 18px;
+    margin: 0px 18px;
+    font-size: 14px;
     font-weight: 500;
 }
 

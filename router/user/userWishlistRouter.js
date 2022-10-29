@@ -18,7 +18,7 @@ router.get(
   '/addCart/:userId/:productId',
   userController.sessionUser,
   userController.checkBlocked,
-  userWishlistController.wishlistAddToCart
+  userWishlistController.Wishlist
 );
 
 // Remove from Wishlist

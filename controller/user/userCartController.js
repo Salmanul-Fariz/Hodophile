@@ -61,6 +61,7 @@ exports.addCart = async (req, res) => {
       });
       res.json({
         status: true,
+        inc: true,
       });
     } else {
       let productExist = await cartModel.aggregate([
@@ -83,6 +84,7 @@ exports.addCart = async (req, res) => {
         );
         res.json({
           status: true,
+          inc: true,
         });
       } else {
         // Find The Count
@@ -106,6 +108,10 @@ exports.addCart = async (req, res) => {
           productInc.Count = productInc.Count + 1;
           product.Products[productIndex] = productInc;
           product.save();
+
+          res.json({
+            status: true,
+          });
         }
       }
     }

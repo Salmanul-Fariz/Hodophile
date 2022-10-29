@@ -25,12 +25,12 @@ window.addEventListener('load', () => {
   const productDiscount = document.getElementsByClassName('productDiscount');
   let discount = 0;
   for (let i = 0; i < productDiscount.length; i++) {
-    discount += parseFloat(
+    discount += parseInt(
       (productTotal[i].innerHTML / 100) * productDiscount[i].innerHTML
     );
   }
   // Round the discout Price
-  let roundDiscount = Math.round(discount * 100) / 100;
+  let roundDiscount = Math.round(discount);
   totalPriceDiscount.innerHTML = `-${roundDiscount}`;
 
   // Setting Total Amount of the Cart
@@ -50,7 +50,7 @@ function increaseQuantity(userId, productId) {
         if (res.status) {
           // Increase quatity while add and remove
           const countInput = document.getElementById(`${productId}Input`);
-          countInput.setAttribute('value', `${countInput.value *1 + 1}`);
+          countInput.setAttribute('value', `${countInput.value * 1 + 1}`);
 
           // sett total cart quatity And (Price)
           const incProductPrice = document.getElementById(
@@ -79,7 +79,7 @@ function increaseQuantity(userId, productId) {
           // Round the discout Price
           const incTotal = Math.abs(totalPriceDiscount.innerHTML);
           const discount = incTotal + incDiscount;
-          const roundedDiscount = Math.round(discount * 100) / 100;
+          const roundedDiscount = Math.round(discount);
           totalPriceDiscount.innerHTML = `-${roundedDiscount}`;
 
           // Setting Total Amount of the Cart
@@ -133,8 +133,7 @@ function decreaseQuantity(userId, productId) {
 
           // Round the discout Price
           const incTotal = Math.abs(totalPriceDiscount.innerHTML);
-          const roundedDiscount =
-            Math.round((incTotal - dicDiscount) * 100) / 100;
+          const roundedDiscount = Math.round(incTotal - dicDiscount);
           totalPriceDiscount.innerHTML = `-${roundedDiscount}`;
 
           // Setting Total Amount of the Cart
@@ -143,8 +142,8 @@ function decreaseQuantity(userId, productId) {
         }
       },
     });
-  }else{
-    deleteCartProduct(userId,productId)
+  } else {
+    deleteCartProduct(userId, productId);
   }
 }
 
@@ -200,9 +199,11 @@ function deleteCartProduct(userId, productId) {
               const dicDiscount =
                 (parseInt(productTotal.innerHTML) / 100) *
                 parseInt(productDiscount.innerHTML);
-              const discount = Total - dicDiscount;
-              const roundedDiscount = Math.round(discount * 100) / 100;
-              totalPriceDiscount.innerHTML = `-${roundedDiscount}`;
+              let discount = Math.round(Total - dicDiscount);
+              if (discount <= 0) {
+                discount = 0;
+              }
+              totalPriceDiscount.innerHTML = `-${discount}`;
 
               // Set Total Price
               totalCartPrice.innerHTML =
@@ -225,6 +226,8 @@ function deleteCartProduct(userId, productId) {
 
 // Add to cart in (Shoppings)
 function addToCart(productId, userId) {
+  console.log('hello');
+
   $.ajax({
     url: ` /shoppings/carts/${userId}/${productId}`,
     type: 'post',
@@ -232,18 +235,19 @@ function addToCart(productId, userId) {
     success: (res) => {
       console.log(res.status);
       if (res.status) {
+        console.log('helldfso');
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
-          timer:2500,
+          timer: 1500,
           timerProgressBar: true,
           didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer);
             toast.addEventListener('mouseleave', Swal.resumeTimer);
           },
         });
-      
+
         Toast.fire({
           icon: 'success',
           title: 'Add To Cart',
@@ -251,8 +255,10 @@ function addToCart(productId, userId) {
           color: 'White',
           iconColor: 'White',
         });
-        const cartCount = document.getElementById('cartCount');
-        cartCount.innerHTML = cartCount.innerHTML * 1 + 1;
+        if (res.inc) {
+          const cartCount = document.getElementById('cartCount');
+          cartCount.innerHTML = cartCount.innerHTML * 1 + 1;
+        }
       }
     },
   });
