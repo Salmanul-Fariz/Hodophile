@@ -15,11 +15,25 @@ router.get(
 );
 
 // Products Order
-router.get(
-  '/:userId/:orderType/:orderTypeId',
+router
+  .route('/:orderType/:userId/:orderTypeId')
+  .get(
+    userController.sessionUser,
+    userController.checkBlocked,
+    userOderController.orderPage
+  )
+  .post(
+    userController.sessionUser,
+    userController.checkBlocked,
+    userOderController.orderSubmit
+  );
+
+// Products Order Add Address
+router.post(
+  '/address/:userId',
   userController.sessionUser,
   userController.checkBlocked,
-  userOderController.orderPage
+  userOderController.addAddress
 );
 
 // filter Shopping Produc

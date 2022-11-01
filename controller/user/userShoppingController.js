@@ -43,7 +43,6 @@ exports.shoppingPage = async (req, res) => {
 // Shopping Product Details
 exports.shoppingDetailsPage = async (req, res) => {
   try {
-    console.log('started');
     const product = await shoppingsModel.findById(req.params.id);
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);

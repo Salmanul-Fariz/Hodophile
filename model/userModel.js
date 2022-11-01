@@ -48,9 +48,13 @@ const userSchema = new mongoos.Schema({
       message: 'Password are not Same !',
     },
   },
-  NewsLike:{
-    type:Array,
-    default:null
+  Address: {
+    type: Array,
+    default: null,
+  },
+  NewsLike: {
+    type: Array,
+    default: null,
   },
 });
 

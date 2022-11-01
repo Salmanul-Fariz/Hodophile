@@ -28,6 +28,7 @@ const agencyShoppingsRouter = require('./router/agency/agencyShoppingsRouter');
 const agencyNewsRouter = require('./router/agency/agencyNewsRouter');
 const agencyUserRouter = require('./router/agency/agencyUserRouter');
 const agencyBookingsRouter = require('./router/agency/agencyBookingsRouter');
+const agencyOrderRouter = require('./router/agency/agencyOrderRouter');
 
 // cache
 app.use(middleware.cache);
@@ -66,6 +67,7 @@ app.use('/agency/shoppings', agencyShoppingsRouter);
 app.use('/agency/news', agencyNewsRouter);
 app.use('/agency/users', agencyUserRouter);
 app.use('/agency/bookings', agencyBookingsRouter);
+app.use('/agency/orders', agencyOrderRouter);
 
 // view engine setup
 app.set('view engine', 'ejs');

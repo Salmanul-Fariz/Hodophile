@@ -1,0 +1,148 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section --->
+        <section class="agToursSec1">
+            <div class="container">
+                <div class="row">
+                    <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Order Details</h1>
+                    <div class="d-flex col-12 col-md-6 mt-5">
+                        <div class="col-6">
+                            <P class="bookingText">Order ID</P>
+                            <P class="bookingText">User ID</P>
+                            <P class="bookingText">Order Status</P>
+                            <P class="bookingText">Payment Status</P>
+                            <P class="bookingText">Payment Method</P>
+                            <P class="bookingText">Contact</P>
+                            <P class="bookingText">Email</P>
+                            <P class="bookingText">Price</P>
+                            <P class="bookingText">Discount</P>
+                            <P class="bookingText">Total Price</P>
+                            <P class="bookingText">Products ID</P>
+                        </div>
+                        <div class="col-6">
+                            <P class="bookingText">
+                                <%= order._id %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.User.UserId %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.Status %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.PaymentStatus %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.PaymentMethod %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.User.Contact %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.User.Email %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.Price %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.Discount %>
+                            </P>
+                            <P class="bookingText">
+                                <%= order.TotalPrice %>
+                            </P>
+                            <% for(key of order.Order){%>
+                                <P class="bookingText">
+                                    <%= key.ProductId %>
+                                </P>
+                                <P class="bookingText">
+                                    <%= key.Quantity %>
+                                </P>
+                                <%} %>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-6 d-flex justify-content-end mt-5">
+                        <% if(order.Status=='Pending' ){%>
+                            <div class="dropdown">
+                                <button style="background-color:#0d6efd;" class="bookingStatusButton dropdown-toggle"
+                                    type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pending
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li>
+                                        <form
+                                            action="/agency/orders/approved/<%= order._id %>/<%= order.User.Email %>/<%= order.User.Contact %>"
+                                            method="post">
+                                            <button class="dropdown-item" type="submit">Approved</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form
+                                            action="/agency/orders/cancelled/<%= order._id %>/<%= order.User.Email %>/<%= order.User.Contact %>"
+                                            method="post">
+                                            <button class="dropdown-item" type="submit">Cancelled</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <%}else if(order.Status=='Approved' ){%>
+                                <div class="dropdown">
+                                    <button class="bg-primary bookingStatusButton dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Approved
+                                    </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li>
+                                        <form
+                                            action="/agency/orders/shipped/<%= order._id %>/<%= order.User.Email %>/<%= order.User.Contact %>"
+                                            method="post">
+                                            <button class="dropdown-item" type="submit">Shipped</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                                </div>
+                                <%}else if (order.Status=='Shipped' ){%>
+                                    <div class="dropdown">
+                                        <button style="background-color:#027f8b;"
+                                            class="bookingStatusButton dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Shipped
+                                        </button>
+                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <li>
+                                            <form
+                                                action="/agency/orders/delivered/<%= order._id %>/<%= order.User.Email %>/<%= order.User.Contact %>"
+                                                method="post">
+                                                <button class="dropdown-item" type="submit">Delivered</button>
+                                            </form>
+                                        </li>
+                                     </ul>
+                                    </div>
+                                    <%}else if (order.Status=='Delivered' ){%>
+                                        <div class="dropdown">
+                                            <button style="background-color:#41c356;" class="bookingStatusButton"
+                                                type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Delivered
+                                            </button>
+                                        </div>
+                                        <%}else if (order.Status=='Cancelled' ){%>
+                                            <div class="dropdown">
+                                                <button style="background-color:red;" class="bookingStatusButton"
+                                                    type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    Cancelled
+                                                </button>
+                                            </div>
+                                            <%} %>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

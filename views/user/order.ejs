@@ -1,0 +1,236 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Order Page</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="toursSec2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-7 pb-5">
+                        <div class="col-12 p-3">
+                            <h4 class="orderAddressHead">Address</h4>
+                            <% if(user.Address.length> 0){%>
+                                <form>
+                                    <% for(i=0 ; i < user.Address.length ; i++ ){%>
+                                        <div class="form-check mt-3">
+                                            <input class="radioformAddress form-check-input" type="radio" name="flexRadioDefault"
+                                                value="<%= i %>" >
+                                            <label class="orderAddress form-check-label" for="flexRadioDefault1">
+                                                <%= user.Address[i].Name %><br>
+                                                    <%= user.Address[i].Address %>,<%= user.Address[i].City %><br>
+                                                            <%= user.Address[i].PIN %>
+                                            </label>
+                                        </div>
+                                        <%} %>
+                                            <div class="mt-3">
+                                                <button onclick="showAddressBar('<%= user._id %>')" type="button" class="orderAddressAdd">Add Address</button>
+                                            </div>
+                                </form>
+                                <div id="downAddress"></div>
+                                <%}else{%>
+                                    <form action="/shoppings/address/<%= user._id %>" class="col-10 mt-5" method="post">
+                                        <div class="mb-3 mt-2">
+                                            <label class="form-label signupSec2Text">Name</label>
+                                            <input name="addressName" type="text" class="form-control"
+                                                placeholder="Name" required>
+                                        </div>
+                                        <div class=" mb-3 mt-2">
+                                            <label class="form-label signupSec2Text">Address</label>
+                                            <input name="address" type="text" class="form-control"
+                                                placeholder="Street Address" required>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">Country</label>
+                                                <input type="text" class="form-control" name="addressCountry"
+                                                    placeholder="Country" required>
+                                            </div>
+                                            <div class="mb-3 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">State</label>
+                                                <input type="text" class="form-control" name="addressState"
+                                                    placeholder="State" required>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">City</label>
+                                                <input type="text" class="form-control" name="addressCity"
+                                                    placeholder="City" required>
+                                            </div>
+                                            <div class="mb-3 signupSec2FormBar">
+                                                <label class="form-label signupSec2Text">PIN Code</label>
+                                                <input maxlength="6" type="number"
+                                                    class="form-control" name="addressPincode" placeholder="PIN Code"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="orderAddressAdd">Add
+                                                Address</button>
+                                        </div>
+                                    </form>
+                                    <%} %>
+                        </div>
+                        <% if(product){%>
+                            <div id="ProductID"></div>
+                            <div  class="col-12 d-flex orderAddressProductPage mt-5">
+                                <div class="col-6">
+                                    <img class="w-75" src="/images/shopping/<%= product.Images[1] %>" alt="">
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="orderAddressProductHead">
+                                        <%= product.Name %>
+                                    </h5>
+                                    <p class="orderAddressProductText">
+                                        <%= product.ShortDescription %>
+                                    </p>
+                                    <p id="productPrice" class="orderAddressProductPRice">₹ <%= product.Price %></p>
+                                    <div class="mb-3 pe-2 signupSec2FormBar">
+                                        <label class="form-label signupSec2Text">Quantity</label>
+                                        <input id="orderQuantity" onblur="calcTotal()" type="number" class="w-50 form-control" name="addressQuantity" value="1"
+                                            min="1" max="10">
+                                    </div>
+                                    <span id="productDiscount" style="display: none;"><%= product.Discount %></span>
+                                </div>
+                            </div>
+                            <%}else if(cart){%>
+                            <div id="CartID"></div>
+                                <div class="col-12" style="margin-top: 120px;">
+                                    <div class="table-responsive">
+                                        <table id="myTable" class="table " style="background-color: #ecf9ee;">
+                                            <thead>
+                                                <tr>
+                                                    <th class="p-3" scope="col">IMAGES</th>
+                                                    <th class="p-3" scope="col">NAMES</th>
+                                                    <th class="p-3" scope="col">PRICE</th>
+                                                    <th class="p-3" scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <span id="cartLength" style="display:none ;"><%= cartProducts.length %></span>
+                                                <% for(let i=0; i < cartProducts.length; i++){%>
+                                                    <span id="cartDiscount<%= i %>" style="display:none ;"><%= cartProducts[i].Discount %></span>
+                                                    <tr id="<%= cartProducts[i].id %>Product" scope="row">
+                                                        <td class="pt-3"><img style="width: 60px;"
+                                                                src="/images/shopping/<%= cartProducts[i].Images[i] %>" alt="">
+                                                        </td>
+                                                        <td class="p-3 ">
+                                                            <p class="orderCartText">
+                                                                <%= cartProducts[i].ShortName %>
+                                                            </p>
+                                                        </td>
+                                                        <td class="p-3 ">
+                                                            <p id="cartProductPrice<%= i %>" class="orderCartText">
+                                                                <%= cartProducts[i].Price %>
+                                                            </p>
+                                                        </td>
+                                                        <td class="p-3">
+                                                            <div class="d-flex mt-4">
+                                                                <% for (p of cart.Products) { %>
+                                                                    <% if(p.productId===cartProducts[i].id) { %>
+                                                                        <input id="cartProductQuantity<%= i %>" 
+                                                                        type="number" class="ms-2 " name="addressQuantity" value="<%= p.Count %>"
+                                                                        min="1" max="10" readonly style="width:30px ;">
+                                                                        <% } %>
+                                                                            <% } %>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                            <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <%} %>
+
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <div class="orderCheckoutBar">
+                            <div class="d-flex mt-2">
+                                <div class="mb-3 pe-2 signupSec2FormBar">
+                                    <label class="form-label signupSec2Text">Contact</label>
+                                    <input style="color:#858585 ;" id="bookingContact" type="number"
+                                        class="form-control" name="bookingContact" value="<%= user.contact %>" readonly>
+                                </div>
+                                <div class="mb-3 signupSec2FormBar">
+                                    <label class="form-label signupSec2Text">Email</label>
+                                    <input style="color:#858585 ;" id="bookingEmail" type="email" class="form-control"
+                                        name="bookingEmail" value="<%= user.email %>" readonly>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="form-check mt-3">
+                                    <input class="deliveryRadio form-check-input" type="radio" name="flexRadioDefault"
+                                        value="0" checked>
+                                    <label id="0" class="orderAddress form-check-label" for="flexRadioDefault1">Cash on
+                                        Delivery</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="deliveryRadio form-check-input" type="radio" name="flexRadioDefault"
+                                        value="1">
+                                    <label id="1" class="orderAddress form-check-label" for="flexRadioDefault1">Online
+                                        Payment</label>
+                                </div>
+                            </form>
+                            <div class="d-flex justify-content-center mt-4">
+                                <div class="col-7 mb-5">
+                                    <div class="d-flex">
+                                        <div class="col-6">
+                                            <h5>Price</h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 id="orderPrice" class="text-end"></h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="col-6">
+                                            <h5>Discount</h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 id="orderDiscount" class="text-end text-secondary fw-normal"></h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex border-top border-2 text-dark mt-2">
+                                        <div class="col-6 mt-3">
+                                            <h5>Total</h5>
+                                        </div>
+                                        <div class="col-6 mt-3">
+                                            <h5 id="orderTotal" class="text-end"></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 id="ErrText" class="text-center text-danger"></h6>
+                        <% if(product){%>
+                            <div class="d-flex justify-content-center p-3">
+                                <button onclick="checkOut('Product','<%= user._id %>','<%= product._id %>')" type="submit" class="orderAddressAdd">Check Out</button>
+                            </div>
+                            <%}else if(cart){%>
+                                <div class="d-flex justify-content-center p-3">
+                                    <button onclick="checkOut('Cart','<%= user._id %>','<%= cart._id %>')" type="submit" class="orderAddressAdd">Check Out</button>
+                                </div>
+                                <%} %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order -->
+        <script src="/js/order.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>

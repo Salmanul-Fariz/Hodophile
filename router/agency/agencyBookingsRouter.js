@@ -33,7 +33,7 @@ router.post(
   agencyBookingsController.approved
 );
 
-// Booking Approved
+// Booking Cancelled
 router.post(
   '/cancelled/:id/:packageCategory/:userEmail/:userContact',
   agencyController.sessionAgency,

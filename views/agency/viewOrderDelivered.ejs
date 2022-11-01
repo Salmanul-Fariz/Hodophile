@@ -1,0 +1,97 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section --->
+        <section class="agToursSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 ">
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/orders" class="d-flex justify-content-center">
+                                <i class="text-primary agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">View
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/orders/approved" class="d-flex justify-content-center">
+                                <i class="text-success agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Approved</p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/orders/shipped" class="d-flex justify-content-center">
+                                <i class="text-ligter agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Shipped
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/orders/delivered" class="d-flex justify-content-center">
+                                <i class="text-secondary agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Delivered
+                                </p>
+                            </a>
+                        </div>
+                        <div class=" mb-3 agToursSec1LeftButton">
+                            <a href="/agency/orders/cancelled" class="d-flex justify-content-center">
+                                <i class="text-danger agToursSec1LeftButtonIcon fa-solid fa-user"></i>
+                                <p style="color: white;" class="agToursSec1LeftButtonText text-center mt-3">Cancelled
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- section-2 -->
+                    <div class="agToursSec1RightBar ms-4 col-9">
+                        <h1 class="agToursSec1RightHead text-center mt-3 pb-3">Delivered</h1>
+
+                        <!-- search button -->
+                        <input class="agToursSec1SearchButton" type="text" id="myInput" onkeyup="myFunction()"
+                            placeholder="Search for names.." title="Type in a name">
+                        <div class="table-responsive">
+                            <table id="myTable" class="table table-striped " style="background-color: #ecf9ee;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Order ID</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Payment</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(let i=0; i < delivered.length ; i++){%>
+                                        <tr scope="row">
+                                            <td class="pt-3">
+                                                <%= i+1 %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= delivered[i]._id %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= delivered[i].Status %>
+                                            </td>
+                                            <td class="pt-3">
+                                                <%= delivered[i].PaymentStatus %>
+                                            </td>
+                                            <td><a href="/agency/orders/<%= delivered[i]._id %>"
+                                                    class="btn btn-primary">Details</a></td>
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Field -->
+        <script src="/js/agencySearchField.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>
