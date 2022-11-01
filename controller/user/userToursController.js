@@ -35,21 +35,17 @@ exports.details = async (req, res) => {
     const wishlistCount = await wishlistItemCount(req.session.user);
     const user = await userModel.findById(req.session.user._id);
 
-    req.session.bookingPrice = tour.Price;
-    req.session.bookingDiscount = Math.round(
-      (req.session.bookingPrice / 100) * tour.Discount
-    );
-    req.session.BookingTotal =
-      req.session.bookingPrice - req.session.bookingDiscount;
-
+    let bookingPrice = tour.Price;
+    let bookingDiscount = Math.round((bookingPrice / 100) * tour.Discount);
+    let BookingTotal = bookingPrice - bookingDiscount;
     res.render('user/toursDetails', {
       tour,
       cartCount,
       wishlistCount,
       user,
-      bookingPrice: req.session.bookingPrice,
-      bookingDiscount: req.session.bookingDiscount,
-      BookingTotal: req.session.BookingTotal,
+      bookingPrice: bookingPrice,
+      bookingDiscount: bookingDiscount,
+      BookingTotal: BookingTotal,
       bookingPopup: req.flash('bookingPopup'),
     });
   } catch (err) {

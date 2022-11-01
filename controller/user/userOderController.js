@@ -4,6 +4,7 @@ const userModel = require('./../../model/userModel');
 const cartModel = require('./../../model/cartModel');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
+const razoPayment = require('./../../utils/razoPayment');
 
 // Order Page
 exports.orderPage = async (req, res) => {
@@ -81,7 +82,7 @@ exports.orderSubmit = async (req, res) => {
       );
       const total = product.Price * req.body.productQuatity - discount;
 
-      await orderModel.create({
+      const orderCollection = await orderModel.create({
         User: {
           UserId: user._id,
           Name: `${user.firstName} ${user.lastName}`,
@@ -98,6 +99,20 @@ exports.orderSubmit = async (req, res) => {
           Price: product.Price,
         },
         Address: user.Address[req.body.addressIndex],
+      });
+
+      // Payment integration
+      const order = await razoPayment(total * 100);
+
+      // Send Responce
+      res.json({
+        status: true,
+        cash: total,
+        rzOrderId: order.id,
+        name: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+        contact: user.contact,
+        orderId: orderCollection._id,
       });
     } else if (req.params.orderType === 'Cart') {
       const user = await userModel.findById(req.params.userId);
@@ -118,7 +133,7 @@ exports.orderSubmit = async (req, res) => {
         }
       }
 
-      await orderModel.create({
+      const orderCollection = await orderModel.create({
         User: {
           UserId: user._id,
           Name: `${user.firstName} ${user.lastName}`,
@@ -135,12 +150,45 @@ exports.orderSubmit = async (req, res) => {
 
       // delete cart
       await cartModel.deleteOne({ _id: req.params.orderTypeId });
-    }
 
-    res.json({
-      status: true,
-    });
+      // Payment integration
+      const order = await razoPayment(req.body.total * 100);
+
+      // Send Responce
+      res.json({
+        status: true,
+        cash: req.body.total,
+        rzOrderId: order.id,
+        name: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+        contact: user.contact,
+        orderId: orderCollection._id,
+      });
+    }
   } catch (err) {
     console.log(err);
   }
+};
+
+// order Successs
+exports.success = async (req, res) => {
+  await orderModel.updateOne(
+    { _id: req.params.id },
+    {
+      PaymentStatus: 'Complete',
+    }
+  );
+  res.json({
+    status: true,
+  });
+};
+
+
+// If Payment failed
+exports.falied = async (req, res) => {
+  console.log(req.params);
+  await orderModel.deleteOne({ _id: req.params.id });
+  res.json({
+    status: true,
+  });
 };

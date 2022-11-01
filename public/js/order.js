@@ -1,3 +1,72 @@
+// Setting Razorpay payment Option
+function razorpayFunction(
+  cash,
+  rzOrderId,
+  name,
+  email,
+  contact,
+  orderId,
+  type
+) {
+  const options = {
+    key: 'rzp_test_0QcZGwIjWOF25m',
+    amount: cash,
+    currency: 'INR',
+    name: 'Hodophile',
+    description: 'Booking Tour Package',
+    image: 'http://localhost:3000/images/logoText.png',
+    order_id: rzOrderId,
+    callback_url: 'https://eneqd3r9zrjok.x.pipedream.net/',
+    notes: {
+      address: 'Razorpay Corporate Office',
+    },
+    prefill: {
+      name: name,
+      email: email,
+      contact: contact,
+    },
+    theme: {
+      color: '#3399cc',
+    },
+
+    // when it is success
+    handler: function (response) {
+      $.ajax({
+        url: `/shoppings/success/${orderId}`,
+        type: 'get',
+        cache: false,
+        success: (res) => {
+          Swal.fire({
+            title: 'Order',
+            text: 'Success your Order !',
+            confirmButtonColor: '#3085d6',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              if (type == 'Product') {
+                location.replace(`/shoppings`);
+              } else {
+                location.replace(`/shoppings/carts`);
+              }
+            }
+          });
+        },
+      });
+    },
+  };
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+
+  // When It Is failed
+  rzp1.on('payment.failed', function (response) {
+    $.ajax({
+      url: `/shoppings/failed/${orderId}`,
+      type: 'get',
+      cache: false,
+    });
+  });
+}
+
+// Check out Function
 function checkOut(orderType, userId, productId) {
   const radio = document.getElementsByClassName('radioformAddress');
   let AddressIndex;
@@ -31,47 +100,144 @@ function checkOut(orderType, userId, productId) {
       deliveryType = 'Online Payment';
     }
 
-    // Order With a Product
-    console.log(orderType);
-    if (orderType == 'Product') {
-      const orderQuantity = document.getElementById('orderQuantity').value;
-      $.ajax({
-        url: `/shoppings/${orderType}/${userId}/${productId}`,
-        type: 'post',
-        data: {
-          addressIndex: AddressIndex.value,
-          productQuatity: orderQuantity,
-          deliveryType: deliveryType,
-        },
-        cache: false,
-        success: (res) => {
-          if (res.status) {
-            location.replace('/shoppings');
-          }
-        },
-      });
-    } else if (orderType == 'Cart') {
-      const orderPrice = document.getElementById('orderPrice').innerHTML;
-      const orderDiscount = document.getElementById('orderDiscount').innerHTML;
-      const orderTotal = document.getElementById('orderTotal').innerHTML;
+    // payment is in online
+    if (deliveryType == 'Online Payment') {
+      // Order With a Product
+      if (orderType == 'Product') {
+        let cash, rzOrderId, name, email, contact, orderId;
+        const orderQuantity = document.getElementById('orderQuantity').value;
+        $.ajax({
+          url: `/shoppings/${orderType}/${userId}/${productId}`,
+          type: 'post',
+          data: {
+            addressIndex: AddressIndex.value,
+            productQuatity: orderQuantity,
+            deliveryType: deliveryType,
+          },
+          cache: false,
+          success: (res) => {
+            cash = res.cash;
+            rzOrderId = res.rzOrderId;
+            name = res.name;
+            email = res.email;
+            contact = res.contact;
+            orderId = res.orderId;
 
-      $.ajax({
-        url: `/shoppings/${orderType}/${userId}/${productId}`,
-        type: 'post',
-        data: {
-          addressIndex: AddressIndex.value,
-          deliveryType: deliveryType,
-          price: orderPrice,
-          discount: orderDiscount,
-          total: orderTotal,
-        },
-        cache: false,
-        success: (res) => {
-          if (res.status) {
-            location.replace('/shoppings/carts');
-          }
-        },
-      });
+            razorpayFunction(
+              cash,
+              rzOrderId,
+              name,
+              email,
+              contact,
+              orderId,
+              'Products'
+            );
+
+            // if (res.status) {
+            //   location.replace('/shoppings');
+            // }
+          },
+        });
+      } else if (orderType == 'Cart') {
+        const orderPrice = document.getElementById('orderPrice').innerHTML;
+        const orderDiscount =
+          document.getElementById('orderDiscount').innerHTML;
+        const orderTotal = document.getElementById('orderTotal').innerHTML;
+
+        let cash, rzOrderId, name, email, contact, orderId;
+
+        $.ajax({
+          url: `/shoppings/${orderType}/${userId}/${productId}`,
+          type: 'post',
+          data: {
+            addressIndex: AddressIndex.value,
+            deliveryType: deliveryType,
+            price: orderPrice,
+            discount: orderDiscount,
+            total: orderTotal,
+          },
+          cache: false,
+          success: (res) => {
+            cash = res.cash;
+            rzOrderId = res.rzOrderId;
+            name = res.name;
+            email = res.email;
+            contact = res.contact;
+            orderId = res.orderId;
+
+            razorpayFunction(
+              cash,
+              rzOrderId,
+              name,
+              email,
+              contact,
+              orderId,
+              'Cart'
+            );
+          },
+        });
+      }
+    }
+    // Cash on Delivery
+    else {
+      // Order With a Product
+      if (orderType == 'Product') {
+        const orderQuantity = document.getElementById('orderQuantity').value;
+        $.ajax({
+          url: `/shoppings/${orderType}/${userId}/${productId}`,
+          type: 'post',
+          data: {
+            addressIndex: AddressIndex.value,
+            productQuatity: orderQuantity,
+            deliveryType: deliveryType,
+          },
+          cache: false,
+          success: (res) => {
+            if (res.status) {
+              Swal.fire({
+                title: 'Order',
+                text: 'Success your Order !',
+                confirmButtonColor: '#3085d6',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.replace('/shoppings');
+                }
+              });
+            }
+          },
+        });
+      } else if (orderType == 'Cart') {
+        const orderPrice = document.getElementById('orderPrice').innerHTML;
+        const orderDiscount =
+          document.getElementById('orderDiscount').innerHTML;
+        const orderTotal = document.getElementById('orderTotal').innerHTML;
+
+        $.ajax({
+          url: `/shoppings/${orderType}/${userId}/${productId}`,
+          type: 'post',
+          data: {
+            addressIndex: AddressIndex.value,
+            deliveryType: deliveryType,
+            price: orderPrice,
+            discount: orderDiscount,
+            total: orderTotal,
+          },
+          cache: false,
+          success: (res) => {
+            if (res.status) {
+              Swal.fire({
+                title: 'Order',
+                text: 'Success your Order !',
+                confirmButtonColor: '#3085d6',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.replace('/shoppings/carts');
+                }
+              });
+            }
+          },
+        });
+      }
     }
   }
 }

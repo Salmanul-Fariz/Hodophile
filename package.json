@@ -29,12 +29,13 @@
     "nodemailer": "^6.8.0",
     "otp-generator": "^4.0.0",
     "path": "^0.12.7",
+    "razorpay": "^2.8.3",
     "sweetalert2": "^11.5.2",
     "twilio": "^3.82.2",
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "ndb": "^1.1.5",
+    "ndb": "^0.2.4",
     "nodemon": "^2.0.20"
   }
 }

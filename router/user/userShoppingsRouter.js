@@ -14,6 +14,22 @@ router.get(
   userShoppingController.shoppingPage
 );
 
+// order Success
+router.get(
+  '/success/:id',
+  userController.sessionUser,
+  userController.checkBlocked,
+  userOderController.success
+);
+
+// order Failed
+router.get(
+  '/failed/:id',
+  userController.sessionUser,
+  userController.checkBlocked,
+  userOderController.falied
+);
+
 // Products Order
 router
   .route('/:orderType/:userId/:orderTypeId')
