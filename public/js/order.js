@@ -6,7 +6,7 @@ function razorpayFunction(
   email,
   contact,
   orderId,
-  type
+  types
 ) {
   const options = {
     key: 'rzp_test_0QcZGwIjWOF25m',
@@ -42,7 +42,8 @@ function razorpayFunction(
             confirmButtonColor: '#3085d6',
           }).then((result) => {
             if (result.isConfirmed) {
-              if (type == 'Product') {
+              console.log(types);
+              if (types == 'Products') {
                 location.replace(`/shoppings`);
               } else {
                 location.replace(`/shoppings/carts`);
@@ -69,6 +70,7 @@ function razorpayFunction(
 // Check out Function
 function checkOut(orderType, userId, productId) {
   const radio = document.getElementsByClassName('radioformAddress');
+
   let AddressIndex;
   for (let i = 0; i < radio.length; i++) {
     if (radio[i].checked) {

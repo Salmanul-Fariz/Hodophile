@@ -1,0 +1,37 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-2 -->
+        <section class="toursSec2">
+            <div class="container">
+                <div class="row d-flex justify-content-center pt-5 pb-5">
+                    <div class="col-sm-10 col-lg-6 ">
+                        <form id="form" method="post" action="/profile/update/personal/<%= type %>/<%= user._id %>"
+                            class="signupSec2Form">
+                                <% if(type == 'Contact'){%>
+                                    <div class="mb-3 mt-2">
+                                        <label class="form-label signupSec2Text">Contact</label>
+                                        <input id="contact" type="number" class="form-control" name="contact"
+                                            placeholder="+91 " required minlength="10" maxlength="10">
+                                    </div>
+                                    <%}else{%>
+                                        <div class="mb-3 mt-2">
+                                            <label class="form-label signupSec2Text">Email</label>
+                                            <input id="email" type="email" class="form-control" name="email"
+                                                placeholder=" Enter email Address" required>
+                                        </div>
+                                        <%}%>
+                            <div class="d-flex justify-content-center p-4">
+                                <button type="submit" class="signupSec2FormButton">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>

@@ -38,6 +38,10 @@ const userSchema = new mongoos.Schema({
     minlength: [6, 'Please Enter Strong Password !'],
     select: false,
   },
+  ProfileImage: {
+    type: String,
+    default: '1667366632072.jpg'
+  },
   passwordConfirm: {
     type: String,
     required: [true, 'Please Confirm the Password !'],

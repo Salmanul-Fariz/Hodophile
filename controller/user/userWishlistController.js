@@ -138,3 +138,79 @@ exports.removeWishlist = async (req, res) => {
     console.log(err);
   }
 };
+
+// Add to cart
+exports.wishlistAddToCart = async (req, res) => {
+  try {
+    const cartDocuments = await cartModel.findOne({
+      UserId: req.params.userId,
+    });
+
+    // User has No Document
+    if (!cartDocuments) {
+      await cartModel.create({
+        UserId: req.params.userId,
+        Products: {
+          productId: req.params.productId,
+          Count: 1,
+        },
+      });
+      res.json({
+        status: true,
+        inc: true,
+      });
+    } else {
+      let productExist = await cartModel.aggregate([
+        { $match: { UserId: req.params.userId } },
+        { $unwind: '$Products' },
+        { $match: { 'Products.productId': req.params.productId } },
+      ]);
+      // Product Not Exist
+      if (productExist.length === 0) {
+        await cartModel.updateOne(
+          { UserId: req.params.userId },
+          {
+            $push: {
+              Products: {
+                productId: req.params.productId,
+                Count: 1,
+              },
+            },
+          }
+        );
+        res.json({
+          status: true,
+          inc: true,
+        });
+      } else {
+        // Find The Count
+        const cartCount = await cartModel.aggregate([
+          { $match: { UserId: req.params.userId } },
+          { $unwind: '$Products' },
+          { $match: { 'Products.productId': req.params.productId } },
+        ]);
+
+        console.log(cartCount);
+
+        // Product Exist
+        if (cartCount[0].Products.Count < 10) {
+          const product = await cartModel.findOne({
+            UserId: req.params.userId,
+          });
+          let productIndex = product.Products.findIndex(
+            (p) => p.productId == req.params.productId
+          );
+          let productInc = product.Products[productIndex];
+          productInc.Count = productInc.Count + 1;
+          product.Products[productIndex] = productInc;
+          product.save();
+        }
+        res.json({
+          status: true,
+        });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

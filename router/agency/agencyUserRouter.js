@@ -5,11 +5,23 @@ const router = express.Router();
 const agencyController = require('./../../controller/agency/agencyController');
 const agencyUserController = require('./../../controller/agency/agencyUserController');
 
+// require Multer
+const Multer = require('../../utils/multer');
+const avatarMulter = Multer.avatarMulter();
+
 // All users
 router.get(
   '/',
   agencyController.sessionAgency,
   agencyUserController.userdetails
+);
+
+// Avatar Page
+router.post(
+  '/avatar',
+  agencyController.sessionAgency,
+  avatarMulter.single('avatarImage'),
+  agencyUserController.addAvatars
 );
 
 // To block user

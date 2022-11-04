@@ -55,3 +55,18 @@ exports.shoppingMulter = () => {
   });
   return multer({ storage: storage });
 };
+
+
+// set multer(User Profile)
+exports.avatarMulter = () => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/avatar');
+    },
+    filename: function (req, file, cb) {
+      const uniqueName = Date.now() + '.jpg';
+      cb(null, uniqueName);
+    },
+  });
+  return multer({ storage: storage });
+};

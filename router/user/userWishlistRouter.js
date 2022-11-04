@@ -5,7 +5,7 @@ const router = express.Router();
 const userController = require('./../../controller/user/userController');
 const userWishlistController = require('./../../controller/user/userWishlistController');
 
-// Get Cart Page
+// Get Wishlist Page
 router.get(
   '/',
   userController.sessionUser,
@@ -18,7 +18,7 @@ router.get(
   '/addCart/:userId/:productId',
   userController.sessionUser,
   userController.checkBlocked,
-  userWishlistController.Wishlist
+  userWishlistController.wishlistAddToCart
 );
 
 // Remove from Wishlist

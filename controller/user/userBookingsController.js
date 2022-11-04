@@ -44,21 +44,29 @@ exports.bookings = async (req, res) => {
 
 // IF Payment Success
 exports.successPage = async (req, res) => {
-  await bookingsModel.updateOne(
-    { _id: req.params.id },
-    {
-      Payment: 'Complete',
-    }
-  );
-  res.json({
-    status: true,
-  });
+  try {
+    await bookingsModel.updateOne(
+      { _id: req.params.id },
+      {
+        Payment: 'Complete',
+      }
+    );
+    res.json({
+      status: true,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // If Payment failed
 exports.falied = async (req, res) => {
-  await bookingsModel.deleteOne({ _id: req.params.id });
-  res.json({
-    status: true,
-  });
+  try {
+    await bookingsModel.deleteOne({ _id: req.params.id });
+    res.json({
+      status: true,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };

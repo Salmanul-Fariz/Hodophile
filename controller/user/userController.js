@@ -101,17 +101,3 @@ exports.logout = (req, res) => {
     console.log(err);
   }
 };
-
-// Profile page
-exports.profile = async (req, res) => {
-  try {
-    const userEmail = req.session.user.email;
-    const user = await userModel.findOne({ email: userEmail });
-    const cartCount = await cartItemCount(req.session.user);
-    const wishlistCount = await wishlistItemCount(req.session.user);
-
-    res.render('user/profile', { user, cartCount, wishlistCount });
-  } catch (err) {
-    console.log(err);
-  }
-};

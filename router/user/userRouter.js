@@ -26,12 +26,4 @@ router.route('/login').get(userController.login).post(userAuthController.login);
 // Logout
 router.post('/logout', userController.logout);
 
-// profile page
-router.get(
-  '/profile',
-  userController.sessionUser,
-  userController.checkBlocked,
-  userController.profile
-);
-
 module.exports = router;

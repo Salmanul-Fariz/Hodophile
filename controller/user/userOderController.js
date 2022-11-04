@@ -172,23 +172,29 @@ exports.orderSubmit = async (req, res) => {
 
 // order Successs
 exports.success = async (req, res) => {
-  await orderModel.updateOne(
-    { _id: req.params.id },
-    {
-      PaymentStatus: 'Complete',
-    }
-  );
-  res.json({
-    status: true,
-  });
+  try {
+    await orderModel.updateOne(
+      { _id: req.params.id },
+      {
+        PaymentStatus: 'Complete',
+      }
+    );
+    res.json({
+      status: true,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
-
 
 // If Payment failed
 exports.falied = async (req, res) => {
-  console.log(req.params);
-  await orderModel.deleteOne({ _id: req.params.id });
-  res.json({
-    status: true,
-  });
+  try {
+    await orderModel.deleteOne({ _id: req.params.id });
+    res.json({
+      status: true,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };

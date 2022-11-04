@@ -19,75 +19,211 @@
         <section class="profileSec2">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 p-5">
-                        <div class="profileSec2Bar W-100 p-4 ">
-                            <div class="d-flex justify-content-center">
-                                <i class="profileSec2LeftLogo fa-solid fa-user"></i>
-                            </div>
-                            <div class="d-flex justify-content-center pt-3">
-                                <h5 class="text-center">
-                                    <%= user.firstName%>
-                                        <%= user.lastName%>
-                                </h5>
-                            </div>
-                            <div class="d-flex justify-content-center pt-3">
-                                <button onclick="userLogout()" type="submit" class="btn btn-danger"">Log out</button>
-                            </div>
+                    <div class="col-4 col-md-3 col-xl-2">
+                        <div class="col-12">
+                            <a href="/profile" class="profileSec2LeftButton">Your Profile</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a href="/profile/shoppings/<%= user._id %>" class="profileSec2LeftButton">Your
+                                Shoppings</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a href="/profile/bookings/<%= user._id %>" class="profileSec2LeftButton">Your Bookings</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a onclick="userLogout()" class="profileSec2LeftButton">Log Out</a>
                         </div>
                     </div>
-                    <div class="col-lg-8 p-5">
-                        <div class="profileSec2Bar W-100 p-4 ">
-                            <div class="d-flex justify-content-center">
-                                <h2 class="profileSec2BarTextHead text-center">User Details</h2>
-                            </div>
-                            <div class="d-flex mt-4 border border-2 rounded-4 p-3">
-                                <h4 class="m-0">First name:</h4>
-                                <div class="d-flex justify-content-center">
-                                    <p class="m-0 ms-3 profileSec2BarText">
+                    <div class="profileSec2RightBar col-8 col-md-9 col-xl-10">
+                        <div class="row">
+                            <% if(userEditErr.length>0){%>
+                                <div id="userErr" class="d-flex justify-content-center fs-5 fw-bolder text-danger">
+                                    <%= userEditErr %>
+                                </div>
+                                <%} %>
+                                    <div class="profileSec2ImageBar col-12 col-sm-10 col-md-6 col-lg-4 col-xl-3">
+                                        <img class="profileSec2Image" src="/images/avatar/<%= user.ProfileImage %>">
+                                        <button class="profileSec2Icon" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            <i class=" fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="signupSec2Head">Avatars</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body mt-3">
+                                                    <div class="row">
+                                                        <% for(avatar of avatars){%>
+                                                            <div class="col-3 mt-3">
+                                                                <a href="/profile/avatar/<%= avatar._id %>">
+                                                                    <img style="width: 100%;"
+                                                                        src="/images/avatar/<%= avatar.Image %>" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <%} %>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 d-flex">
+                                        <h5 class="profileSec2Name" style="color:rgb(90, 90, 90) ;">
+                                            Hello
+                                            <h5 class="profileSec2Name">
+                                                , <%= user.firstName%>
+                                            </h5>
+                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10 col-md-6 d-flex mt-5">
+                                <div class="col-6">
+                                    <P class="profileSec2Texts">First Name</P>
+                                    <P class="profileSec2Texts">Last Name</P>
+                                    <P class="profileSec2Texts">Email</P>
+                                    <P class="profileSec2Texts">Contact</P>
+                                    <P class="profileSec2Texts">Age</P>
+                                </div>
+                                <div class="col-6">
+                                    <P class="profileSec2Texts">
                                         <%= user.firstName%>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-4 border border-2 rounded-4 p-3">
-                                <h4 class="m-0">Last name:</h4>
-                                <div class="d-flex justify-content-center">
-                                    <p class="m-0 ms-3 profileSec2BarText">
+                                    </P>
+                                    <P class="profileSec2Texts">
                                         <%= user.lastName%>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-4 border border-2 rounded-4 p-3">
-                                <h4 class="m-0">Email:</h4>
-                                <div class="d-flex justify-content-center">
-                                    <p class="m-0 ms-3 profileSec2BarText">
+                                    </P>
+                                    <P class="profileSec2Texts">
                                         <%= user.email%>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-4 border border-2 rounded-4 p-3">
-                                <h4 class="m-0">Contact:</h4>
-                                <div class="d-flex justify-content-center">
-                                    <p class="m-0 ms-3 profileSec2BarText">
+                                    </P>
+                                    <P class="profileSec2Texts">
                                         <%= user.contact%>
-                                    </p>
+                                    </P>
+                                    <P class="profileSec2Texts">
+                                        <%= user.age%>
+                                    </P>
                                 </div>
                             </div>
-                            <div class="d-flex mt-4 border border-2 rounded-4 p-3">
-                                <h4 class="m-0">Age:</h4>
-                                <div class="d-flex justify-content-center">
-                                    <p class="m-0 ms-3 profileSec2BarText">
-                                        <%= user.age%>
-                                    </p>
+
+                            <div class="mt-3">
+                                <button style="border:none ; background:none;" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal3">
+                                    <a>
+                                        <p class="text-primary ">Edit Personal Details</p>
+                                    </a>
+                                </button>
+                            </div>
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="signupSec2Head">Personal Details</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body mt-3">
+                                            <div class="row">
+                                                <form method="post"
+                                                    action="/profile/update/personal/password/<%= user._id %>">
+                                                    <div class="mb-3 mt-2">
+                                                        <label class="form-label signupSec2Text">Password</label>
+                                                        <input type="password" class="form-control" name="password"
+                                                            placeholder="Enter Your Password" required>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="deliveryRadio form-check-input" type="radio"
+                                                            value="Contact" name="personalDetail" checked>
+                                                        <label class="orderAddress form-check-label"
+                                                            for="flexRadioDefault1">Contact</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="deliveryRadio form-check-input" type="radio"
+                                                            value="Email" name="personalDetail">
+                                                        <label class="orderAddress form-check-label"
+                                                            for="flexRadioDefault1">Email</label>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center p-4">
+                                                        <button type="submit" class="orderAddressAdd">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 mt-3 pb-3">
+                                <button class="profileSec2EditButton" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal2">Edit
+                                </button>
+                            </div>
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="signupSec2Head">Edit Profile</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body mt-3">
+                                            <div class="row">
+                                                <form method="post" action="/profile/update/<%= user._id %>">
+                                                    <div class="d-flex">
+                                                        <div class="mb-3 pe-2 signupSec2FormBar">
+                                                            <label class="form-label signupSec2Text">First
+                                                                Name</label>
+                                                            <input id="firstName" type="text" class="form-control"
+                                                                name="firstName" value="<%= user.firstName %>" required>
+                                                        </div>
+                                                        <div class="mb-3 signupSec2FormBar">
+                                                            <label class="form-label signupSec2Text">Last
+                                                                Name</label>
+                                                            <input id="lastName" type="text" class="form-control"
+                                                                name="lastName" value="<%= user.lastName %>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex mt-2">
+                                                        <div class="mb-3 signupSec2FormBar">
+                                                            <label class="form-label signupSec2Text">Age</label>
+                                                            <input id="age" type="number" class="form-control"
+                                                                name="age" value="<%= user.age %>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center p-4">
+                                                        <button type="submit" class="orderAddressAdd">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
         </section>
 
         <!-- Swal Alert -->
         <script src="/js/swalAlert.js"></script>
+
+        <script src="/js/userProfileUpdate.js"></script>
 
         <!-- footer -->
         <%- include('../includes/end.ejs') %>

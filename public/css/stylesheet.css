@@ -635,7 +635,7 @@ a:active {
 
 .profileSec2 {
     width: 100%;
-    background-color: #41c3569c;
+    background-color: #ecf9ee;
     padding: 12px 0px;
 }
 
@@ -658,6 +658,146 @@ a:active {
 .profileSec2BarText {
     font-size: 20px;
     font-weight: 300;
+}
+
+.profileSec2LeftButton {
+    border: none;
+    color: black;
+    font-size: 18px;
+    padding: 10px 7px;
+    background: transparent;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .profileSec2LeftButton {
+        font-size: 13px;
+    }
+}
+
+.profileSec2LeftButton:hover {
+    cursor: pointer;
+    color: #41C356;
+}
+
+.profileSec2RightBar {
+    border-left: solid;
+    border-color: #c1c1c1;
+    border-width: 2px;
+}
+
+.profileSec2Image {
+    background: #000000;
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+}
+
+
+.profileSec2Icon {
+    border: none;
+    position: absolute;
+    left: 110px;
+    color: black;
+    top: 114px;
+    font-size: 18px;
+    background: white;
+    padding: 3px 8px;
+    border-radius: 110px;
+}
+
+.profileSec2Name {
+    padding-top: 118px;
+}
+
+@media (max-width:768px) {
+    .profileSec2Name {
+        padding-top: 38px;
+    }
+}
+
+.profileSec2ImageBar {
+    position: relative;
+}
+
+.profileSec2Texts {
+    font-size: 16px;
+    font-weight: normal;
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profileSec2EditButton {
+    border: none;
+    color: white;
+    font-size: 13px;
+    padding: 5px 19px;
+    background: #41C356;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.profileSec2EditButton:hover {
+    cursor: pointer;
+    color: #000000;
+    background-color: transparent;
+}
+
+.profileSec2ShoppingsText {
+    font-size: 17px;
+    font-weight: 600;
+    padding: 10px 9px;
+}
+
+.profileSec2ShoppingsButton {
+    border: none;
+    text-decoration: none;
+    color: white;
+    background: #41C356;
+    padding: 3px 8px;
+}
+
+.profileSec2ShoppingsButton:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.profilShoppingList {
+    background-color: #ecf9ee;
+}
+
+.profilShoppingList:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+.profileSec2ShoppingsStatusBar {
+    width: 100%;
+    border-left: solid;
+    border-width: 2px;
+    position: relative;
+}
+
+.profileSec2ShoppingsStatusDot {
+    position: absolute;
+    bottom: -1px;
+    left: -7px;
+    font-size: 12px;
+}
+
+.profileSec2ShoppingsEmail {
+    font-size: 17px;
+    font-weight: 600;
+    padding: 10px 9px;
+    display: inline-block;
+    width: 76%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /*////////////////////*/

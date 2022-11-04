@@ -20,6 +20,8 @@ const userNewsRouter = require('./router/user/userNewsRouter');
 const userCartRouter = require('./router/user/userCartRouter');
 const userWishlistRouter = require('./router/user/userWishlistRouter');
 const userBookingsRouter = require('./router/user/userBookingsRouter');
+const userProfileRouter = require('./router/user/userProfileRouter');
+
 
 // require agency router
 const agencyRouter = require('./router/agency/agencyRouter');
@@ -57,6 +59,7 @@ app.use('/shoppings/wishlists', userWishlistRouter);
 app.use('/shoppings/carts', userCartRouter);
 app.use('/shoppings', userShoppingRouter);
 app.use('/tours', userTourRouter);
+app.use('/profile', userProfileRouter);
 app.use('/trekkings', userTrekkingsRouter);
 app.use('/news', userNewsRouter);
 app.use('/bookings', userBookingsRouter);

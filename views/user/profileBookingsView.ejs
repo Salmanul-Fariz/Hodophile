@@ -1,0 +1,170 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Shoppings</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="profileSec2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-md-3 col-xl-2">
+                        <div class="col-12">
+                            <a href="/profile" class="profileSec2LeftButton">Your Profile</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a href="/profile/shoppings/<%= user._id %>" class="profileSec2LeftButton">Your
+                                Shoppings</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a href="/profile/bookings/<%= user._id %>" class="profileSec2LeftButton">Your Bookings</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a onclick="userLogout()" class="profileSec2LeftButton">Log Out</a>
+                        </div>
+                    </div>
+                    <div class="profileSec2RightBar col-8 col-md-9 col-xl-10">
+                        <div class="row">
+                            <div style="overflow-x:auto ;" class="col-md-8 mb-5">
+                                <table class="col-12">
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Date</td>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= booking.Date %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Name</td>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= booking.User.Name %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Contact</td>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= booking.User.Contact %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Email</td>
+                                            <td class=" profileSec2ShoppingsEmail">
+                                                <%= booking.User.Email %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Booked Date</td>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= booking.DateBooking %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Payment Status</td>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= booking.Payment %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th class="profileSec2ShoppingsText">Category</th>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= booking.Category %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th class="profileSec2ShoppingsText">Package</th>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= Package %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Discount</td>
+                                            <td class=" profileSec2ShoppingsText">
+                                                <%= booking.discount %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="profileSec2ShoppingsText">Total Price</td>
+                                            <td class=" profileSec2ShoppingsText">₹ <%= booking.TotalPrice %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <% if( booking.Status=='Pending' ){%>
+                                    <div class=" col-10">
+                                        <div class="dropdown">
+                                            <button style="background-color:#0d6efd;" class="bookingStatusButton"
+                                                type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Pending
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <%}else if( booking.Status=='Approved' ){%>
+                                        <div class=" col-10">
+                                            <div class="dropdown">
+                                                <button style="background-color:#41c356;" class="bookingStatusButton"
+                                                    type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    Approved
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <%}else if( booking.Status=='Cancelled' ){%>
+                                            <div class=" col-10">
+                                                <div class="dropdown">
+                                                    <button style="background-color:red;" class="bookingStatusButton"
+                                                        type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
+                                                        Cancelled
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <%}%>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Swal Alert -->
+        <script src="/js/swalAlert.js"></script>
+
+        <!-- profile -->
+        <script src="/js/profile.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>

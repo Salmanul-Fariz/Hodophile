@@ -1,5 +1,7 @@
 const userModel = require('./../../model/userModel');
+const userProfileAvatar = require('./../../model/userProfileAvatar');
 
+// user Details Page
 exports.userdetails = async (req, res) => {
   try {
     const users = await userModel.find({});
@@ -9,6 +11,7 @@ exports.userdetails = async (req, res) => {
   }
 };
 
+// user Block
 exports.userBlock = async (req, res) => {
   try {
     await userModel.updateOne(
@@ -23,6 +26,7 @@ exports.userBlock = async (req, res) => {
   }
 };
 
+// user unblock
 exports.userUnblock = async (req, res) => {
   try {
     await userModel.updateOne(
@@ -32,6 +36,20 @@ exports.userUnblock = async (req, res) => {
       }
     );
     res.redirect('/agency/users');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Add Avatar (Post)
+exports.addAvatars = async (req, res) => {
+  try {
+    console.log(req.file.filename);
+    await userProfileAvatar.create({
+      Image: req.file.filename,
+    });
+
+    res.redirect('/agency/users')
   } catch (err) {
     console.log(err);
   }

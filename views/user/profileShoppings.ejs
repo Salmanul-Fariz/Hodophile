@@ -1,0 +1,80 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Shoppings</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="profileSec2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-md-3 col-xl-2">
+                        <div class="col-12">
+                            <a href="/profile" class="profileSec2LeftButton">Your Profile</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a href="/profile/shoppings/<%= user._id %>" class="profileSec2LeftButton">Your Shoppings</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a href="/profile/bookings/<%= user._id %>" class="profileSec2LeftButton">Your Bookings</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a onclick="userLogout()" class="profileSec2LeftButton">Log Out</a>
+                        </div>
+                    </div>
+                    <div class="profileSec2RightBar col-8 col-md-9 col-xl-10">
+                        <div class="row">
+                            <div style="overflow-x:auto ;" class="col-12">
+                                <table class="col-12">
+                                    <tbody>
+                                        <% for(i=0 ; i < orders.length ; i++){%>
+                                            <tr onclick="viewOrder('<%= orders[i]._id %>')" class="profilShoppingList">
+                                                <td class="profileSec2ShoppingsText">
+                                                    <%= orders[i].Date.split(',')[0] %>
+                                                </td>
+                                                <% if(Products[i].length> 1){%>
+                                                    <td class="profileSec2ShoppingsText">
+                                                        <%= Products[i][0] %> & More
+                                                    </td>
+                                                    <%}else{%>
+                                                        <td class="profileSec2ShoppingsText">
+                                                            <%= Products[i][0] %>
+                                                        </td>
+                                                        <%} %>
+                                                            <td class="profileSec2ShoppingsText">
+                                                                <%= orders[i]._id %>
+                                                            </td>
+                                                            <td class="text-center profileSec2ShoppingsText">₹ <%=
+                                                                    orders[i].TotalPrice %>
+                                                            </td>
+                                            </tr>
+                                            <%} %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Swal Alert -->
+        <script src="/js/swalAlert.js"></script>
+
+        <!-- profile -->
+        <script src="/js/profile.js"></script>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>
