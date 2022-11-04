@@ -11,6 +11,8 @@ exports.shoppings = async (req, res) => {
   try {
     const allProducts = await shoppingsModel.find({});
     const products = checkItemDelete(allProducts);
+    products.reverse();
+
     res.render('agency/viewShoppings', { products });
   } catch (err) {
     console.log(err);
@@ -31,6 +33,8 @@ exports.shoppingsDetails = async (req, res) => {
 exports.viewCategory = async (req, res) => {
   try {
     const categories = await shoppingCategoryModel.find({});
+    categories.reverse();
+
     res.render('agency/viewCategory', {
       categories,
       categoryErr: req.flash('categoryErr'),
@@ -144,6 +148,7 @@ exports.updateShoppings = async (req, res) => {
 exports.updateShopping = async (req, res) => {
   try {
     const categories = await shoppingCategoryModel.find({});
+    categories.reverse();
     const product = await shoppingsModel.findById(req.params.id);
     res.render('agency/updateShoping', {
       product,
@@ -214,6 +219,8 @@ exports.deleteShoppings = async (req, res) => {
   try {
     const allShoppings = await shoppingsModel.find({});
     const products = checkItemDelete(allShoppings);
+    products.reverse();
+
     res.render('agency/deleteshoppings', { products });
   } catch (err) {
     console.log(err);

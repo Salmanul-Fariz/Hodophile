@@ -10,6 +10,8 @@ exports.trekkings = async (req, res) => {
   try {
     const alltrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(alltrekkings);
+    trekkings.reverse();
+
     res.render('agency/viewTrekkings', { trekkings });
   } catch (err) {
     console.log(err);
@@ -99,6 +101,8 @@ exports.updateTrekkings = async (req, res) => {
   try {
     const alltrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(alltrekkings);
+    trekkings.reverse();
+
     res.render('agency/updateTrekkings', { trekkings });
   } catch (err) {
     console.log(err);
@@ -155,32 +159,38 @@ exports.update = async (req, res) => {
       for (let i = 0; i < image.Images.length; i++) {
         fs.unlinkSync(`${imagePath}/${image.Images[i]}`);
       }
-      await trekkingModel.updateOne({_id:req.params.id}, {
-        Images: imagesName,
-      });
+      await trekkingModel.updateOne(
+        { _id: req.params.id },
+        {
+          Images: imagesName,
+        }
+      );
     }
 
     // Update the current Trekking
-    await trekkingModel.updateOne({_id:req.params.id}, {
-      Name: req.body.trekkingName,
-      Place: req.body.trekkingPlace,
-      Country: req.body.trekkingCountry,
-      State: req.body.trekkingState,
-      City: req.body.trekkingCity,
-      Description: req.body.trekkingDescription,
-      ShortDescription: req.body.trekkingShortDescription,
-      Features: req.body.trekkingFeatures,
-      Coordinates: {
-        Longitude: req.body.trekkingLongitude,
-        Latitude: req.body.trekkinglatitude,
-      },
-      Duration: req.body.trekkingDuration,
-      Review: req.body.trekkingReview,
-      Difficulty: req.body.trekkingDifficulty,
-      Price: req.body.trekkingPrice,
-      Discount: req.body.trekkingDiscount,
-      Itinerary: itineraryArray,
-    });
+    await trekkingModel.updateOne(
+      { _id: req.params.id },
+      {
+        Name: req.body.trekkingName,
+        Place: req.body.trekkingPlace,
+        Country: req.body.trekkingCountry,
+        State: req.body.trekkingState,
+        City: req.body.trekkingCity,
+        Description: req.body.trekkingDescription,
+        ShortDescription: req.body.trekkingShortDescription,
+        Features: req.body.trekkingFeatures,
+        Coordinates: {
+          Longitude: req.body.trekkingLongitude,
+          Latitude: req.body.trekkinglatitude,
+        },
+        Duration: req.body.trekkingDuration,
+        Review: req.body.trekkingReview,
+        Difficulty: req.body.trekkingDifficulty,
+        Price: req.body.trekkingPrice,
+        Discount: req.body.trekkingDiscount,
+        Itinerary: itineraryArray,
+      }
+    );
 
     res.redirect('/agency/trekkings/update');
   } catch (err) {
@@ -196,6 +206,8 @@ exports.deleteTours = async (req, res) => {
   try {
     const alltrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(alltrekkings);
+    trekkings.reverse();
+
     res.render('agency/deleteTrekkings', { trekkings });
   } catch (err) {
     console.log(err);
@@ -205,9 +217,12 @@ exports.deleteTours = async (req, res) => {
 // Trekkings delete page(post)
 exports.delete = async (req, res) => {
   try {
-    await trekkingModel.updateOne({_id:req.params.id}, {
-      ItemDelete: true,
-    });
+    await trekkingModel.updateOne(
+      { _id: req.params.id },
+      {
+        ItemDelete: true,
+      }
+    );
     res.redirect('/agency/trekkings/delete');
   } catch (err) {
     console.log(err);

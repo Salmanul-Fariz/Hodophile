@@ -5,6 +5,8 @@ const orderApproval = require('./../../utils/orderApproval');
 exports.ordersPage = async (req, res) => {
   try {
     const orders = await orderModel.find({});
+    orders.reverse();
+
     res.render('agency/viewOrders', { orders });
   } catch (err) {
     console.log(err);
@@ -15,6 +17,7 @@ exports.ordersPage = async (req, res) => {
 exports.orderDetails = async (req, res) => {
   try {
     const order = await orderModel.findById(req.params.id);
+
     res.render('agency/viewOrder', { order });
   } catch (err) {
     console.log(err);
@@ -114,6 +117,7 @@ exports.cancelled = async (req, res) => {
 exports.approvedPage = async (req, res) => {
   try {
     const approved = await orderModel.find({ Status: 'Approved' });
+    approved.reverse();
 
     res.render('agency/viewOrderApproval', { approved });
   } catch (err) {
@@ -125,6 +129,7 @@ exports.approvedPage = async (req, res) => {
 exports.shippedPage = async (req, res) => {
   try {
     const shipped = await orderModel.find({ Status: 'Shipped' });
+    shipped.reverse();
 
     res.render('agency/viewOrderShipped', { shipped });
   } catch (err) {
@@ -136,6 +141,7 @@ exports.shippedPage = async (req, res) => {
 exports.deliveryPage = async (req, res) => {
   try {
     const delivered = await orderModel.find({ Status: 'Delivered' });
+    delivered.reverse();
 
     res.render('agency/viewOrderDelivered', { delivered });
   } catch (err) {
@@ -147,6 +153,7 @@ exports.deliveryPage = async (req, res) => {
 exports.cancelledPage = async (req, res) => {
   try {
     const cancelled = await orderModel.find({ Status: 'Cancelled' });
+    cancelled.reverse();
 
     res.render('agency/viewOrderCancelled', { cancelled });
   } catch (err) {

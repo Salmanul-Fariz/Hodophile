@@ -56,15 +56,12 @@
                             </P>
                             <% for(key of order.Order){%>
                                 <P class="bookingText">
-                                    <%= key.ProductId %>
-                                </P>
-                                <P class="bookingText">
-                                    <%= key.Quantity %>
+                                    <%= key.ProductId %> <br>( Qty <%= key.Quantity %> )
                                 </P>
                                 <%} %>
                         </div>
                     </div>
-                    <div class="col-4 col-md-6 d-flex justify-content-end mt-5">
+                    <div class="col-4 col-md-5 d-flex justify-content-end mt-5 ms-4">
                         <% if(order.Status=='Pending' ){%>
                             <div class="dropdown">
                                 <button style="background-color:#0d6efd;" class="bookingStatusButton dropdown-toggle"

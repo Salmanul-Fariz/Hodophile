@@ -8,6 +8,8 @@ const path = require('path');
 exports.news = async (req, res) => {
   try {
     const news = await newsModel.find({});
+    news.reverse();
+
     res.render('agency/news', { news });
   } catch (err) {
     console.log(err);

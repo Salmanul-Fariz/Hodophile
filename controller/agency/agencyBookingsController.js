@@ -5,6 +5,7 @@ const bookingApproval = require('./../../utils/bookingApproval');
 exports.bookingsPage = async (req, res) => {
   try {
     const bookings = await bookingsModel.find({});
+    bookings.reverse();
     res.render('agency/viewBookings', { bookings });
   } catch (err) {
     console.log(err);
@@ -85,6 +86,7 @@ exports.cancelled = async (req, res) => {
 exports.approvedPage = async (req, res) => {
   try {
     const approved = await bookingsModel.find({ Status: 'Approved' });
+    approved.reverse();
 
     res.render('agency/viewApproval', { approved });
   } catch (err) {
@@ -96,6 +98,7 @@ exports.approvedPage = async (req, res) => {
 exports.cancelledPage = async (req, res) => {
   try {
     const cancelled = await bookingsModel.find({ Status: 'Cancelled' });
+    cancelled.reverse();
 
     res.render('agency/viewCancelled', { cancelled });
   } catch (err) {

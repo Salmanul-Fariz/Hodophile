@@ -10,6 +10,8 @@ exports.tours = async (req, res) => {
   try {
     const alltours = await destinationsModel.find({});
     const tours = checkItemDelete(alltours);
+    tours.reverse();
+
     res.render('agency/viewTours', { tours });
   } catch (err) {
     console.log(err);
@@ -31,6 +33,8 @@ exports.deleteTours = async (req, res) => {
   try {
     const alltours = await destinationsModel.find({});
     const tours = checkItemDelete(alltours);
+    tours.reverse();
+
     res.render('agency/deleteTours', { tours });
   } catch (err) {
     console.log(err);
@@ -40,9 +44,12 @@ exports.deleteTours = async (req, res) => {
 // Tours delete page(post)
 exports.delete = async (req, res) => {
   try {
-    await destinationsModel.updateOne({_id:req.params.id}, {
-      ItemDelete: true,
-    });
+    await destinationsModel.updateOne(
+      { _id: req.params.id },
+      {
+        ItemDelete: true,
+      }
+    );
     res.redirect('/agency/tours/delete');
   } catch (err) {
     console.log(err);
@@ -54,6 +61,8 @@ exports.updateTours = async (req, res) => {
   try {
     const alltours = await destinationsModel.find({});
     const tours = checkItemDelete(alltours);
+    tours.reverse();
+
     res.render('agency/updateTours', { tours });
   } catch (err) {
     console.log(err);
@@ -110,35 +119,40 @@ exports.update = async (req, res) => {
       for (let i = 0; i < image.Images.length; i++) {
         fs.unlinkSync(`${imagePath}/${image.Images[i]}`);
       }
-      await destinationsModel.updateOne({_id:req.params.id}, {
-        Images: imagesName,
-      });
+      await destinationsModel.updateOne(
+        { _id: req.params.id },
+        {
+          Images: imagesName,
+        }
+      );
     }
 
     // Update the current Tour
-    await destinationsModel.updateOne({_id:req.params.id}, {
-      Name: req.body.tourName,
-      Place: req.body.tourPlace,
-      Country: req.body.tourCountry,
-      State: req.body.tourState,
-      City: req.body.tourCity,
-      Description: req.body.tourDescription,
-      ShortDescription: req.body.tourShortDescription,
-      Features: req.body.tourFeatures,
-      Coordinates: {
-        Longitude: req.body.tourLongitude,
-        Latitude: req.body.tourlatitude,
-      },
-      Duration: req.body.tourDuration,
-      Review: req.body.tourReview,
-      Difficulty: req.body.tourDifficulty,
-      Price: req.body.tourPrice,
-      Discount: req.body.tourDiscount,
-      Itinerary: itineraryArray,
-    });
+    await destinationsModel.updateOne(
+      { _id: req.params.id },
+      {
+        Name: req.body.tourName,
+        Place: req.body.tourPlace,
+        Country: req.body.tourCountry,
+        State: req.body.tourState,
+        City: req.body.tourCity,
+        Description: req.body.tourDescription,
+        ShortDescription: req.body.tourShortDescription,
+        Features: req.body.tourFeatures,
+        Coordinates: {
+          Longitude: req.body.tourLongitude,
+          Latitude: req.body.tourlatitude,
+        },
+        Duration: req.body.tourDuration,
+        Review: req.body.tourReview,
+        Difficulty: req.body.tourDifficulty,
+        Price: req.body.tourPrice,
+        Discount: req.body.tourDiscount,
+        Itinerary: itineraryArray,
+      }
+    );
 
     res.redirect('/agency/tours/update');
-
   } catch (err) {
     console.log(err);
     let error = mongoosErr(err);
