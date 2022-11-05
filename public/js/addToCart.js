@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
   // Set total cart Price(Without Minus Discount)
   let totalPrice = 0;
   for (let i = 0; i < productTotal.length; i++) {
-    totalPrice += parseInt(productTotal[i].innerHTML);
+    totalPrice += productTotal[i].innerHTML * 1;
   }
   subTotalPrice.innerHTML = totalPrice;
 
@@ -25,9 +25,8 @@ window.addEventListener('load', () => {
   const productDiscount = document.getElementsByClassName('productDiscount');
   let discount = 0;
   for (let i = 0; i < productDiscount.length; i++) {
-    discount += parseInt(
-      (productTotal[i].innerHTML / 100) * productDiscount[i].innerHTML
-    );
+    discount +=
+      ((productTotal[i].innerHTML * 1) / 100) * productDiscount[i].innerHTML;
   }
   // Round the discout Price
   let roundDiscount = Math.round(discount);
@@ -59,22 +58,21 @@ function increaseQuantity(userId, productId) {
           const incProductTotal = document.getElementById(
             `${productId}productTotal`
           );
-          incProductTotal.innerHTML = parseInt(
-            incProductPrice.innerHTML * countInput.value
-          );
+          incProductTotal.innerHTML =
+            incProductPrice.innerHTML * 1 * countInput.value;
 
           // Set total cart Price(Without Minus Discount)
           subTotalPrice.innerHTML =
-            parseInt(subTotalPrice.innerHTML) +
-            parseInt(incProductPrice.innerHTML);
+            subTotalPrice.innerHTML * 1 + incProductPrice.innerHTML * 1;
 
           // Setting discount
           const incProductDiscount = document.getElementById(
             `${productId}productDiscount`
           );
           const incDiscount =
-            (parseInt(incProductPrice.innerHTML) / 100) *
-            parseInt(incProductDiscount.innerHTML);
+            ((incProductPrice.innerHTML * 1) / 100) *
+            incProductDiscount.innerHTML *
+            1;
 
           // Round the discout Price
           const incTotal = Math.abs(totalPriceDiscount.innerHTML);
@@ -114,22 +112,21 @@ function decreaseQuantity(userId, productId) {
           const dicProductTotal = document.getElementById(
             `${productId}productTotal`
           );
-          dicProductTotal.innerHTML = parseInt(
-            dicProductPrice.innerHTML * countInput.value
-          );
+          dicProductTotal.innerHTML =
+            dicProductPrice.innerHTML * 1 * countInput.value;
 
           // Set total cart Price(Without Minus Discount)
           subTotalPrice.innerHTML =
-            parseInt(subTotalPrice.innerHTML) -
-            parseInt(dicProductPrice.innerHTML);
+            subTotalPrice.innerHTML * 1 - dicProductPrice.innerHTML * 1;
 
           // Setting discount
           const dicProductDiscount = document.getElementById(
             `${productId}productDiscount`
           );
           const dicDiscount =
-            (parseInt(dicProductPrice.innerHTML) / 100) *
-            parseInt(dicProductDiscount.innerHTML);
+            ((dicProductPrice.innerHTML * 1) / 100) *
+            dicProductDiscount.innerHTML *
+            1;
 
           // Round the discout Price
           const incTotal = Math.abs(totalPriceDiscount.innerHTML);
@@ -197,8 +194,8 @@ function deleteCartProduct(userId, productId) {
               );
               const Total = Math.abs(totalPriceDiscount.innerHTML);
               const dicDiscount =
-                (parseInt(productTotal.innerHTML) / 100) *
-                parseInt(productDiscount.innerHTML);
+                ((productTotal.innerHTML * 1) / 100) *
+                (productDiscount.innerHTML * 1);
               let discount = Math.round(Total - dicDiscount);
               if (discount <= 0) {
                 discount = 0;

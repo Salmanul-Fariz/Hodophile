@@ -55,7 +55,7 @@
                                 </p>
                                 <div class="d-flex justify-content-center toursDetailsSec3BookBar">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="d-flex toursDetailsSec3BookButton"
+                                    <button id="bookingButton" type="button" class="d-flex toursDetailsSec3BookButton"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="toursDetailsSec3BookIcon fa-sharp fa-solid fa-compass"></i>
                                         <p class="ms-2 toursDetailsSec3BookButton">
@@ -75,77 +75,100 @@
                                                     aria-label="Close"></button>
                                             </div>
 
-                                                <div class="modal-body mt-3">
-                                                    <div class="d-flex mt-2">
-                                                        <div class="mb-3 pe-2 signupSec2FormBar">
-                                                            <label class="form-label signupSec2Text">Date</label>
-                                                            <input id="setTodaysDate" type="date" class="form-control"
-                                                                name="bookingDate" placeholder="Enter the Date"
-                                                                required>
-                                                        </div>
-                                                        <div class="mb-3 signupSec2FormBar">
-                                                            <label class="form-label signupSec2Text">No.of
-                                                                Travelers</label>
-                                                            <input id="bookingTravallers" type="number"
-                                                                class="form-control" name="bookingTravallers"
-                                                                placeholder="Enter No. of Travellers" required max="10">
-                                                        </div>
+                                            <div class="modal-body mt-3">
+                                                <div class="d-flex mt-2">
+                                                    <div class="mb-3 pe-2 signupSec2FormBar">
+                                                        <label class="form-label signupSec2Text">Date</label>
+                                                        <input id="setTodaysDate" type="date" class="form-control"
+                                                            name="bookingDate" placeholder="Enter the Date" required>
                                                     </div>
-                                                    <div class="d-flex mt-2">
-                                                        <div class="mb-3 pe-2 signupSec2FormBar">
-                                                            <label class="form-label signupSec2Text">Contact</label>
-                                                            <input id="bookingContact" type="number"
-                                                                class="form-control" name="bookingContact"
-                                                                value="<%= user.contact %>" readonly>
-                                                        </div>
-                                                        <div class="mb-3 signupSec2FormBar">
-                                                            <label class="form-label signupSec2Text">Email</label>
-                                                            <input id="bookingEmail" type="email" class="form-control"
-                                                                name="bookingEmail" value="<%= user.email %>" readonly>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-center mt-4">
-                                                        <div class="col-7 mb-5">
-                                                                    <div class="d-flex">
-                                                                        <div class="col-6">
-                                                                            <h5>Price</h5>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <h5 id="tourPrice" class="text-end">
-                                                                                <%= bookingPrice %>
-                                                                            </h5>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex">
-                                                                        <div class="col-6">
-                                                                            <h5>Discount</h5>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <h5 id="tourDiscount"
-                                                                                class="text-end text-secondary fw-normal">
-                                                                                -<%= bookingDiscount %>
-                                                                            </h5>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="d-flex border-top border-2 text-dark mt-2">
-                                                                        <div class="col-6 mt-3">
-                                                                            <h5>Total</h5>
-                                                                        </div>
-                                                                        <div class="col-6 mt-3">
-                                                                            <h5 id="tourTotal" class="text-end">
-                                                                                <%= BookingTotal %>
-                                                                            </h5>
-                                                                        </div>
-                                                                    </div>
-                                                        </div>
-                                                    </div>
-                                                    <h6 id="ErrText" class="text-center text-danger"></h6>
-                                                    <div id="PayButton" class="d-flex justify-content-center p-3">
-                                                        <button type="button" onclick="successBookking('<%= user._id %>','<%= tour._id %>','Tour')" class="signupSec2FormButton">Booking
-                                                            Now</button>
+                                                    <div class="mb-3 signupSec2FormBar">
+                                                        <label class="form-label signupSec2Text">No.of
+                                                            Travelers</label>
+                                                        <input id="bookingTravallers" type="number" class="form-control"
+                                                            name="bookingTravallers"
+                                                            placeholder="Enter No. of Travellers" required max="10">
                                                     </div>
                                                 </div>
+                                                <div class="d-flex mt-2">
+                                                    <div class="mb-3 pe-2 signupSec2FormBar">
+                                                        <label class="form-label signupSec2Text">Contact</label>
+                                                        <input id="bookingContact" type="number" class="form-control"
+                                                            name="bookingContact" value="<%= user.contact %>" readonly>
+                                                    </div>
+                                                    <div class="mb-3 signupSec2FormBar">
+                                                        <label class="form-label signupSec2Text">Email</label>
+                                                        <input id="bookingEmail" type="email" class="form-control"
+                                                            name="bookingEmail" value="<%= user.email %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <% if( couponsOpen.length> 0 ){%>
+                                                    <% if( couponsOpen=='Coupon is not Existed' ){%>
+                                                        <h6 id="couponsOpen" class="mt-3 text-center text-danger">Coupon
+                                                            is not Existed</h6>
+                                                        <%}else{%>
+                                                            <h6 id="couponsOpen" class="mt-3 text-center text-success">Coupen Added</h6>
+                                                            <span id="couponId" style="display: none;"><%= couponsOpen[0]._id %></span>
+                                                            <%} %>
+                                                                <%} %>
+                                                                    <form action="/coupons" method="post" class="">
+                                                                        <div class="d-flex mt-2">
+                                                                            <div class="mb-3 pe-2 signupSec2FormBar">
+                                                                                <label class="form-label signupSec2Text">Coupon</label>
+                                                                                <input type="text" class="form-control" name="coupon" placeholder="Enter Coupon Code" required>
+                                                                            </div>
+                                                                            <div class="mb-3 signupSec2FormBar">
+                                                                                <button class="tourCouponButton"
+                                                                                    type="submit">Redeem</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                    <div class="d-flex justify-content-center mt-4">
+                                                                        <div class="col-7 mb-5">
+                                                                            <div class="d-flex">
+                                                                                <div class="col-6">
+                                                                                    <h5>Price</h5>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <h5 id="tourPrice" class="text-end">
+                                                                                        <%= bookingPrice %>
+                                                                                    </h5>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex">
+                                                                                <div class="col-6">
+                                                                                    <h5>Discount</h5>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <h5 id="tourDiscount"
+                                                                                        class="text-end text-secondary fw-normal">
+                                                                                        -<%= bookingDiscount %>
+                                                                                    </h5>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="d-flex border-top border-2 text-dark mt-2">
+                                                                                <div class="col-6 mt-3">
+                                                                                    <h5>Total</h5>
+                                                                                </div>
+                                                                                <div class="col-6 mt-3">
+                                                                                    <h5 id="tourTotal" class="text-end">
+                                                                                        <%= BookingTotal %>
+                                                                                    </h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <h6 id="ErrText" class="text-center text-danger">
+                                                                    </h6>
+                                                                    <div id="PayButton"
+                                                                        class="d-flex justify-content-center p-3">
+                                                                        <button type="button"
+                                                                            onclick="successBookking('<%= user._id %>','<%= tour._id %>','Tour')"
+                                                                            class="signupSec2FormButton">Booking
+                                                                            Now</button>
+                                                                    </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

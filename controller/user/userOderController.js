@@ -2,6 +2,7 @@ const shoppingsModel = require('./../../model/shoppingsModel');
 const orderModel = require('./../../model/orderModel');
 const userModel = require('./../../model/userModel');
 const cartModel = require('./../../model/cartModel');
+const couponModel = require('./../../model/couponModel');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
 const razoPayment = require('./../../utils/razoPayment');
@@ -34,11 +35,13 @@ exports.orderPage = async (req, res) => {
       wishlistCount = await wishlistItemCount(req.session.user);
       user = await userModel.findById(req.params.userId);
     }
+
     res.render('user/order', {
       cartProducts,
       cartCount,
       wishlistCount,
       product,
+      couponsOpen: req.flash('orderMsg'),
       cart,
       user,
     });
@@ -77,42 +80,81 @@ exports.orderSubmit = async (req, res) => {
     if (req.params.orderType === 'Product') {
       const user = await userModel.findById(req.params.userId);
       const product = await shoppingsModel.findById(req.params.orderTypeId);
-      const discount = Math.round(
-        ((product.Price * req.body.productQuatity) / 100) * product.Discount
-      );
-      const total = product.Price * req.body.productQuatity - discount;
 
-      const orderCollection = await orderModel.create({
-        User: {
-          UserId: user._id,
-          Name: `${user.firstName} ${user.lastName}`,
-          Contact: user.contact,
-          Email: user.email,
-        },
-        Price: product.Price,
-        Discount: discount,
-        TotalPrice: total,
-        PaymentMethod: req.body.deliveryType,
-        Order: {
-          ProductId: product._id,
-          Quantity: req.body.productQuatity,
-          Price: product.Price,
-        },
-        Address: user.Address[req.body.addressIndex],
-      });
+      let proTotal, proDiscount, proPrice;
+      if (req.body.orderCoupon === 'false') {
+        proDiscount = Math.round(
+          ((product.Price * req.body.productQuatity) / 100) * product.Discount
+        );
+        proPrice = product.Price * req.body.productQuatity;
+        proTotal = proPrice - proDiscount;
+      } else {
+        proDiscount = Math.round((product.Price / 100) * product.Discount);
+        proPrice = product.Price * req.body.productQuatity;
+        proTotal = proPrice - proDiscount;
 
+        const coupon = await couponModel.findById(req.body.orderCoupon);
+        let couponDiscount = Math.round((proTotal / 100) * coupon.Discount);
+        proDiscount += couponDiscount;
+        proTotal -= couponDiscount;
+        req.session.ordersCoupon = coupon._id;
+      }
+
+      if (req.body.deliveryType === 'Cash On Delivery') {
+        await orderModel.create({
+          User: {
+            UserId: user._id,
+            Name: `${user.firstName} ${user.lastName}`,
+            Contact: user.contact,
+            Email: user.email,
+          },
+          Price: proPrice,
+          Discount: proDiscount,
+          TotalPrice: proTotal,
+          PaymentMethod: req.body.deliveryType,
+          Order: {
+            ProductId: product._id,
+            Quantity: req.body.productQuatity,
+            Price: product.Price,
+          },
+          Address: user.Address[req.body.addressIndex],
+        });
+
+        if (req.session.ordersCoupon) {
+          await couponModel.deleteOne({ _id: req.session.ordersCoupon });
+          req.session.ordersCoupon = null;
+        }
+      } else {
+        req.session.orderCollection = {
+          User: {
+            UserId: user._id,
+            Name: `${user.firstName} ${user.lastName}`,
+            Contact: user.contact,
+            Email: user.email,
+          },
+          Price: proPrice,
+          Discount: proDiscount,
+          TotalPrice: proTotal,
+          PaymentMethod: req.body.deliveryType,
+          Order: {
+            ProductId: product._id,
+            Quantity: req.body.productQuatity,
+            Price: product.Price,
+          },
+          Address: user.Address[req.body.addressIndex],
+        };
+      }
       // Payment integration
-      const order = await razoPayment(total * 100);
+      const order = await razoPayment(proTotal * 100);
 
       // Send Responce
       res.json({
         status: true,
-        cash: total,
+        cash: proTotal,
         rzOrderId: order.id,
         name: `${user.firstName} ${user.lastName}`,
         email: user.email,
         contact: user.contact,
-        orderId: orderCollection._id,
       });
     } else if (req.params.orderType === 'Cart') {
       const user = await userModel.findById(req.params.userId);
@@ -129,40 +171,94 @@ exports.orderSubmit = async (req, res) => {
             ProductId: product._id,
             Quantity: cart.Products[i].Count,
             Price: product.Price,
+            Discount: product.Discount,
           });
         }
       }
 
-      const orderCollection = await orderModel.create({
-        User: {
-          UserId: user._id,
-          Name: `${user.firstName} ${user.lastName}`,
-          Contact: user.contact,
-          Email: user.email,
-        },
-        Price: req.body.price,
-        Discount: req.body.discount,
-        TotalPrice: req.body.total,
-        PaymentMethod: req.body.deliveryType,
-        Order: orderCart,
-        Address: user.Address[req.body.addressIndex],
-      });
+      //  Product Price
+      let proTotal;
+      let proPrice = 0;
+      let proDiscount = 0;
+      if (req.body.orderCoupon === 'false') {
+        for (let i = 0; i < orderCart.length; i++) {
+          proDiscount += Math.round(
+            ((orderCart[i].Price * orderCart[i].Quantity) / 100) *
+              orderCart[i].Discount
+          );
+          proPrice += orderCart[i].Price * orderCart[i].Quantity;
+        }
+        proTotal = proPrice - proDiscount;
+      } else {
+        for (let i = 0; i < orderCart.length; i++) {
+          proDiscount += Math.round(
+            ((orderCart[i].Price * orderCart[i].Quantity) / 100) *
+              orderCart[i].Discount
+          );
+          proPrice += orderCart[i].Price * orderCart[i].Quantity;
+        }
+        proTotal = proPrice - proDiscount;
 
-      // delete cart
-      await cartModel.deleteOne({ _id: req.params.orderTypeId });
+        // coupon Settup
+        const coupon = await couponModel.findById(req.body.orderCoupon);
+        let couponDiscount = Math.round((proTotal / 100) * coupon.Discount);
+        proDiscount += couponDiscount;
+        proTotal -= couponDiscount;
+        req.session.ordersCoupon = coupon._id;
+      }
+
+      if (req.body.deliveryType === 'Cash On Delivery') {
+        await orderModel.create({
+          User: {
+            UserId: user._id,
+            Name: `${user.firstName} ${user.lastName}`,
+            Contact: user.contact,
+            Email: user.email,
+          },
+          Price: proPrice,
+          Discount: proDiscount,
+          TotalPrice: proTotal,
+          PaymentMethod: req.body.deliveryType,
+          Order: orderCart,
+          Address: user.Address[req.body.addressIndex],
+        });
+
+        if (req.session.ordersCoupon) {
+          await couponModel.deleteOne({ _id: req.session.ordersCoupon });
+          req.session.ordersCoupon = null;
+        }
+
+        await cartModel.deleteOne({ _id: req.params.orderTypeId });
+      } else {
+        req.session.orderCartId = req.params.orderTypeId;
+        req.session.orderCollection = {
+          User: {
+            UserId: user._id,
+            Name: `${user.firstName} ${user.lastName}`,
+            Contact: user.contact,
+            Email: user.email,
+          },
+          Price: proPrice,
+          Discount: proDiscount,
+          TotalPrice: proTotal,
+          PaymentStatus: 'Completed',
+          PaymentMethod: req.body.deliveryType,
+          Order: orderCart,
+          Address: user.Address[req.body.addressIndex],
+        };
+      }
 
       // Payment integration
-      const order = await razoPayment(req.body.total * 100);
+      const order = await razoPayment(proTotal * 100);
 
       // Send Responce
       res.json({
         status: true,
-        cash: req.body.total,
+        cash: proTotal,
         rzOrderId: order.id,
         name: `${user.firstName} ${user.lastName}`,
         email: user.email,
         contact: user.contact,
-        orderId: orderCollection._id,
       });
     }
   } catch (err) {
@@ -173,12 +269,20 @@ exports.orderSubmit = async (req, res) => {
 // order Successs
 exports.success = async (req, res) => {
   try {
-    await orderModel.updateOne(
-      { _id: req.params.id },
-      {
-        PaymentStatus: 'Complete',
-      }
-    );
+    await orderModel.create(req.session.orderCollection);
+    req.session.orderCollection = null;
+
+    // delete cart
+    if (req.session.orderCartId) {
+      await cartModel.deleteOne({ _id: req.session.orderCartId });
+      req.session.orderCartId = null;
+    }
+
+    if (req.session.ordersCoupon) {
+      await couponModel.deleteOne({ _id: req.session.ordersCoupon });
+      req.session.ordersCoupon = null;
+    }
+
     res.json({
       status: true,
     });
@@ -190,7 +294,7 @@ exports.success = async (req, res) => {
 // If Payment failed
 exports.falied = async (req, res) => {
   try {
-    await orderModel.deleteOne({ _id: req.params.id });
+    req.session.orderCollection = null;
     res.json({
       status: true,
     });

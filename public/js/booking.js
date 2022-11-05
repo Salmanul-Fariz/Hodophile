@@ -1,7 +1,17 @@
+// When redeem Coupons
+window.addEventListener('load', () => {
+  const couponsOpen = document.getElementById('couponsOpen');
+  if (couponsOpen.innerHTML) {
+    setTimeout(() => {
+      couponsOpen.innerHTML = '';
+    }, 2500);
+    document.getElementById('bookingButton').click();
+  }
+});
+
 // Set Min Value in Date Field
 var today = new Date().toISOString().split('T')[0];
 document.getElementById('setTodaysDate').setAttribute('min', today);
-
 
 // Payment settings
 function successBookking(userId, packageId, packageCategory) {
@@ -16,7 +26,13 @@ function successBookking(userId, packageId, packageCategory) {
       ErrText.innerHTML = '';
     }, 2500);
   } else {
-    let orderId, cash, name, email, contact, bookingId;
+    let orderId, cash, name, email, contact;
+    let couponId = document.getElementById('couponId');
+    if (couponId) {
+      couponId = couponId.innerHTML;
+    } else {
+      couponId = false;
+    }
 
     $.ajax({
       url: `/bookings/${userId}/${packageId}/${packageCategory}`,
@@ -27,11 +43,7 @@ function successBookking(userId, packageId, packageCategory) {
         bookingEmail: document.getElementById('bookingEmail').value,
         bookingTravallers: bookingTravallers,
         bookingDate: setTodaysDate,
-        bookingPrice: document.getElementById('tourPrice').innerHTML * 1,
-        BookingTotal: document.getElementById('tourTotal').innerHTML * 1,
-        bookingDiscount: Math.abs(
-          document.getElementById('tourDiscount').innerHTML * 1
-        ),
+        bookingCoupon: couponId,
       },
       success: (res) => {
         orderId = res.orderId;
@@ -39,7 +51,6 @@ function successBookking(userId, packageId, packageCategory) {
         name = res.name;
         contact = res.contact;
         email = res.email;
-        bookingId = res.bookingId;
 
         // Setting Razorpay payment Option
         const options = {
@@ -66,7 +77,7 @@ function successBookking(userId, packageId, packageCategory) {
           // when it is success
           handler: function (response) {
             $.ajax({
-              url: `/bookings/success/${bookingId}`,
+              url: `/bookings/success`,
               type: 'get',
               cache: false,
               success: (res) => {
@@ -76,9 +87,9 @@ function successBookking(userId, packageId, packageCategory) {
                   confirmButtonColor: '#3085d6',
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    if(packageCategory =='Tour'){
+                    if (packageCategory == 'Tour') {
                       location.replace(`/tours/${packageId}`);
-                    }else{
+                    } else {
                       location.replace(`/trekkings/${packageId}`);
                     }
                   }
@@ -93,7 +104,7 @@ function successBookking(userId, packageId, packageCategory) {
         // When It Is failed
         rzp1.on('payment.failed', function (response) {
           $.ajax({
-            url: `/bookings/failed/${bookingId}`,
+            url: `/bookings/failed`,
             type: 'get',
             cache: false,
           });

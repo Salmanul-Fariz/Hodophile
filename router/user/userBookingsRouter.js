@@ -7,7 +7,7 @@ const userBookingsController = require('./../../controller/user/userBookingsCont
 
 // Success Booking
 router.get(
-  '/success/:id',
+  '/success',
   userController.sessionUser,
   userController.checkBlocked,
   userBookingsController.successPage
@@ -15,7 +15,7 @@ router.get(
 
 // Failed Booking
 router.get(
-  '/failed/:id',
+  '/failed',
   userController.sessionUser,
   userController.checkBlocked,
   userBookingsController.falied

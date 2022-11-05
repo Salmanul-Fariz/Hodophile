@@ -40,22 +40,31 @@ exports.details = async (req, res) => {
     const wishlistCount = await wishlistItemCount(req.session.user);
     const user = await userModel.findById(req.session.user._id);
 
-    req.session.bookingPrice = trekking.Price;
-    req.session.bookingDiscount = Math.round(
-      (req.session.bookingPrice / 100) * trekking.Discount
-    );
-    req.session.BookingTotal =
-      req.session.bookingPrice - req.session.bookingDiscount;
+    let bookingPrice = trekking.Price;
+    let bookingDiscount = Math.round((bookingPrice / 100) * trekking.Discount);
+    let BookingTotal = bookingPrice - bookingDiscount;
+
+    if (req.session.bookingMsg == 'Coupon is not Existed') {
+      req.flash('bookingMsg', req.session.bookingMsg);
+    } else if (req.session.bookingMsg) {
+      let couponDiscount = Math.round(
+        (BookingTotal / 100) * req.session.bookingMsg.Discount
+      );
+      bookingDiscount += couponDiscount;
+      BookingTotal -= couponDiscount;
+      req.flash('bookingMsg', req.session.bookingMsg.Discount);
+    }
+    req.session.bookingMsg = null;
 
     res.render('user/trekkingsDetails', {
       trekking,
       cartCount,
       wishlistCount,
       user,
-      bookingPrice: req.session.bookingPrice,
-      bookingDiscount: req.session.bookingDiscount,
-      BookingTotal: req.session.BookingTotal,
-      bookingPopup: req.flash('bookingPopup'),
+      couponsOpen: req.flash('bookingMsg'),
+      bookingPrice: bookingPrice,
+      bookingDiscount: bookingDiscount,
+      BookingTotal: BookingTotal,
     });
   } catch (err) {
     console.log(err);

@@ -1,13 +1,5 @@
 // Setting Razorpay payment Option
-function razorpayFunction(
-  cash,
-  rzOrderId,
-  name,
-  email,
-  contact,
-  orderId,
-  types
-) {
+function razorpayFunction(cash, rzOrderId, name, email, contact, types) {
   const options = {
     key: 'rzp_test_0QcZGwIjWOF25m',
     amount: cash,
@@ -32,7 +24,7 @@ function razorpayFunction(
     // when it is success
     handler: function (response) {
       $.ajax({
-        url: `/shoppings/success/${orderId}`,
+        url: `/shoppings/success`,
         type: 'get',
         cache: false,
         success: (res) => {
@@ -60,7 +52,7 @@ function razorpayFunction(
   // When It Is failed
   rzp1.on('payment.failed', function (response) {
     $.ajax({
-      url: `/shoppings/failed/${orderId}`,
+      url: `/shoppings/failed`,
       type: 'get',
       cache: false,
     });
@@ -106,8 +98,15 @@ function checkOut(orderType, userId, productId) {
     if (deliveryType == 'Online Payment') {
       // Order With a Product
       if (orderType == 'Product') {
-        let cash, rzOrderId, name, email, contact, orderId;
+        let cash, rzOrderId, name, email, contact;
         const orderQuantity = document.getElementById('orderQuantity').value;
+        let couponId = document.getElementById('couponId');
+        if (couponId) {
+          couponId = couponId.innerHTML.split(',')[0];
+        } else {
+          couponId = false;
+        }
+
         $.ajax({
           url: `/shoppings/${orderType}/${userId}/${productId}`,
           type: 'post',
@@ -115,6 +114,7 @@ function checkOut(orderType, userId, productId) {
             addressIndex: AddressIndex.value,
             productQuatity: orderQuantity,
             deliveryType: deliveryType,
+            orderCoupon: couponId,
           },
           cache: false,
           success: (res) => {
@@ -123,30 +123,20 @@ function checkOut(orderType, userId, productId) {
             name = res.name;
             email = res.email;
             contact = res.contact;
-            orderId = res.orderId;
 
-            razorpayFunction(
-              cash,
-              rzOrderId,
-              name,
-              email,
-              contact,
-              orderId,
-              'Products'
-            );
-
-            // if (res.status) {
-            //   location.replace('/shoppings');
-            // }
+            razorpayFunction(cash, rzOrderId, name, email, contact, 'Products');
           },
         });
       } else if (orderType == 'Cart') {
-        const orderPrice = document.getElementById('orderPrice').innerHTML;
-        const orderDiscount =
-          document.getElementById('orderDiscount').innerHTML;
-        const orderTotal = document.getElementById('orderTotal').innerHTML;
+        let couponId = document.getElementById('couponId');
 
         let cash, rzOrderId, name, email, contact, orderId;
+
+        if (couponId) {
+          couponId = couponId.innerHTML.split(',')[0];
+        } else {
+          couponId = false;
+        }
 
         $.ajax({
           url: `/shoppings/${orderType}/${userId}/${productId}`,
@@ -154,9 +144,7 @@ function checkOut(orderType, userId, productId) {
           data: {
             addressIndex: AddressIndex.value,
             deliveryType: deliveryType,
-            price: orderPrice,
-            discount: orderDiscount,
-            total: orderTotal,
+            orderCoupon: couponId,
           },
           cache: false,
           success: (res) => {
@@ -185,6 +173,13 @@ function checkOut(orderType, userId, productId) {
       // Order With a Product
       if (orderType == 'Product') {
         const orderQuantity = document.getElementById('orderQuantity').value;
+        let couponId = document.getElementById('couponId');
+        if (couponId) {
+          couponId = couponId.innerHTML.split(',')[0];
+        } else {
+          couponId = false;
+        }
+
         $.ajax({
           url: `/shoppings/${orderType}/${userId}/${productId}`,
           type: 'post',
@@ -192,6 +187,7 @@ function checkOut(orderType, userId, productId) {
             addressIndex: AddressIndex.value,
             productQuatity: orderQuantity,
             deliveryType: deliveryType,
+            orderCoupon: couponId,
           },
           cache: false,
           success: (res) => {
@@ -209,10 +205,13 @@ function checkOut(orderType, userId, productId) {
           },
         });
       } else if (orderType == 'Cart') {
-        const orderPrice = document.getElementById('orderPrice').innerHTML;
-        const orderDiscount =
-          document.getElementById('orderDiscount').innerHTML;
-        const orderTotal = document.getElementById('orderTotal').innerHTML;
+        let couponId = document.getElementById('couponId');
+
+        if (couponId) {
+          couponId = couponId.innerHTML.split(',')[0];
+        } else {
+          couponId = false;
+        }
 
         $.ajax({
           url: `/shoppings/${orderType}/${userId}/${productId}`,
@@ -220,9 +219,7 @@ function checkOut(orderType, userId, productId) {
           data: {
             addressIndex: AddressIndex.value,
             deliveryType: deliveryType,
-            price: orderPrice,
-            discount: orderDiscount,
-            total: orderTotal,
+            orderCoupon: couponId,
           },
           cache: false,
           success: (res) => {
@@ -414,13 +411,35 @@ function calculate() {
   const orderTotal = document.getElementById('orderTotal');
   orderTotal.innerHTML =
     orderPrice.innerHTML * 1 - Math.abs(orderDiscount.innerHTML) * 1;
+
+  // if Coupon is Applied
+  const couponId = document.getElementById('couponId');
+  if (couponId) {
+    if (couponId.innerHTML) {
+      let discount = Math.round(
+        (orderTotal.innerHTML / 100) * couponId.innerHTML.split(',')[1]
+      );
+      let totalDiscount = Math.abs(orderDiscount.innerHTML);
+      orderDiscount.innerHTML = totalDiscount + discount;
+
+      orderTotal.innerHTML -= discount;
+    }
+  }
 }
 
 const ProductID = document.getElementById('ProductID');
 const CartID = document.getElementById('CartID');
+const couponsOpen = document.getElementById('couponsOpen');
+
 if (ProductID) {
   window.addEventListener('load', () => {
     calculate();
+    if (couponsOpen.innerHTML) {
+      setTimeout(() => {
+        console.log('hello');
+        couponsOpen.innerHTML = '';
+      }, 2500);
+    }
   });
 
   // calculate total while enter quantity in the filed
@@ -464,11 +483,34 @@ else if (CartID) {
       discount +=
         ((cartProductPrice * cartProductQuantity) / 100) * cartDiscount * 1;
     }
-    orderDiscount.innerHTML = `-${Math.round(discount - 1)}`;
+    orderDiscount.innerHTML = `-${Math.round(discount)}`;
 
     // calculate total
     const orderTotal = document.getElementById('orderTotal');
     orderTotal.innerHTML =
-      orderPrice.innerHTML * 1 - Math.abs(orderDiscount.innerHTML);
+      orderPrice.innerHTML - Math.abs(orderDiscount.innerHTML);
+
+    // if Coupon is Applied
+    const couponId = document.getElementById('couponId');
+    if (couponId) {
+      if (couponId.innerHTML) {
+        let discount = Math.round(
+          (orderTotal.innerHTML / 100) * couponId.innerHTML.split(',')[1]
+        );
+        let totalDiscount = Math.abs(orderDiscount.innerHTML);
+        orderDiscount.innerHTML = totalDiscount + discount;
+
+        orderTotal.innerHTML -= discount;
+      }
+    }
+
+    // To Remove Error Message
+    const couponsOpen = document.getElementById('couponsOpen');
+    if (couponsOpen.innerHTML) {
+      setTimeout(() => {
+        console.log('hello');
+        couponsOpen.innerHTML = '';
+      }, 2500);
+    }
   });
 }

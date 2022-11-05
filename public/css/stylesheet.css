@@ -973,6 +973,14 @@ a:active {
     font-size: 32px;
 }
 
+.tourCouponButton {
+    background-color: #41C356;
+    border: none;
+    color: white;
+    padding: 6px 18px;
+    margin-top: 32px;
+}
+
 /*////////////////////*/
 /* Admin tours page */
 /*////////////////////*/

@@ -21,7 +21,7 @@ const userCartRouter = require('./router/user/userCartRouter');
 const userWishlistRouter = require('./router/user/userWishlistRouter');
 const userBookingsRouter = require('./router/user/userBookingsRouter');
 const userProfileRouter = require('./router/user/userProfileRouter');
-
+const userCouponsRouter = require('./router/user/userCouponsRouter');
 
 // require agency router
 const agencyRouter = require('./router/agency/agencyRouter');
@@ -32,6 +32,7 @@ const agencyNewsRouter = require('./router/agency/agencyNewsRouter');
 const agencyUserRouter = require('./router/agency/agencyUserRouter');
 const agencyBookingsRouter = require('./router/agency/agencyBookingsRouter');
 const agencyOrderRouter = require('./router/agency/agencyOrderRouter');
+const agencyCouponsRouter = require('./router/agency/agencyCouponsRouter');
 
 // cache
 app.use(middleware.cache);
@@ -63,8 +64,9 @@ app.use('/profile', userProfileRouter);
 app.use('/trekkings', userTrekkingsRouter);
 app.use('/news', userNewsRouter);
 app.use('/bookings', userBookingsRouter);
+app.use('/coupons', userCouponsRouter);
 
-// User Router
+// Agency Router
 app.use('/agency', agencyRouter);
 app.use('/agency/tours', agnecyToursRouter);
 app.use('/agency/trekkings', agencyTrekkingRouter);
@@ -73,6 +75,7 @@ app.use('/agency/news', agencyNewsRouter);
 app.use('/agency/users', agencyUserRouter);
 app.use('/agency/bookings', agencyBookingsRouter);
 app.use('/agency/orders', agencyOrderRouter);
+app.use('/agency/coupons', agencyCouponsRouter);
 
 // view engine setup
 app.set('view engine', 'ejs');

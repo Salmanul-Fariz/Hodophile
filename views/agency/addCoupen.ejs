@@ -1,0 +1,47 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/agHead.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Add Coupons</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="agNewsSec2">
+            <div class="row justify-content-center">
+                <form id="form" method="post" action="/agency/coupons/add" class="col-md-6 signupSec2Form">
+                    <div id="Err" class="errBar">
+                        <div class="signupSec2ErrorBar d-flex justify-content-center">
+                            <p id="ErrText" class="text-center signupSec2ErrorText"></p>
+                            <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-2">
+                        <label class="form-label signupSec2Text">Coupon</label>
+                        <input  name="coupon" type="text" class="form-control"
+                            placeholder=" Enter Coupon" required maxlength="6">
+                    </div>
+                    <div class="mb-3 mt-2">
+                        <label class="form-label signupSec2Text">Discount</label>
+                        <input name="discount" type="number" class="form-control" placeholder="Enter Discount Price"
+                            required>
+                    </div>
+                    <div class="d-flex justify-content-center p-4">
+                        <button type="submit" class="signupSec2FormButton">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- footer -->
+        <%- include('../includes/agEnd.ejs') %>

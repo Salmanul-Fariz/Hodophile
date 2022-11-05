@@ -16,7 +16,7 @@ router.get(
 
 // order Success
 router.get(
-  '/success/:id',
+  '/success',
   userController.sessionUser,
   userController.checkBlocked,
   userOderController.success
@@ -24,7 +24,7 @@ router.get(
 
 // order Failed
 router.get(
-  '/failed/:id',
+  '/failed',
   userController.sessionUser,
   userController.checkBlocked,
   userOderController.falied
