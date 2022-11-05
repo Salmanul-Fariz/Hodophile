@@ -102,3 +102,52 @@ exports.login = async (req, res) => {
     res.redirect('/login');
   }
 };
+
+// SignUp page
+exports.signupPage = (req, res) => {
+  try {
+    if (req.session.user) {
+      res.redirect('/');
+    } else {
+      res.render('user/signup', { userErr: req.flash('userErr') });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Login page
+exports.loginPage = (req, res) => {
+  try {
+    if (req.session.user) {
+      res.redirect('/');
+    } else {
+      res.render('user/login', { userErr: req.flash('userErr') });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// OTP page
+exports.otpPage = (req, res) => {
+  try {
+    if (req.session.user) {
+      res.redirect('/');
+    } else {
+      res.render('user/otp', { otpErr: req.flash('otpErr') });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// log out (post)
+exports.logout = (req, res) => {
+  try {
+    req.session.user = null;
+    res.redirect('/');
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -6,13 +6,13 @@ const flash = require('connect-flash');
 const dotenv = require('dotenv');
 
 // Require MiddleWare
-const middleware = require('./middleware/middleware');
+const cache = require('./middleware/cache');
 
 // set config file
 dotenv.config({ path: './config.env' });
 
 // require User router
-const userRouter = require('./router/user/userRouter');
+const userRouter = require('./router/user/userHomeRouter');
 const userShoppingRouter = require('./router/user/userShoppingsRouter');
 const userTourRouter = require('./router/user/userTourRouter');
 const userTrekkingsRouter = require('./router/user/userTrekkingsRouter');
@@ -24,7 +24,7 @@ const userProfileRouter = require('./router/user/userProfileRouter');
 const userCouponsRouter = require('./router/user/userCouponsRouter');
 
 // require agency router
-const agencyRouter = require('./router/agency/agencyRouter');
+const agencyRouter = require('./router/agency/agencyDashboardRouter');
 const agnecyToursRouter = require('./router/agency/agnecyToursRouter');
 const agencyTrekkingRouter = require('./router/agency/agencyTrekkingRouter');
 const agencyShoppingsRouter = require('./router/agency/agencyShoppingsRouter');
@@ -35,7 +35,7 @@ const agencyOrderRouter = require('./router/agency/agencyOrderRouter');
 const agencyCouponsRouter = require('./router/agency/agencyCouponsRouter');
 
 // cache
-app.use(middleware.cache);
+app.use(cache);
 
 // Body parser, reading data from body into req.body
 app.use(express.json());

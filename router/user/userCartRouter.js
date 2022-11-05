@@ -1,48 +1,45 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const userBlockCheck = require('../../middleware/userBlockCheck');
+const userSession = require('../../middleware/userSession');
+
 // require controller
-const userController = require('./../../controller/user/userController');
 const userCartController = require('./../../controller/user/userCartController');
 
 // Get Cart Page
-router.get(
-  '/',
-  userController.sessionUser,
-  userController.checkBlocked,
-  userCartController.cartsPage
-);
+router.get('/', userSession, userBlockCheck, userCartController.cartsPage);
 
 // Delete The Products
 router.get(
   '/delete/:userId/:productId',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userCartController.deleteCart
 );
-
 
 // Increase The Quatity
 router.get(
   '/increment/:userId/:productId',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userCartController.increaseQuatity
 );
 
 // Decrease The Quatity
 router.get(
   '/decrement/:userId/:productId',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userCartController.decreaseQuatity
 );
 
 // Add To Cart
 router.post(
   '/:userId/:productId',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userCartController.addCart
 );
 

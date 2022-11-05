@@ -1,32 +1,30 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const agencySession = require('./../../middleware/agencySession');
+
 // require controller
-const agencyController = require('./../../controller/agency/agencyController');
 const agencyNewsController = require('./../../controller/agency/agencyNewsController');
 
 // require Multer
-const Multer = require('../../utils/multer');
+const Multer = require('../../middleware/multer');
 const newsMulter = Multer.newsMulter();
 
 // get all news
-router.get('/', agencyController.sessionAgency, agencyNewsController.news);
+router.get('/', agencySession, agencyNewsController.news);
 
 // Add News
 router
   .route('/add')
-  .get(agencyController.sessionAgency, agencyNewsController.newsPage)
+  .get(agencySession, agencyNewsController.newsPage)
   .post(
-    agencyController.sessionAgency,
+    agencySession,
     newsMulter.single('newsImage'),
     agencyNewsController.newsAdd
   );
 
 // Delete news
-router.post(
-  '/delete/:id',
-  agencyController.sessionAgency,
-  agencyNewsController.delete
-);
+router.post('/delete/:id', agencySession, agencyNewsController.delete);
 
 module.exports = router;

@@ -1,59 +1,49 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const agencySession = require('./../../middleware/agencySession');
+
 // require controller
-const agencyController = require('./../../controller/agency/agencyController');
 const agencyToursController = require('./../../controller/agency/agencyToursController');
 
 // require Multer
-const Multer = require('./../../utils/multer');
+const Multer = require('./../../middleware/multer');
 const tourMulter = Multer.tourMulter();
 
 // Tours page
 router
   .route('/')
-  .get(agencyController.sessionAgency, agencyToursController.tours)
+  .get(agencySession, agencyToursController.tours)
   .post(
-    agencyController.sessionAgency,
+    agencySession,
     tourMulter.array('tourImages', 4),
     agencyToursController.addPost
   );
 
 // Tour update page
-router.get(
-  '/update',
-  agencyController.sessionAgency,
-  agencyToursController.updateTours
-);
+router.get('/update', agencySession, agencyToursController.updateTours);
 
 // Tour delete page
-router.get(
-  '/delete',
-  agencyController.sessionAgency,
-  agencyToursController.deleteTours
-);
+router.get('/delete', agencySession, agencyToursController.deleteTours);
 
 // Tour add page
-router.get('/add', agencyController.sessionAgency, agencyToursController.add);
+router.get('/add', agencySession, agencyToursController.add);
 
 // Tour Page(id)
-router.get('/:id', agencyController.sessionAgency, agencyToursController.tour);
+router.get('/:id', agencySession, agencyToursController.tour);
 
 // Tour update Page(id)
 router
   .route('/update/:id')
-  .get(agencyController.sessionAgency, agencyToursController.updateTour)
+  .get(agencySession, agencyToursController.updateTour)
   .post(
-    agencyController.sessionAgency,
+    agencySession,
     tourMulter.array('tourImages', 4),
     agencyToursController.update
   );
 
 // Tour delete Page(id)
-router.post(
-  '/delete/:id',
-  agencyController.sessionAgency,
-  agencyToursController.delete
-);
+router.post('/delete/:id', agencySession, agencyToursController.delete);
 
 module.exports = router;

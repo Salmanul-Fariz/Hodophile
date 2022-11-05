@@ -56,7 +56,6 @@ exports.shoppingMulter = () => {
   return multer({ storage: storage });
 };
 
-
 // set multer(User Profile)
 exports.avatarMulter = () => {
   const storage = multer.diskStorage({

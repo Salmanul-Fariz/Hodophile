@@ -1,67 +1,49 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const agencySession = require('./../../middleware/agencySession');
+
 // require controller
-const agencyController = require('./../../controller/agency/agencyController');
 const agencyTrekkingController = require('./../../controller/agency/agencyTrekkingController');
 
 // require Multer
-const Multer = require('./../../utils/multer');
+const Multer = require('./../../middleware/multer');
 const trekkingMulter = Multer.trekkingMulter();
 
 // Trekking page
 router
   .route('/')
-  .get(agencyController.sessionAgency, agencyTrekkingController.trekkings)
+  .get(agencySession, agencyTrekkingController.trekkings)
   .post(
-    agencyController.sessionAgency,
+    agencySession,
     trekkingMulter.array('trekkingImages', 4),
     agencyTrekkingController.addPost
   );
 
 // Trekking update page
-router.get(
-  '/update',
-  agencyController.sessionAgency,
-  agencyTrekkingController.updateTrekkings
-);
+router.get('/update', agencySession, agencyTrekkingController.updateTrekkings);
 
 // Tour delete page
-router.get(
-  '/delete',
-  agencyController.sessionAgency,
-  agencyTrekkingController.deleteTours
-);
+router.get('/delete', agencySession, agencyTrekkingController.deleteTours);
 
 // Trekkings add page
-router.get(
-  '/add',
-  agencyController.sessionAgency,
-  agencyTrekkingController.add
-);
+router.get('/add', agencySession, agencyTrekkingController.add);
 
 // trekking Page(id)
-router.get(
-  '/:id',
-  agencyController.sessionAgency,
-  agencyTrekkingController.trekking
-);
+router.get('/:id', agencySession, agencyTrekkingController.trekking);
 
 // Trekkings update Page(id)
 router
   .route('/update/:id')
-  .get(agencyController.sessionAgency, agencyTrekkingController.updateTrekking)
+  .get(agencySession, agencyTrekkingController.updateTrekking)
   .post(
-    agencyController.sessionAgency,
+    agencySession,
     trekkingMulter.array('trekkingImages', 4),
     agencyTrekkingController.update
   );
 
 // Trekking delete Page(id)
-router.post(
-  '/delete/:id',
-  agencyController.sessionAgency,
-  agencyTrekkingController.delete
-);
+router.post('/delete/:id', agencySession, agencyTrekkingController.delete);
 
 module.exports = router;

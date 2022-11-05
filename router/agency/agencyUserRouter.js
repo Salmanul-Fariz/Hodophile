@@ -1,41 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const agencySession = require('./../../middleware/agencySession');
+
 // require controller
-const agencyController = require('./../../controller/agency/agencyController');
 const agencyUserController = require('./../../controller/agency/agencyUserController');
 
 // require Multer
-const Multer = require('../../utils/multer');
+const Multer = require('../../middleware/multer');
 const avatarMulter = Multer.avatarMulter();
 
 // All users
-router.get(
-  '/',
-  agencyController.sessionAgency,
-  agencyUserController.userdetails
-);
+router.get('/', agencySession, agencyUserController.userdetails);
 
 // Avatar Page
 router.post(
   '/avatar',
-  agencyController.sessionAgency,
+  agencySession,
   avatarMulter.single('avatarImage'),
   agencyUserController.addAvatars
 );
 
 // To block user
-router.post(
-  '/block/:id',
-  agencyController.sessionAgency,
-  agencyUserController.userBlock
-);
+router.post('/block/:id', agencySession, agencyUserController.userBlock);
 
 // To unblock user
-router.post(
-  '/unblock/:id',
-  agencyController.sessionAgency,
-  agencyUserController.userUnblock
-);
+router.post('/unblock/:id', agencySession, agencyUserController.userUnblock);
 
 module.exports = router;

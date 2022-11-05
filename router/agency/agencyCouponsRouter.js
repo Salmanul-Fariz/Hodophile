@@ -1,28 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const agencySession = require('./../../middleware/agencySession');
+
 // require controller
-const agencyController = require('./../../controller/agency/agencyController');
 const agencyCouponsController = require('./../../controller/agency/agencyCouponsController');
 
 // View Coupons
-router.get(
-  '/',
-  agencyController.sessionAgency,
-  agencyCouponsController.coupenPage
-);
+router.get('/', agencySession, agencyCouponsController.coupenPage);
 
 // Add Coupons page
 router
   .route('/add')
-  .get(agencyController.sessionAgency, agencyCouponsController.addCouponPage)
-  .post(agencyController.sessionAgency, agencyCouponsController.addCoupon);
+  .get(agencySession, agencyCouponsController.addCouponPage)
+  .post(agencySession, agencyCouponsController.addCoupon);
 
 // Delete Coupons
-router.get(
-  '/delete/:id',
-  agencyController.sessionAgency,
-  agencyCouponsController.deleteCoupon
-);
+router.get('/delete/:id', agencySession, agencyCouponsController.deleteCoupon);
 
 module.exports = router;

@@ -1,72 +1,55 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const agencySession = require('./../../middleware/agencySession');
+
 // Require Controller
-const agencyController = require('./../../controller/agency/agencyController');
 const agencyShoppingsController = require('./../../controller/agency/agencyShoppingsController');
 
 // require Multer
-const Multer = require('./../../utils/multer');
+const Multer = require('./../../middleware/multer');
 const shoppingMulter = Multer.shoppingMulter();
 
 // Shoppings page
-router.get(
-  '/',
-  agencyController.sessionAgency,
-  agencyShoppingsController.shoppings
-);
+router.get('/', agencySession, agencyShoppingsController.shoppings);
 
 // Shopppings Add
 router
   .route('/add')
-  .get(
-    agencyController.sessionAgency,
-    agencyShoppingsController.viewAddShoppings
-  )
+  .get(agencySession, agencyShoppingsController.viewAddShoppings)
   .post(
-    agencyController.sessionAgency,
+    agencySession,
     shoppingMulter.array('shoppingImages', 4),
     agencyShoppingsController.addShoppings
   );
 
 // Shoppings Update
-router.get(
-  '/update',
-  agencyController.sessionAgency,
-  agencyShoppingsController.updateShoppings
-);
+router.get('/update', agencySession, agencyShoppingsController.updateShoppings);
 
 // Shopppings category
 router
   .route('/category')
-  .get(agencyController.sessionAgency, agencyShoppingsController.viewCategory);
+  .get(agencySession, agencyShoppingsController.viewCategory);
 
 // Add Shopppings category
 router
   .route('/category/add')
-  .get(agencyController.sessionAgency, agencyShoppingsController.addCategory)
-  .post(agencyController.sessionAgency, agencyShoppingsController.category);
+  .get(agencySession, agencyShoppingsController.addCategory)
+  .post(agencySession, agencyShoppingsController.category);
 
 // Shoppings Delete
-router.get(
-  '/delete',
-  agencyController.sessionAgency,
-  agencyShoppingsController.deleteShoppings
-);
+router.get('/delete', agencySession, agencyShoppingsController.deleteShoppings);
 
 // Shopping Delete
-router.post(
-  '/delete/:id',
-  agencyController.sessionAgency,
-  agencyShoppingsController.delete
-);
+router.post('/delete/:id', agencySession, agencyShoppingsController.delete);
 
 // shopping Update
 router
   .route('/update/:id')
-  .get(agencyController.sessionAgency, agencyShoppingsController.updateShopping)
+  .get(agencySession, agencyShoppingsController.updateShopping)
   .post(
-    agencyController.sessionAgency,
+    agencySession,
     shoppingMulter.array('shoppingImages', 4),
     agencyShoppingsController.update
   );
@@ -74,15 +57,11 @@ router
 // Shopping Category delete
 router.post(
   '/category/:id',
-  agencyController.sessionAgency,
+  agencySession,
   agencyShoppingsController.deleteCategory
 );
 
 // Shoppings Details Page
-router.get(
-  '/:id',
-  agencyController.sessionAgency,
-  agencyShoppingsController.shoppingsDetails
-);
+router.get('/:id', agencySession, agencyShoppingsController.shoppingsDetails);
 
 module.exports = router;

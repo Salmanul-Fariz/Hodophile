@@ -1,103 +1,101 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const userBlockCheck = require('../../middleware/userBlockCheck');
+const userSession = require('../../middleware/userSession');
+
 // require controller
-const userController = require('./../../controller/user/userController');
 const userProfileController = require('./../../controller/user/userProfileController');
 
 // profile page
-router.get(
-  '/',
-  userController.sessionUser,
-  userController.checkBlocked,
-  userProfileController.profile
-);
+router.get('/', userSession, userBlockCheck, userProfileController.profile);
 
 // Edit Personal Details
 router.post(
   '/update/personal/password/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.updatePersonalDetails
 );
 
 // Edit Personal Page
 router.get(
   '/update/personal',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.updatePersonalDetailsPage
 );
 
 // Personal Details Verification
 router.get(
   '/personal/verification',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.personalVerification
 );
 
 // personal Details verification
 router.post(
   '/personal/verification/:type/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.otpVerification
 );
 
 // Edit Personal Page(post)
 router.post(
   '/update/personal/:type/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.updatePersonalDetailsPost
 );
 
 // Shoppings view Order
 router.get(
   '/shoppings/details/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.shoppingOrderview
 );
 
 // booking view Order
 router.get(
   '/bookings/details/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.bookingsview
 );
 
 // Edit profile
 router.post(
   '/update/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.updateProfile
 );
 
 // avatar Change
 router.get(
   '/avatar/:avatarId',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.avatarsUpdate
 );
 
 // Shoppings
 router.get(
   '/shoppings/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.shopping
 );
 
 // Bookings
 router.get(
   '/bookings/:id',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userProfileController.booking
 );
 

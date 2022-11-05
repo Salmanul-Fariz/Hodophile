@@ -1,23 +1,26 @@
 const express = require('express');
 const router = express.Router();
 
+// require Session MiddleWare
+const userBlockCheck = require('../../middleware/userBlockCheck');
+const userSession = require('../../middleware/userSession');
+
 // require controller
-const userController = require('./../../controller/user/userController');
 const userCouponController = require('./../../controller/user/userCouponController');
 
 // Booking Coupons
 router.post(
   '/',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userCouponController.bookingCouponChecking
 );
 
 // Order Coupons
 router.post(
   '/orders',
-  userController.sessionUser,
-  userController.checkBlocked,
+  userSession,
+  userBlockCheck,
   userCouponController.orderCouponChecking
 );
 
