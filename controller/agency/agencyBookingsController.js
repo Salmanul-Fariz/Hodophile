@@ -32,19 +32,19 @@ exports.approved = async (req, res) => {
       }
     );
 
-    // // Sending mail
-    // bookingApproval.emailSender(
-    //   req.params.userEmail,
-    //   req.params.packageCategory,
-    //   'Approved'
-    // );
+    // Sending mail
+    bookingApproval.emailSender(
+      req.params.userEmail,
+      req.params.packageCategory,
+      'Approved'
+    );
 
-    // // Sending SMS
-    // bookingApproval.smsSender(
-    //   req.params.userContact,
-    //   req.params.packageCategory,
-    //   'Approved'
-    // );
+    // Sending SMS
+    bookingApproval.smsSender(
+      req.params.userContact,
+      req.params.packageCategory,
+      'Approved'
+    );
 
     res.redirect('/agency/bookings');
   } catch (err) {
@@ -62,19 +62,19 @@ exports.cancelled = async (req, res) => {
       }
     );
 
-    // // Sending mail
-    // bookingApproval.emailSender(
-    //   req.params.userEmail,
-    //   req.params.packageCategory,
-    //   'Cancelled'
-    // );
+    // Sending mail
+    bookingApproval.emailSender(
+      req.params.userEmail,
+      req.params.packageCategory,
+      'Cancelled'
+    );
 
-    // // Sending SMS
-    // bookingApproval.smsSender(
-    //   req.params.userContact,
-    //   req.params.packageCategory,
-    //   'Cancelled'
-    // );
+    // Sending SMS
+    bookingApproval.smsSender(
+      req.params.userContact,
+      req.params.packageCategory,
+      'Cancelled'
+    );
 
     res.redirect('/agency/bookings');
   } catch (err) {

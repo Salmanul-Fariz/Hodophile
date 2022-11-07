@@ -34,11 +34,11 @@ exports.approved = async (req, res) => {
       }
     );
 
-    // // Sending mail
-    // orderApproval.emailSender(req.params.userEmail, 'Approved');
+    // Sending mail
+    orderApproval.emailSender(req.params.userEmail, 'Approved');
 
-    // // Sending SMS
-    // orderApproval.smsSender(req.params.userContact, 'Approved');
+    // Sending SMS
+    orderApproval.smsSender(req.params.userContact, 'Approved');
 
     res.redirect('/agency/orders');
   } catch (err) {
@@ -56,11 +56,11 @@ exports.shipped = async (req, res) => {
       }
     );
 
-    // // Sending mail
-    // orderApproval.emailSender(req.params.userEmail, 'Shipped');
+    // Sending mail
+    orderApproval.emailSender(req.params.userEmail, 'Shipped');
 
-    // // Sending SMS
-    // orderApproval.smsSender(req.params.userContact, 'Shipped');
+    // Sending SMS
+    orderApproval.smsSender(req.params.userContact, 'Shipped');
 
     res.redirect('/agency/orders');
   } catch (err) {
@@ -79,11 +79,11 @@ exports.Deliverd = async (req, res) => {
       }
     );
 
-    // // Sending mail
-    // orderApproval.emailSender(req.params.userEmail, 'Delivered');
+    // Sending mail
+    orderApproval.emailSender(req.params.userEmail, 'Delivered');
 
-    // // Sending SMS
-    // orderApproval.smsSender(req.params.userContact, 'Delivered');
+    // Sending SMS
+    orderApproval.smsSender(req.params.userContact, 'Delivered');
 
     res.redirect('/agency/orders');
   } catch (err) {
@@ -101,11 +101,11 @@ exports.cancelled = async (req, res) => {
       }
     );
 
-    // // Sending mail
-    // orderApproval.emailSender(req.params.userEmail, 'Cancelled');
+    // Sending mail
+    orderApproval.emailSender(req.params.userEmail, 'Cancelled');
 
-    // // Sending SMS
-    // orderApproval.smsSender(req.params.userContact, 'Cancelled');
+    // Sending SMS
+    orderApproval.smsSender(req.params.userContact, 'Cancelled');
 
     res.redirect('/agency/orders');
   } catch (err) {

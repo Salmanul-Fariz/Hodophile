@@ -1489,7 +1489,7 @@ a:active {
     border-radius: 15px;
 }
 
-.agnecyDashBoardCardsBar:hover{
+.agnecyDashBoardCardsBar:hover {
     cursor: pointer;
     filter: brightness(0.9);
 }
@@ -1543,7 +1543,7 @@ a:active {
     border-radius: 35px;
 }
 
-.agnecyDashBoardLatestText2{
+.agnecyDashBoardLatestText2 {
     margin: 0;
     padding: 3px 11px;
     width: 125px;
@@ -1553,7 +1553,7 @@ a:active {
     text-overflow: ellipsis;
 }
 
-.agnecyDashBoardLatestListBar{
+.agnecyDashBoardLatestListBar {
     border-top: solid;
     border-width: 1px;
     border-color: #a7a7a7;
@@ -1561,7 +1561,7 @@ a:active {
     margin-top: 16px;
 }
 
-.agnecyDashBoardLatestListButton{
+.agnecyDashBoardLatestListButton {
     background: #41c356;
     color: white;
     padding: 6px 16px;
@@ -1569,7 +1569,21 @@ a:active {
     border-radius: 25px;
 }
 
-.agnecyDashBoardLatestListButton:hover{
+.agnecyDashBoardLatestListButton:hover {
     cursor: pointer;
     color: white;
+}
+
+/*////////////////////*/
+/* Contact Page */
+/*////////////////////*/
+
+.contactText1 {
+    padding: 26px 0;
+    margin: 0;
+    font-size: 18px;
+}
+
+.contactSubject{
+    
 }

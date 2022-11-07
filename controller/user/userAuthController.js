@@ -21,19 +21,19 @@ exports.signup = async (req, res) => {
       };
 
       //session setting
-      req.session.userOtp = user;
-
-      // otp generator
-      req.session.otpGenerator = otpVerification.otpGeneration();
-      console.log(req.session.otpGenerator);
+      req.session.userSignup = user;
 
       // message sending
-      // otpVerification
-      //   .otpSender(req.session.otpGenerator, userSignup.contact)
-      //   .then(() => {
-      //     res.redirect('/otp');
-      //   });
-      res.redirect('/otp');
+      otpVerification
+        .otpSender(req.session.userSignup.contact)
+        .then((response) => {
+          res.redirect('/otp');
+        })
+        .catch((err) => {
+          console.log(err);
+          req.flash('userErr', 'Something Went Wrong');
+          res.redirect('/signup');
+        });
     }
   } catch (err) {
     console.log(err);
@@ -47,8 +47,13 @@ exports.signup = async (req, res) => {
 exports.resend = (req, res) => {
   // message sending
   otpVerification
-    .otpSender(req.session.otpGenerator, req.session.userOtp.contact)
-    .then(() => {
+    .otpSender(req.session.userSignup.contact)
+    .then((response) => {
+      res.redirect('/otp');
+    })
+    .catch((err) => {
+      console.log(err);
+      req.flash('otpErr', 'Something Went Wrong');
       res.redirect('/otp');
     });
 };
@@ -56,16 +61,25 @@ exports.resend = (req, res) => {
 // OTP page(Post)
 exports.otp = async (req, res) => {
   try {
-    if (req.session.otpGenerator === req.body.Otp) {
-      const user = await userModel.create(req.session.userOtp);
-      req.session.user = user;
-      req.session.userOtp = null;
-      req.session.otpGenerator = null;
-      res.redirect('/');
-    } else {
-      req.flash('otpErr', 'Please Enter correctly !');
-      res.redirect('/otp');
-    }
+    // message Checking
+    otpVerification
+      .otpCheking(req.body.Otp, req.session.userSignup.contact)
+      .then(async (response) => {
+        if (response.status === 'approved') {
+          const user = await userModel.create(req.session.userSignup);
+          req.session.user = user;
+          req.session.userSignup = null;
+          res.redirect('/');
+        } else {
+          req.flash('otpErr', 'OTP is Incorrect !');
+          res.redirect('/otp');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        req.flash('otpErr', 'Something Went Wrong !');
+        res.redirect('/otp');
+      });
   } catch (err) {
     console.log(err);
   }

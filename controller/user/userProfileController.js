@@ -121,19 +121,21 @@ exports.updatePersonalDetailsPost = async (req, res) => {
     if (req.params.type == 'Contact') {
       // otp generator
       req.session.personalOtpGenerator = {
-        otp: otpVerification.otpGeneration(),
         user: req.params.id,
         type: 'Contact',
         number: req.body.contact,
       };
-      console.log(req.session.personalOtpGenerator.otp);
 
       // message sending
-      // otpVerification
-      //   .otpSender(req.session.personalOtpGenerator.otp, req.body.contact)
-      //   .then(() => {
-      res.redirect('/profile/personal/verification');
-      //   })
+      otpVerification
+        .otpSender(req.body.contact)
+        .then((response) => {
+          res.redirect('/profile/personal/verification');
+        })
+        .catch((err) => {
+          console.log(err);
+          res.redirect('/profile');
+        });
     } else {
       // otp generator
       req.session.personalOtpGenerator = {
@@ -144,10 +146,10 @@ exports.updatePersonalDetailsPost = async (req, res) => {
       };
 
       // Send Mail
-      // emailVerification.emailSender(
-      //   req.session.personalOtpGenerator.email,
-      //   req.session.personalOtpGenerator.otp
-      // );
+      emailVerification.emailSender(
+        req.session.personalOtpGenerator.email,
+        req.session.personalOtpGenerator.otp
+      );
 
       res.redirect('/profile/personal/verification');
     }
@@ -168,7 +170,6 @@ exports.personalVerification = async (req, res) => {
       let type = req.session.personalOtpGenerator.type;
       if (type == 'Contact') {
         req.session.otp = {
-          otp: req.session.personalOtpGenerator.otp,
           number: req.session.personalOtpGenerator.number,
         };
       } else {
@@ -197,17 +198,23 @@ exports.otpVerification = async (req, res) => {
   try {
     if (req.session.otp) {
       if (req.params.type == 'Contact') {
-        if (req.session.otp.otp == req.body.otp) {
-          await userModel.updateOne(
-            { _id: req.params.id },
-            { contact: req.session.otp.number }
-          );
-
-          res.redirect('/profile');
-        } else {
-          req.flash('userEditErr', 'Invalid Otp !');
-          res.redirect('/profile');
-        }
+        let number = req.session.otp.number;
+        // message Checking
+        otpVerification
+          .otpCheking(req.body.otp, number)
+          .then(async (response) => {
+            console.log(response);
+            if (response.status === 'approved') {
+              await userModel.updateOne(
+                { _id: req.params.id },
+                { contact: number }
+              );
+              res.redirect('/profile');
+            } else {
+              req.flash('userEditErr', 'Invalid Otp !');
+              res.redirect('/profile');
+            }
+          });
       } else {
         if (req.session.otp.otp == req.body.otp) {
           await userModel.updateOne(

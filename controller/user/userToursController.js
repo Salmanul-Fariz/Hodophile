@@ -3,7 +3,6 @@ const userModel = require('./../../model/userModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
-const { booking } = require('./userProfileController');
 
 // Tours page
 exports.tours = async (req, res) => {

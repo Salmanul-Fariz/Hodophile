@@ -1,0 +1,76 @@
+<!-- navigationbar -->
+<%- include('../includes/navigation.ejs') %>
+
+    <!-- header -->
+    <%- include('../includes/head.ejs') %>
+
+        <!-- section-1 -->
+        <section class="signupSec1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="signupSec1Text d-flex justify-content-center">Contact</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- section-2 -->
+        <section class="signupSec1 pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <h2 class="text-center">How Can We Help ?</h2>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="col-12 col-md-10">
+                                <p class="contactText1 text-center">Contact us and get strapped in for a better
+                                    adventure experience in
+                                    your life-time. Just look for opportunity to be with nature. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        <div class="col-12 col-sm-10 col-md-8 mt-5">
+                            <form action="">
+                                <div class="d-flex mt-3">
+                                    <div class="mb-3 pe-2 signupSec2FormBar">
+                                        <label class="form-label signupSec2Text">Your Name</label>
+                                        <input type="text" class="form-control" name="contactName"
+                                            placeholder="Enter Your Name" required>
+                                    </div>
+                                    <div class="mb-3 signupSec2FormBar">
+                                        <label class="form-label signupSec2Text">Your Email</label>
+                                        <input type="email" class="form-control" name="contactEmail"
+                                            placeholder=" Enter Your Email" required>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-3">
+                                    <div class="mb-3 pe-2 signupSec2FormBar">
+                                        <label class="form-label signupSec2Text">Your Contact</label>
+                                        <input type="number" class="form-control" name="contactPhone"
+                                            placeholder="Enter Your Contact">
+                                    </div>
+                                    <div class="mb-3 signupSec2FormBar">
+                                        <label class="form-label signupSec2Text">Subject</label>
+                                        <input type="text" class="form-control" name="contactSubject"
+                                            placeholder=" Enter Subject">
+                                    </div>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label class="form-label signupSec2Text">Message</label>
+                                    <textarea name="contactMessage" class="form-control"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center p-4">
+                                    <button type="submit" class="signupSec2FormButton">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <%- include('../includes/end.ejs') %>
