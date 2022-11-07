@@ -9,7 +9,7 @@ const agencyDashboardController = require('./../../controller/agency/agencyDashb
 const agencyAuthController = require('../../controller/agency/agencyAuthController');
 
 // home page
-router.get('/', agencySession, agencyDashboardController.homePage);
+router.get('/', agencySession, agencyDashboardController.dashboardPage);
 
 // login page
 router

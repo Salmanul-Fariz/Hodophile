@@ -1446,3 +1446,130 @@ a:active {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/*////////////////////*/
+/* agency Dashboard */
+/*////////////////////*/
+
+.agnecyDashBoardWalletBar {
+    width: 100%;
+    padding: 35px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.agnecyDashBoardWalletText1 {
+    color: #4e4e4e;
+    font-size: 30px;
+    font-weight: 800;
+    padding: 22px 0px;
+    margin: 0;
+}
+
+.agnecyDashBoardWalletText2 {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #444444;
+    margin: 0;
+    padding: 30px 0px;
+}
+
+.agnecyDashBoardWalletIcon {
+    color: #41c356;
+    font-size: 36px;
+    text-align: center;
+    padding: 24px;
+}
+
+.agnecyDashBoardCardsBar {
+    width: 100%;
+    padding: 28px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.agnecyDashBoardCardsBar:hover{
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+.agnecyDashBoardCardsCount {
+    color: #4e4e4e;
+    font-weight: 800;
+}
+
+.agnecyDashBoardCardsText1 {
+    margin: 0px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.agnecyDashBoardCardsText2 {
+    margin: 0px;
+    margin-top: 11px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.agnecyDashBoardCardsIcons {
+    font-size: 27px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.agnecyDashBoardLatestBar {
+    width: 100%;
+    padding: 14px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.agnecyDashBoardLatestHead {
+    font-family: 'Arizonia';
+    font-size: 26px;
+}
+
+.agnecyDashBoardLatestText1 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.agnecyDashBoardLatestImage {
+    width: 30px;
+    height: 30px;
+    background: black;
+    border-radius: 35px;
+}
+
+.agnecyDashBoardLatestText2{
+    margin: 0;
+    padding: 3px 11px;
+    width: 125px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.agnecyDashBoardLatestListBar{
+    border-top: solid;
+    border-width: 1px;
+    border-color: #a7a7a7;
+    padding-top: 6px;
+    margin-top: 16px;
+}
+
+.agnecyDashBoardLatestListButton{
+    background: #41c356;
+    color: white;
+    padding: 6px 16px;
+    font-size: 15px;
+    border-radius: 25px;
+}
+
+.agnecyDashBoardLatestListButton:hover{
+    cursor: pointer;
+    color: white;
+}

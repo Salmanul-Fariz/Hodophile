@@ -1,7 +1,7 @@
 // Home page(get)
-exports.homePage = (req, res) => {
+exports.dashboardPage = (req, res) => {
   try {
-    res.render('agency/home');
+    res.render('agency/dashboard');
   } catch (err) {
     console.log(err);
   }
