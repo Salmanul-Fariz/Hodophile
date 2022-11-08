@@ -801,8 +801,8 @@ a:active {
 }
 
 .profileaddressBar{
-    border: double;
-    border-width: 3px;
+    border: solid;
+    border-width: 1px;
     padding: 18px;
     border-color: #999999;
 }

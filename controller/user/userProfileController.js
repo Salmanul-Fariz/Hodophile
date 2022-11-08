@@ -369,3 +369,74 @@ exports.bookingsview = async (req, res) => {
     console.log(err);
   }
 };
+
+// Update Shopping Address Page
+exports.updateAddressPage = async (req, res) => {
+  try {
+    const cartCount = await cartItemCount(req.session.user);
+    const wishlistCount = await wishlistItemCount(req.session.user);
+    const user = await userModel.findById(req.params.id);
+    const address = user.Address[req.params.adddressIndex];
+
+    res.render('user/profileAddress', {
+      cartCount,
+      wishlistCount,
+      address,
+      user,
+      index: req.params.adddressIndex,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// update Shopping Address
+exports.updateAddress = async (req, res) => {
+  try {
+    const index = req.params.adddressIndex;
+    await userModel.updateOne(
+      {
+        UserId: req.params.id,
+      },
+      {
+        [`Address.${index}.Name`]: req.body.addressName,
+        [`Address.${index}.Address`]: req.body.address,
+        [`Address.${index}.Country`]: req.body.addressCountry,
+        [`Address.${index}.State`]: req.body.addressState,
+        [`Address.${index}.City`]: req.body.addressCity,
+        [`Address.${index}.PIN`]: req.body.addressPincode,
+      }
+    );
+    res.redirect(`/profile/shoppings/${req.params.id}`);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// delete Shopping Address
+exports.removeAddress = async (req, res) => {
+  try {
+    const index = req.params.adddressIndex;
+
+    // To Remove element in array by index
+    await userModel.updateOne(
+      {
+        UserId: req.params.id,
+      },
+      {
+        $unset: { [`Address.${index}`]: 1 },
+      }
+    );
+    await userModel.updateOne(
+      {
+        UserId: req.params.id,
+      },
+      {
+        $pull: { Address: null },
+      }
+    );
+    res.redirect('back');
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -37,7 +37,7 @@
                     <div class="profileSec2RightBar col-8 col-md-9 col-xl-10">
                         <div class="row">
                             <% for(i=0 ; i < user.Address.length ; i++ ){%>
-                                <div class="profileaddressBar col-3 ms-2 mt-3">
+                                <div class="profileaddressBar col-11 col-md-4 col-lg-3 ms-2 mt-3">
                                     <div class="col-12">
                                         <label class="profileAddress form-check-label" for="flexRadioDefault1">
                                             <%= user.Address[i].Name %><br>
@@ -45,15 +45,16 @@
                                                         <%= user.Address[i].PIN %>
                                         </label>
                                         <div class="d-flex mt-2">
-                                            <i onclick="removeAddress(i)" style="color:red ;"
+                                            <i onclick="removeAddress('<%= i %>','<%= user._id %>')" style="color:red ;"
                                                 class="profileAddressIcon fa-solid fa-trash-can me-2"></i>
-                                            <a href=""><i style="color:#0d6efd ;"
+                                            <a href="/profile/shoppings/address/<%= i %>/<%= user.id %>"><i
+                                                    style="color:#0d6efd ;"
                                                     class="profileAddressIcon fa-solid fa-pen-to-square"></i></a>
                                         </div>
                                     </div>
                                 </div>
                                 <%} %>
-                                    <div style="overflow-x:auto ;" class="col-12 mt-4">
+                                    <div style="overflow-x:auto ;" class="col-12 mt-5">
                                         <table class="col-12">
                                             <tbody>
                                                 <% for(i=0 ; i < orders.length ; i++){%>

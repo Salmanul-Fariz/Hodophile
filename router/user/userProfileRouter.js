@@ -35,6 +35,19 @@ router.get(
   userProfileController.personalVerification
 );
 
+// Shoppings address Update
+router
+  .route('/shoppings/address/:adddressIndex/:id')
+  .get(userSession, userBlockCheck, userProfileController.updateAddressPage)
+  .post(userSession, userBlockCheck, userProfileController.updateAddress);
+
+// Shoppings address Delete
+router.get(
+  '/shoppings/address/remove/:adddressIndex/:id',
+  userSession,
+  userBlockCheck,
+  userProfileController.removeAddress
+);
 
 // personal Details verification
 router.post(

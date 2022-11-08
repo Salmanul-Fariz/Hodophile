@@ -19,3 +19,15 @@ function viewBooking(bookingId) {
   document.body.appendChild(form);
   form.submit();
 }
+
+// Remove Address
+function removeAddress(index, userId) {
+  console.log('start');
+  // Creating Submit Form
+  const form = document.createElement('form');
+  // Form Attributes
+  form.method = 'get';
+  form.action = `/profile/shoppings/address/remove/${index}/${userId}`;
+  document.body.appendChild(form);
+  form.submit();
+}
