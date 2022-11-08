@@ -8,6 +8,7 @@ const bookingsModel = require('./../../model/bookingsModel');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
 const emailVerification = require('./../../utils/emailVerification');
+const otpGenerator = require('./../../utils/otpGenerator');
 const otpVerification = require('./../../utils/otpVerification');
 const mongoosErr = require('./../../utils/mongoosErr');
 
@@ -139,7 +140,7 @@ exports.updatePersonalDetailsPost = async (req, res) => {
     } else {
       // otp generator
       req.session.personalOtpGenerator = {
-        otp: otpVerification.otpGeneration(),
+        otp: otpGenerator(),
         user: req.params.id,
         type: 'Email',
         email: req.body.email,
@@ -249,16 +250,15 @@ exports.shopping = async (req, res) => {
     let Products = [];
     // Product Details
     for (let i = 0; i < orders.length; i++) {
-      let object = [];
       for (let j = 0; j < orders[i].Order.length; j++) {
         const product = await shoppingsModel.findById(
           orders[i].Order[j].ProductId
         );
         if (product) {
-          object.push(product.ShortName);
+          Products.push(product.ShortName);
+          break;
         }
       }
-      Products.push(object);
     }
 
     res.render('user/profileShoppings', {

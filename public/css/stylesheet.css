@@ -800,6 +800,30 @@ a:active {
     text-overflow: ellipsis;
 }
 
+.profileaddressBar{
+    border: double;
+    border-width: 3px;
+    padding: 18px;
+    border-color: #999999;
+}
+
+.profileAddress{
+    color: black;
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profileAddressIcon{
+    font-size: 19px;
+}
+
+.profileAddressIcon:hover{
+    cursor: pointer;
+}
+
 /*////////////////////*/
 /* tours page*/
 /*////////////////////*/
@@ -1584,6 +1608,3 @@ a:active {
     font-size: 18px;
 }
 
-.contactSubject{
-    
-}

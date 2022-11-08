@@ -1,6 +1,9 @@
 const userModel = require('./../../model/userModel');
 const mongoosErr = require('./../../utils/mongoosErr');
 const otpVerification = require('./../../utils/otpVerification');
+const otpGenerator = require('./../../utils/otpGenerator');
+const emailVerification = require('./../../utils/emailVerification');
+const bcrypt = require('bcrypt');
 
 // SignUp page(Post)
 exports.signup = async (req, res) => {
@@ -161,6 +164,93 @@ exports.logout = (req, res) => {
   try {
     req.session.user = null;
     res.redirect('/');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Reset Password (Page)
+exports.resetPasswordPage = async (req, res) => {
+  try {
+    if (req.session.user) {
+      res.redirect('/');
+    } else {
+      res.render('user/resetPass', { userErr: req.flash('userErr') });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// reset Password
+exports.resetPassword = (req, res) => {
+  try {
+    req.session.resetOTP = otpGenerator();
+    emailVerification.emailSender(req.body.email, req.session.resetOTP);
+    req.session.resetNewPassword = req.body.email;
+
+    res.json({
+      status: true,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// otp verify
+exports.resetPasswordVerify = (req, res) => {
+  try {
+    if (req.session.resetOTP === req.body.restOTP) {
+      req.session.resetOTP = null;
+      req.session.resetVerify = true;
+
+      res.json({
+        status: true,
+      });
+    } else {
+      res.json({
+        status: false,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// New Password Page
+exports.newPasswordPage = async (req, res) => {
+  try {
+    if (req.session.resetVerify) {
+      res.render('user/password');
+    } else {
+      res.redirect('/login');
+    }
+    req.session.resetVerify = null;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Add New Password
+exports.Newpassword = async (req, res) => {
+  try {
+    if (req.body.newPassword) {
+      const pass = await bcrypt.hash(req.body.newPassword, 12);
+      await userModel.updateOne(
+        {
+          email: req.session.resetNewPassword,
+        },
+        {
+          password: pass,
+        }
+      );
+
+      req.session.resetNewPassword = null;
+      res.redirect('/login');
+    } else {
+      req.flash('userErr', 'Cannot Change Password');
+      res.redirect('/login');
+    }
   } catch (err) {
     console.log(err);
   }

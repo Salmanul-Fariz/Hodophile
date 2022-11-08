@@ -37,7 +37,6 @@ function successBookking(userId, packageId, packageCategory) {
     $.ajax({
       url: `/bookings/${userId}/${packageId}/${packageCategory}`,
       type: 'post',
-      cache: false,
       data: {
         bookingContact: document.getElementById('bookingContact').value,
         bookingEmail: document.getElementById('bookingEmail').value,
@@ -79,7 +78,7 @@ function successBookking(userId, packageId, packageCategory) {
             $.ajax({
               url: `/bookings/success`,
               type: 'get',
-              cache: false,
+
               success: (res) => {
                 Swal.fire({
                   title: 'Booked',
@@ -106,7 +105,6 @@ function successBookking(userId, packageId, packageCategory) {
           $.ajax({
             url: `/bookings/failed`,
             type: 'get',
-            cache: false,
           });
         });
       },

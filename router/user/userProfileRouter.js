@@ -35,6 +35,7 @@ router.get(
   userProfileController.personalVerification
 );
 
+
 // personal Details verification
 router.post(
   '/personal/verification/:type/:id',

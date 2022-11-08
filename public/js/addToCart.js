@@ -44,7 +44,6 @@ function increaseQuantity(userId, productId) {
     $.ajax({
       url: `/shoppings/carts/increment/${userId}/${productId}`,
       type: 'get',
-      cache: false,
       success: (res) => {
         if (res.status) {
           // Increase quatity while add and remove
@@ -97,7 +96,6 @@ function decreaseQuantity(userId, productId) {
     $.ajax({
       url: `/shoppings/carts/decrement/${userId}/${productId}`,
       type: 'get',
-      cache: false,
       success: (res) => {
         console.log('Started');
         if (res.status) {
@@ -161,7 +159,6 @@ function deleteCartProduct(userId, productId) {
       $.ajax({
         url: `/shoppings/carts/delete/${userId}/${productId}`,
         type: 'get',
-        cache: false,
         success: (res) => {
           if (res.status) {
             const emptyProductLength =
@@ -223,12 +220,9 @@ function deleteCartProduct(userId, productId) {
 
 // Add to cart in (Shoppings)
 function addToCart(productId, userId) {
-  console.log('hello');
-
   $.ajax({
     url: ` /shoppings/carts/${userId}/${productId}`,
     type: 'post',
-    cache: false,
     success: (res) => {
       console.log(res.status);
       if (res.status) {

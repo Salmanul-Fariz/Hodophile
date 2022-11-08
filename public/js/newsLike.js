@@ -3,12 +3,10 @@ function Like(userId, newsId) {
   const newsButton = document.getElementById(`news${newsId}`);
   console.log(newsButton.innerHTML);
   if (newsButton.innerHTML === 'Like') {
-    console.log(newsButton.innerHTML);
-
     $.ajax({
       url: ` /news/increment/${userId}/${newsId}`,
       type: 'get',
-      cache: false,
+
       success: (res) => {
         if (res.status) {
           // Setting the button
@@ -28,7 +26,7 @@ function Like(userId, newsId) {
     $.ajax({
       url: `/news/decrement/${userId}/${newsId}`,
       type: 'get',
-      cache: false,
+
       success: (res) => {
         if (res.status) {
           // Setting the button

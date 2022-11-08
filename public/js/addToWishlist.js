@@ -3,7 +3,6 @@ function addToWishlist(productId, userId) {
   $.ajax({
     url: `/shoppings/wishlists/${userId}/${productId}`,
     type: 'get',
-    cache: false,
     success: (res) => {
       console.log(res.status);
       let wishlist = document.getElementById(`${productId}Wishlist`);
@@ -41,7 +40,6 @@ function addToCartProduct(userId, productId) {
       $.ajax({
         url: `/shoppings/wishlists/addCart/${userId}/${productId}`,
         type: 'get',
-        cache: false,
         success: (res) => {
           if (res.status) {
             const emptyProductLength =
@@ -95,7 +93,6 @@ function deleteWishlsitProduct(userId, productId) {
       $.ajax({
         url: `/shoppings/wishlists/remove/${userId}/${productId}`,
         type: 'get',
-        cache: false,
         success: (res) => {
           if (res.status) {
             const emptyProductLength =

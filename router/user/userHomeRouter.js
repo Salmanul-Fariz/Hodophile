@@ -32,4 +32,19 @@ router
 // Logout
 router.post('/logout', userAuthController.logout);
 
+// Reset Password
+router
+  .route('/reset')
+  .get(userAuthController.resetPasswordPage)
+  .post(userAuthController.resetPassword);
+
+// Verify OTP For Reset Password
+router.post('/resetOtp', userAuthController.resetPasswordVerify);
+
+// Add New Password
+router
+  .route('/reset/password')
+  .get(userAuthController.newPasswordPage)
+  .post(userAuthController.Newpassword);
+
 module.exports = router;

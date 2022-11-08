@@ -26,7 +26,7 @@ function razorpayFunction(cash, rzOrderId, name, email, contact, types) {
       $.ajax({
         url: `/shoppings/success`,
         type: 'get',
-        cache: false,
+
         success: (res) => {
           Swal.fire({
             title: 'Order',
@@ -54,7 +54,6 @@ function razorpayFunction(cash, rzOrderId, name, email, contact, types) {
     $.ajax({
       url: `/shoppings/failed`,
       type: 'get',
-      cache: false,
     });
   });
 }
@@ -116,7 +115,7 @@ function checkOut(orderType, userId, productId) {
             deliveryType: deliveryType,
             orderCoupon: couponId,
           },
-          cache: false,
+
           success: (res) => {
             cash = res.cash;
             rzOrderId = res.rzOrderId;
@@ -146,7 +145,7 @@ function checkOut(orderType, userId, productId) {
             deliveryType: deliveryType,
             orderCoupon: couponId,
           },
-          cache: false,
+
           success: (res) => {
             cash = res.cash;
             rzOrderId = res.rzOrderId;
@@ -189,7 +188,7 @@ function checkOut(orderType, userId, productId) {
             deliveryType: deliveryType,
             orderCoupon: couponId,
           },
-          cache: false,
+
           success: (res) => {
             if (res.status) {
               Swal.fire({
@@ -221,7 +220,7 @@ function checkOut(orderType, userId, productId) {
             deliveryType: deliveryType,
             orderCoupon: couponId,
           },
-          cache: false,
+
           success: (res) => {
             if (res.status) {
               Swal.fire({
