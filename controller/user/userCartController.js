@@ -7,31 +7,18 @@ const wishlistItemCount = require('./../../utils/wishlistItemCount');
 // Get Cart Page
 exports.cartsPage = async (req, res) => {
   try {
-    const cart = await cartModel.findOne({ UserId: req.session.user });
+    const cart = await cartModel
+      .findOne({ UserId: req.session.user })
+      .populate('Products.productId');
 
-    // Set Cart Add Product Details
-    let AllCartProducts = [];
-    let cartProducts = null;
-    if (cart) {
-      userCart = true;
-      for (let i = 0; i < cart.Products.length; i++) {
-        const product = await shoppingsModel.findById(
-          cart.Products[i].productId
-        );
-        if (product) {
-          AllCartProducts.push(product);
-        }
-      }
-      cartProducts = await checkItemDelete(AllCartProducts);
-    } else {
+    let userCart = true;
+    if (!cart) {
       userCart = false;
-      cartProducts = null;
     }
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
 
     res.render('user/carts', {
-      cartProducts,
       cart,
       userId: req.session.user._id,
       userCart,
@@ -93,8 +80,6 @@ exports.addCart = async (req, res) => {
           { $unwind: '$Products' },
           { $match: { 'Products.productId': req.params.productId } },
         ]);
-
-        console.log(cartCount);
 
         // Product Exist
         if (cartCount[0].Products.Count < 10) {

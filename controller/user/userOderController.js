@@ -12,7 +12,6 @@ exports.orderPage = async (req, res) => {
   try {
     // Came from Direct Click Product
     let product, cartCount, wishlistCount, user, cart;
-    let cartProducts = [];
     if (req.params.orderType === 'Product') {
       product = await shoppingsModel.findById(req.params.orderTypeId);
       cartCount = await cartItemCount(req.session.user);
@@ -21,23 +20,16 @@ exports.orderPage = async (req, res) => {
     }
     // Came from Direct Click Cart
     else if (req.params.orderType === 'Cart') {
-      cart = await cartModel.findById(req.params.orderTypeId);
-      // Product Details
-      for (let i = 0; i < cart.Products.length; i++) {
-        const product = await shoppingsModel.findById(
-          cart.Products[i].productId
-        );
-        if (product) {
-          cartProducts.push(product);
-        }
-      }
+      cart = await cartModel
+        .findById(req.params.orderTypeId)
+        .populate('Products.productId');
+
       cartCount = await cartItemCount(req.session.user);
       wishlistCount = await wishlistItemCount(req.session.user);
       user = await userModel.findById(req.params.userId);
     }
 
     res.render('user/order', {
-      cartProducts,
       cartCount,
       wishlistCount,
       product,
@@ -135,7 +127,7 @@ exports.orderSubmit = async (req, res) => {
           Price: proPrice,
           Discount: proDiscount,
           TotalPrice: proTotal,
-          PaymentStatus:'Completed',
+          PaymentStatus: 'Completed',
           PaymentMethod: req.body.deliveryType,
           Order: {
             ProductId: product._id,

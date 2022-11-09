@@ -42,10 +42,10 @@
                                             <tr onclick="viewBooking('<%= bookings[i]._id %>')"
                                                 class="profilShoppingList">
                                                 <td class="profileSec2ShoppingsText">
-                                                    <%= bookings[i].Date.split(',')[0] %>
+                                                    <%= bookings[i].Date.toISOString().split('T')[0] %>
                                                 </td>
                                                 <td class="profileSec2ShoppingsText">
-                                                    <%= packages[i] %>
+                                                    <%= bookings[i].PackageId.Name %>
                                                 </td>
                                                 <td class="profileSec2ShoppingsText">
                                                     <%= bookings[i]._id %>

@@ -37,66 +37,59 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% for(let i=0; i < cartProducts.length; i++){%>
-                                            <tr id="<%= cartProducts[i].id %>Product" scope="row">
+                                        <% for(let i=0; i < cart.Products.length; i++) {%>
+                                            <tr id="<%= cart.Products[i].productId[0].id %>Product" scope="row">
                                                 <td class="pt-3"><img style="width: 80px;"
-                                                        src="/images/shopping/<%= cartProducts[i].Images[i] %>" alt="">
+                                                        src="/images/shopping/<%= cart.Products[i].productId[0].Images[0] %>"
+                                                        alt="">
                                                 </td>
                                                 <td class="p-3 ">
                                                     <p class="cartTableText">
-                                                        <%= cartProducts[i].ShortName %>
+                                                        <%= cart.Products[i].productId[0].ShortName %>
                                                     </p>
                                                 </td>
                                                 <td class="p-3 ">
                                                     <p class="cartTableText">
-                                                        <%= cartProducts[i].Price %>
+                                                        <%= cart.Products[i].productId[0].Price %>
                                                     </p>
                                                 </td>
                                                 <td class="p-3">
                                                     <div class="d-flex cartTableButtonBar">
-                                                        <i onclick="decreaseQuantity('<%= userId %>','<%= cartProducts[i].id %>')"
+                                                        <i onclick="decreaseQuantity('<%= userId %>','<%= cart.Products[i].productId[0].id %>')"
                                                             class="cartTableIncButtons fa-solid fa-minus"></i>
-                                                        <% for (p of cart.Products) { %>
-                                                            <% if(p.productId===cartProducts[i].id) { %>
-                                                                <input id="<%= cartProducts[i].id %>Input"
-                                                                    value="<%= p.Count %>" readonly
-                                                                    class=" ms-2 cartTableIncInput" type="Number">
-                                                                <% } %>
-                                                                    <% } %>
-                                                                        <i onclick="increaseQuantity('<%= userId %>','<%= cartProducts[i].id %>')"
-                                                                            class="cartTableIncButtons fa-solid fa-plus"></i>
+                                                        <input id="<%= cart.Products[i].productId[0].id %>Input"
+                                                            value="<%= cart.Products[i].Count %>" readonly
+                                                            class=" ms-2 cartTableIncInput" type="Number">
+                                                        <i onclick="increaseQuantity('<%= userId %>','<%= cart.Products[i].productId[0].id %>')"
+                                                            class="cartTableIncButtons fa-solid fa-plus"></i>
                                                     </div>
                                                 </td>
-                                                <% for (p of cart.Products) { %>
-                                                    <% if(p.productId===cartProducts[i].id) { %>
-                                                        <span id="<%= cartProducts[i].id %>productPrice"
-                                                            class="productPrice" style="visibility:hidden ;">
-                                                            <%= cartProducts[i].Price %>
-                                                        </span>
-                                                        <span class="productCount" style="visibility:hidden ">
-                                                            <%= p.Count %>
-                                                        </span>
-                                                        <td class=" p-3 ">
-                                                            <p id="<%= cartProducts[i].id %>productTotal"
-                                                                class="productTotal cartTableText">
-                                                            </p>
-                                                        </td>
-                                                        <% } %>
-                                                            <% } %>
-                                                                <td class="p-3 cartTableText"></td>
-                                                                <td class="p-3 cartTableClose">
-                                                                    <i onclick="deleteCartProduct('<%= userId %>','<%= cartProducts[i].id %>')"
-                                                                        class="cartTableCloseButton fa-solid fa-xmark"></i>
-                                                                </td>
+                                                <span id="<%= cart.Products[i].productId[0].id %>productPrice"
+                                                    class="productPrice" style="visibility:hidden ;">
+                                                    <%= cart.Products[i].productId[0].Price %>
+                                                </span>
+                                                <span class="productCount" style="visibility:hidden ">
+                                                    <%= cart.Products[i].Count %>
+                                                </span>
+                                                <td class=" p-3 ">
+                                                    <p id="<%= cart.Products[i].productId[0].id %>productTotal"
+                                                        class="productTotal cartTableText">
+                                                    </p>
+                                                </td>
+                                                <td class="p-3 cartTableText"></td>
+                                                <td class="p-3 cartTableClose">
+                                                    <i onclick="deleteCartProduct('<%= userId %>','<%= cart.Products[i].productId[0].id %>')"
+                                                        class="cartTableCloseButton fa-solid fa-xmark"></i>
+                                                </td>
                                             </tr>
-                                            <span id="<%= cartProducts[i].id %>productDiscount" class="productDiscount"
-                                                style="visibility:hidden ;">
-                                                <%= cartProducts[i].Discount %>
+                                            <span id="<%= cart.Products[i].productId[0].id %>productDiscount"
+                                                class="productDiscount" style="visibility:hidden ;">
+                                                <%= cart.Products[i].productId[0].Discount %>
+                                            </span>
+                                            <span id="emptyProductLength" style="display: none;">
+                                                <%= cart.Products.length %>
                                             </span>
                                             <%}%>
-                                                <span id="emptyProductLength" style="display: none;">
-                                                    <%= cartProducts.length %>
-                                                </span>
                                     </tbody>
                                 </table>
                             </div>
@@ -134,7 +127,8 @@
                     </div>
                     <div id="emptyCheckout" class="row d-flex justify-content-end">
                         <div class="col-5 col-md-3 col-xl-2 ">
-                            <a class="signupSec2FormButton" style="padding: 14px 25px;" href="/shoppings/Cart/<%= userId %>/<%= cart._id %>">Check Out</a>
+                            <a class="signupSec2FormButton" style="padding: 14px 25px;"
+                                href="/shoppings/Cart/<%= userId %>/<%= cart._id %>">Check Out</a>
                         </div>
                     </div>
                     <%}else{%>

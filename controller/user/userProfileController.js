@@ -244,25 +244,13 @@ exports.shopping = async (req, res) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
-    const orders = await orderModel.find({ 'User.UserId': req.params.id });
+    const orders = await orderModel
+      .find({ 'User.UserId': req.params.id })
+      .populate('Order.ProductId')
+      .sort({ Date: -1 });
     const user = await userModel.findById(req.params.id);
 
-    let Products = [];
-    // Product Details
-    for (let i = 0; i < orders.length; i++) {
-      for (let j = 0; j < orders[i].Order.length; j++) {
-        const product = await shoppingsModel.findById(
-          orders[i].Order[j].ProductId
-        );
-        if (product) {
-          Products.push(product.ShortName);
-          break;
-        }
-      }
-    }
-
     res.render('user/profileShoppings', {
-      Products,
       orders,
       user,
       cartCount,
@@ -308,27 +296,15 @@ exports.booking = async (req, res) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
-    const bookings = await bookingsModel.find({ 'User.UserId': req.params.id });
+    const bookings = await bookingsModel
+      .find({ 'User.UserId': req.params.id })
+      .populate('User.UserId')
+      .populate('PackageId')
+      .sort({ Date: -1 });
+
     const user = await userModel.findById(req.params.id);
 
-    let packages = [];
-    // Packages Details
-    for (let i = 0; i < bookings.length; i++) {
-      if (bookings[i].Category === 'Trekking') {
-        const product = await trekkingModel.findById(bookings[i].PackageId);
-        if (product) {
-          packages.push(product.Name);
-        }
-      } else {
-        const product = await destinationsModel.findById(bookings[i].PackageId);
-        if (product) {
-          packages.push(product.Name);
-        }
-      }
-    }
-
     res.render('user/profileBookings', {
-      packages,
       user,
       bookings,
       cartCount,

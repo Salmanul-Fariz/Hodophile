@@ -61,17 +61,23 @@
                                                     <tr onclick="viewOrder('<%= orders[i]._id %>')"
                                                         class="profilShoppingList">
                                                         <td class="profileSec2ShoppingsText">
-                                                            <%= orders[i].Date.split(',')[0] %>
+                                                            <%= orders[i].Date.toISOString().split('T')[0] %>
                                                         </td>
-                                                        <td class="profileSec2ShoppingsText">
-                                                            <%= Products[i] %>
-                                                        </td>
-                                                        <td class="profileSec2ShoppingsText">
-                                                            <%= orders[i]._id %>
-                                                        </td>
-                                                        <td class="text-center profileSec2ShoppingsText">₹
-                                                            <%= orders[i].TotalPrice %>
-                                                        </td>
+                                                        <% if( orders[i].Order.length> 1 ){%>
+                                                            <td class="profileSec2ShoppingsText">
+                                                                <%= orders[i].Order[0].ProductId.ShortName %> & More
+                                                            </td>
+                                                            <%}else{%>
+                                                                <td class="profileSec2ShoppingsText">
+                                                                    <%= orders[i].Order[0].ProductId.ShortName %>
+                                                                </td>
+                                                                <%} %>
+                                                                    <td class="profileSec2ShoppingsText">
+                                                                        <%= orders[i]._id %>
+                                                                    </td>
+                                                                    <td class="text-center profileSec2ShoppingsText">₹
+                                                                        <%= orders[i].TotalPrice %>
+                                                                    </td>
                                                     </tr>
                                                     <%} %>
                                             </tbody>
