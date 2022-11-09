@@ -32,6 +32,7 @@ exports.contact = async (req, res) => {
         res.redirect('/');
       })
       .catch((err) => {
+        console.log(err);
         req.flash('msgErr', 'Something Went Wrong !');
         res.redirect('/contact');
       });

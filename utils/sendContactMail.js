@@ -7,8 +7,8 @@ dotenv.config({ path: './config.env' });
 
 const auth = {
   auth: {
-    api_key: 'ac224358aff784e04cb9d5f09bb1125c-48c092ba-411fb22f',
-    domain: 'sandbox9c78792901ae47e99075be1c0fd465fd.mailgun.org',
+    api_key: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN,
   },
 };
 
@@ -21,7 +21,7 @@ module.exports = (sendemail, name, subject, message, phone) => {
     // Sending mail options
     const mailOptions = {
       from: sendemail,
-      to: 'salmanulnadakkal1@gmail.com',
+      to: 'salmanulnadakkal2@gmail.com',
       subject: 'Welcome onboard',
       html: `<h4>${subject}</h4><h5>${name},</h5><h5>${message}</h5><h5>Email : ${sendemail}</h5><h5>Contact : ${phone}</h5><h6>Thank you!</h6>`,
     };
