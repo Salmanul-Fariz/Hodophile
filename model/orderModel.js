@@ -2,8 +2,8 @@ const mongoos = require('mongoose');
 
 const orderSchema = new mongoos.Schema({
   Date: {
-    type: String,
-    default: new Date().toLocaleString(undefined, { timeZone: 'Asia/Kolkata' }),
+    type: Date,
+    default: Date.now(),
   },
   Status: {
     type: String,
@@ -11,7 +11,8 @@ const orderSchema = new mongoos.Schema({
   },
   User: {
     UserId: {
-      type: String,
+      type: mongoos.Schema.Types.ObjectId,
+      ref: 'User',
       required: [true, 'Please Enter User Id !'],
     },
     Name: {
@@ -35,10 +36,13 @@ const orderSchema = new mongoos.Schema({
     type: String,
     required: [true, 'Please Enter Payment Method !'],
   },
-  Order: {
-    type: Array,
-    required: [true, 'Please Enter Order Details !'],
-  },
+  Order: [
+    {
+      ProductId: { type: mongoos.Schema.Types.ObjectId, ref: 'shopping' },
+      Quantity: Number,
+      Price: Number,
+    },
+  ],
   Price: {
     type: Number,
     required: [true, 'Please Enter Price !'],

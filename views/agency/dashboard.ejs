@@ -7,7 +7,6 @@
         <section class="agToursSec1 ">
             <div class="container mb-4">
                 <div class="row">
-
                     <!-- section 1 -->
                     <div class="col-12 col-md-10 col-lg-8">
                         <div class="col-12 col-md-10 col-lg-10 mt-5">
@@ -15,10 +14,11 @@
                                 <div class="agnecyDashBoardWalletBar">
                                     <div class="row">
                                         <div class="col-4">
-                                            <h2 class="agnecyDashBoardWalletText1">$10,000</h2>
+                                            <h2 class="agnecyDashBoardWalletText1">$<%= totalRevenue %>
+                                            </h2>
                                         </div>
                                         <div class="col-5">
-                                            <p class="agnecyDashBoardWalletText2">Revenue last Year</p>
+                                            <p class="agnecyDashBoardWalletText2">Revenue Current Year</p>
                                         </div>
                                         <div class="col-3">
                                             <i class="ms-3 agnecyDashBoardWalletIcon fa-solid fa-wallet"></i>
@@ -30,88 +30,112 @@
                                 <div class="row">
                                     <div class="col-10 col-md-6 mt-3">
                                         <div class="agnecyDashBoardCardsBar">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <h3 class="agnecyDashBoardCardsCount">10</h3>
-                                                    <p class="agnecyDashBoardCardsText1">Tours</p>
-                                                    <p class="agnecyDashBoardCardsText2"><i>last Month</i></p>
+                                            <a href="/agency/tours">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <h3 class="agnecyDashBoardCardsCount">
+                                                            <%= tourCount %>
+                                                        </h3>
+                                                        <p class="agnecyDashBoardCardsText1">Tours</p>
+                                                        <p class="agnecyDashBoardCardsText2"><i>In Hodophile</i></p>
+                                                    </div>
+                                                    <div style="padding: 29px 0px;" class="col-4 m-0">
+                                                        <i
+                                                            class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-box-open "></i>
+                                                    </div>
                                                 </div>
-                                                <div style="padding: 29px 0px;" class="col-4 m-0">
-                                                    <i class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-box-open "></i>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-10 col-md-6 mt-3">
                                         <div class="agnecyDashBoardCardsBar">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <h3 class="agnecyDashBoardCardsCount">10</h3>
-                                                    <p class="agnecyDashBoardCardsText1">Treakings</p>
-                                                    <p class="agnecyDashBoardCardsText2"><i>last Month</i></p>
+                                            <a href="/agency/trekkings">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <h3 class="agnecyDashBoardCardsCount">
+                                                            <%= trekkingCount %>
+                                                        </h3>
+                                                        <p class="agnecyDashBoardCardsText1">Treakings</p>
+                                                        <p class="agnecyDashBoardCardsText2"><i>In Hodophile</i></p>
+                                                    </div>
+                                                    <div style="padding: 29px 0px;" class="col-4 m-0">
+                                                        <i
+                                                            class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-person-hiking"></i>
+                                                    </div>
                                                 </div>
-                                                <div style="padding: 29px 0px;" class="col-4 m-0">
-                                                    <i
-                                                        class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-person-hiking"></i>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-10 col-md-6 mt-3">
                                         <div class="agnecyDashBoardCardsBar">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <h3 class="agnecyDashBoardCardsCount">10</h3>
-                                                    <p class="agnecyDashBoardCardsText1">News</p>
-                                                    <p class="agnecyDashBoardCardsText2"><i>last Month</i></p>
+                                            <a href="/agency/news">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <h3 class="agnecyDashBoardCardsCount">
+                                                            <%= newsCount %>
+                                                        </h3>
+                                                        <p class="agnecyDashBoardCardsText1">News</p>
+                                                        <p class="agnecyDashBoardCardsText2"><i>In Hodophile</i></p>
+                                                    </div>
+                                                    <div style="padding: 29px 0px;" class="col-4 m-0">
+                                                        <i
+                                                            class="ms-1 agnecyDashBoardCardsIcons fa-regular fa-newspaper"></i>
+                                                    </div>
                                                 </div>
-                                                <div style="padding: 29px 0px;" class="col-4 m-0">
-                                                    <i
-                                                        class="ms-1 agnecyDashBoardCardsIcons fa-regular fa-newspaper"></i>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-10 col-md-6 mt-3">
                                         <div class="agnecyDashBoardCardsBar">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <h3 class="agnecyDashBoardCardsCount">10</h3>
-                                                    <p class="agnecyDashBoardCardsText1">Products</p>
-                                                    <p class="agnecyDashBoardCardsText2"><i>last Month</i></p>
+                                            <a href="/agency/shoppings">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <h3 class="agnecyDashBoardCardsCount">
+                                                            <%= productsCount %>
+                                                        </h3>
+                                                        <p class="agnecyDashBoardCardsText1">Products</p>
+                                                        <p class="agnecyDashBoardCardsText2"><i>In Hodophile</i></p>
+                                                    </div>
+                                                    <div style="padding: 29px 0px;" class="col-4 m-0">
+                                                        <i class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-store"></i>
+                                                    </div>
                                                 </div>
-                                                <div style="padding: 29px 0px;" class="col-4 m-0">
-                                                    <i class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-store"></i>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-10 col-md-6 mt-3">
                                         <div class="agnecyDashBoardCardsBar">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <h3 class="agnecyDashBoardCardsCount">10</h3>
-                                                    <p class="agnecyDashBoardCardsText1">Clients</p>
-                                                    <p class="agnecyDashBoardCardsText2"><i>last Month</i></p>
+                                            <a href="/agency/users">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <h3 class="agnecyDashBoardCardsCount">
+                                                            <%= userCount %>
+                                                        </h3>
+                                                        <p class="agnecyDashBoardCardsText1">Clients</p>
+                                                        <p class="agnecyDashBoardCardsText2"><i>In Hodophile</i></p>
+                                                    </div>
+                                                    <div style="padding: 29px 0px;" class="col-4 m-0">
+                                                        <i class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-users"></i>
+                                                    </div>
                                                 </div>
-                                                <div style="padding: 29px 0px;" class="col-4 m-0">
-                                                    <i class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-users"></i>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-10 col-md-6 mt-3">
                                         <div class="agnecyDashBoardCardsBar">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <h3 class="agnecyDashBoardCardsCount">10</h3>
-                                                    <p class="agnecyDashBoardCardsText1">Revenue</p>
-                                                    <p class="agnecyDashBoardCardsText2"><i>last Month</i></p>
+                                            <a href="">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <h3 class="agnecyDashBoardCardsCount">$<%= profite %>
+                                                        </h3>
+                                                        <p class="agnecyDashBoardCardsText1">Profite</p>
+                                                        <p class="agnecyDashBoardCardsText2"><i>Current Year</i></p>
+                                                    </div>
+                                                    <div style="padding: 29px 0px;" class="col-4 m-0">
+                                                        <i class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-coins"></i>
+                                                    </div>
                                                 </div>
-                                                <div style="padding: 29px 0px;" class="col-4 m-0">
-                                                    <i class="ms-1 agnecyDashBoardCardsIcons fa-solid fa-coins"></i>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +146,6 @@
 
                         <div class=" col-12 col-md-10 col-lg-12 mt-5">
                             <canvas id="myChart"></canvas>
-
                         </div>
                     </div>
 
@@ -135,49 +158,26 @@
                                 <div class="col-12">
                                     <p class="agnecyDashBoardLatestHead">Latest Bookings</p>
                                 </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
+                                <% for (i=0 ;i < 4 ; i++){%>
+                                    <div class="col-12 agnecyDashBoardLatestListBar">
+                                        <div class="col-12">
+                                            <p class="agnecyDashBoardLatestText1">
+                                                <%= latestBooking[i].PackageId.Name %>
+                                            </p>
+                                        </div>
+                                        <div class="mt-3 col-12 d-flex">
+                                            <img class="agnecyDashBoardLatestImage"
+                                                src="/images/avatar/<%= latestBooking[i].User.UserId.ProfileImage %>">
+                                            <p class="agnecyDashBoardLatestText2">
+                                                <%= latestBooking[i].User.UserId.firstName %>
+                                                    <%= latestBooking[i].User.UserId.lastName %>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
-                                    </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
-                                    </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
-                                    </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3 col-12 d-flex justify-content-center">
-                                    <a class="agnecyDashBoardLatestListButton" href="">More</a>
-                                </div>
+                                    <%} %>
+                                        <div class="mt-3 col-12 d-flex justify-content-center">
+                                            <a class="agnecyDashBoardLatestListButton" href="/agency/bookings">More</a>
+                                        </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -185,49 +185,26 @@
                                 <div class="col-12">
                                     <p class="agnecyDashBoardLatestHead">Latest Orders</p>
                                 </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
+                                <% for (i=0 ;i < 4 ; i++){%>
+                                    <div class="col-12 agnecyDashBoardLatestListBar">
+                                        <div class="col-12">
+                                            <p class="agnecyDashBoardLatestText1">
+                                                <%= latestOrders[i].Order[0].ProductId.ShortName %>
+                                            </p>
+                                        </div>
+                                        <div class="mt-3 col-12 d-flex">
+                                            <img class="agnecyDashBoardLatestImage"
+                                                src="/images/avatar/<%= latestOrders[i].User.UserId.ProfileImage %>">
+                                            <p class="agnecyDashBoardLatestText2">
+                                                <%= latestOrders[i].User.UserId.firstName %>
+                                                    <%= latestOrders[i].User.UserId.lastName %>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
-                                    </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
-                                    </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 agnecyDashBoardLatestListBar">
-                                    <div class="col-12">
-                                        <p class="agnecyDashBoardLatestText1">Name of Treaking Or tours That Booked
-                                        </p>
-                                    </div>
-                                    <div class="mt-3 col-12 d-flex">
-                                        <div class="agnecyDashBoardLatestImage"></div>
-                                        <p class="agnecyDashBoardLatestText2">Salmanul Fariz</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3 col-12 d-flex justify-content-center">
-                                    <a class="agnecyDashBoardLatestListButton" href="">More</a>
-                                </div>
+                                    <%} %>
+                                        <div class="mt-3 col-12 d-flex justify-content-center">
+                                            <a class="agnecyDashBoardLatestListButton" href="/agency/orders">More</a>
+                                        </div>
                             </div>
                         </div>
                     </div>
@@ -237,7 +214,6 @@
 
         <!-- dashboard chart -->
         <script src="/js/dashboardChart.js"></script>
-
 
         <!-- footer -->
         <%- include('../includes/agEnd.ejs') %>

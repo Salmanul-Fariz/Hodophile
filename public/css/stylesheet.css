@@ -1524,6 +1524,7 @@ a:active {
 }
 
 .agnecyDashBoardCardsText1 {
+    color: #000000;
     margin: 0px;
     margin-top: 15px;
     font-size: 18px;
@@ -1531,6 +1532,7 @@ a:active {
 }
 
 .agnecyDashBoardCardsText2 {
+    color: #000000;
     margin: 0px;
     margin-top: 11px;
     font-size: 14px;
@@ -1538,6 +1540,7 @@ a:active {
 }
 
 .agnecyDashBoardCardsIcons {
+    color: #000000;
     font-size: 27px;
     padding: 10px;
     border-radius: 15px;
@@ -1551,7 +1554,7 @@ a:active {
 }
 
 .agnecyDashBoardLatestHead {
-    font-family: 'Arizonia';
+    font-weight: 400;
     font-size: 26px;
 }
 
@@ -1570,7 +1573,7 @@ a:active {
 .agnecyDashBoardLatestText2 {
     margin: 0;
     padding: 3px 11px;
-    width: 125px;
+    width: 150px;
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -1578,9 +1581,9 @@ a:active {
 }
 
 .agnecyDashBoardLatestListBar {
-    border-top: solid;
-    border-width: 1px;
-    border-color: #a7a7a7;
+    border-top: double;
+    border-width: 3px;
+    border-color: #c7c6c6;
     padding-top: 6px;
     margin-top: 16px;
 }

@@ -135,6 +135,7 @@ exports.orderSubmit = async (req, res) => {
           Price: proPrice,
           Discount: proDiscount,
           TotalPrice: proTotal,
+          PaymentStatus:'Completed',
           PaymentMethod: req.body.deliveryType,
           Order: {
             ProductId: product._id,

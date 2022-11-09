@@ -11,7 +11,7 @@ exports.bookings = async (req, res) => {
     // find user name
     const user = await userModel.findById(req.params.userId);
     let packageTotal, packageDiscount, packagePrice;
-    if (req.params.packageCategory === 'Tour') {
+    if (req.params.packageCategory === 'Destination') {
       let package = await destinationsModel.findById(req.params.packageId);
       packagePrice = package.Price;
       if (req.body.bookingCoupon === 'false') {

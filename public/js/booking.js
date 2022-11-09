@@ -86,7 +86,7 @@ function successBookking(userId, packageId, packageCategory) {
                   confirmButtonColor: '#3085d6',
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    if (packageCategory == 'Tour') {
+                    if (packageCategory == 'Destination') {
                       location.replace(`/tours/${packageId}`);
                     } else {
                       location.replace(`/trekkings/${packageId}`);

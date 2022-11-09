@@ -11,6 +11,9 @@ const agencyAuthController = require('../../controller/agency/agencyAuthControll
 // home page
 router.get('/', agencySession, agencyDashboardController.dashboardPage);
 
+// Take Data To Graph
+router.get('/data', agencySession, agencyDashboardController.graph);
+
 // login page
 router
   .route('/login')
