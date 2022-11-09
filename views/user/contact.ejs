@@ -33,7 +33,15 @@
                     </div>
                     <div class="col-12 d-flex justify-content-center">
                         <div class="col-12 col-sm-10 col-md-8 mt-5">
-                            <form action="">
+                            <form action="/contact/send" method="post">
+                                <% if (msgErr.length>0){%>
+                                    <div class="signupSec2ErrorBar d-flex justify-content-center">
+                                        <p id="ErrText" class="text-center signupSec2ErrorText">
+                                            <%= msgErr %>
+                                        </p>
+                                        <i class="signupSec2ErrorMark fa-regular fa-circle-xmark"></i>
+                                    </div>
+                                    <%}%>
                                 <div class="d-flex mt-3">
                                     <div class="mb-3 pe-2 signupSec2FormBar">
                                         <label class="form-label signupSec2Text">Your Name</label>
