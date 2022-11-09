@@ -105,6 +105,16 @@ exports.login = (req, res) => {
   }
 };
 
+// log out (post)
+exports.logout = (req, res) => {
+  try {
+    req.session.agency = null;
+    res.redirect('/agency');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Take Data To Graph
 exports.graph = async (req, res) => {
   try {
