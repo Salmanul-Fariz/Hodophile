@@ -122,8 +122,10 @@ exports.Wishlist = async (req, res) => {
 exports.removeWishlist = async (req, res) => {
   try {
     // Remove From Wishlist
-    const userCart = await wishlistModel.findOne({ UserId: req.params.userId });
-    if (userCart.Products.length > 1) {
+    const userWishlist = await wishlistModel.findOne({
+      UserId: req.params.userId,
+    });
+    if (userWishlist.Products.length > 1) {
       await wishlistModel.updateOne(
         { UserId: req.params.userId },
         { $pull: { Products: { productId: req.params.productId } } }
@@ -190,8 +192,6 @@ exports.wishlistAddToCart = async (req, res) => {
           { $match: { 'Products.productId': req.params.productId } },
         ]);
 
-        console.log(cartCount);
-
         // Product Exist
         if (cartCount[0].Products.Count < 10) {
           const product = await cartModel.findOne({
@@ -209,6 +209,19 @@ exports.wishlistAddToCart = async (req, res) => {
           status: true,
         });
       }
+    }
+
+    // Remove From Wishlist
+    const userWishlist = await wishlistModel.findOne({
+      UserId: req.params.userId,
+    });
+    if (userWishlist.Products.length > 1) {
+      await wishlistModel.updateOne(
+        { UserId: req.params.userId },
+        { $pull: { Products: { productId: req.params.productId } } }
+      );
+    } else {
+      await wishlistModel.deleteOne({ UserId: req.params.userId });
     }
   } catch (err) {
     console.log(err);
