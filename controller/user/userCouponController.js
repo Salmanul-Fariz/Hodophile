@@ -1,7 +1,8 @@
 const couponModel = require('./../../model/couponModel');
+const appError = require('./../../middleware/appError');
 
 // coupon Checking(booking)
-exports.bookingCouponChecking = async (req, res) => {
+exports.bookingCouponChecking = async (req, res, next) => {
   try {
     const clientCoupon = req.body.coupon.toUpperCase();
     const coupon = await couponModel.findOne({ Name: clientCoupon });
@@ -15,12 +16,12 @@ exports.bookingCouponChecking = async (req, res) => {
       res.redirect('back');
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // coupon Checking(Orders)
-exports.orderCouponChecking = async (req, res) => {
+exports.orderCouponChecking = async (req, res, next) => {
   try {
     const clientCoupon = req.body.coupon.toUpperCase();
     const coupon = await couponModel.findOne({ Name: clientCoupon });
@@ -33,6 +34,6 @@ exports.orderCouponChecking = async (req, res) => {
       res.redirect('back');
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

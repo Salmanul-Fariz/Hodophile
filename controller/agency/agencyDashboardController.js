@@ -5,9 +5,10 @@ const trekkingModel = require('./../../model/trekkingModel');
 const newsModel = require('./../../model/newsModel');
 const shoppingsModel = require('./../../model/shoppingsModel');
 const userModel = require('./../../model/userModel');
+const appError = require('./../../middleware/appError');
 
 // Home page(get)
-exports.dashboardPage = async (req, res) => {
+exports.dashboardPage = async (req, res, next) => {
   try {
     // current year
     let year = new Date().toISOString().split('-')[0];
@@ -92,31 +93,35 @@ exports.dashboardPage = async (req, res) => {
       latestOrders,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // login pagee (get)
-exports.login = (req, res) => {
-  if (req.session.agency) {
-    res.render('agency/home');
-  } else {
-    res.render('agency/login', { agencyErr: req.flash('agencyErr') });
+exports.login = (req, res, next) => {
+  try {
+    if (req.session.agency) {
+      res.render('agency/home');
+    } else {
+      res.render('agency/login', { agencyErr: req.flash('agencyErr') });
+    }
+  } catch (err) {
+    appError(req, res, next);
   }
 };
 
 // log out (post)
-exports.logout = (req, res) => {
+exports.logout = (req, res, next) => {
   try {
     req.session.agency = null;
     res.redirect('/agency');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Take Data To Graph
-exports.graph = async (req, res) => {
+exports.graph = async (req, res, next) => {
   try {
     // current year
     let year = new Date().toISOString().split('-')[0];
@@ -204,6 +209,6 @@ exports.graph = async (req, res) => {
       total: total,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

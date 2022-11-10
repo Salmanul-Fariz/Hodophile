@@ -1,9 +1,10 @@
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
 const sendContactMail = require('./../../utils/sendContactMail');
+const appError = require('./../../middleware/appError');
 
 // Contact Page
-exports.contactPage = async (req, res) => {
+exports.contactPage = async (req, res, next) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -14,12 +15,12 @@ exports.contactPage = async (req, res) => {
       msgErr: req.flash('msgErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // send mail To admin
-exports.contact = async (req, res) => {
+exports.contact = async (req, res, next) => {
   try {
     sendContactMail(
       req.body.contactEmail,
@@ -32,11 +33,10 @@ exports.contact = async (req, res) => {
         res.redirect('/');
       })
       .catch((err) => {
-        console.log(err);
         req.flash('msgErr', 'Something Went Wrong !');
         res.redirect('/contact');
       });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

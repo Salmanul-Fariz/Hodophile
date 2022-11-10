@@ -1,29 +1,30 @@
 const bookingsModel = require('./../../model/bookingsModel');
 const bookingApproval = require('./../../utils/bookingApproval');
+const appError = require('./../../middleware/appError');
 
 // Bookings page
-exports.bookingsPage = async (req, res) => {
+exports.bookingsPage = async (req, res, next) => {
   try {
     const bookings = await bookingsModel.find({});
     bookings.reverse();
     res.render('agency/viewBookings', { bookings });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Booking Details
-exports.booking = async (req, res) => {
+exports.booking = async (req, res, next) => {
   try {
     const booking = await bookingsModel.findById(req.params.id);
     res.render('agency/viewBooking', { booking });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Booking Approved
-exports.approved = async (req, res) => {
+exports.approved = async (req, res, next) => {
   try {
     await bookingsModel.updateOne(
       { _id: req.params.id },
@@ -48,12 +49,12 @@ exports.approved = async (req, res) => {
 
     res.redirect('/agency/bookings');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Booking Cancelled
-exports.cancelled = async (req, res) => {
+exports.cancelled = async (req, res, next) => {
   try {
     await bookingsModel.updateOne(
       { _id: req.params.id },
@@ -78,30 +79,30 @@ exports.cancelled = async (req, res) => {
 
     res.redirect('/agency/bookings');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Approved Page
-exports.approvedPage = async (req, res) => {
+exports.approvedPage = async (req, res, next) => {
   try {
     const approved = await bookingsModel.find({ Status: 'Approved' });
     approved.reverse();
 
     res.render('agency/viewApproval', { approved });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Cancelled Page
-exports.cancelledPage = async (req, res) => {
+exports.cancelledPage = async (req, res, next) => {
   try {
     const cancelled = await bookingsModel.find({ Status: 'Cancelled' });
     cancelled.reverse();
 
     res.render('agency/viewCancelled', { cancelled });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

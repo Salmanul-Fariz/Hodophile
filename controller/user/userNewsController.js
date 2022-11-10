@@ -2,9 +2,10 @@ const newsModel = require('./../../model/newsModel');
 const userModel = require('./../../model/userModel');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
+const appError = require('./../../middleware/appError');
 
 // News Page
-exports.news = async (req, res) => {
+exports.news = async (req, res, next) => {
   try {
     const news = await newsModel.find({});
     const user = await userModel.findOne({ _id: req.session.user._id });
@@ -19,12 +20,12 @@ exports.news = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // News Increment
-exports.increment = async (req, res) => {
+exports.increment = async (req, res, next) => {
   try {
     await userModel.updateOne(
       { _id: req.params.userId },
@@ -40,12 +41,12 @@ exports.increment = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // News Decrement
-exports.decrement = async (req, res) => {
+exports.decrement = async (req, res, next) => {
   try {
     await userModel.updateOne(
       { _id: req.params.userId },
@@ -61,6 +62,6 @@ exports.decrement = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

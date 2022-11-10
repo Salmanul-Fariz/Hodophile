@@ -4,9 +4,10 @@ const destinationsModel = require('./../../model/destinationsModel');
 const trekkingModel = require('./../../model/trekkingModel');
 const userModel = require('./../../model/userModel');
 const razoPayment = require('./../../utils/razoPayment');
+const appError = require('./../../middleware/appError');
 
 // To add Bookkings
-exports.bookings = async (req, res) => {
+exports.bookings = async (req, res, next) => {
   try {
     // find user name
     const user = await userModel.findById(req.params.userId);
@@ -75,12 +76,12 @@ exports.bookings = async (req, res) => {
       contact: user.contact,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // If Payment Success
-exports.successPage = async (req, res) => {
+exports.successPage = async (req, res, next) => {
   try {
     await bookingsModel.create(req.session.booking);
     if (req.session.bookingCoupon) {
@@ -92,18 +93,18 @@ exports.successPage = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // If Payment failed
-exports.falied = async (req, res) => {
+exports.falied = async (req, res, next) => {
   try {
     req.session.booking = null;
     res.json({
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

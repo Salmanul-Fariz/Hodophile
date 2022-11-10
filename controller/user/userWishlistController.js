@@ -4,9 +4,10 @@ const wishlistItemCount = require('./../../utils/wishlistItemCount');
 const shoppingsModel = require('./../../model/shoppingsModel');
 const checkItemDelete = require('../../utils/checkItemDelete');
 const cartModel = require('../../model/cartModel');
+const appError = require('./../../middleware/appError');
 
 // Get Wishlist Page
-exports.wishlistPage = async (req, res) => {
+exports.wishlistPage = async (req, res, next) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -37,12 +38,12 @@ exports.wishlistPage = async (req, res) => {
       userId: req.session.user._id,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Add To WishList
-exports.Wishlist = async (req, res) => {
+exports.Wishlist = async (req, res, next) => {
   try {
     const wishlistDocuments = await wishlistModel.findOne({
       UserId: req.params.userId,
@@ -119,7 +120,7 @@ exports.Wishlist = async (req, res) => {
 };
 
 // Remove From Wishlist
-exports.removeWishlist = async (req, res) => {
+exports.removeWishlist = async (req, res, next) => {
   try {
     // Remove From Wishlist
     const userWishlist = await wishlistModel.findOne({
@@ -137,12 +138,12 @@ exports.removeWishlist = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Add to cart
-exports.wishlistAddToCart = async (req, res) => {
+exports.wishlistAddToCart = async (req, res, next) => {
   try {
     const cartDocuments = await cartModel.findOne({
       UserId: req.params.userId,
@@ -224,6 +225,6 @@ exports.wishlistAddToCart = async (req, res) => {
       await wishlistModel.deleteOne({ UserId: req.params.userId });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

@@ -3,9 +3,10 @@ const userModel = require('./../../model/userModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
+const appError = require('./../../middleware/appError');
 
 // Tours page
-exports.tours = async (req, res) => {
+exports.tours = async (req, res, next) => {
   try {
     const allTours = await destinationsModel.find({});
     const tours = checkItemDelete(allTours);
@@ -23,12 +24,12 @@ exports.tours = async (req, res) => {
 
     res.render('user/tours', { tours, coordinates, cartCount, wishlistCount });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Tours details page
-exports.details = async (req, res) => {
+exports.details = async (req, res, next) => {
   try {
     const tour = await destinationsModel.findById(req.params.id);
     const cartCount = await cartItemCount(req.session.user);
@@ -62,6 +63,6 @@ exports.details = async (req, res) => {
       BookingTotal: BookingTotal,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

@@ -4,9 +4,10 @@ const checkItemDelete = require('./../../utils/checkItemDelete');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
 const wishlistModel = require('./../../model/wishlistModel');
+const appError = require('./../../middleware/appError');
 
 // Shopping Page
-exports.shoppingPage = async (req, res) => {
+exports.shoppingPage = async (req, res, next) => {
   try {
     const categories = await shoppingCategoryModel.find({});
     const allproducts = await shoppingsModel.find({});
@@ -36,12 +37,12 @@ exports.shoppingPage = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shopping Product Details
-exports.shoppingDetailsPage = async (req, res) => {
+exports.shoppingDetailsPage = async (req, res, next) => {
   try {
     const product = await shoppingsModel.findById(req.params.id);
     const cartCount = await cartItemCount(req.session.user);
@@ -59,12 +60,12 @@ exports.shoppingDetailsPage = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Filtering the shoppping
-exports.filterProducts = async (req, res) => {
+exports.filterProducts = async (req, res, next) => {
   try {
     req.session.filterCategory = req.params.filter;
     if (req.params.filter == 'All') {
@@ -78,6 +79,6 @@ exports.filterProducts = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

@@ -1,11 +1,10 @@
-const shoppingsModel = require('../../model/shoppingsModel');
-const checkItemDelete = require('../../utils/checkItemDelete');
 const cartModel = require('./../../model/cartModel');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
+const appError = require('./../../middleware/appError');
 
 // Get Cart Page
-exports.cartsPage = async (req, res) => {
+exports.cartsPage = async (req, res, next) => {
   try {
     const cart = await cartModel
       .findOne({ UserId: req.session.user })
@@ -26,12 +25,12 @@ exports.cartsPage = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Add To Cart
-exports.addCart = async (req, res) => {
+exports.addCart = async (req, res, next) => {
   try {
     const cartDocuments = await cartModel.findOne({
       UserId: req.params.userId,
@@ -101,12 +100,12 @@ exports.addCart = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // To Increase Quaatity
-exports.increaseQuatity = async (req, res) => {
+exports.increaseQuatity = async (req, res, next) => {
   try {
     await cartModel.updateOne(
       {
@@ -121,12 +120,12 @@ exports.increaseQuatity = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // To Decrease Quaatity
-exports.decreaseQuatity = async (req, res) => {
+exports.decreaseQuatity = async (req, res, next) => {
   try {
     const cartCount = await cartModel.aggregate([
       { $match: { UserId: req.params.userId } },
@@ -149,12 +148,12 @@ exports.decreaseQuatity = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // To delete from Cart
-exports.deleteCart = async (req, res) => {
+exports.deleteCart = async (req, res, next) => {
   try {
     const userCart = await cartModel.findOne({ UserId: req.params.userId });
     if (userCart.Products.length > 1) {
@@ -170,6 +169,6 @@ exports.deleteCart = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

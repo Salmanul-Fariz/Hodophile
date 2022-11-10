@@ -3,9 +3,10 @@ const userModel = require('./../../model/userModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
+const appError = require('./../../middleware/appError');
 
 // Trekkings page
-exports.trekkings = async (req, res) => {
+exports.trekkings = async (req, res, next) => {
   try {
     const allTrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(allTrekkings);
@@ -28,12 +29,12 @@ exports.trekkings = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Trekking details page
-exports.details = async (req, res) => {
+exports.details = async (req, res, next) => {
   try {
     const trekking = await trekkingModel.findById(req.params.id);
     const cartCount = await cartItemCount(req.session.user);
@@ -67,6 +68,6 @@ exports.details = async (req, res) => {
       BookingTotal: BookingTotal,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

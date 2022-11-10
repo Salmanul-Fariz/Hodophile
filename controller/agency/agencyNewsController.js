@@ -1,27 +1,28 @@
 const newsModel = require('./../../model/newsModel');
 const mongoosErr = require('./../../utils/mongoosErr');
+const appError = require('./../../middleware/appError');
 
 const fs = require('fs');
 const path = require('path');
 
 // Get All news page
-exports.news = async (req, res) => {
+exports.news = async (req, res, next) => {
   try {
     const news = await newsModel.find({});
     news.reverse();
 
     res.render('agency/news', { news });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 //  Add News page
-exports.newsPage = (req, res) => {
+exports.newsPage = (req, res, next) => {
   try {
     res.render('agency/addNews', { newsErr: req.flash('newsErr') });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
@@ -43,7 +44,7 @@ exports.newsAdd = async (req, res) => {
 };
 
 // To delete News (post)
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
   try {
     // delete old image
     const image = await newsModel.findById(req.params.id);
@@ -60,6 +61,6 @@ exports.delete = async (req, res) => {
     await newsModel.deleteOne({ _id: req.params.id });
     res.redirect('/agency/news');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

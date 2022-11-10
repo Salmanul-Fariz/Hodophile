@@ -11,9 +11,10 @@ const emailVerification = require('./../../utils/emailVerification');
 const otpGenerator = require('./../../utils/otpGenerator');
 const otpVerification = require('./../../utils/otpVerification');
 const mongoosErr = require('./../../utils/mongoosErr');
+const appError = require('./../../middleware/appError');
 
 // Profile page
-exports.profile = async (req, res) => {
+exports.profile = async (req, res, next) => {
   try {
     const Id = req.session.user._id;
     const user = await userModel.findOne({ _id: Id });
@@ -28,12 +29,12 @@ exports.profile = async (req, res) => {
       userEditErr: req.flash('userEditErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Update Avatar
-exports.avatarsUpdate = async (req, res) => {
+exports.avatarsUpdate = async (req, res, next) => {
   try {
     const avatar = await userProfileAvatar.findById(req.params.avatarId);
     await userModel.updateOne(
@@ -45,12 +46,12 @@ exports.avatarsUpdate = async (req, res) => {
 
     res.redirect('/profile');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Update Profile(post)
-exports.updateProfile = async (req, res) => {
+exports.updateProfile = async (req, res, next) => {
   try {
     await userModel.updateOne(
       { _id: req.params.id },
@@ -63,12 +64,12 @@ exports.updateProfile = async (req, res) => {
 
     res.redirect('/profile');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Update Personal Details
-exports.updatePersonalDetails = async (req, res) => {
+exports.updatePersonalDetails = async (req, res, next) => {
   try {
     const user = await userModel.findById(req.params.id).select('+password');
     if (!user) {
@@ -89,12 +90,12 @@ exports.updatePersonalDetails = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Update Personal Details Page
-exports.updatePersonalDetailsPage = async (req, res) => {
+exports.updatePersonalDetailsPage = async (req, res, next) => {
   try {
     if (req.session.personalUpdate) {
       const cartCount = await cartItemCount(req.session.user);
@@ -112,12 +113,12 @@ exports.updatePersonalDetailsPage = async (req, res) => {
       res.redirect('/profile');
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Personal details Change Page (post)
-exports.updatePersonalDetailsPost = async (req, res) => {
+exports.updatePersonalDetailsPost = async (req, res, next) => {
   try {
     if (req.params.type == 'Contact') {
       // otp generator
@@ -155,12 +156,12 @@ exports.updatePersonalDetailsPost = async (req, res) => {
       res.redirect('/profile/personal/verification');
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Personal Details verifications
-exports.personalVerification = async (req, res) => {
+exports.personalVerification = async (req, res, next) => {
   try {
     if (req.session.personalOtpGenerator) {
       const cartCount = await cartItemCount(req.session.user);
@@ -190,7 +191,7 @@ exports.personalVerification = async (req, res) => {
       res.redirect('/profile');
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
@@ -232,7 +233,6 @@ exports.otpVerification = async (req, res) => {
       req.session.otp = null;
     }
   } catch (err) {
-    console.log(err);
     let error = mongoosErr(err);
     req.flash('userEditErr', error);
     res.redirect('/profile');
@@ -240,7 +240,7 @@ exports.otpVerification = async (req, res) => {
 };
 
 // Shoppings
-exports.shopping = async (req, res) => {
+exports.shopping = async (req, res, next) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -257,12 +257,12 @@ exports.shopping = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // View Shoppings Details
-exports.shoppingOrderview = async (req, res) => {
+exports.shoppingOrderview = async (req, res, next) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -287,12 +287,12 @@ exports.shoppingOrderview = async (req, res) => {
       Products,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Booking Page
-exports.booking = async (req, res) => {
+exports.booking = async (req, res, next) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -311,12 +311,12 @@ exports.booking = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // View Booking Details
-exports.bookingsview = async (req, res) => {
+exports.bookingsview = async (req, res, next) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -342,12 +342,12 @@ exports.bookingsview = async (req, res) => {
       Package,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Update Shopping Address Page
-exports.updateAddressPage = async (req, res) => {
+exports.updateAddressPage = async (req, res, next) => {
   try {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
@@ -362,12 +362,12 @@ exports.updateAddressPage = async (req, res) => {
       index: req.params.adddressIndex,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // update Shopping Address
-exports.updateAddress = async (req, res) => {
+exports.updateAddress = async (req, res, next) => {
   try {
     const index = req.params.adddressIndex;
     await userModel.updateOne(
@@ -385,12 +385,12 @@ exports.updateAddress = async (req, res) => {
     );
     res.redirect(`/profile/shoppings/${req.params.id}`);
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // delete Shopping Address
-exports.removeAddress = async (req, res) => {
+exports.removeAddress = async (req, res, next) => {
   try {
     const index = req.params.adddressIndex;
 
@@ -413,6 +413,6 @@ exports.removeAddress = async (req, res) => {
     );
     res.redirect('back');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

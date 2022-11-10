@@ -4,9 +4,10 @@ const checkItemDelete = require('../../utils/checkItemDelete');
 const cartItemCount = require('../../utils/cartItemCount');
 const wishlistItemCount = require('../../utils/wishlistItemCount');
 const shoppingsModel = require('../../model/shoppingsModel');
+const appError = require('./../../middleware/appError');
 
 // Home page
-exports.homePage = async (req, res) => {
+exports.homePage = async (req, res, next) => {
   try {
     const user = req.session.user;
     const allTours = await destinationsModel.find({});
@@ -27,6 +28,6 @@ exports.homePage = async (req, res) => {
       wishlistCount,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

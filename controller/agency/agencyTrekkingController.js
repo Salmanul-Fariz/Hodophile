@@ -1,12 +1,13 @@
 const trekkingModel = require('./../../model/trekkingModel');
 const mongoosErr = require('./../../utils/mongoosErr');
 const checkItemDelete = require('./../../utils/checkItemDelete');
+const appError = require('./../../middleware/appError');
 
 const fs = require('fs');
 const path = require('path');
 
 // All Trekking View page
-exports.trekkings = async (req, res) => {
+exports.trekkings = async (req, res, next) => {
   try {
     const alltrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(alltrekkings);
@@ -14,33 +15,33 @@ exports.trekkings = async (req, res) => {
 
     res.render('agency/viewTrekkings', { trekkings });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Trekking Page
-exports.trekking = async (req, res) => {
+exports.trekking = async (req, res, next) => {
   try {
     const trekking = await trekkingModel.findById(req.params.id);
     res.render('agency/viewTrekking', { trekking });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Trekking add page
-exports.add = (req, res) => {
+exports.add = (req, res, next) => {
   try {
     res.render('agency/addTrekkings', {
       trekkingErr: req.flash('trekkingErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Trekking Add (post)
-exports.addPost = async (req, res) => {
+exports.addPost = async (req, res, next) => {
   try {
     // Make image path to Array
     let imagesName = [];
@@ -89,7 +90,6 @@ exports.addPost = async (req, res) => {
 
     res.redirect('/agency/trekkings');
   } catch (err) {
-    console.log(err);
     let error = mongoosErr(err);
     req.flash('trekkingErr', error);
     res.redirect('/agency/trekkings/add');
@@ -97,7 +97,7 @@ exports.addPost = async (req, res) => {
 };
 
 // All Trekings update page
-exports.updateTrekkings = async (req, res) => {
+exports.updateTrekkings = async (req, res, next) => {
   try {
     const alltrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(alltrekkings);
@@ -105,12 +105,12 @@ exports.updateTrekkings = async (req, res) => {
 
     res.render('agency/updateTrekkings', { trekkings });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Trekkings update page
-exports.updateTrekking = async (req, res) => {
+exports.updateTrekking = async (req, res, next) => {
   try {
     const trekking = await trekkingModel.findById(req.params.id);
     res.render('agency/updateTrekking', {
@@ -118,12 +118,12 @@ exports.updateTrekking = async (req, res) => {
       updateErr: req.flash('updateErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Trekkings update Page(post)
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     // Make Itinerary to Array
     let day = req.body.trekkingDuration;
@@ -194,7 +194,6 @@ exports.update = async (req, res) => {
 
     res.redirect('/agency/trekkings/update');
   } catch (err) {
-    console.log(err);
     let error = mongoosErr(err);
     req.flash('updateErr', error);
     res.redirect('back');
@@ -202,7 +201,7 @@ exports.update = async (req, res) => {
 };
 
 // All Trekkings delete page
-exports.deleteTours = async (req, res) => {
+exports.deleteTours = async (req, res, next) => {
   try {
     const alltrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(alltrekkings);
@@ -210,12 +209,12 @@ exports.deleteTours = async (req, res) => {
 
     res.render('agency/deleteTrekkings', { trekkings });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Trekkings delete page(post)
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
   try {
     await trekkingModel.updateOne(
       { _id: req.params.id },
@@ -225,6 +224,6 @@ exports.delete = async (req, res) => {
     );
     res.redirect('/agency/trekkings/delete');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

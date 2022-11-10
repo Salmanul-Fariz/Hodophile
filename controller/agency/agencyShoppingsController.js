@@ -2,12 +2,13 @@ const shoppingsModel = require('./../../model/shoppingsModel');
 const shoppingCategoryModel = require('./../../model/shoppingCategoryModel');
 const checkItemDelete = require('./../../utils/checkItemDelete');
 const mongoosErr = require('./../../utils/mongoosErr');
+const appError = require('./../../middleware/appError');
 
 const fs = require('fs');
 const path = require('path');
 
 // Shoppings page
-exports.shoppings = async (req, res) => {
+exports.shoppings = async (req, res, next) => {
   try {
     const allProducts = await shoppingsModel.find({});
     const products = checkItemDelete(allProducts);
@@ -15,22 +16,22 @@ exports.shoppings = async (req, res) => {
 
     res.render('agency/viewShoppings', { products });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings Details Page
-exports.shoppingsDetails = async (req, res) => {
+exports.shoppingsDetails = async (req, res, next) => {
   try {
     const product = await shoppingsModel.findById(req.params.id);
     res.render('agency/viewShopping', { product });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings category
-exports.viewCategory = async (req, res) => {
+exports.viewCategory = async (req, res, next) => {
   try {
     const categories = await shoppingCategoryModel.find({});
     categories.reverse();
@@ -40,21 +41,21 @@ exports.viewCategory = async (req, res) => {
       categoryErr: req.flash('categoryErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings category Add
-exports.addCategory = async (req, res) => {
+exports.addCategory = async (req, res, next) => {
   try {
     res.render('agency/addCategory', { categoryErr: req.flash('categoryErr') });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings category Add(post)
-exports.category = async (req, res) => {
+exports.category = async (req, res, next) => {
   try {
     const category = await shoppingCategoryModel.findOne({
       Name: req.body.shoppingCategory,
@@ -74,7 +75,7 @@ exports.category = async (req, res) => {
 };
 
 // Shopping Category Delete
-exports.deleteCategory = async (req, res) => {
+exports.deleteCategory = async (req, res, next) => {
   try {
     const category = await shoppingCategoryModel.findById(req.params.id);
     const product = await shoppingsModel.find({ Category: category.Name });
@@ -86,12 +87,12 @@ exports.deleteCategory = async (req, res) => {
       res.redirect('/agency/shoppings/category');
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings Add
-exports.viewAddShoppings = async (req, res) => {
+exports.viewAddShoppings = async (req, res, next) => {
   try {
     const categories = await shoppingCategoryModel.find({});
     res.render('agency/addShoppings', {
@@ -99,12 +100,12 @@ exports.viewAddShoppings = async (req, res) => {
       shoppingErr: req.flash('shoppingErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings Add(post)
-exports.addShoppings = async (req, res) => {
+exports.addShoppings = async (req, res, next) => {
   try {
     // Make image path to Array
     let imagesName = [];
@@ -135,17 +136,17 @@ exports.addShoppings = async (req, res) => {
 };
 
 // Shoppings update list
-exports.updateShoppings = async (req, res) => {
+exports.updateShoppings = async (req, res, next) => {
   try {
     const products = await shoppingsModel.find({});
     res.render('agency/updateShoppings', { products });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings Update
-exports.updateShopping = async (req, res) => {
+exports.updateShopping = async (req, res, next) => {
   try {
     const categories = await shoppingCategoryModel.find({});
     categories.reverse();
@@ -156,12 +157,12 @@ exports.updateShopping = async (req, res) => {
       shoppingErr: req.flash('shoppingErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shoppings Update(post)
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     // When image update
     if (req.files.length !== 0) {
@@ -210,12 +211,12 @@ exports.update = async (req, res) => {
     );
     res.redirect('/agency/shoppings/update');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // All Shoppings delete page
-exports.deleteShoppings = async (req, res) => {
+exports.deleteShoppings = async (req, res, next) => {
   try {
     const allShoppings = await shoppingsModel.find({});
     const products = checkItemDelete(allShoppings);
@@ -223,12 +224,12 @@ exports.deleteShoppings = async (req, res) => {
 
     res.render('agency/deleteshoppings', { products });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Shopping delete page(post)
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
   try {
     await shoppingsModel.updateOne(
       { _id: req.params.id },
@@ -238,6 +239,6 @@ exports.delete = async (req, res) => {
     );
     res.redirect('/agency/shoppings/delete');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 
 // Require MiddleWare
 const cache = require('./middleware/cache');
+const appError = require('./middleware/appError');
 
 // set config file
 dotenv.config({ path: './config.env' });
@@ -85,5 +86,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Handle Undifined Routes
+app.all('*', (req, res, next) => {
+  appError(req, res, next);
+});
 
 module.exports = app;

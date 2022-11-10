@@ -6,6 +6,7 @@ const couponModel = require('./../../model/couponModel');
 const cartItemCount = require('./../../utils/cartItemCount');
 const wishlistItemCount = require('./../../utils/wishlistItemCount');
 const razoPayment = require('./../../utils/razoPayment');
+const appError = require('./../../middleware/appError');
 
 // Order Page
 exports.orderPage = async (req, res) => {
@@ -38,12 +39,12 @@ exports.orderPage = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Add Address
-exports.addAddress = async (req, res) => {
+exports.addAddress = async (req, res, next) => {
   try {
     await userModel.updateOne(
       { _id: req.params.userId },
@@ -62,12 +63,12 @@ exports.addAddress = async (req, res) => {
     );
     res.redirect('back');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Order Submit
-exports.orderSubmit = async (req, res) => {
+exports.orderSubmit = async (req, res, next) => {
   try {
     if (req.params.orderType === 'Product') {
       const user = await userModel.findById(req.params.userId);
@@ -255,12 +256,12 @@ exports.orderSubmit = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // order Successs
-exports.success = async (req, res) => {
+exports.success = async (req, res, next) => {
   try {
     await orderModel.create(req.session.orderCollection);
     req.session.orderCollection = null;
@@ -280,18 +281,18 @@ exports.success = async (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // If Payment failed
-exports.falied = async (req, res) => {
+exports.falied = async (req, res, next) => {
   try {
     req.session.orderCollection = null;
     res.json({
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

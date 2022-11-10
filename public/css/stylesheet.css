@@ -800,14 +800,14 @@ a:active {
     text-overflow: ellipsis;
 }
 
-.profileaddressBar{
+.profileaddressBar {
     border: solid;
     border-width: 1px;
     padding: 18px;
     border-color: #999999;
 }
 
-.profileAddress{
+.profileAddress {
     color: black;
     display: inline-block;
     width: 100%;
@@ -816,11 +816,11 @@ a:active {
     text-overflow: ellipsis;
 }
 
-.profileAddressIcon{
+.profileAddressIcon {
     font-size: 19px;
 }
 
-.profileAddressIcon:hover{
+.profileAddressIcon:hover {
     cursor: pointer;
 }
 
@@ -1611,3 +1611,38 @@ a:active {
     font-size: 18px;
 }
 
+
+/*////////////////////*/
+/* Error Page */
+/*////////////////////*/
+
+.errorSec1 {
+    width: 100%;
+}
+
+.errorSec1Head {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.errorSec1BackButton {
+    background-color: #41c356;
+    color: white;
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: 600;
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: transparent;
+}
+
+.errorSec1BackButton:hover {
+    cursor: pointer;
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #41C356;
+    background-color: transparent;
+    color: #41C356;
+}

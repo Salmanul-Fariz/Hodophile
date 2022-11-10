@@ -3,6 +3,7 @@ const mongoosErr = require('./../../utils/mongoosErr');
 const otpVerification = require('./../../utils/otpVerification');
 const otpGenerator = require('./../../utils/otpGenerator');
 const emailVerification = require('./../../utils/emailVerification');
+const appError = require('./../../middleware/appError');
 const bcrypt = require('bcrypt');
 
 // SignUp page(Post)
@@ -39,7 +40,6 @@ exports.signup = async (req, res) => {
         });
     }
   } catch (err) {
-    console.log(err);
     let error = mongoosErr(err);
     req.flash('userErr', error);
     res.redirect('/signup');
@@ -47,22 +47,26 @@ exports.signup = async (req, res) => {
 };
 
 // Resent OTP
-exports.resend = (req, res) => {
-  // message sending
-  otpVerification
-    .otpSender(req.session.userSignup.contact)
-    .then((response) => {
-      res.redirect('/otp');
-    })
-    .catch((err) => {
-      console.log(err);
-      req.flash('otpErr', 'Something Went Wrong');
-      res.redirect('/otp');
-    });
+exports.resend = (req, res, next) => {
+  try {
+    // message sending
+    otpVerification
+      .otpSender(req.session.userSignup.contact)
+      .then((response) => {
+        res.redirect('/otp');
+      })
+      .catch((err) => {
+        console.log(err);
+        req.flash('otpErr', 'Something Went Wrong');
+        res.redirect('/otp');
+      });
+  } catch (err) {
+    appError(req, res, next);
+  }
 };
 
 // OTP page(Post)
-exports.otp = async (req, res) => {
+exports.otp = async (req, res, next) => {
   try {
     // message Checking
     otpVerification
@@ -84,7 +88,7 @@ exports.otp = async (req, res) => {
         res.redirect('/otp');
       });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
@@ -121,7 +125,7 @@ exports.login = async (req, res) => {
 };
 
 // SignUp page
-exports.signupPage = (req, res) => {
+exports.signupPage = (req, res, next) => {
   try {
     if (req.session.user) {
       res.redirect('/');
@@ -129,12 +133,12 @@ exports.signupPage = (req, res) => {
       res.render('user/signup', { userErr: req.flash('userErr') });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Login page
-exports.loginPage = (req, res) => {
+exports.loginPage = (req, res, next) => {
   try {
     if (req.session.user) {
       res.redirect('/');
@@ -142,12 +146,12 @@ exports.loginPage = (req, res) => {
       res.render('user/login', { userErr: req.flash('userErr') });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // OTP page
-exports.otpPage = (req, res) => {
+exports.otpPage = (req, res, next) => {
   try {
     if (req.session.user) {
       res.redirect('/');
@@ -155,22 +159,22 @@ exports.otpPage = (req, res) => {
       res.render('user/otp', { otpErr: req.flash('otpErr') });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // log out (post)
-exports.logout = (req, res) => {
+exports.logout = (req, res, next) => {
   try {
     req.session.user = null;
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Reset Password (Page)
-exports.resetPasswordPage = async (req, res) => {
+exports.resetPasswordPage = async (req, res, next) => {
   try {
     if (req.session.user) {
       res.redirect('/');
@@ -178,12 +182,12 @@ exports.resetPasswordPage = async (req, res) => {
       res.render('user/resetPass', { userErr: req.flash('userErr') });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // reset Password
-exports.resetPassword = (req, res) => {
+exports.resetPassword = (req, res, next) => {
   try {
     req.session.resetOTP = otpGenerator();
     emailVerification.emailSender(req.body.email, req.session.resetOTP);
@@ -193,12 +197,12 @@ exports.resetPassword = (req, res) => {
       status: true,
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // otp verify
-exports.resetPasswordVerify = (req, res) => {
+exports.resetPasswordVerify = (req, res, next) => {
   try {
     if (req.session.resetOTP === req.body.restOTP) {
       req.session.resetOTP = null;
@@ -213,12 +217,12 @@ exports.resetPasswordVerify = (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // New Password Page
-exports.newPasswordPage = async (req, res) => {
+exports.newPasswordPage = async (req, res, next) => {
   try {
     if (req.session.resetVerify) {
       res.render('user/password');
@@ -227,12 +231,12 @@ exports.newPasswordPage = async (req, res) => {
     }
     req.session.resetVerify = null;
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Add New Password
-exports.Newpassword = async (req, res) => {
+exports.Newpassword = async (req, res, next) => {
   try {
     if (req.body.newPassword) {
       const pass = await bcrypt.hash(req.body.newPassword, 12);
@@ -252,6 +256,6 @@ exports.Newpassword = async (req, res) => {
       res.redirect('/login');
     }
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };

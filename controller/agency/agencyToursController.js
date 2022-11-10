@@ -1,12 +1,13 @@
 const destinationsModel = require('./../../model/destinationsModel');
 const mongoosErr = require('./../../utils/mongoosErr');
 const checkItemDelete = require('./../../utils/checkItemDelete');
+const appError = require('./../../middleware/appError');
 
 const fs = require('fs');
 const path = require('path');
 
 // All Tours View page
-exports.tours = async (req, res) => {
+exports.tours = async (req, res, next) => {
   try {
     const alltours = await destinationsModel.find({});
     const tours = checkItemDelete(alltours);
@@ -14,22 +15,22 @@ exports.tours = async (req, res) => {
 
     res.render('agency/viewTours', { tours });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Tour Page
-exports.tour = async (req, res) => {
+exports.tour = async (req, res, next) => {
   try {
     const tour = await destinationsModel.findById(req.params.id);
     res.render('agency/viewTour', { tour });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // All Tours delete page
-exports.deleteTours = async (req, res) => {
+exports.deleteTours = async (req, res, next) => {
   try {
     const alltours = await destinationsModel.find({});
     const tours = checkItemDelete(alltours);
@@ -37,12 +38,12 @@ exports.deleteTours = async (req, res) => {
 
     res.render('agency/deleteTours', { tours });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Tours delete page(post)
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
   try {
     await destinationsModel.updateOne(
       { _id: req.params.id },
@@ -52,12 +53,12 @@ exports.delete = async (req, res) => {
     );
     res.redirect('/agency/tours/delete');
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // All Tours update page
-exports.updateTours = async (req, res) => {
+exports.updateTours = async (req, res, next) => {
   try {
     const alltours = await destinationsModel.find({});
     const tours = checkItemDelete(alltours);
@@ -65,12 +66,12 @@ exports.updateTours = async (req, res) => {
 
     res.render('agency/updateTours', { tours });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Tour update page
-exports.updateTour = async (req, res) => {
+exports.updateTour = async (req, res, next) => {
   try {
     const tour = await destinationsModel.findById(req.params.id);
     res.render('agency/updateTour', {
@@ -78,12 +79,12 @@ exports.updateTour = async (req, res) => {
       updateErr: req.flash('updateErr'),
     });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Tour update Page(post)
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     // Make Itinerary to Array
     let day = req.body.tourDuration;
@@ -154,7 +155,6 @@ exports.update = async (req, res) => {
 
     res.redirect('/agency/tours/update');
   } catch (err) {
-    console.log(err);
     let error = mongoosErr(err);
     req.flash('updateErr', error);
     res.redirect('back');
@@ -162,16 +162,16 @@ exports.update = async (req, res) => {
 };
 
 // Tour add page
-exports.add = (req, res) => {
+exports.add = (req, res, next) => {
   try {
     res.render('agency/addTours', { tourErr: req.flash('tourErr') });
   } catch (err) {
-    console.log(err);
+    appError(req, res, next);
   }
 };
 
 // Tour Add (post)
-exports.addPost = async (req, res) => {
+exports.addPost = async (req, res, next) => {
   try {
     // Make image path to Array
     let imagesName = [];
@@ -220,7 +220,6 @@ exports.addPost = async (req, res) => {
 
     res.redirect('/agency/tours');
   } catch (err) {
-    console.log(err);
     let error = mongoosErr(err);
     req.flash('tourErr', error);
     res.redirect('/agency/tours/add');
