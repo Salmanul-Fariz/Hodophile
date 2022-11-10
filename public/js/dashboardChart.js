@@ -7,43 +7,40 @@ function takeDataToGraph() {
     url: `/agency/data`,
     type: 'get',
     success: (res) => {
+      let monthArray = [
+        'Jan',
+        'Feb',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+        
+      let total = res.total;
+      let month = [];
+      let backgroundColor = [];
+      for (let i = 0; i < res.total.length; i++) {
+        month.push(monthArray[i]);
+        backgroundColor.push('#83e392');
+      }
+
       // Settup Chart
       const chart = document.getElementById('myChart').getContext('2d');
       const myChart = new Chart(chart, {
         type: 'bar',
         data: {
-          labels: [
-            'Jan',
-            'Feb',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
-          ],
+          labels: month,
           datasets: [
             {
-              data: res.total,
+              data: total,
               label: 'Sales Revenue',
-              backgroundColor: [
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-                '#83e392',
-              ],
+              backgroundColor: backgroundColor,
               borderRadius: 16,
             },
           ],

@@ -125,6 +125,7 @@ exports.graph = async (req, res, next) => {
   try {
     // current year
     let year = new Date().toISOString().split('-')[0];
+    let month = new Date().toISOString().split('-')[1];
 
     // Total Revenue of orders By Monthly
     const orders = await orderModel.aggregate([
@@ -185,7 +186,7 @@ exports.graph = async (req, res, next) => {
     // Add Two documents Total By monthly
     let total = [];
 
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= month; i++) {
       let addTotal = 0;
 
       // order Array
