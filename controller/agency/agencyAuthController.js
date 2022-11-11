@@ -33,11 +33,11 @@ exports.login = async (req, res) => {
   }
 };
 
-// agency signup post (only for test in postman)
-exports.signup = async (req, res) => {
-  const agency = await agencyModel.create(req.body);
-  res.status(200).json({
-    status: 'success',
-    agency,
-  });
-};
+// // agency signup post (only for test in postman)
+// exports.signup = async (req, res) => {
+//   const agency = await agencyModel.create(req.body);
+//   res.status(200).json({
+//     status: 'success',
+//     agency,
+//   });
+// };
