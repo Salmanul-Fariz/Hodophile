@@ -1,8 +1,7 @@
 const Razorpay = require('razorpay');
 
 // config file setup
-const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+const dotenv = require('dotenv').config()
 
 const instance = new Razorpay({
   key_id: process.env.RAZO_PAYMENT_KEY_ID,

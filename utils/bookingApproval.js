@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
 
 // config file setup
-const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+const dotenv = require('dotenv').config()
 
 // twilio settup
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
