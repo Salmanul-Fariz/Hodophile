@@ -84,15 +84,14 @@ function successBookking(userId, packageId, packageCategory) {
                   title: 'Booked',
                   text: 'Confirmation Message will be Send Soon !',
                   confirmButtonColor: '#3085d6',
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    if (packageCategory == 'Destination') {
-                      location.replace(`/tours/${packageId}`);
-                    } else {
-                      location.replace(`/trekkings/${packageId}`);
-                    }
-                  }
                 });
+                setTimeout(() => {
+                  if (packageCategory == 'Destination') {
+                    location.replace(`/tours/${packageId}`);
+                  } else {
+                    location.replace(`/trekkings/${packageId}`);
+                  }
+                }, 2000);
               },
             });
           },

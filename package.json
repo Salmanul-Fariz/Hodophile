@@ -14,7 +14,8 @@
   },
   "homepage": "https://github.com/Salmanul-Fariz/Hodophile#readme",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "debug": "ndb server.js"
   },
   "dependencies": {

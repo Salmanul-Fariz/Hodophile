@@ -152,7 +152,7 @@ function deleteCartProduct(userId, productId) {
     confirmButtonColor: '#d33',
     cancelButtonColor: '#3085d6',
     confirmButtonText: 'Delete',
-    background: '#41c356',
+    background: '#bdbdbd',
     color: 'White',
   }).then((result) => {
     if (result.isConfirmed) {

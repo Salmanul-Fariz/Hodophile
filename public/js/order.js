@@ -1,5 +1,5 @@
 // Setting Razorpay payment Option
-function razorpayFunction(cash, rzOrderId, name, email, contact, types) {
+function razorpayFunction(cash, rzOrderId, name, email, contact) {
   const options = {
     key: 'rzp_test_0QcZGwIjWOF25m',
     amount: cash,
@@ -30,18 +30,12 @@ function razorpayFunction(cash, rzOrderId, name, email, contact, types) {
         success: (res) => {
           Swal.fire({
             title: 'Order',
-            text: 'Success your Order !',
+            text: 'Order Completed !',
             confirmButtonColor: '#3085d6',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              console.log(types);
-              if (types == 'Products') {
-                location.replace(`/shoppings`);
-              } else {
-                location.replace(`/shoppings/carts`);
-              }
-            }
           });
+          setTimeout(() => {
+            location.replace(`/shoppings`);
+          }, 2000);
         },
       });
     },
@@ -123,7 +117,7 @@ function checkOut(orderType, userId, productId) {
             email = res.email;
             contact = res.contact;
 
-            razorpayFunction(cash, rzOrderId, name, email, contact, 'Products');
+            razorpayFunction(cash, rzOrderId, name, email, contact);
           },
         });
       } else if (orderType == 'Cart') {
@@ -154,15 +148,7 @@ function checkOut(orderType, userId, productId) {
             contact = res.contact;
             orderId = res.orderId;
 
-            razorpayFunction(
-              cash,
-              rzOrderId,
-              name,
-              email,
-              contact,
-              orderId,
-              'Cart'
-            );
+            razorpayFunction(cash, rzOrderId, name, email, contact, orderId);
           },
         });
       }
@@ -188,18 +174,16 @@ function checkOut(orderType, userId, productId) {
             deliveryType: deliveryType,
             orderCoupon: couponId,
           },
-
           success: (res) => {
             if (res.status) {
               Swal.fire({
                 title: 'Order',
-                text: 'Success your Order !',
+                text: 'Order Completed !',
                 confirmButtonColor: '#3085d6',
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  location.replace('/shoppings');
-                }
               });
+              setTimeout(() => {
+                location.replace(`/shoppings`);
+              }, 2000);
             }
           },
         });
@@ -227,11 +211,10 @@ function checkOut(orderType, userId, productId) {
                 title: 'Order',
                 text: 'Success your Order !',
                 confirmButtonColor: '#3085d6',
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  location.replace('/shoppings/carts');
-                }
               });
+              setTimeout(() => {
+                location.replace(`/shoppings`);
+              }, 2000);
             }
           },
         });

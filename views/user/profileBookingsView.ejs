@@ -42,7 +42,7 @@
                                         <tr>
                                             <td class="profileSec2ShoppingsText">Date</td>
                                             <td class=" profileSec2ShoppingsText">
-                                                <%= booking.Date %>
+                                                <%= booking.Date.toISOString().split('T')[0] %>
                                             </td>
                                         </tr>
                                     </tbody>

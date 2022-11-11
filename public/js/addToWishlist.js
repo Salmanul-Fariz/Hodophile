@@ -32,8 +32,8 @@ function addToCartProduct(userId, productId) {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Add',
-    background: '#41c356',
+    confirmButtonText: 'Add To Cart',
+    background: '#bdbdbd',
     color: 'White',
   }).then((result) => {
     if (result.isConfirmed) {
@@ -86,7 +86,7 @@ function deleteWishlsitProduct(userId, productId) {
     confirmButtonColor: '#d33',
     cancelButtonColor: '#3085d6',
     confirmButtonText: 'Delete',
-    background: '#41c356',
+    background: '#bdbdbd',
     color: 'White',
   }).then((result) => {
     if (result.isConfirmed) {
