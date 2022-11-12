@@ -201,7 +201,7 @@ exports.resetPassword = (req, res, next) => {
   }
 };
 
-// otp verify
+// otp verify reset password
 exports.resetPasswordVerify = (req, res, next) => {
   try {
     if (req.session.resetOTP === req.body.restOTP) {
