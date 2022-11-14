@@ -101,6 +101,9 @@ exports.login = async (req, res) => {
     if (!req.body.password || !req.body.email) {
       req.flash('userErr', 'Fields required');
       res.redirect('/login');
+    } else if (!user) {
+      req.flash('userErr', 'Invalid Email');
+      res.redirect('/login');
     } else if (user.blocked === true) {
       req.flash('userErr', 'Id is Blocked');
       res.redirect('/login');
