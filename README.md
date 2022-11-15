@@ -1,4 +1,4 @@
-<img src="" alt="Logo of the project" align="right" style="width:120px;">
+<img src="logo.png" alt="Logo of the project" align="right" style="width:120px;">
 
 # Hodophile  
 
@@ -15,4 +15,5 @@
 * <i>Please visit my website <a href="https://www.hodophile.fun/" target="_blank">Hodophile</a> and kindly provide your valuable suggestions I will implement those in my upcoming projects.</i>
 
 * <i>The Home Page of the Project is here ;</i>
-  <img src="" style="width:100%;">
+  <br>
+  <img src="/images/Project home.png" style="width:100%;">
