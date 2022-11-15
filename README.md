@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/110988451/201887076-4fdc3b45-d283-4e84-9d0f-f6bfaf640052.png" alt="Logo of the project" align="right" style="width:120px;">
+<img src="" alt="Logo of the project" align="right" style="width:120px;">
 
 # Hodophile  
 
