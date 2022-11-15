@@ -64,7 +64,7 @@ app.use('/shoppings', userShoppingRouter);
 app.use('/tours', userTourRouter);
 app.use('/profile', userProfileRouter);
 app.use('/trekkings', userTrekkingsRouter);
-app.use('/news', userNewsRouter);
+app.use('/blogs', userNewsRouter);
 app.use('/bookings', userBookingsRouter);
 app.use('/coupons', userCouponsRouter);
 app.use('/contact', userContactRouter);

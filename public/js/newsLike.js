@@ -4,7 +4,7 @@ function Like(userId, newsId) {
   console.log(newsButton.innerHTML);
   if (newsButton.innerHTML === 'Like') {
     $.ajax({
-      url: ` /news/increment/${userId}/${newsId}`,
+      url: ` /blogs/increment/${userId}/${newsId}`,
       type: 'get',
 
       success: (res) => {
@@ -24,7 +24,7 @@ function Like(userId, newsId) {
     // Decrese the News Like
 
     $.ajax({
-      url: `/news/decrement/${userId}/${newsId}`,
+      url: `/blogs/decrement/${userId}/${newsId}`,
       type: 'get',
 
       success: (res) => {

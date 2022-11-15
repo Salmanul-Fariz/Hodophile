@@ -16,7 +16,7 @@ exports.news = async (req, res, next) => {
     res.render('user/news', {
       user,
       news,
-      NewsLike: user.NewsLike,
+      NewsLike: userId.NewsLike,
       userId: userId._id,
       cartCount,
       wishlistCount,

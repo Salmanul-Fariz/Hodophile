@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="signupSec1Text d-flex justify-content-center">News</h1>
+                        <h1 class="signupSec1Text d-flex justify-content-center">Blogs</h1>
                     </div>
                 </div>
             </div>
@@ -37,12 +37,12 @@
                                 <%= key.ShortDescription %>
                             </small>
                             <div class="d-flex p-3">
-                                <% if ( NewsLike.length===0 ){%>
+                                <% if ( NewsLike.length === 0 ){%>
                                     <button id="news<%= key._id %>" class="mt-3 newsLikeIcon"
                                         onclick="Like('<%= userId %>','<%= key._id %>')">Like</button>
                                     <%} %>
                                         <% for ( i=0 ; i < NewsLike.length ; i++ ) {%>
-                                            <% if(NewsLike[i]==key._id){%>
+                                            <% if(NewsLike[i]==key._id){%>  
                                                 <button id="news<%= key._id %>" style="background-color: red;"
                                                     class="mt-3 newsLikeIcon"
                                                     onclick="Like('<%= userId %>','<%= key._id %>')">Unlike</button>
