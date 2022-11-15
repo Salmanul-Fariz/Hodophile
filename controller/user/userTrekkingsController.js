@@ -10,6 +10,7 @@ exports.trekkings = async (req, res, next) => {
   try {
     const allTrekkings = await trekkingModel.find({});
     const trekkings = checkItemDelete(allTrekkings);
+    const user = req.session.user;
 
     // To Google Map Setup
     const coordinates = [];
@@ -23,6 +24,7 @@ exports.trekkings = async (req, res, next) => {
     const wishlistCount = await wishlistItemCount(req.session.user);
 
     res.render('user/trekkings', {
+      user,
       trekkings,
       coordinates,
       cartCount,

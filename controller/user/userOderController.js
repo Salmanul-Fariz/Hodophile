@@ -11,6 +11,7 @@ const appError = require('./../../middleware/appError');
 // Order Page
 exports.orderPage = async (req, res) => {
   try {
+  
     // Came from Direct Click Product
     let product, cartCount, wishlistCount, user, cart;
     if (req.params.orderType === 'Product') {

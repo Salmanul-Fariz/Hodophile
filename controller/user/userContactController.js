@@ -6,10 +6,12 @@ const appError = require('./../../middleware/appError');
 // Contact Page
 exports.contactPage = async (req, res, next) => {
   try {
+    const user = req.session.user;
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
 
     res.render('user/contact', {
+      user,
       cartCount,
       wishlistCount,
       msgErr: req.flash('msgErr'),

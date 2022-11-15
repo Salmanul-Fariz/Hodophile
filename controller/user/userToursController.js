@@ -10,6 +10,7 @@ exports.tours = async (req, res, next) => {
   try {
     const allTours = await destinationsModel.find({});
     const tours = checkItemDelete(allTours);
+    const user = req.session.user;
 
     // To Google Map Setup
     const coordinates = [];
@@ -22,7 +23,13 @@ exports.tours = async (req, res, next) => {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
 
-    res.render('user/tours', { tours, coordinates, cartCount, wishlistCount });
+    res.render('user/tours', {
+      user,
+      tours,
+      coordinates,
+      cartCount,
+      wishlistCount,
+    });
   } catch (err) {
     appError(req, res, next);
   }

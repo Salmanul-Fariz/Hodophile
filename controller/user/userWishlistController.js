@@ -12,6 +12,7 @@ exports.wishlistPage = async (req, res, next) => {
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
     const wishlist = await wishlistModel.findOne({ UserId: req.session.user });
+    const user = req.session.user;
 
     // Set Cart Add Product Details
     let AllWishlistProducts = [];
@@ -31,6 +32,7 @@ exports.wishlistPage = async (req, res, next) => {
     }
 
     res.render('user/wishlists', {
+      user,
       cartCount,
       wishlistProducts,
       userWishlist,

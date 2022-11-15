@@ -7,15 +7,17 @@ const appError = require('./../../middleware/appError');
 // News Page
 exports.news = async (req, res, next) => {
   try {
+    const user = req.session.user;
     const news = await newsModel.find({});
-    const user = await userModel.findOne({ _id: req.session.user._id });
+    const userId = await userModel.findOne({ _id: req.session.user._id });
     const cartCount = await cartItemCount(req.session.user);
     const wishlistCount = await wishlistItemCount(req.session.user);
 
     res.render('user/news', {
+      user,
       news,
       NewsLike: user.NewsLike,
-      userId: user._id,
+      userId: userId._id,
       cartCount,
       wishlistCount,
     });

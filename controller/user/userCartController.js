@@ -6,6 +6,7 @@ const appError = require('./../../middleware/appError');
 // Get Cart Page
 exports.cartsPage = async (req, res, next) => {
   try {
+    const user = req.session.user;
     const cart = await cartModel
       .findOne({ UserId: req.session.user })
       .populate('Products.productId');
@@ -18,6 +19,7 @@ exports.cartsPage = async (req, res, next) => {
     const wishlistCount = await wishlistItemCount(req.session.user);
 
     res.render('user/carts', {
+      user,
       cart,
       userId: req.session.user._id,
       userCart,

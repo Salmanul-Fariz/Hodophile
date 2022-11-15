@@ -26,8 +26,10 @@ exports.shoppingPage = async (req, res, next) => {
     const wishlist = await wishlistModel.findOne({
       UserId: req.session.user._id,
     });
+    const user = req.session.user;
 
     res.render('user/shoppings', {
+      user,
       categories,
       products,
       Category,
@@ -51,8 +53,10 @@ exports.shoppingDetailsPage = async (req, res, next) => {
       UserId: req.session.user._id,
       'Products.productId': req.params.id,
     });
+    const user = req.session.user;
 
     res.render('user/shoppingsDetails', {
+      user,
       product,
       userId: req.session.user._id,
       cartCount,
