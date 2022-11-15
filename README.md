@@ -1,4 +1,4 @@
-<img src="logo.png" alt="Logo of the project" align="right" style="width:120px;">
+<img src="https://user-images.githubusercontent.com/110988451/201929175-1e9aac28-0462-4e95-ba1b-d87e1b3c6188.png" alt="Logo of the project" align="right" style="width:80px;">
 
 # Hodophile  
 
@@ -10,10 +10,12 @@
   * Contact us.
 <br>
 
-## Usage 
+##
 
-* <i>Please visit my website <a href="https://www.hodophile.fun/" target="_blank">Hodophile</a> and kindly provide your valuable suggestions I will implement those in my upcoming projects.</i>
+<i>Please visit my website <a href="https://www.hodophile.fun/" target="_blank">Hodophile</a> and kindly provide your valuable suggestions I will implement those in my upcoming projects.</i>
 
-* <i>The Home Page of the Project is here ;</i>
+<i>The Home Page of the Project is here ;</i>
   <br>
-  <img src="/images/Project home.png" style="width:100%;">
+  <br>
+  <br>
+  <img src="https://user-images.githubusercontent.com/110988451/201929841-f90ccfee-f7a7-477d-80ba-89d48d51dab5.png" style="width:100%;">
