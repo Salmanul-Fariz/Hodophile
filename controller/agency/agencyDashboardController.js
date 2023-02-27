@@ -93,6 +93,7 @@ exports.dashboardPage = async (req, res, next) => {
       latestOrders,
     });
   } catch (err) {
+    console.log(err);
     appError(req, res, next);
   }
 };

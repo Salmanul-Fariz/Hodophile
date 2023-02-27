@@ -9,6 +9,7 @@ const client = require('twilio')(accountSid, authToken);
 
 // Otp Sending
 exports.otpSender = (contact) => {
+  console.log('hel');
   return new Promise((resolve, reject) => {
     client.verify.v2
       .services(otpService)

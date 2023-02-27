@@ -251,7 +251,7 @@ a:active {
 }
 
 .sec3Card {
-    position: relative;
+    background-color: transparent;
 }
 
 .sec3Text1 {
@@ -1292,15 +1292,8 @@ a:active {
 }
 
 .ShoppingmainImages {
-    height: 330px;
+    height: 314px;
     width: 100%;
-}
-
-@media (max-width : 1200px) {
-    .ShoppingmainImages {
-        height: 330px;
-        width: 100%;
-    }
 }
 
 .shoppingDiscountText {
