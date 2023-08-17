@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const mongoos = require('mongoose');
 
 // set config file
-dotenv.config({ path: './config.env' });
+dotenv.config();
 
 // taking datbase link from config
 const DB = process.env.DATABASE.replace(

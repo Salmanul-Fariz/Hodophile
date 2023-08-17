@@ -1,7 +1,7 @@
 // Setting Razorpay payment Option
 function razorpayFunction(cash, rzOrderId, name, email, contact) {
   const options = {
-    key: 'rzp_test_0QcZGwIjWOF25m',
+    key: 'rzp_test_J4TNyt8xduChJS',
     amount: cash,
     currency: 'INR',
     name: 'Hodophile',

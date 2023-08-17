@@ -10,7 +10,7 @@ const cache = require('./middleware/cache');
 const appError = require('./middleware/appError');
 
 // set config file
-dotenv.config({ path: './config.env' });
+dotenv.config();
 
 // require User router
 const userRouter = require('./router/user/userHomeRouter');

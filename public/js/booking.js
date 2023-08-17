@@ -53,7 +53,7 @@ function successBookking(userId, packageId, packageCategory) {
 
         // Setting Razorpay payment Option
         const options = {
-          key: 'rzp_test_0QcZGwIjWOF25m',
+          key: 'rzp_test_J4TNyt8xduChJS',
           amount: cash,
           currency: 'INR',
           name: 'Hodophile',

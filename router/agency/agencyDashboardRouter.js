@@ -24,6 +24,6 @@ router
 router.post('/logout', agencySession, agencyDashboardController.logout);
 
 // // agency signup post (only for test in postman)
-// router.post('/signup', agencyAuthController.signup);
+router.post('/signup', agencyAuthController.signup);
 
 module.exports = router;
